@@ -1,0 +1,2478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CIBC Demo Day · Register</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gradient-primary: linear-gradient(90deg, #e96243 0%, #e67c48 100%);
+    --gradient-light-text: linear-gradient(135deg, #e78873 0%, #e5a27b 63%, #e2b99e 100%);
+    --paper-white: #fefdf9;
+    --bg-warm: #f8f2e6;
+    --bg-warm-2: #f0e3c8;
+    --bg-card: #fffaf0;
+    --bg-deep: #14110d;
+    --ink: #2a2218;
+    --ink-soft: #5a4d3a;
+    --ink-faint: #998774;
+    --rule: rgba(60, 40, 20, 0.16);
+    --rule-soft: rgba(60, 40, 20, 0.08);
+    --accent: #c7725f;
+    --accent-deep: #c45525;
+    --accent-soft: rgba(199, 114, 95, 0.14);
+    --moss: #7a9268;
+    --indigo: #4a5878;
+    --paper-shadow: rgba(60, 40, 20, 0.08);
+    --serif: 'Fraunces', 'Charter', Georgia, serif;
+    --body: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    --mono: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+    --pixel: 'Press Start 2P', 'JetBrains Mono', monospace;
+    --script: 'Caveat', 'Bradley Hand', 'Marker Felt', cursive;
+    --paper: var(--paper-white);
+    --paper-deep: var(--bg-warm);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--paper-white);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection { background: var(--accent); color: var(--paper-white); }
+  a { color: inherit; }
+
+  body {
+    background: var(--paper-white);
+    min-height: 100vh;
+  }
+
+  .page {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 4vw, 48px) 120px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ============ NAV COMPONENT ============
+     Full-bleed cream bar with a Field atmosphere layer behind the content.
+     Active-state underline extends to the very bottom of the bar.
+     Structure: .nav (full-width, cream) > [canvas, field-veil, .nav-inner > brand/links/cta] */
+  .nav {
+    position: relative;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    width: 100vw;
+    background: var(--bg-warm);
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .nav .field-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .nav .field-veil {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: rgba(246, 236, 217, 0.06);
+    backdrop-filter: blur(0.75px) saturate(1.02);
+    -webkit-backdrop-filter: blur(0.75px) saturate(1.02);
+    z-index: 1;
+  }
+  .nav-inner {
+    position: relative;
+    z-index: 2;
+    max-width: none;
+    margin: 0;
+    padding: 0 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 14px;
+    min-height: 0;
+  }
+  .nav-cta { flex-shrink: 0; white-space: nowrap; align-self: center; }
+  .brand {
+    align-self: stretch;
+    margin-left: -16px;
+    display: flex;
+    align-items: stretch;
+    color: var(--ink);
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+  .brand .brand-mark {
+    font-family: var(--pixel);
+    font-size: 15px;
+    line-height: 1;
+    background: var(--ink);
+    color: var(--paper-white);
+    padding: 0 16px 0 24px;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0;
+  }
+  .brand em {
+    font-family: var(--serif);
+    font-style: normal;
+    color: var(--ink);
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1;
+    letter-spacing: -0.015em;
+    font-variation-settings: "opsz" 24, "SOFT" 30;
+  }
+  .nav-cta {
+    background: var(--gradient-primary);
+    color: var(--bg-warm);
+    padding: 10px 18px;
+    border-radius: 100px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 500;
+    transition: filter 150ms;
+  }
+  .nav-cta:hover { filter: brightness(0.92); }
+  .nav-links {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    flex: 1;
+    justify-content: center;
+    min-width: 0;
+    flex-wrap: wrap;
+    align-self: stretch;
+  }
+  .nav-link {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-decoration: none;
+    padding: 24px 16px;
+    border-bottom: 3px solid transparent;
+    transition: color 150ms, border-color 150ms;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+  }
+  .nav-link:hover { color: var(--ink); border-bottom-color: var(--accent); }
+  .nav-link-current {
+    color: var(--accent-deep);
+    border-bottom-color: var(--accent);
+  }
+  /* Hamburger toggle (mobile only) */
+  .nav { position: relative; }
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    padding: 8px;
+    margin: 0;
+    cursor: pointer;
+    color: var(--ink);
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+  }
+  .nav-toggle svg { display: block; width: 22px; height: 22px; }
+  .nav-toggle .icon-close { display: none; }
+  .nav-toggle[aria-expanded="true"] .icon-open { display: none; }
+  .nav-toggle[aria-expanded="true"] .icon-close { display: block; }
+  @media (max-width: 720px) {
+    .nav-toggle { display: inline-flex; }
+    .nav-links {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      padding: 8px 24px 12px;
+      background: var(--paper-white);
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      box-shadow: 0 12px 28px rgba(60, 40, 20, 0.10);
+      display: none;
+      z-index: 50;
+    }
+    .nav-links.is-open { display: flex; }
+    .nav-link {
+      width: 100%;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--rule-soft);
+      font-size: 12px;
+      letter-spacing: 0.06em;
+    }
+    .nav-link:last-child { border-bottom: none; }
+    .nav-link-current { border-bottom-color: var(--rule-soft); }
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    position: relative;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    width: 100vw;
+    max-width: none;
+    padding: clamp(56px, 9vw, 100px) clamp(20px, 4vw, 48px) clamp(40px, 7vw, 72px);
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 820px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero .field-veil {
+    background: linear-gradient(to bottom, rgba(254, 253, 249, 0) 0%, rgba(254, 253, 249, 0.30) 100%);
+    backdrop-filter: blur(1.5px) saturate(1.03);
+    -webkit-backdrop-filter: blur(1.5px) saturate(1.03);
+  }
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 1;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0 0 18px;
+    display: block;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-variation-settings: "opsz" 144, "SOFT" 50;
+    font-weight: 500;
+    font-size: clamp(34px, 6.4vw, 72px);
+    line-height: 1.04;
+    letter-spacing: -0.022em;
+    color: var(--ink);
+    margin-bottom: 28px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100;
+    color: var(--accent);
+    font-weight: 400;
+  }
+  .hero-deck {
+    font-family: var(--serif);
+    font-variation-settings: "opsz" 36, "SOFT" 60;
+    font-size: clamp(18px, 2.2vw, 22px);
+    line-height: 1.5;
+    color: var(--ink-soft);
+    max-width: 58ch;
+    margin-bottom: 32px;
+    font-weight: 400;
+  }
+
+  .meta-strip {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+    padding: 18px 0 12px;
+    border-top: 1px solid var(--rule);
+  }
+  .meta-item { display: flex; flex-direction: column; gap: 4px; }
+  .meta-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .meta-value {
+    font-family: var(--serif);
+    font-variation-settings: "opsz" 18, "SOFT" 60;
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--ink);
+  }
+  .meta-value.tbd {
+    color: var(--accent-deep);
+    font-style: italic;
+  }
+
+  .cta-row { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 14px 24px;
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 100px;
+    transition: all 150ms ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    border: 1.5px solid var(--ink);
+  }
+  .btn-primary { background: var(--gradient-primary); color: var(--paper-white); border-color: transparent; }
+  .btn-primary:hover { filter: brightness(0.92); }
+  .btn-ghost { background: transparent; color: var(--ink); }
+  .btn-ghost:hover { background: var(--ink); color: var(--bg-warm); }
+  .btn .arrow { transition: transform 150ms; }
+  .btn:hover .arrow { transform: translateX(3px); }
+
+  /* ============ SECTION SCAFFOLDING ============ */
+  .section {
+    margin: clamp(72px, 11vw, 120px) 0;
+  }
+  .section-head { margin-bottom: 36px; max-width: 720px; }
+  .section-num {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0;
+    color: var(--ink-faint);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--rule);
+    display: inline-block;
+    line-height: 1;
+  }
+  .section h2 {
+    font-family: var(--serif);
+    font-variation-settings: "opsz" 96, "SOFT" 50;
+    font-weight: 500;
+    font-size: clamp(30px, 4.4vw, 48px);
+    line-height: 1.08;
+    letter-spacing: -0.018em;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+  .section h2 em {
+    font-style: italic;
+    font-variation-settings: "opsz" 96, "SOFT" 100;
+    color: var(--accent);
+    font-weight: 400;
+  }
+  .section-deck {
+    font-family: var(--serif);
+    font-variation-settings: "opsz" 24, "SOFT" 60;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: 56ch;
+  }
+
+
+  /* ============ HERO · v3 redesign ============ */
+  .hero-title {
+    font-family: var(--serif);
+    font-variation-settings: "opsz" 144, "SOFT" 50;
+    font-weight: 500;
+    font-size: clamp(40px, 6vw, 72px);
+    line-height: 1.04;
+    letter-spacing: -0.022em;
+    color: var(--ink);
+    margin: 0 0 8px;
+    text-wrap: balance;
+  }
+  .hero-title .gradient-text {
+    color: var(--accent-deep);
+    font-style: normal;
+  }
+  .hero-deck {
+    font-family: var(--body);
+    font-style: normal;
+    font-size: clamp(16px, 1.8vw, 19px);
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin: 0 0 24px;
+    max-width: 64ch;
+  }
+  .hero-ctas {
+    display: flex;
+    gap: 14px;
+    margin: 0 0 36px;
+    flex-wrap: wrap;
+  }
+  .hero-btn {
+    font-family: var(--mono);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    padding: 14px 26px;
+    border-radius: 100px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: 1.5px solid transparent;
+    transition: filter 150ms, background 150ms, border-color 150ms;
+    cursor: pointer;
+  }
+  .hero-btn-primary { background: var(--gradient-primary); color: #ffffff; }
+  .hero-btn-primary:hover { filter: brightness(1.06); }
+  .hero-btn-primary .hero-btn-arrow { transition: transform 150ms; }
+  .hero-btn-primary:hover .hero-btn-arrow { transform: translateX(3px); }
+  .hero-btn-ghost { background: transparent; color: var(--ink); border-color: var(--ink); }
+  .hero-btn-ghost:hover { background: rgba(42, 34, 24, 0.06); }
+
+  /* Hero info card (cream main + slightly deeper side) */
+  .hero-info-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 296px;
+    background: var(--bg-warm);
+    border: 1px solid var(--ink);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 22px var(--paper-shadow);
+  }
+  .hero-info-main {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .info-block-when {
+    background: var(--bg-warm);
+    padding: 24px 28px 26px;
+    border-bottom: 1px solid var(--ink);
+  }
+  .info-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    display: block;
+    margin-bottom: 10px;
+    line-height: 1;
+  }
+  .info-when-row { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+  .info-when-icon { width: 14px; height: 14px; color: var(--accent); display: inline-flex; }
+  .info-when-icon svg { width: 100%; height: 100%; }
+  .info-when-date {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(17px, 1.6vw, 19px);
+    color: var(--accent-deep);
+  }
+  .info-when-note {
+    font-family: var(--body);
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin: 0 0 10px;
+    max-width: 56ch;
+  }
+  .hero-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: var(--bg-card);
+  }
+  .hero-info-grid > .info-block { padding: 24px 28px 26px; }
+  .hero-info-grid > .info-block:first-child { border-right: 1px solid var(--ink); }
+  .info-list {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--ink);
+    line-height: 1.55;
+    list-style: disc;
+    margin: 0 0 12px;
+    padding-left: 22px;
+  }
+  .info-list li { padding: 1px 0; }
+  .info-action-link {
+    font-family: var(--mono);
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-deep);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 150ms;
+  }
+  .info-action-link:hover { color: var(--accent); }
+  .info-action-link .ext-arrow { width: 12px; height: 12px; display: inline-flex; }
+  .info-action-link .ext-arrow svg { width: 100%; height: 100%; }
+
+  /* Side panel · topic pills */
+  .hero-info-side {
+    position: relative;
+    padding: 26px 22px;
+    background:
+      linear-gradient(204deg, rgba(233, 98, 67, 0.14) 2.88%, rgba(227, 124, 73, 0.14) 82.38%),
+      var(--bg-warm-2);
+    border-left: 1px solid var(--ink);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .hero-info-side .field-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .hero-info-side .field-veil {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(to bottom, rgba(240, 227, 200, 0.10) 0%, rgba(240, 227, 200, 0.18) 100%);
+    backdrop-filter: blur(0.5px) saturate(1.015);
+    -webkit-backdrop-filter: blur(0.5px) saturate(1.015);
+    z-index: 1;
+  }
+  .hero-info-side > .info-label,
+  .hero-info-side > .topic-pills { position: relative; z-index: 2; }
+  .topic-pills {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .topic-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 12px;
+    background:
+      linear-gradient(var(--paper-white), var(--paper-white)) padding-box,
+      var(--gradient-primary) border-box;
+    border: 1.5px solid transparent;
+    border-radius: 100px;
+    font-family: var(--mono);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--accent-deep);
+    white-space: nowrap;
+    box-sizing: border-box;
+  }
+  .topic-pill-icon { width: 24px; height: 24px; color: var(--accent-deep); display: inline-flex; flex-shrink: 0; }
+  .topic-pill-icon svg { width: 100%; height: 100%; }
+  .topic-pill.is-active {
+    background: var(--gradient-primary) padding-box, var(--gradient-primary) border-box;
+    color: #ffffff;
+  }
+  .topic-pill.is-active .topic-pill-icon { color: #ffffff; }
+
+  /* Topic pill · same size in cards and side panel */
+  .demo-card .topic-pill-icon { width: 24px; height: 24px; }
+
+
+  @media (max-width: 820px) {
+    .hero-info-card { grid-template-columns: 1fr; }
+    .hero-info-side { border-left: none; border-top: 1px solid var(--ink); }
+    .hero-info-grid { grid-template-columns: 1fr; }
+    .hero-info-grid > .info-block:first-child { border-right: none; border-bottom: 1px solid var(--ink); }
+  }
+  /* ============ /HERO · v3 redesign ============ */
+
+  /* ============ BLOCK 3 · DEMOS · Field particle atmosphere behind title + grid ============ */
+  .section-demos {
+    position: relative;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    width: 100vw;
+    padding: clamp(72px, 10vw, 120px) clamp(20px, 4vw, 48px) clamp(80px, 11vw, 130px);
+    background: #0e0a07;
+    overflow: hidden;
+    margin-top: 0;
+    margin-bottom: clamp(72px, 11vw, 120px);
+    isolation: isolate;
+  }
+  .section-demos h2 { color: rgba(255, 248, 232, 0.98); }
+  .section-demos h2 em { color: var(--accent); }
+
+  /* Demos section header · gradient title + eyebrow + CTA pair */
+  .section-head-demos {
+    position: relative;
+    z-index: 2;
+    margin: 0 auto clamp(48px, 7vw, 72px);
+    text-align: center;
+    max-width: 960px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+  }
+  .demos-title {
+    font-family: var(--serif);
+    font-variation-settings: "opsz" 96, "SOFT" 50;
+    font-size: clamp(48px, 7vw, 76px);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: rgba(255, 248, 232, 0.98);
+    margin: 0;
+  }
+  .demos-title .gradient-text {
+    background: var(--gradient-light-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-style: italic;
+    font-variation-settings: "opsz" 96, "SOFT" 100;
+  }
+  .demos-eyebrow {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    margin-top: -8px;
+  }
+  .demos-eyebrow-icon {
+    width: 22px;
+    height: 22px;
+    display: inline-flex;
+  }
+  .demos-eyebrow-icon svg { width: 100%; height: 100%; display: block; }
+  .demos-eyebrow-text {
+    font-family: var(--body);
+    font-weight: 400;
+    font-size: 16px;
+    letter-spacing: 0;
+    text-transform: none;
+    color: rgba(255, 248, 232, 0.82);
+  }
+  .demos-ctas {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .demos-btn {
+    font-family: var(--mono);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    padding: 14px 28px;
+    border-radius: 100px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: filter 150ms, background 150ms, border-color 150ms;
+    border: 1.5px solid transparent;
+    cursor: pointer;
+  }
+  .demos-btn-primary {
+    background: var(--gradient-primary);
+    color: #ffffff;
+  }
+  .demos-btn-primary:hover { filter: brightness(1.06); }
+  .demos-btn-primary .demos-btn-arrow { transition: transform 150ms; }
+  .demos-btn-primary:hover .demos-btn-arrow { transform: translateX(3px); }
+  .demos-btn-ghost {
+    background: transparent;
+    color: rgba(255, 248, 232, 0.98);
+    border-color: rgba(255, 248, 232, 0.55);
+  }
+  .demos-btn-ghost:hover {
+    background: rgba(255, 248, 232, 0.08);
+    border-color: rgba(255, 248, 232, 0.85);
+  }
+  .field-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .field-veil {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: rgba(14, 10, 7, 0.025);
+    backdrop-filter: blur(0.6px) saturate(1.04);
+    -webkit-backdrop-filter: blur(0.6px) saturate(1.04);
+    z-index: 1;
+  }
+  .section-demos > .demos {
+    position: relative;
+    z-index: 2;
+    max-width: 1080px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Signals strip · lexicon hashtags (on light bg in hero) */
+  .signals {
+    margin: 0 0 36px;
+    padding: 14px 0 18px;
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 10px;
+    align-items: center;
+  }
+  .signals-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1;
+    color: var(--ink-faint);
+    margin-right: 6px;
+    white-space: nowrap;
+  }
+  .signal {
+    font-family: var(--mono);
+    font-size: 11px;
+    line-height: 1;
+    padding: 7px 12px;
+    border-radius: 100px;
+    border: 1px solid rgba(212, 121, 61, 0.4);
+    color: var(--ink);
+    background: rgba(212, 121, 61, 0.08);
+    white-space: nowrap;
+    transition: background 150ms, border-color 150ms, color 150ms;
+  }
+  .signal .hash { color: var(--accent); margin-right: 3px; font-weight: 500; }
+  .signal:hover {
+    background: rgba(212, 121, 61, 0.16);
+    border-color: rgba(212, 121, 61, 0.6);
+  }
+
+  /* Hero info card · cream background, contains meta-strip + signals */
+  .hero-card {
+    background: var(--bg-warm);
+    border-radius: 14px;
+    padding: clamp(22px, 3vw, 28px) clamp(22px, 3.5vw, 32px);
+    margin: 0 0 32px;
+    border: 1px solid rgba(212, 121, 61, 0.20);
+    box-shadow: 0 2px 10px rgba(26, 26, 26, 0.04);
+  }
+  .hero-card .meta-strip {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px 28px;
+    padding: 0 0 18px;
+    border-top: none;
+    border-bottom: 1px solid rgba(26, 26, 26, 0.10);
+    margin-bottom: 16px;
+  }
+  @media (max-width: 640px) {
+    .hero-card .meta-strip {
+      grid-template-columns: 1fr;
+      gap: 14px;
+      padding-bottom: 16px;
+      margin-bottom: 14px;
+    }
+  }
+  .hero-card .signals {
+    margin: 0;
+    padding: 0;
+    border-bottom: none;
+  }
+  .hero-card .signal {
+    background: rgba(254, 253, 249, 0.85);
+    border-color: rgba(212, 121, 61, 0.45);
+  }
+  .hero-card .signal:hover {
+    background: var(--paper-white);
+    border-color: rgba(212, 121, 61, 0.7);
+  }
+
+  .demos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+    align-items: start;
+  }
+  .demo-card {
+    background:
+      linear-gradient(var(--paper-white), var(--paper-white)) padding-box,
+      var(--gradient-light-text) border-box;
+    border: 1px solid transparent;
+    border-radius: 14px;
+    padding: 28px 24px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    box-shadow:
+      0 18px 40px rgba(0, 0, 0, 0.55),
+      0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 200ms, box-shadow 200ms;
+    position: relative;
+  }
+  .demo-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px var(--paper-shadow);
+  }
+  .demo-card.tbd {
+    background: rgba(20, 14, 8, 0.55);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    border-style: dashed;
+    border-color: rgba(212, 121, 61, 0.42);
+  }
+  .demo-card.tbd .demo-project { color: rgba(255, 220, 180, 0.9); }
+  .demo-card.tbd .demo-desc { color: rgba(232, 220, 198, 0.82); }
+  .demo-card.tbd .demo-presenter { color: rgba(255, 248, 232, 0.95); }
+  .demo-card.tbd .demo-bio { color: rgba(232, 220, 198, 0.7); }
+  .demo-card.tbd .demo-presenter-label { color: rgba(232, 220, 198, 0.45); }
+  .demo-card.tbd .demo-footer { border-top-color: rgba(232, 220, 198, 0.18); }
+
+  /* Top row · tag pills, left-aligned */
+  .demo-top {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: -4px;
+  }
+  .demo-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 100px;
+    background: transparent;
+    color: var(--accent-deep);
+    border: 1px solid var(--accent);
+    white-space: nowrap;
+  }
+  .demo-tag.tbd { color: var(--ink-faint); border-color: rgba(0, 0, 0, 0.18); }
+
+  .demo-top {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+  }
+
+  /* Demo card footer · cream presenter strip + gradient action strip */
+  .demo-footer {
+    margin: 6px -24px -22px;
+    border-top: 1px solid rgba(212, 121, 61, 0.22);
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .demo-presenter-zone {
+    background: var(--bg-warm);
+    padding: 18px 22px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .demo-presenter-row { flex: 1; min-width: 0; }
+  .presenter-linkedin {
+    width: 24px;
+    height: 24px;
+    color: var(--ink);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: color 150ms;
+  }
+  .presenter-linkedin:hover { color: var(--accent-deep); }
+  .presenter-linkedin svg { width: 100%; height: 100%; display: block; fill: currentColor; }
+
+  .demo-action-zone {
+    background: var(--gradient-primary);
+    padding: 0;
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    border-top: 0;
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px;
+    min-height: 50px;
+  }
+  .demo-action-github,
+  .demo-action-arrow {
+    width: 56px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    transition: filter 150ms;
+  }
+  .demo-action-github {
+    background: var(--gradient-light-text);
+    border-bottom-left-radius: 14px;
+  }
+  .demo-action-arrow { border-bottom-right-radius: 14px; }
+  .demo-action-github:hover,
+  .demo-action-arrow:hover { filter: brightness(1.06); }
+  .demo-action-github svg { width: 22px; height: 22px; display: block; fill: currentColor; }
+  .demo-action-arrow svg { width: 22px; height: 22px; display: block; }
+  .demo-action-product {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-family: var(--mono);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 14px 8px;
+    transition: filter 150ms;
+  }
+  .demo-action-product:hover { filter: brightness(1.05); }
+  .demo-action-product.tbd { color: rgba(255,255,255,0.85); }
+  .demo-action-zone .demo-social {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    padding: 12px 22px;
+  }
+  .demo-action-zone .demo-social-link {
+    width: 20px;
+    height: 20px;
+    color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 150ms;
+  }
+  .demo-action-zone .demo-social-link:hover { opacity: 0.78; }
+  .demo-action-zone .demo-social-link svg { width: 100%; height: 100%; display: block; fill: currentColor; }
+  .demo-action-zone .demo-product-link {
+    color: #ffffff;
+    font-family: var(--mono);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    font-style: normal;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--gradient-primary);
+    padding: 12px 22px;
+    border-radius: 0;
+    border-bottom-right-radius: 14px;
+    transition: filter 150ms, transform 150ms;
+  }
+  .demo-action-zone .demo-product-link:hover { filter: brightness(1.06); }
+  .demo-action-zone .demo-product-link:active { transform: translateY(1px); }
+  .demo-action-zone .demo-product-link .ext-arrow {
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+  }
+  .demo-action-zone .demo-product-link .ext-arrow svg { width: 100%; height: 100%; display: block; }
+  .demo-action-zone .demo-product-link.tbd { color: rgba(255,255,255,0.92); }
+
+  .demo-presenter-row {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+  }
+  .demo-avatar {
+    width: 52px;
+    height: 52px;
+    min-width: 52px;
+    border-radius: 50%;
+    background: rgba(212, 121, 61, 0.14);
+    border: 1px solid rgba(212, 121, 61, 0.32);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--accent-deep);
+    overflow: hidden;
+  }
+  .demo-avatar.has-photo { background: transparent; }
+  .demo-avatar.has-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .demo-presenter-text { flex: 1; min-width: 0; }
+
+  .demo-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(212, 121, 61, 0.18);
+    flex-wrap: wrap;
+  }
+  .demo-social {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+  }
+  .demo-social-link {
+    width: 18px;
+    height: 18px;
+    color: var(--ink);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 150ms;
+  }
+  .demo-social-link:hover { color: var(--accent); }
+  .demo-social-link svg { width: 100%; height: 100%; display: block; }
+  .demo-product-link {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 150ms;
+  }
+  .demo-link {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent-deep);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(212, 121, 61, 0.4);
+    padding-bottom: 1px;
+    transition: color 150ms, border-color 150ms;
+  }
+  .demo-link:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+  .demo-link.tbd {
+    color: var(--ink-faint);
+    border-color: rgba(0, 0, 0, 0.15);
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0;
+    cursor: default;
+  }
+
+  .demo-project {
+    font-family: var(--serif);
+    font-variation-settings: "opsz" 36, "SOFT" 50;
+    font-weight: 600;
+    font-size: 26px;
+    color: var(--ink);
+    line-height: 1.12;
+    letter-spacing: -0.018em;
+  }
+  .demo-desc {
+    font-family: var(--body);
+    font-size: 15.5px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin-top: -8px;
+  }
+  .demo-explore {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    margin-top: -2px;
+  }
+  .demo-explore a {
+    color: var(--accent-deep);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(164, 84, 28, 0.35);
+    padding-bottom: 1px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .demo-explore a:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+  .demo-feedback {
+    background: var(--bg-warm-2);
+    border-left: 3px solid var(--accent);
+    border-radius: 6px;
+    padding: 12px 14px;
+  }
+  .demo-feedback .label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .demo-feedback p {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .demo-card.tbd .demo-feedback {
+    background: rgba(0, 0, 0, 0.32);
+    border-left-color: rgba(212, 121, 61, 0.6);
+  }
+  .demo-card.tbd .demo-feedback .label { color: rgba(212, 121, 61, 0.9); }
+  .demo-card.tbd .demo-feedback p { color: rgba(232, 220, 198, 0.85); }
+
+
+
+  .demo-presenter-label {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+  .demo-presenter {
+    font-family: var(--serif);
+    font-variation-settings: "opsz" 24, "SOFT" 60;
+    font-weight: 600;
+    font-size: 17px;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  .demo-bio {
+    font-family: var(--body);
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    margin-top: 3px;
+    line-height: 1.45;
+  }
+  .demo-bio-tbd {
+    font-family: var(--body);
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-top: 2px;
+    line-height: 1.4;
+  }
+  .demo-card.tbd .demo-bio-tbd {
+    color: rgba(232, 220, 198, 0.62);
+    background: rgba(212, 121, 61, 0.12);
+    border-color: rgba(212, 121, 61, 0.4);
+  }
+
+  /* ============ APPLY TO DEMO ============ */
+  .apply {
+    background: var(--bg-warm);
+    border: 1.5px solid var(--ink);
+    border-radius: 14px;
+    padding: clamp(28px, 4vw, 44px);
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 36px;
+    align-items: center;
+  }
+  @media (max-width: 760px) { .apply { grid-template-columns: 1fr; gap: 24px; } }
+  .apply-eyebrow {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 14px;
+  }
+  .apply h3 {
+    font-family: var(--serif);
+    font-variation-settings: "opsz" 72, "SOFT" 60;
+    font-weight: 500;
+    font-size: clamp(26px, 3.6vw, 36px);
+    line-height: 1.12;
+    color: var(--ink);
+    letter-spacing: -0.015em;
+    margin-bottom: 14px;
+  }
+  .apply h3 em { font-style: italic; color: var(--accent); font-weight: 400; }
+  .apply-body {
+    font-family: var(--body);
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+  .apply-side {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .apply-meta {
+    padding: 14px 16px;
+    background: var(--bg-warm-2);
+    border-radius: 8px;
+    font-family: var(--body);
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ink);
+    border-left: 3px solid var(--accent);
+  }
+  .apply-meta strong { font-family: var(--mono); font-size: 9px; letter-spacing: 0; color: var(--ink); display: block; margin-bottom: 4px; line-height: 1; }
+
+  /* ============ BLOCK 4 · WHO CIBC IS ============ */
+  .about {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+  .about-body {
+    font-family: var(--serif);
+    font-variation-settings: "opsz" 24, "SOFT" 60;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--ink);
+    max-width: 64ch;
+  }
+  .about-body p { margin-bottom: 16px; }
+  .about-body em { font-style: italic; color: var(--accent); }
+
+  /* Cluster map embed */
+  .cluster-map-card {
+    background: var(--bg-warm);
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    padding: clamp(20px, 3vw, 28px);
+    box-shadow: 0 4px 14px var(--paper-shadow);
+  }
+  .map-head-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 16px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .map-head-left h4 {
+    font-family: var(--serif);
+    font-variation-settings: "opsz" 36, "SOFT" 60;
+    font-weight: 500;
+    font-size: 22px;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  .map-head-left h4 em { font-style: italic; color: var(--accent); }
+  .map-head-eyebrow {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--ink-faint);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .map-legend {
+    font-family: var(--body);
+    font-style: italic;
+    font-size: 11.5px;
+    color: var(--ink-faint);
+    display: inline-flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .map-legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .map-legend .swatch { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+  .map-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-top: 6px;
+  }
+  .map-stack { display: none; }
+  @media (max-width: 760px) {
+    .map-svg { display: none; }
+    .map-stack { display: flex; flex-direction: column; gap: 14px; margin-top: 4px; }
+    .map-stack .row {
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      gap: 8px 14px;
+      padding: 10px 0;
+      border-bottom: 1px dashed var(--rule-soft);
+      align-items: baseline;
+    }
+    .map-stack .row:last-child { border-bottom: none; }
+    .map-stack .rel {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--ink);
+      line-height: 1;
+      white-space: nowrap;
+      padding-top: 4px;
+    }
+    .map-stack .who {
+      font-family: var(--serif);
+      font-style: italic;
+      font-variation-settings: "opsz" 18, "SOFT" 60;
+      font-weight: 500;
+      font-size: 14.5px;
+      color: var(--ink);
+      line-height: 1.35;
+    }
+    .map-stack .who small {
+      display: block;
+      font-style: normal;
+      font-family: var(--body);
+      font-size: 12.5px;
+      color: var(--ink-soft);
+      margin-top: 3px;
+    }
+  }
+  /* Read-along surfaces · 3 link cards under the map */
+  /* ============ Map view CTA (replaces read-along in about section) ============ */
+  .map-view-cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px dashed var(--rule-soft);
+  }
+
+  /* ============ Follow along · Get involved section ============ */
+  .follow-along { padding-top: 0; }
+  .follow-along .section-head { margin-bottom: 32px; }
+  .follow-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .follow-meta-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    padding: 22px 24px;
+    background: var(--bg-warm);
+    border-radius: 12px;
+    margin-bottom: 24px;
+  }
+  .follow-meta-strip .meta-item { display: flex; flex-direction: column; gap: 6px; }
+  .follow-actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 14px;
+  }
+  a.follow-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 20px 22px 22px;
+    background: var(--paper-white);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    text-decoration: none;
+    transition: transform 150ms, border-color 150ms, box-shadow 150ms;
+    color: var(--ink);
+  }
+  a.follow-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+    box-shadow: 0 6px 16px var(--paper-shadow);
+  }
+  a.follow-card-primary {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--paper-white);
+  }
+  a.follow-card-primary:hover {
+    border-color: var(--accent);
+    box-shadow: 0 6px 16px rgba(212, 121, 61, 0.25);
+  }
+  .follow-card .kind {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .follow-card-primary .kind { color: var(--accent); }
+  .follow-card .label {
+    font-family: var(--serif);
+    font-variation-settings: "opsz" 32, "SOFT" 60;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 1.15;
+    color: var(--ink);
+  }
+  .follow-card-primary .label { color: var(--paper-white); }
+  .follow-card .meta {
+    font-family: var(--body);
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+  .follow-card-primary .meta { color: rgba(255, 248, 232, 0.78); }
+  .follow-card .arrow-end {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-top: 4px;
+  }
+  .follow-card-primary .arrow-end { color: var(--accent); }
+  @media (max-width: 720px) {
+    .follow-meta-strip { grid-template-columns: 1fr; gap: 16px; }
+  }
+
+  .read-along {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+    margin-top: 22px;
+    padding-top: 22px;
+    border-top: 1px dashed var(--rule-soft);
+  }
+  a.read-card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 16px 16px 18px;
+    background: var(--paper-white);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    text-decoration: none;
+    transition: transform 150ms, border-color 150ms, box-shadow 150ms;
+    color: var(--ink);
+  }
+  a.read-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+    box-shadow: 0 4px 12px var(--paper-shadow);
+  }
+  .read-card .kind {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .read-card .label {
+    font-family: var(--serif);
+    font-variation-settings: "opsz" 24, "SOFT" 60;
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+  .read-card .meta {
+    font-family: var(--body);
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    line-height: 1.45;
+  }
+  .read-card .arrow-end {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-top: 6px;
+  }
+
+  /* ============ BLOCK 5 · AFTER THE EVENT ============ */
+  .after {
+    background: var(--bg-warm);
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    padding: clamp(28px, 4vw, 40px);
+  }
+  .after-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 28px;
+    margin-top: 20px;
+  }
+  .after-item h4 {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .after-item p {
+    font-family: var(--body);
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+  .after-item .timing {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--ink-soft);
+  }
+
+  /* ============ FOOTER ============ */
+  .footer {
+    margin-top: clamp(80px, 12vw, 140px);
+    padding-top: 36px;
+    border-top: 2px solid var(--ink);
+  }
+  .footer-brand { text-decoration: none; display: inline-block; margin-bottom: 28px; }
+  .footer-brand-mark {
+    font-family: var(--pixel);
+    font-size: 14px;
+    line-height: 1;
+    background: var(--ink);
+    color: var(--bg-warm);
+    padding: 8px 11px 7px;
+    border-radius: 0;
+    display: inline-block;
+    letter-spacing: 0;
+  }
+  .footer-row {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 32px;
+    padding-bottom: 32px;
+  }
+  @media (max-width: 760px) {
+    .footer-row { grid-template-columns: 1fr; }
+  }
+  .footer-block h4 {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 12px;
+  }
+  .footer-block p {
+    font-family: var(--body);
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .footer-block a {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--rule);
+    text-underline-offset: 3px;
+  }
+  .footer-block a:hover { color: var(--accent); text-decoration-color: var(--accent); }
+  .footer-block a.btn { text-decoration: none; }
+  .footer-block a.btn-primary { color: var(--bg-warm); }
+  .footer-block a.btn-primary:hover { color: var(--bg-warm); }
+  .footer-block a.btn-ghost { color: var(--ink); }
+  .footer-block ul { list-style: none; }
+  .footer-block li { font-family: var(--body); font-size: 14px; padding: 4px 0; }
+  .footer-bottom {
+    padding: 20px 0;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .footer-bottom span { line-height: 1.6; }
+
+  /* ============ Mobile ============ */
+  @media (max-width: 760px) {
+    .demos { grid-template-columns: 1fr; }
+    .meta-strip { gap: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+<!-- ===== NAV COMPONENT ===== -->
+<nav class="nav" aria-label="Primary">
+  <canvas class="field-canvas" id="field-canvas-nav" aria-hidden="true"></canvas>
+  <div class="field-veil" aria-hidden="true"></div>
+  <div class="nav-inner">
+    <a href="#" class="brand" aria-label="CIBC home"><span class="brand-mark">CIBC</span></a>
+    <div class="nav-links" id="primary-links" role="navigation">
+      <a href="#" class="nav-link nav-link-current" aria-current="page">Demo Day</a>
+      <a href="ecosystem-map.html" class="nav-link">Ecosystem Map</a>
+      <a href="get-involved.html" class="nav-link">Get Involved</a>
+    </div>
+    <a href="#register" class="nav-cta">Register</a>
+    <button type="button" class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="primary-links" aria-label="Open menu">
+      <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+      <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>
+    </button>
+  </div>
+</nav>
+<!-- ===== /NAV COMPONENT ===== -->
+
+<!-- ===== HERO ===== -->
+<header class="masthead hero">
+  <div class="hero-inner">
+
+    <div class="hero-eyebrow">CIBC Demo Day · 01</div>
+    <h1 class="hero-title">See who is building <span class="gradient-text">citizen infrastructure</span></h1>
+    <p class="hero-deck">Deliberation tools, peer-knowledge networks, and citizen-owned systems. Built for people by people. Come see what is growing.</p>
+
+    <div class="hero-ctas">
+      <a href="#register" class="hero-btn hero-btn-primary">Register <span class="hero-btn-arrow" aria-hidden="true">→</span></a>
+      <a href="#demos" class="hero-btn hero-btn-ghost">See the demos</a>
+    </div>
+
+    <div class="hero-info-card">
+      <div class="hero-info-main">
+
+        <div class="info-block info-block-when">
+          <span class="info-label">When</span>
+          <div class="info-when-row">
+            <span class="info-when-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
+            <span class="info-when-date">Mid-June 2026 · TBD</span>
+          </div>
+          <p class="info-when-note">Date locking soon. The first of more to come. Want to demo? Apply below.</p>
+          <a href="#apply" class="info-action-link">Apply to demo <span class="ext-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg></span></a>
+        </div>
+
+        <div class="hero-info-grid">
+          <div class="info-block">
+            <span class="info-label">Who should attend</span>
+            <ul class="info-list">
+              <li>Builders</li>
+              <li>Community leaders</li>
+              <li>Civic technologists</li>
+            </ul>
+            <a href="#share" class="info-action-link">Share this event</a>
+          </div>
+          <div class="info-block">
+            <span class="info-label">Format</span>
+            <ul class="info-list">
+              <li>Virtual</li>
+              <li>Free</li>
+              <li>Recorded</li>
+            </ul>
+            <a href="https://youtube.com" class="info-action-link">CIBC YouTube <span class="ext-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg></span></a>
+          </div>
+        </div>
+
+      </div>
+
+      <aside class="hero-info-side">
+        <canvas class="field-canvas" id="field-canvas-topics" aria-hidden="true"></canvas>
+        <div class="field-veil" aria-hidden="true"></div>
+        <span class="info-label">Tools being demoed</span>
+        <div class="topic-pills">
+          <span class="topic-pill is-active"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg></span><span class="topic-pill-label">Civic technology</span></span>
+          <span class="topic-pill"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.856 6H16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-1.144"/><path d="M22 14v-4"/><path d="M7.144 6H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h1.144"/><path d="m11 7-3 5h4l-3 5"/></svg></span><span class="topic-pill-label">Capacity building</span></span>
+          <span class="topic-pill"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg></span><span class="topic-pill-label">Knowledge management</span></span>
+          <span class="topic-pill"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span class="topic-pill-label">Collaboration</span></span>
+          <span class="topic-pill"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span><span class="topic-pill-label">Deliberation</span></span>
+        </div>
+      </aside>
+
+    </div>
+
+  </div>
+</header>
+
+<!-- ===== BLOCK 3 · THE DEMOS (Field particle atmosphere behind title + grid) ===== -->
+<section class="cluster section section-demos" id="demos">
+  <canvas class="field-canvas" id="field-canvas" aria-hidden="true"></canvas>
+  <div class="field-veil" aria-hidden="true"></div>
+  <div class="section-head-demos">
+    <h2 class="demos-title"><span class="gradient-text">Demo Day</span> June</h2>
+    <div class="demos-eyebrow">
+      <span class="demos-eyebrow-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="cal-light-gradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#e78873"/>
+              <stop offset="63%" stop-color="#e5a27b"/>
+              <stop offset="100%" stop-color="#e2b99e"/>
+            </linearGradient>
+          </defs>
+          <rect x="3" y="5" width="18" height="16" rx="2" stroke="url(#cal-light-gradient)" stroke-width="2" stroke-linejoin="round"/>
+          <line x1="16" y1="3" x2="16" y2="7" stroke="url(#cal-light-gradient)" stroke-width="2" stroke-linecap="round"/>
+          <line x1="8" y1="3" x2="8" y2="7" stroke="url(#cal-light-gradient)" stroke-width="2" stroke-linecap="round"/>
+          <line x1="3" y1="11" x2="21" y2="11" stroke="url(#cal-light-gradient)" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span class="demos-eyebrow-text">Exact date TBD</span>
+    </div>
+    <div class="demos-ctas">
+      <a href="#register" class="demos-btn demos-btn-primary">Register <span class="demos-btn-arrow" aria-hidden="true">→</span></a>
+      <a href="#apply" class="demos-btn demos-btn-ghost">Apply to demo</a>
+    </div>
+  </div>
+  <div class="demos">
+
+    <article class="demo-card">
+      <div class="demo-top">
+        <span class="topic-pill"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg></span><span class="topic-pill-label">Knowledge Management</span></span>
+      </div>
+      <h3 class="demo-project">Gardens not Platforms</h3>
+      <p class="demo-desc">An Obsidian + Claude workflow that renders private notes into artifacts collaborators can use. Do this instead of platforms or paid-for tools.</p>
+      <div class="demo-footer">
+        <div class="demo-presenter-zone">
+        <div class="demo-presenter-row">
+          <div class="demo-avatar has-photo" aria-hidden="true"><img src="assets/megan.webp" alt="" /></div>
+          <div class="demo-presenter-text">
+                <div class="demo-presenter">Megan Ducote</div>
+            <div class="demo-bio-tbd">Relational Technologist</div>
+          </div>
+        </div>
+        <a class="presenter-linkedin" href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56V14.85c0-1.34-.03-3.06-1.87-3.06-1.87 0-2.15 1.46-2.15 2.97v5.69H9.31V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27zM5.34 7.43c-1.14 0-2.07-.93-2.07-2.07 0-1.14.93-2.07 2.07-2.07 1.14 0 2.07.93 2.07 2.07 0 1.14-.93 2.07-2.07 2.07zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.45c.97 0 1.78-.77 1.78-1.72V1.72C24 .77 23.19 0 22.22 0z"/></svg></a>
+        </div>
+        <div class="demo-action-zone">
+          <a class="demo-action-github" href="#" target="_blank" rel="noopener" aria-label="GitHub"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></span></a>
+          <a class="demo-action-product tbd" href="#" target="_blank" rel="noopener">Product page</a>
+          <a class="demo-action-arrow" href="#" target="_blank" rel="noopener" aria-label="Open product page"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg></span></a>
+        </div>
+      </div>
+    </article>
+
+    <article class="demo-card">
+      <div class="demo-top">
+        <span class="topic-pill"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.856 6H16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-1.144"/><path d="M22 14v-4"/><path d="M7.144 6H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h1.144"/><path d="m11 7-3 5h4l-3 5"/></svg></span><span class="topic-pill-label">Capacity Building</span></span>
+      </div>
+      <h3 class="demo-project">Critical Suit</h3>
+      <p class="demo-desc">A modular MCP suite for designers, PMs, researchers, and job seekers. Each module ships with explicit schemas, validation, and decision traces.</p>
+      <div class="demo-footer">
+        <div class="demo-presenter-zone">
+        <div class="demo-presenter-row">
+          <div class="demo-avatar" aria-hidden="true">KH</div>
+          <div class="demo-presenter-text">
+                <div class="demo-presenter">Kyle Hobson</div>
+            <div class="demo-bio-tbd">Title · Org · to fill</div>
+          </div>
+        </div>
+        <a class="presenter-linkedin" href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56V14.85c0-1.34-.03-3.06-1.87-3.06-1.87 0-2.15 1.46-2.15 2.97v5.69H9.31V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27zM5.34 7.43c-1.14 0-2.07-.93-2.07-2.07 0-1.14.93-2.07 2.07-2.07 1.14 0 2.07.93 2.07 2.07 0 1.14-.93 2.07-2.07 2.07zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.45c.97 0 1.78-.77 1.78-1.72V1.72C24 .77 23.19 0 22.22 0z"/></svg></a>
+        </div>
+        <div class="demo-action-zone">
+          <a class="demo-action-github" href="#" target="_blank" rel="noopener" aria-label="GitHub"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></span></a>
+          <a class="demo-action-product" href="https://jonathankhobson.github.io/compass-suite/" target="_blank" rel="noopener">Product page</a>
+          <a class="demo-action-arrow" href="https://jonathankhobson.github.io/compass-suite/" target="_blank" rel="noopener" aria-label="Open product page"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg></span></a>
+        </div>
+      </div>
+    </article>
+
+    <article class="demo-card">
+      <div class="demo-top">
+        <span class="topic-pill"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span><span class="topic-pill-label">Deliberation</span></span>
+      </div>
+      <h3 class="demo-project">Book Power</h3>
+      <p class="demo-desc">Hand-crafted MCP servers and Claude Code skills built from methodology books, so practitioners can query them at the moment of work. Four books live: Facilitating Deliberation, Governable Spaces, Think Like a Commoner, JTBD Knowledge.</p>
+      <div class="demo-footer">
+        <div class="demo-presenter-zone">
+        <div class="demo-presenter-row">
+          <div class="demo-avatar" aria-hidden="true">AZ</div>
+          <div class="demo-presenter-text">
+                <div class="demo-presenter">Artem Zhiganov</div>
+            <div class="demo-bio-tbd">Title · Org · to fill</div>
+          </div>
+        </div>
+        <a class="presenter-linkedin" href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56V14.85c0-1.34-.03-3.06-1.87-3.06-1.87 0-2.15 1.46-2.15 2.97v5.69H9.31V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27zM5.34 7.43c-1.14 0-2.07-.93-2.07-2.07 0-1.14.93-2.07 2.07-2.07 1.14 0 2.07.93 2.07 2.07 0 1.14-.93 2.07-2.07 2.07zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.45c.97 0 1.78-.77 1.78-1.72V1.72C24 .77 23.19 0 22.22 0z"/></svg></a>
+        </div>
+        <div class="demo-action-zone">
+          <a class="demo-action-github" href="#" target="_blank" rel="noopener" aria-label="GitHub"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></span></a>
+          <a class="demo-action-product" href="https://bookpower.org" target="_blank" rel="noopener">Product page</a>
+          <a class="demo-action-arrow" href="https://bookpower.org" target="_blank" rel="noopener" aria-label="Open product page"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg></span></a>
+        </div>
+      </div>
+    </article>
+
+<article class="demo-card">
+      <div class="demo-top">
+        <span class="topic-pill"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span class="topic-pill-label">Collaboration</span></span>
+      </div>
+      <h3 class="demo-project">Collaboration under Constraint</h3>
+      <p class="demo-desc">A platform that uses constraint strategies (lottocracy-elected editors, fixed deadlines, mandatory sharing) to take groups from forming to completion. Built for projects stuck in discussion.</p>
+      <div class="demo-footer">
+        <div class="demo-presenter-zone">
+        <div class="demo-presenter-row">
+          <div class="demo-avatar" aria-hidden="true">MM</div>
+          <div class="demo-presenter-text">
+                <div class="demo-presenter">Momcilo Mijovic</div>
+            <div class="demo-bio-tbd">Title · Org · to fill</div>
+          </div>
+        </div>
+        <a class="presenter-linkedin" href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56V14.85c0-1.34-.03-3.06-1.87-3.06-1.87 0-2.15 1.46-2.15 2.97v5.69H9.31V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27zM5.34 7.43c-1.14 0-2.07-.93-2.07-2.07 0-1.14.93-2.07 2.07-2.07 1.14 0 2.07.93 2.07 2.07 0 1.14-.93 2.07-2.07 2.07zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.45c.97 0 1.78-.77 1.78-1.72V1.72C24 .77 23.19 0 22.22 0z"/></svg></a>
+        </div>
+        <div class="demo-action-zone">
+          <a class="demo-action-github" href="#" target="_blank" rel="noopener" aria-label="GitHub"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></span></a>
+          <a class="demo-action-product tbd" href="#" target="_blank" rel="noopener">Product page</a>
+          <a class="demo-action-arrow" href="#" target="_blank" rel="noopener" aria-label="Open product page"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg></span></a>
+        </div>
+      </div>
+    </article>
+
+    <article class="demo-card">
+      <div class="demo-top">
+        <span class="topic-pill"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span><span class="topic-pill-label">Deliberation</span></span>
+      </div>
+      <h3 class="demo-project">DelibAI</h3>
+      <p class="demo-desc">A non-intrusive AI tool that flags fallacies in deliberation forums and suggests reformulations. The user decides what to do. Built for citizens and lawmakers.</p>
+      <div class="demo-footer">
+        <div class="demo-presenter-zone">
+        <div class="demo-presenter-row">
+          <div class="demo-avatar" aria-hidden="true">SV</div>
+          <div class="demo-presenter-text">
+                <div class="demo-presenter">Simone Vagnoni</div>
+            <div class="demo-bio-tbd">Title · Org · to fill</div>
+          </div>
+        </div>
+        <a class="presenter-linkedin" href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56V14.85c0-1.34-.03-3.06-1.87-3.06-1.87 0-2.15 1.46-2.15 2.97v5.69H9.31V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27zM5.34 7.43c-1.14 0-2.07-.93-2.07-2.07 0-1.14.93-2.07 2.07-2.07 1.14 0 2.07.93 2.07 2.07 0 1.14-.93 2.07-2.07 2.07zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.45c.97 0 1.78-.77 1.78-1.72V1.72C24 .77 23.19 0 22.22 0z"/></svg></a>
+        </div>
+        <div class="demo-action-zone">
+          <a class="demo-action-github" href="#" target="_blank" rel="noopener" aria-label="GitHub"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></span></a>
+          <a class="demo-action-product" href="https://platform.svagnoni.linkeddata.es" target="_blank" rel="noopener">Product page</a>
+          <a class="demo-action-arrow" href="https://platform.svagnoni.linkeddata.es" target="_blank" rel="noopener" aria-label="Open product page"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg></span></a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ===== APPLY TO DEMO ===== -->
+<section class="cluster section" id="apply">
+  <div class="apply">
+    <div>
+      <div class="apply-eyebrow">For builders</div>
+      <h3>Built something?</h3>
+      <p class="apply-body">Apply through the Harmonica intake form. If the first session fills up, your application carries to the next. We're keeping this running.</p>
+    </div>
+    <div class="apply-side">
+      <a href="https://app.harmonica.chat/chat?s=fc325b1d-2abb-4869-b2b5-6e35bfb274bb" target="_blank" rel="noopener" class="btn btn-primary">Apply to demo <span class="arrow">→</span></a>
+      <div class="apply-meta">
+        <strong>Spots limited</strong>
+        The first session is targeting five presenters. Apply anyway · we're planning more sessions.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BLOCK 4 · WHO CIBC IS ===== -->
+<section class="cluster section" id="about">
+  <div class="section-head">
+    <h2>Watch us plan this <em>in public</em></h2>
+  </div>
+
+  <div class="about">
+    <div class="about-body">
+      <p>CIBC (<em>Citizen Infrastructure Builders Club</em>) publishes the ecosystem it works alongside. Nine orgs mapped, with overlap, status, and where the club is reaching in next. Code lives in the open at <a href="https://github.com/Citizen-Infra" target="_blank" rel="noopener">github.com/Citizen-Infra</a>.</p>
+    </div>
+
+    <aside class="cluster-map-card" aria-label="CIBC ecosystem map">
+      <div class="map-head-row" style="justify-content: flex-end;">
+        <div class="map-legend">
+          <span><span class="swatch" style="background: var(--moss)"></span>Caught</span>
+          <span><span class="swatch" style="background: var(--accent)"></span>Spotted</span>
+          <span><span class="swatch" style="background: var(--indigo)"></span>Rumored</span>
+          <span><span class="swatch" style="background: var(--ink-faint)"></span>Unverified</span>
+        </div>
+      </div>
+
+      <svg class="map-svg" viewBox="0 0 1200 640" preserveAspectRatio="xMidYMid meet" aria-label="CIBC ecosystem network: entities and people connected by formalized and speculative ties">
+        <!-- Connections: solid = formalized, dashed = loose / speculative -->
+        <g stroke="#5a4d3a" stroke-width="1.5" fill="none" opacity="0.55">
+          <!-- CIBC to entity nodes (formalized) -->
+          <line x1="600" y1="335" x2="300" y2="220"/>
+          <line x1="600" y1="335" x2="345" y2="305"/>
+          <line x1="600" y1="335" x2="245" y2="430"/>
+          <!-- CIBC to entity nodes (loose) -->
+          <line x1="600" y1="335" x2="900" y2="220" stroke-dasharray="5 5"/>
+          <line x1="600" y1="335" x2="990" y2="320" stroke-dasharray="5 5"/>
+          <line x1="600" y1="335" x2="880" y2="500" stroke-dasharray="5 5"/>
+          <line x1="600" y1="335" x2="120" y2="520" stroke-dasharray="5 5"/>
+          <!-- Cluster ties (intra-cluster) -->
+          <line x1="300" y1="220" x2="180" y2="155"/>
+          <line x1="300" y1="220" x2="345" y2="305"/>
+          <line x1="300" y1="220" x2="225" y2="270"/>
+          <line x1="300" y1="220" x2="420" y2="240"/>
+          <line x1="245" y1="430" x2="120" y2="520"/>
+          <line x1="245" y1="430" x2="190" y2="475"/>
+          <line x1="245" y1="430" x2="320" y2="395"/>
+          <line x1="900" y1="220" x2="1010" y2="290"/>
+          <line x1="900" y1="220" x2="820" y2="170"/>
+          <line x1="990" y1="320" x2="1080" y2="290"/>
+          <!-- Cross-cluster bridges (loose) -->
+          <line x1="900" y1="220" x2="300" y2="220" stroke-dasharray="3 6" stroke="#d4793d" opacity="0.5"/>
+          <line x1="990" y1="320" x2="245" y2="430" stroke-dasharray="3 6" opacity="0.45"/>
+          <line x1="900" y1="500" x2="660" y2="385" stroke-dasharray="3 6" opacity="0.45"/>
+        </g>
+
+        <!-- Entity nodes: status-colored, sized by salience -->
+        <g font-family="Fraunces, Georgia, serif" font-style="italic" font-size="14" font-weight="500" fill="#2a2218">
+          <!-- Deliberation cluster -->
+          <circle cx="300" cy="220" r="11" fill="#7a9268"/>
+          <text x="318" y="225">DemNext</text>
+          <circle cx="180" cy="155" r="8" fill="#d4793d"/>
+          <text x="196" y="159">DelibTech</text>
+          <circle cx="345" cy="305" r="10" fill="#7a9268"/>
+          <text x="362" y="310">Agora</text>
+
+          <!-- DML cluster -->
+          <circle cx="245" cy="430" r="11" fill="#7a9268"/>
+          <text x="263" y="435">Dark Matter Labs</text>
+          <circle cx="120" cy="520" r="8" fill="#4a5878"/>
+          <text x="136" y="524">Komma</text>
+
+          <!-- Plurality / Metagov cluster -->
+          <circle cx="900" cy="220" r="10" fill="#d4793d"/>
+          <text x="918" y="225">Plurality</text>
+          <circle cx="990" cy="320" r="10" fill="#d4793d"/>
+          <text x="1008" y="325">Metagov</text>
+
+          <!-- Regen + Unverified -->
+          <circle cx="880" cy="500" r="9" fill="#4a5878"/>
+          <text x="897" y="505">RegenOS</text>
+          <circle cx="1080" cy="565" r="7" fill="#998774" stroke="#998774" stroke-dasharray="2 3" fill-opacity="0.45"/>
+          <text x="1095" y="569" fill="#998774">Newsweek (?)</text>
+        </g>
+
+        <!-- Person nodes: smaller ringed circles, paper fill -->
+        <g font-family="Fraunces, Georgia, serif" font-style="italic" font-size="11" fill="#5a4d3a">
+          <!-- Deliberation people -->
+          <circle cx="225" cy="270" r="5" fill="#fffaf0" stroke="#5a4d3a" stroke-width="1.5"/>
+          <text x="237" y="273">Chwalisz</text>
+          <circle cx="420" cy="240" r="5" fill="#fffaf0" stroke="#5a4d3a" stroke-width="1.5"/>
+          <text x="432" y="243">Audrey Tang</text>
+          <!-- DML people -->
+          <circle cx="190" cy="475" r="5" fill="#fffaf0" stroke="#5a4d3a" stroke-width="1.5"/>
+          <text x="202" y="478">Charlie Fisher</text>
+          <circle cx="320" cy="395" r="5" fill="#fffaf0" stroke="#5a4d3a" stroke-width="1.5"/>
+          <text x="332" y="398">Gurden Batra</text>
+          <!-- Plurality / Metagov people -->
+          <circle cx="820" cy="170" r="5" fill="#fffaf0" stroke="#5a4d3a" stroke-width="1.5"/>
+          <text x="832" y="173">Glen Weyl</text>
+          <circle cx="1080" cy="290" r="5" fill="#fffaf0" stroke="#5a4d3a" stroke-width="1.5"/>
+          <text x="1063" y="278" text-anchor="end">Liz Barry</text>
+        </g>
+
+        <!-- CIBC center: black rect + Press Start 2P pixel mark -->
+        <rect x="552" y="320" width="96" height="40" fill="#2a2218"/>
+        <text x="600" y="347" text-anchor="middle" font-family="'Press Start 2P', monospace" font-size="18" fill="#f6ecd9" letter-spacing="1">CIBC</text>
+
+        <!-- Tie-type legend (bottom-left) -->
+        <g font-family="JetBrains Mono, monospace" font-size="10" fill="#998774">
+          <line x1="40" y1="600" x2="76" y2="600" stroke="#5a4d3a" stroke-width="1.5" opacity="0.7"/>
+          <text x="84" y="604">formalized</text>
+          <line x1="180" y1="600" x2="216" y2="600" stroke="#5a4d3a" stroke-width="1.5" stroke-dasharray="5 4" opacity="0.7"/>
+          <text x="224" y="604">speculative</text>
+        </g>
+      </svg>
+
+      <div class="map-stack" aria-label="CIBC ecosystem position">
+        <div class="row">
+          <span class="rel">upstream of</span>
+          <span class="who">Local-first &amp; data sovereignty<small>DemNext · DelibTech · Agora</small></span>
+        </div>
+        <div class="row">
+          <span class="rel">parallel to</span>
+          <span class="who">Civic-tech architecture<small>Dark Matter Labs · Metagov</small></span>
+        </div>
+        <div class="row">
+          <span class="rel">downstream of</span>
+          <span class="who">Theory framing<small>Plurality</small></span>
+        </div>
+      </div>
+
+      <div class="map-view-cta">
+        <a href="ecosystem-map.html" class="btn btn-primary">View the map <span class="arrow">→</span></a>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer" id="register">
+  <a href="#" class="footer-brand" aria-label="CIBC home"><span class="footer-brand-mark">CIBC</span></a>
+  <div class="footer-row">
+    <div class="footer-block">
+      <h4>Register</h4>
+      <p>Registration goes to a Luma form for v1. We'll move it to a portable surface once we pick one. Data exportable in either case.</p>
+      <a href="#" class="btn btn-primary" style="margin-top: 16px;">Register on Luma <span class="arrow">→</span></a>
+    </div>
+    <div class="footer-block">
+      <h4>Stay in touch</h4>
+      <ul>
+        <li><a href="#">CIBC Telegram</a></li>
+        <li><a href="#">Substack digest</a></li>
+      </ul>
+    </div>
+    <div class="footer-block">
+      <h4>Surface</h4>
+      <ul>
+        <li><a href="#">CIBC main link</a></li>
+        <li><a href="#">First demo day · open call</a></li>
+        <li><a href="#">Past planning logs</a></li>
+        <li><a href="https://github.com/Citizen-Infra" target="_blank" rel="noopener">GitHub · Citizen-Infra</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>CIBC Demo Day · v1 landing · drafted 2026-05-15 · spine in demo-day-landing-page-spine</span>
+    <span>No tracking pixels · no third-party scripts beyond Google Fonts</span>
+  </div>
+</footer>
+
+</div>
+
+<script>
+/* ============ Field atmosphere · reusable factory ============
+   Lifted from 02_atmospheres/_examples/field.html (canonical Field implementation).
+   Adapted: canvas sized to section bounds, cursor coordinates section-local.
+   Particle system: 4-phase cycle (fish/snow/water/electric), curl noise,
+   cursor flow-around physics, glowing trails.
+
+   Refactored 2026-05-20 from one-off IIFE into a factory so we can run a
+   light-mode instance on the hero in addition to the dark-mode demos instance.
+   Pass `transparentBackground: true` + `glowComposite: 'multiply'` for light bg. */
+function initFieldAtmosphere(opts) {
+  const section = document.querySelector(opts.sectionSelector);
+  const canvas = document.getElementById(opts.canvasId);
+  if (!section || !canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  const CONFIG = Object.assign({
+    backgroundColor: '#0e0a07',
+    transparentBackground: false,
+    glowComposite: 'lighter',
+    lineColor: '#d4793d',
+    speed: 0.85,
+    phaseDuration: 22000,
+    transitionDuration: 7000,
+    maxSpeed: 1.8,
+    damping: 0.972,
+    cursorInner: 40,
+    cursorRadius: 120,
+    cursorStrength: 0.5,
+    mainCount: 140,
+    mainHistory: 110,
+    mainWidth: 0.35,
+    mainAlpha: 0.5,
+    mainDotSize: 4.5,
+    mainDotAlpha: 0.7,
+    whisperCount: 80,
+    whisperHistory: 90,
+    whisperWidth: 0.18,
+    whisperMaxAlpha: 0.28,
+    whisperDotSize: 2.0,
+    whisperDotMaxAlpha: 0.3,
+    whisperCyclePeriod: 16000,
+  }, opts.config || {});
+
+  function paintBackground() {
+    if (CONFIG.transparentBackground) {
+      ctx.clearRect(0, 0, W, H);
+    } else {
+      ctx.fillStyle = CONFIG.backgroundColor;
+      ctx.fillRect(0, 0, W, H);
+    }
+  }
+
+  let W, H, dpr, CX, CY;
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let cursorX = 0, cursorY = 0, cursorActive = false;
+
+  function hexToRgb(hex) { const n = parseInt(hex.replace('#', ''), 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255]; }
+  const LC = hexToRgb(CONFIG.lineColor);
+
+  function createGlowSprite() {
+    const size = 40;
+    const cv = document.createElement('canvas');
+    cv.width = cv.height = size;
+    const gctx = cv.getContext('2d');
+    const grad = gctx.createRadialGradient(size/2, size/2, 0, size/2, size/2, size/2);
+    grad.addColorStop(0, `rgba(${LC[0]}, ${LC[1]}, ${LC[2]}, 0.7)`);
+    grad.addColorStop(0.25, `rgba(${LC[0]}, ${LC[1]}, ${LC[2]}, 0.38)`);
+    grad.addColorStop(0.6, `rgba(${LC[0]}, ${LC[1]}, ${LC[2]}, 0.1)`);
+    grad.addColorStop(1, `rgba(${LC[0]}, ${LC[1]}, ${LC[2]}, 0)`);
+    gctx.fillStyle = grad;
+    gctx.fillRect(0, 0, size, size);
+    return cv;
+  }
+  const glowSprite = createGlowSprite();
+
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const rect = section.getBoundingClientRect();
+    W = Math.max(1, Math.floor(rect.width));
+    H = Math.max(1, Math.floor(rect.height));
+    CX = W / 2; CY = H / 2;
+    canvas.width = W * dpr;
+    canvas.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    paintBackground();
+  }
+
+  function makePerm(seed) {
+    const p = 256;
+    const perm = new Uint8Array(p * 2);
+    for (let i = 0; i < p; i++) perm[i] = i;
+    let s = seed;
+    const rand = () => { s = (s * 9301 + 49297) % 233280; return s / 233280; };
+    for (let i = p - 1; i > 0; i--) { const j = Math.floor(rand() * (i + 1)); [perm[i], perm[j]] = [perm[j], perm[i]]; }
+    for (let i = 0; i < p; i++) perm[p + i] = perm[i];
+    return perm;
+  }
+  const perm = makePerm(2026);
+  const fadeN = t => t * t * t * (t * (t * 6 - 15) + 10);
+  const lerp = (a, b, t) => a + t * (b - a);
+  const gradVec = (hash, x, y) => { const h = hash & 3; const u = h < 2 ? x : y; const v = h < 2 ? y : x; return ((h & 1) === 0 ? u : -u) + ((h & 2) === 0 ? v : -v); };
+  function noise2D(x, y) {
+    const X = Math.floor(x) & 255, Y = Math.floor(y) & 255;
+    x -= Math.floor(x); y -= Math.floor(y);
+    const u = fadeN(x), v = fadeN(y);
+    const aa = perm[perm[X] + Y], ab = perm[perm[X] + Y + 1], ba = perm[perm[X + 1] + Y], bb = perm[perm[X + 1] + Y + 1];
+    return lerp(lerp(gradVec(aa, x, y), gradVec(ba, x - 1, y), u), lerp(gradVec(ab, x, y - 1), gradVec(bb, x - 1, y - 1), u), v);
+  }
+  function curl(x, y, t) {
+    const eps = 0.01;
+    const a = (noise2D(x, y + eps + t) - noise2D(x, y - eps + t)) / (2 * eps);
+    const b = (noise2D(x + eps, y + t) - noise2D(x - eps, y + t)) / (2 * eps);
+    return { x: a, y: -b };
+  }
+
+  const particles = [];
+  function seedParticles() {
+    particles.length = 0;
+    for (let i = 0; i < CONFIG.mainCount; i++) particles.push({ kind: 'main', x: Math.random() * W, y: Math.random() * H, vx: 0, vy: 0, seed: Math.random() * 1000, zap: 0, zapDir: 0, depth: Math.random(), history: [], historyLimit: CONFIG.mainHistory * 2, phase: 0 });
+    for (let i = 0; i < CONFIG.whisperCount; i++) particles.push({ kind: 'whisper', x: Math.random() * W, y: Math.random() * H, vx: 0, vy: 0, seed: Math.random() * 1000, zap: 0, zapDir: 0, depth: Math.random(), history: [], historyLimit: CONFIG.whisperHistory * 2, phase: Math.random() * Math.PI * 2 });
+  }
+
+  const cellSize = 70;
+  let cols, rows, grid;
+  function initGrid() { cols = Math.ceil(W / cellSize) + 1; rows = Math.ceil(H / cellSize) + 1; }
+  function rebuildGrid() {
+    grid = new Array(cols * rows);
+    for (let i = 0; i < grid.length; i++) grid[i] = null;
+    for (let i = 0; i < particles.length; i++) {
+      const p = particles[i];
+      const cx = Math.floor(p.x / cellSize), cy = Math.floor(p.y / cellSize);
+      if (cx < 0 || cx >= cols || cy < 0 || cy >= rows) continue;
+      const idx = cy * cols + cx;
+      if (!grid[idx]) grid[idx] = [];
+      grid[idx].push(i);
+    }
+  }
+  function forEachNeighbor(p, radius, cb) {
+    const cx = Math.floor(p.x / cellSize), cy = Math.floor(p.y / cellSize);
+    const r = Math.ceil(radius / cellSize), r2 = radius * radius;
+    for (let dy = -r; dy <= r; dy++) for (let dx = -r; dx <= r; dx++) {
+      const nx = cx + dx, ny = cy + dy;
+      if (nx < 0 || nx >= cols || ny < 0 || ny >= rows) continue;
+      const cell = grid[ny * cols + nx];
+      if (!cell) continue;
+      for (const idx of cell) {
+        const n = particles[idx];
+        if (n === p) continue;
+        const ddx = n.x - p.x, ddy = n.y - p.y;
+        const d2 = ddx * ddx + ddy * ddy;
+        if (d2 < r2) cb(n, d2, ddx, ddy);
+      }
+    }
+  }
+
+  function fishForce(p, t) {
+    let ax = 0, ay = 0, count = 0, avgVx = 0, avgVy = 0, avgX = 0, avgY = 0, sepX = 0, sepY = 0;
+    forEachNeighbor(p, 75, (n, d2, ddx, ddy) => {
+      count++; avgVx += n.vx; avgVy += n.vy; avgX += n.x; avgY += n.y;
+      if (d2 < 900 && d2 > 0) { const inv = 1 / d2; sepX -= ddx * inv; sepY -= ddy * inv; }
+    });
+    if (count > 0) {
+      avgVx /= count; avgVy /= count; avgX /= count; avgY /= count;
+      ax += (avgVx - p.vx) * 0.05; ay += (avgVy - p.vy) * 0.05;
+      ax += (avgX - p.x) * 0.0004; ay += (avgY - p.y) * 0.0004;
+      ax += sepX * 55; ay += sepY * 55;
+    }
+    const nt = t * 0.00008, c = curl(p.x * 0.0012, p.y * 0.0012, nt);
+    ax += c.x * 0.45; ay += c.y * 0.45;
+    const dx = CX - p.x, dy = CY - p.y, d = Math.hypot(dx, dy), boundary = Math.min(W, H) * 0.38;
+    if (d > boundary) { const pull = (d - boundary) * 0.0015; ax += (dx / d) * pull; ay += (dy / d) * pull; }
+    return { x: ax, y: ay };
+  }
+  function snowForce(p, t) {
+    const dx = p.x - CX, dy = p.y - CY, d = Math.hypot(dx, dy) + 0.01, speed = 0.16 + p.depth * 0.3;
+    let ax = (dx / d) * speed, ay = (dy / d) * speed + 0.025;
+    const nt = t * 0.00018, c = curl(p.x * 0.0025, p.y * 0.0025, nt);
+    ax += c.x * 0.13; ay += c.y * 0.13;
+    return { x: ax, y: ay };
+  }
+  function waterForce(p, t) {
+    const bottomZone = H * 0.68;
+    let ax = 0, ay = 0;
+    if (p.y < bottomZone) {
+      ay = 0.26;
+      const nt = t * 0.00025, c = curl(p.x * 0.003, p.y * 0.0025, nt);
+      ax = c.x * 0.4; ay += c.y * 0.08;
+    } else {
+      const waveT = t * 0.0012;
+      ax = Math.sin(p.y * 0.035 + waveT + p.seed * 0.01) * 0.6;
+      ay = Math.cos(p.x * 0.012 + waveT) * 0.22;
+      if (p.y > H - 40) ay -= 0.3;
+    }
+    return { x: ax, y: ay };
+  }
+  function electricForce(p, t) {
+    const s = p.seed;
+    let ax = Math.sin(t * 0.002 + s * 17) * 0.22 + Math.sin(t * 0.004 + s * 29) * 0.1;
+    let ay = Math.cos(t * 0.0019 + s * 23) * 0.22 + Math.sin(t * 0.0036 + s * 31) * 0.1;
+    if (p.zap > 0) { p.zap--; ax += Math.cos(p.zapDir) * 0.85; ay += Math.sin(p.zapDir) * 0.85; }
+    else if (Math.random() < 0.0014) { p.zap = 7; p.zapDir = Math.random() * Math.PI * 2; }
+    return { x: ax, y: ay };
+  }
+  function cursorForce(p) {
+    if (!cursorActive) return { x: 0, y: 0 };
+    const dx = p.x - cursorX, dy = p.y - cursorY, d = Math.hypot(dx, dy);
+    const inner = CONFIG.cursorInner, outer = CONFIG.cursorRadius;
+    if (d >= outer) return { x: 0, y: 0 };
+    if (d < 0.01) return { x: 1.5, y: 0 };
+    const nx = dx / d, ny = dy / d, tx = -ny, ty = nx;
+    const vRadial = p.vx * nx + p.vy * ny, vTangent = p.vx * tx + p.vy * ty;
+    let fx = 0, fy = 0;
+    if (d < inner) {
+      const overshoot = (inner - d) / inner, hardPush = 1.2 + overshoot * 2.0;
+      fx += nx * hardPush; fy += ny * hardPush;
+      if (vRadial < 0) { fx -= vRadial * nx * 1.5; fy -= vRadial * ny * 1.5; }
+      return { x: fx, y: fy };
+    }
+    const tt = 1 - (d - inner) / (outer - inner), strength = tt * tt;
+    if (vRadial < 0) {
+      const tangSign = vTangent >= 0 ? 1 : -1, redirectForce = -vRadial * strength * 1.1;
+      fx += nx * redirectForce; fy += ny * redirectForce;
+      fx += tx * redirectForce * tangSign; fy += ty * redirectForce * tangSign;
+    }
+    const outPush = strength * CONFIG.cursorStrength * 0.3;
+    fx += nx * outPush; fy += ny * outPush;
+    return { x: fx, y: fy };
+  }
+
+  const forces = [fishForce, snowForce, waterForce, electricForce];
+  const phaseKey = ['fish', 'snow', 'water', 'electric'];
+  function phaseInfo(t) {
+    const total = CONFIG.phaseDuration + CONFIG.transitionDuration, cycle = total * 4;
+    const ct = ((t % cycle) + cycle) % cycle, idx = Math.floor(ct / total), within = ct % total;
+    if (within < CONFIG.phaseDuration) return { current: idx, next: idx, transition: 0 };
+    return { current: idx, next: (idx + 1) % 4, transition: (within - CONFIG.phaseDuration) / CONFIG.transitionDuration };
+  }
+  function easeInOut(t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
+  function respawnForPhase(p, key) {
+    if (key === 'snow') { p.x = CX + (Math.random() - 0.5) * 30; p.y = CY + (Math.random() - 0.5) * 30; p.vx = 0; p.vy = 0; p.depth = Math.random(); }
+    else if (key === 'water') { p.x = Math.random() * W; p.y = -10 - Math.random() * 40; p.vx = 0; p.vy = 0; }
+    else { p.x = Math.random() * W; p.y = Math.random() * H; p.vx = 0; p.vy = 0; }
+  }
+  function drawGlow(x, y, size, alpha) { ctx.globalAlpha = alpha; ctx.drawImage(glowSprite, x - size, y - size, size * 2, size * 2); }
+
+  function draw(t) {
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.globalAlpha = 1;
+    paintBackground();
+    rebuildGrid();
+    const info = phaseInfo(t), curKey = phaseKey[info.current], nextKey = phaseKey[info.next];
+    const ease = easeInOut(info.transition), blending = info.transition > 0;
+    const f1 = forces[info.current], f2 = forces[info.next];
+    for (const p of particles) {
+      let fx, fy;
+      if (blending) { const a = f1(p, t), b = f2(p, t); fx = a.x * (1 - ease) + b.x * ease; fy = a.y * (1 - ease) + b.y * ease; }
+      else { const a = f1(p, t); fx = a.x; fy = a.y; }
+      const cf = cursorForce(p); fx += cf.x; fy += cf.y;
+      p.vx = p.vx * CONFIG.damping + fx; p.vy = p.vy * CONFIG.damping + fy;
+      const sp = Math.hypot(p.vx, p.vy);
+      if (sp > CONFIG.maxSpeed) { p.vx = (p.vx / sp) * CONFIG.maxSpeed; p.vy = (p.vy / sp) * CONFIG.maxSpeed; }
+      p.x += p.vx * CONFIG.speed; p.y += p.vy * CONFIG.speed;
+      const activeKey = ease < 0.5 ? curKey : nextKey;
+      let cleared = false;
+      if (activeKey === 'water') { if (p.y > H + 12) { respawnForPhase(p, activeKey); cleared = true; } }
+      else if (activeKey === 'snow') { if (p.x < -20 || p.x > W + 20 || p.y < -20 || p.y > H + 20) { respawnForPhase(p, activeKey); cleared = true; } }
+      else {
+        if (p.x < -20) { p.x = W + 20; cleared = true; } else if (p.x > W + 20) { p.x = -20; cleared = true; }
+        if (p.y < -20) { p.y = H + 20; cleared = true; } else if (p.y > H + 20) { p.y = -20; cleared = true; }
+      }
+      if (cleared) p.history.length = 0;
+      p.history.push(p.x, p.y);
+      if (p.history.length > p.historyLimit) p.history.splice(0, 2);
+    }
+    const freq = (Math.PI * 2) / CONFIG.whisperCyclePeriod;
+    ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    ctx.lineWidth = CONFIG.whisperWidth;
+    for (const p of particles) {
+      if (p.kind !== 'whisper') continue;
+      const envRaw = Math.sin(t * freq + p.phase), env = envRaw > 0 ? Math.pow(envRaw, 1.6) : 0;
+      if (env < 0.02) continue;
+      let lineA = CONFIG.whisperMaxAlpha * env;
+      if (p.history.length >= 4) {
+        ctx.strokeStyle = `rgba(${LC[0]}, ${LC[1]}, ${LC[2]}, ${lineA})`;
+        ctx.beginPath(); ctx.moveTo(p.history[0], p.history[1]);
+        for (let i = 2; i < p.history.length; i += 2) ctx.lineTo(p.history[i], p.history[i + 1]);
+        ctx.stroke();
+      }
+    }
+    ctx.lineWidth = CONFIG.mainWidth;
+    for (const p of particles) {
+      if (p.kind !== 'main') continue;
+      let lineA = CONFIG.mainAlpha;
+      if (p.history.length >= 4) {
+        ctx.strokeStyle = `rgba(${LC[0]}, ${LC[1]}, ${LC[2]}, ${lineA})`;
+        ctx.beginPath(); ctx.moveTo(p.history[0], p.history[1]);
+        for (let i = 2; i < p.history.length; i += 2) ctx.lineTo(p.history[i], p.history[i + 1]);
+        ctx.stroke();
+      }
+    }
+    ctx.globalCompositeOperation = CONFIG.glowComposite;
+    for (const p of particles) {
+      if (p.kind !== 'whisper') continue;
+      const envRaw = Math.sin(t * freq + p.phase), env = envRaw > 0 ? Math.pow(envRaw, 1.6) : 0;
+      if (env < 0.04) continue;
+      drawGlow(p.x, p.y, CONFIG.whisperDotSize, CONFIG.whisperDotMaxAlpha * env);
+    }
+    for (const p of particles) {
+      if (p.kind !== 'main') continue;
+      drawGlow(p.x, p.y, CONFIG.mainDotSize, CONFIG.mainDotAlpha);
+    }
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.globalAlpha = 1;
+  }
+
+  resize(); initGrid(); seedParticles();
+  const ro = new ResizeObserver(() => { resize(); initGrid(); });
+  ro.observe(section);
+  window.addEventListener('resize', () => { resize(); initGrid(); });
+
+  section.addEventListener('mousemove', (e) => {
+    const rect = section.getBoundingClientRect();
+    cursorX = e.clientX - rect.left;
+    cursorY = e.clientY - rect.top;
+    cursorActive = true;
+  });
+  section.addEventListener('mouseleave', () => { cursorActive = false; });
+
+  if (prefersReducedMotion) {
+    paintBackground();
+    ctx.globalCompositeOperation = CONFIG.glowComposite;
+    for (const p of particles) {
+      if (p.kind !== 'main') continue;
+      drawGlow(p.x, p.y, CONFIG.mainDotSize, CONFIG.mainDotAlpha);
+    }
+    ctx.globalCompositeOperation = 'source-over';
+  } else {
+    let simTime = 0, lastReal = 0;
+    function loop(now) {
+      if (lastReal === 0) lastReal = now;
+      const realDelta = Math.min(50, now - lastReal);
+      lastReal = now;
+      simTime += realDelta * CONFIG.speed;
+      draw(simTime);
+      requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+  }
+}
+
+initFieldAtmosphere({
+  sectionSelector: '.section-demos',
+  canvasId: 'field-canvas'
+});
+
+initFieldAtmosphere({
+  sectionSelector: '.nav',
+  canvasId: 'field-canvas-nav',
+  config: {
+    transparentBackground: true,
+    glowComposite: 'source-over',
+    lineColor: '#d4793d',
+    mainCount: 80,
+    whisperCount: 50,
+    mainAlpha: 0.55,
+    mainDotAlpha: 0.85,
+    whisperMaxAlpha: 0.32,
+    whisperDotMaxAlpha: 0.45,
+    mainDotSize: 3.6,
+    whisperDotSize: 1.8,
+    speed: 0.4,
+  }
+});
+
+initFieldAtmosphere({
+  sectionSelector: '.hero-info-side',
+  canvasId: 'field-canvas-topics',
+  config: {
+    transparentBackground: true,
+    glowComposite: 'source-over',
+    lineColor: '#c45525',
+    mainCount: 60,
+    whisperCount: 40,
+    mainAlpha: 0.32,
+    mainDotAlpha: 0.55,
+    whisperMaxAlpha: 0.18,
+    whisperDotMaxAlpha: 0.28,
+    mainDotSize: 3.0,
+    whisperDotSize: 1.5,
+    speed: 0.5,
+  }
+});
+</script>
+
+<script>
+/* ============ Mobile nav toggle ============ */
+(function() {
+  function ready(fn) {
+    if (document.readyState !== 'loading') { fn(); } else { document.addEventListener('DOMContentLoaded', fn); }
+  }
+  ready(function() {
+    document.querySelectorAll('[data-nav-toggle]').forEach(function(btn) {
+      var panel = document.getElementById(btn.getAttribute('aria-controls'));
+      if (!panel) return;
+      function setOpen(open) {
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        panel.classList.toggle('is-open', open);
+      }
+      btn.addEventListener('click', function() {
+        setOpen(btn.getAttribute('aria-expanded') !== 'true');
+      });
+      panel.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() { setOpen(false); });
+      });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') {
+          setOpen(false);
+          btn.focus();
+        }
+      });
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

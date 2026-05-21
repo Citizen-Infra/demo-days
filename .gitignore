@@ -1,0 +1,19 @@
+# OS metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor metadata
+.vscode/
+.idea/
+*.swp
+*~
+
+# Local preview / build artifacts (none in V1, reserved for future)
+node_modules/
+dist/
+.cache/
+
+# Backup files
+*.bak
+*.orig
