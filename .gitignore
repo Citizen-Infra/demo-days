@@ -13,6 +13,7 @@ desktop.ini
 node_modules/
 dist/
 .cache/
+.claude/
 
 # Backup files
 *.bak
