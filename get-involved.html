@@ -229,6 +229,152 @@
     margin: 0;
   }
 
+  /* "Professionals, loosely tied." section · CIBC intro plus the
+     trainer roster, restyled from the Atlas lens cards into a
+     compact horizontal pattern (avatar dot, name, mono caps
+     section label). Uses design system tokens throughout. */
+  .professionals {
+    max-width: 1080px;
+    margin: clamp(56px, 8vw, 96px) auto;
+    padding: 0;
+  }
+  .professionals-head {
+    max-width: 720px;
+    margin-bottom: clamp(36px, 5vw, 56px);
+  }
+  .professionals-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 14px;
+  }
+  .professionals h2 {
+    font-family: var(--serif);
+    font-variation-settings: "opsz" 72, "SOFT" 50;
+    font-weight: 700;
+    font-size: clamp(32px, 4vw, 48px);
+    line-height: 1.08;
+    letter-spacing: -0.018em;
+    color: var(--ink);
+    margin: 0 0 18px;
+  }
+  .professionals h2 em {
+    font-style: italic;
+    font-weight: 500;
+    color: var(--accent);
+  }
+  .professionals-deck {
+    font-family: var(--body);
+    font-size: clamp(15px, 1.5vw, 17px);
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin: 0 0 24px;
+    max-width: 640px;
+  }
+  .professionals-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 22px;
+    border-radius: 100px;
+    background: var(--paper-white);
+    border: 1.5px solid var(--ink);
+    color: var(--ink);
+    font-family: var(--body);
+    font-weight: 600;
+    font-size: 13px;
+    text-decoration: none;
+    transition: background 150ms, color 150ms;
+  }
+  .professionals-cta:hover {
+    background: var(--ink);
+    color: var(--paper-white);
+  }
+  .professionals-grid {
+    display: grid;
+    gap: clamp(20px, 3vw, 36px);
+  }
+  .trainer-grid-block + .trainer-grid-block { margin-top: 0; }
+  .professionals .trainer-section-label {
+    font-family: var(--mono);
+    font-style: normal;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 12px;
+  }
+  /* Restyled trainer-card · compact horizontal layout. Drops the
+     bobbing 92 px avatar and count badge in favor of a 36 px
+     color-coded dot, the trainer name, and a small mono category
+     label. Card itself sits on the cream page bg with a paper-
+     shadow lift. Used only on Learn More; trainer-overlay still
+     uses .inv-item cards inside #trainer-view. */
+  .professionals .trainer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+  }
+  .professionals .trainer-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--paper-white, #fffaf0);
+    border: 1px solid rgba(60, 40, 20, 0.10);
+    border-radius: 14px;
+    padding: 14px 16px;
+    box-shadow: 0 1px 2px rgba(60, 40, 20, 0.04), 0 6px 16px rgba(60, 40, 20, 0.06);
+    text-align: left;
+    cursor: pointer;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .professionals .trainer-card:hover,
+  .professionals .trainer-card:focus-visible {
+    transform: translateY(-2px);
+    border-color: rgba(60, 40, 20, 0.18);
+    box-shadow: 0 2px 4px rgba(60, 40, 20, 0.06), 0 10px 22px rgba(60, 40, 20, 0.10);
+    outline: none;
+  }
+  .professionals .trainer-card .avatar-wrap {
+    width: 36px; height: 36px;
+    flex-shrink: 0;
+    margin: 0;
+    border-radius: 50%;
+    overflow: hidden;
+    background: var(--bg-warm);
+  }
+  .professionals .trainer-card .avatar-wrap svg { animation: none !important; }
+  .professionals .trainer-card .trainer-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    flex: 1;
+  }
+  .professionals .trainer-card .trainer-name {
+    font-family: var(--serif);
+    font-variation-settings: "opsz" 18, "SOFT" 60;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1.2;
+    color: var(--ink);
+    margin: 0;
+  }
+  .professionals .trainer-card .trainer-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    line-height: 1;
+  }
+  /* Hide legacy fields (role + count) on the Professionals variant. */
+  .professionals .trainer-card .trainer-role,
+  .professionals .trainer-card .trainer-count { display: none; }
+
   /* Pull-quote section · cream band with massive quote marks
      flanking the Buckminster Fuller quote. Sits right under the
      dark hero so the visual rhythm goes dark to light to dark. */
@@ -2295,6 +2441,47 @@ const ATLAS_DATA = {
     </div>
   </section>
 
+  <!-- ===== PROFESSIONALS, LOOSELY TIED · intro + trainer roster ===== -->
+  <section class="professionals" aria-labelledby="professionals-title">
+    <div class="professionals-head">
+      <p class="professionals-eyebrow">002</p>
+      <h2 id="professionals-title">Professionals, <em>loosely tied</em>.</h2>
+      <p class="professionals-deck">CIBC isn't an organization. We're a group of professionals, loosely tied by our connections, determined to build tech for a better future.</p>
+      <a href="#" class="professionals-cta" data-todo="add-telegram-link">Join the Telegram</a>
+    </div>
+
+    <div class="professionals-grid">
+      <div class="trainer-grid-block">
+        <p class="trainer-section-label">CIBC connectors</p>
+        <div class="trainer-grid" id="cibc-grid"></div>
+      </div>
+      <div class="trainer-grid-block">
+        <p class="trainer-section-label">Ecosystem bridges</p>
+        <div class="trainer-grid" id="bridge-grid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ATLAS MAP · dark ===== -->
+  <div id="caught-counter" hidden></div>
+  <section class="front-map-section front-map-section-dark">
+    <p class="front-map-eyebrow">003 &middot; the whole ecosystem &middot; tap a node to focus</p>
+    <div class="front-map-wrap is-dark">
+      <svg id="front-map-svg" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid meet">
+        <g class="front-map-inner" id="front-map-inner"></g>
+      </svg>
+      <div class="front-map-tooltip" id="front-map-tooltip"></div>
+      <button class="front-reset-btn" id="front-reset-btn" aria-label="Reset map view">reset view</button>
+    </div>
+    <div class="front-map-legend" aria-hidden="true">
+      <span class="legend-item"><svg width="36" height="6" viewBox="0 0 36 6"><line x1="2" y1="3" x2="34" y2="3" stroke="currentColor" stroke-width="1.4"/></svg> formalized tie</span>
+      <span class="legend-item"><svg width="36" height="6" viewBox="0 0 36 6"><line x1="2" y1="3" x2="34" y2="3" stroke="currentColor" stroke-width="1.4" stroke-dasharray="5 4"/></svg> loose / speculative</span>
+      <span class="legend-item"><svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="#c4a880"/></svg> entity / concept</span>
+      <span class="legend-item"><svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="4" r="2.4" fill="#c8b88c"/><path d="M 1 12 Q 3 7 7 7 Q 11 7 13 12 Z" fill="#c8b88c"/></svg> person</span>
+    </div>
+    <p class="front-map-hint">pan: drag. zoom: pinch or scroll. focus: tap a node. reset: double-tap.</p>
+  </section>
+
   <div class="meeting-strip">
     <div class="meeting-item">
       <span class="meeting-label">When</span>
@@ -2347,46 +2534,6 @@ const ATLAS_DATA = {
 
 </div>
 
-
-  
-
-
-  <!-- ===== ATLAS LENS (ported from Initiatives/CIBC/Demo Days/_activity/cibc-ecosystem-map-2026-05-15.html) ===== -->
-  <div id="caught-counter" hidden></div>
-  
-
-  <section class="front-map-section front-map-section-dark">
-    <p class="front-map-eyebrow">the whole ecosystem &middot; tap a node to focus</p>
-    <div class="front-map-wrap is-dark">
-      <svg id="front-map-svg" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid meet">
-        <g class="front-map-inner" id="front-map-inner"></g>
-      </svg>
-      <div class="front-map-tooltip" id="front-map-tooltip"></div>
-      <button class="front-reset-btn" id="front-reset-btn" aria-label="Reset map view">reset view</button>
-    </div>
-    <div class="front-map-legend" aria-hidden="true">
-      <span class="legend-item"><svg width="36" height="6" viewBox="0 0 36 6"><line x1="2" y1="3" x2="34" y2="3" stroke="#5a4d3a" stroke-width="1.4"/></svg> formalized tie</span>
-      <span class="legend-item"><svg width="36" height="6" viewBox="0 0 36 6"><line x1="2" y1="3" x2="34" y2="3" stroke="#5a4d3a" stroke-width="1.4" stroke-dasharray="5 4"/></svg> loose / speculative</span>
-      <span class="legend-item"><svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="#c4a880"/></svg> entity / concept</span>
-      <span class="legend-item"><svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="4" r="2.4" fill="#c8b88c"/><path d="M 1 12 Q 3 7 7 7 Q 11 7 13 12 Z" fill="#c8b88c"/></svg> person</span>
-    </div>
-    <p class="front-map-hint">pan: drag. zoom: pinch or scroll. focus: tap a node. reset: double-tap.</p>
-  </section>
-  
-  <!-- /ATLAS SECTION: front-map -->
-
-  <!-- ATLAS SECTION: trainer-roster -->
-
-  <section class="trainer-section">
-    <p class="trainer-section-label">CIBC team</p>
-    <div class="trainer-grid" id="cibc-grid"></div>
-
-    <p class="trainer-section-label">ecosystem bridges</p>
-    <div class="trainer-grid" id="bridge-grid"></div>
-  </section>
-  
-  <!-- /ATLAS SECTION: trainer-roster -->
-  <!-- ===== /ATLAS LENS ===== -->
 <footer class="footer">
   <div class="footer-inner">
     <a href="index.html" class="footer-brand" aria-label="CIBC home"><span class="footer-brand-mark">CIBC</span></a>
@@ -2959,15 +3106,23 @@ const cibcGrid = document.getElementById('cibc-grid');
 const bridgeGrid = document.getElementById('bridge-grid');
 document.getElementById('caught-counter').textContent = `trainers · ${trainers.length}`;
 
+// Category labels map to the section header above each grid. The
+// compact trainer-card layout on Learn More renders name + small
+// mono caps label; the legacy role + count fields stay in the
+// markup but are hidden via the .professionals scope CSS.
+const sectionLabel = { cibc: 'CIBC connector', bridge: 'Ecosystem bridge' };
 trainers.forEach(t => {
   const card = document.createElement('button');
   card.className = 'trainer-card';
   card.setAttribute('aria-label', `Open ${t.name}'s roster`);
   card.innerHTML = `
     <div class="avatar-wrap">${trainerSVG(t)}</div>
-    <div class="trainer-name">${t.name}</div>
-    <div class="trainer-role">${t.role}</div>
-    <div class="trainer-count">${t.count} caught</div>
+    <div class="trainer-text">
+      <div class="trainer-name">${t.name}</div>
+      <div class="trainer-label">${sectionLabel[t.section] || ''}</div>
+      <div class="trainer-role">${t.role}</div>
+      <div class="trainer-count">${t.count} caught</div>
+    </div>
   `;
   card.addEventListener('click', () => openTrainer(t));
   (t.section === 'cibc' ? cibcGrid : bridgeGrid).appendChild(card);
