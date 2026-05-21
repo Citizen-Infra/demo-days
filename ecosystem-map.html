@@ -1712,95 +1712,118 @@
   }
 
   /* ============ RESOURCES PAGE: HERO + TOOLS FILTER BAR ============ */
-  /* Resources hero is compact per Figma frame 123:3121 (820 x 275
-     inner content): smaller title, tighter padding, and the CTAs
-     hand off to the filter bar with only the in-bar margin instead
-     of the global section margin. */
+  /* Resources hero · centered per Figma frame 153:781. Eyebrow,
+     big title, and CTA pair all center-aligned in an 820w inner
+     column. Title is large (clamp 48..72), so wider readable
+     bounds; CTAs are uppercase mono pills matching the nav. */
   .resources-hero {
     padding-top: clamp(40px, 6vw, 72px);
     padding-bottom: clamp(20px, 3vw, 36px);
+    text-align: center;
   }
-  .resources-hero .hero-eyebrow { margin-bottom: 16px; }
+  .resources-hero .hero-inner {
+    max-width: 820px;
+    margin: 0 auto;
+  }
+  .resources-hero .hero-eyebrow {
+    margin-bottom: 18px;
+    text-align: center;
+    justify-content: center;
+  }
   .resources-hero .hero-title {
-    font-size: clamp(34px, 4.6vw, 56px);
+    font-size: clamp(48px, 6.2vw, 72px);
     line-height: 1.05;
-    margin-bottom: 14px;
+    margin: 0 0 28px;
+    text-wrap: balance;
   }
-  .resources-hero .hero-deck {
-    color: var(--ink-soft);
-    margin-bottom: 22px;
+  .resources-hero .hero-ctas {
+    margin-bottom: 0;
+    justify-content: center;
   }
-  .resources-hero .hero-ctas { margin-bottom: 0; }
+  /* Uppercase-mono CTA labels per the spec image. */
+  .resources-hero .hero-btn {
+    font-family: var(--mono);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 11px;
+  }
   /* Filter bar sits close under the hero, not separated by the
      global section gap. */
   .section-tool-filter {
     margin-top: clamp(24px, 3vw, 40px);
     margin-bottom: clamp(32px, 4vw, 56px);
   }
-  /* Filter bar · dark band per the latest spec.
-     Dark wrapper, cream search input (icon on the right), a filled
-     ALL pill that reads as the default selected filter, and four
-     coral-outlined uppercase-mono category chips beside it. */
-  /* Section breaks out of the .page 1080 max-width so the dark bar
-     gets the full 1280 it needs to fit all six controls on a
-     single row at desktop, matching the spec image. */
-  .section-tool-filter {
-    margin-left: calc(-50vw + 50%);
-    margin-right: calc(-50vw + 50%);
-    width: 100vw;
-    padding: 0 clamp(20px, 4vw, 48px);
-    box-sizing: border-box;
-  }
+  /* Filter bar · dark band per Figma frame 153:781.
+     Compact 741-wide pill centered in the hero; inside it the
+     search input stacks ABOVE the chip row. Bar is no longer a
+     full-width band (the previous breakout is gone) since the
+     spec shows it tucked beneath the title. */
   .tool-filter-bar {
     background: #0e0a07;
-    border-radius: 28px;
-    padding: 14px 18px;
+    border-radius: 24px;
+    padding: 16px;
     display: flex;
-    align-items: center;
-    gap: 14px;
-    flex-wrap: wrap;
-    max-width: 1280px;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    max-width: 780px;
     margin: 0 auto;
   }
+  /* Search input · wide white pill, magnifier icon on the left,
+     coral arrow-button on the right. Reads like the spec mockup. */
   .tool-search {
     display: flex;
     align-items: center;
     gap: 12px;
-    flex: 1 1 260px;
-    max-width: 360px;
     background: #ffffff;
-    border-radius: 100px;
-    padding: 12px 20px;
+    border-radius: 14px;
+    padding: 10px 10px 10px 18px;
     border: 1px solid rgba(255, 255, 255, 0.04);
   }
+  .tool-search-icon {
+    width: 22px; height: 22px;
+    color: var(--ink-soft);
+    flex-shrink: 0;
+  }
+  .tool-search-icon svg { width: 100%; height: 100%; display: block; }
   .tool-search input {
     flex: 1;
     background: transparent;
     border: none;
     font-family: var(--body);
-    font-size: 15px;
+    font-size: 16px;
     color: var(--ink);
-    padding: 2px 0;
+    padding: 6px 0;
     outline: none;
     min-width: 0;
-    order: 1;
   }
-  .tool-search input::placeholder { color: var(--ink-soft); opacity: 0.7; }
-  .tool-search-icon {
-    width: 18px; height: 18px;
-    color: var(--ink-soft);
+  .tool-search input::placeholder { color: var(--ink-soft); opacity: 0.65; }
+  /* Coral submit button on the right of the search pill. */
+  .tool-search-submit {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--gradient-primary);
+    border: none;
+    color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
     flex-shrink: 0;
-    order: 2;
+    transition: filter 0.18s ease, transform 0.18s ease;
+    -webkit-tap-highlight-color: transparent;
   }
-  .tool-search-icon svg { width: 100%; height: 100%; display: block; }
+  .tool-search-submit:hover { filter: brightness(1.06); }
+  .tool-search-submit:active { transform: scale(0.96); }
+  .tool-search-submit svg { width: 18px; height: 18px; display: block; }
 
-  /* Chips group sits to the right of the search. ALL pill leads. */
+  /* Chips group sits on the bar's second row. ALL pill leads. */
   .tool-filter-chips {
     display: flex;
     gap: 8px;
-    flex: 1 1 auto;
     flex-wrap: wrap;
-    justify-content: flex-end;
+    justify-content: flex-start;
     align-items: center;
   }
 
@@ -1963,11 +1986,10 @@
 <!-- ===== HERO: INFRA RESOURCES ===== -->
 <header class="masthead resources-hero">
   <div class="hero-inner">
-    <div class="hero-eyebrow">Citizen Infra &middot; Infra Resources &middot; Last updated 5/21/2026</div>
-    <h1 class="hero-title">Tools for you <span class="gradient-text">&amp; your community</span>.</h1>
-    <p class="hero-deck">&hellip;</p>
+    <div class="hero-eyebrow">Last updated 5/21/2026</div>
+    <h1 class="hero-title">Tools for you &amp; your community.</h1>
     <div class="hero-ctas">
-      <a href="#tools" class="hero-btn hero-btn-primary">Find tools <span class="hero-btn-arrow" aria-hidden="true"><svg style="width:1em;height:1em;vertical-align:-0.12em;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></a>
+      <a href="#tools" class="hero-btn hero-btn-primary">Find tools</a>
       <a href="https://app.harmonica.chat/chat?s=fc325b1d-2abb-4869-b2b5-6e35bfb274bb" target="_blank" rel="noopener" class="hero-btn hero-btn-ghost">Demo a tool</a>
     </div>
   </div>
@@ -1978,7 +2000,8 @@
   <div class="tool-filter-bar">
     <div class="tool-search">
       <span class="tool-search-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
-      <input type="search" placeholder="Search for tools..." aria-label="Search for tools" data-todo="wire-up-search">
+      <input type="search" placeholder="What are you looking for?" aria-label="Search for tools" data-todo="wire-up-search">
+      <button class="tool-search-submit" type="button" aria-label="Search" data-todo="wire-up-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
     </div>
     <div class="tool-filter-chips" role="group" aria-label="Filter by category">
       <button class="topic-pill tool-chip tool-chip-all is-active" data-cat="__all" type="button"><span class="topic-pill-label">All</span></button>
