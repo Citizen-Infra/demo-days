@@ -1711,10 +1711,32 @@
     .meta-strip { gap: 18px; }
   }
 
-  /* ============ RESOURCES PAGE: TOOLS FILTER BAR ============ */
-  .resources-hero .hero-eyebrow { margin-bottom: 18px; }
-  .resources-hero .hero-deck { color: var(--ink-soft); }
-  .section-tool-filter { margin-top: clamp(48px, 6vw, 80px); }
+  /* ============ RESOURCES PAGE: HERO + TOOLS FILTER BAR ============ */
+  /* Resources hero is compact per Figma frame 123:3121 (820 x 275
+     inner content): smaller title, tighter padding, and the CTAs
+     hand off to the filter bar with only the in-bar margin instead
+     of the global section margin. */
+  .resources-hero {
+    padding-top: clamp(40px, 6vw, 72px);
+    padding-bottom: clamp(20px, 3vw, 36px);
+  }
+  .resources-hero .hero-eyebrow { margin-bottom: 16px; }
+  .resources-hero .hero-title {
+    font-size: clamp(34px, 4.6vw, 56px);
+    line-height: 1.05;
+    margin-bottom: 14px;
+  }
+  .resources-hero .hero-deck {
+    color: var(--ink-soft);
+    margin-bottom: 22px;
+  }
+  .resources-hero .hero-ctas { margin-bottom: 0; }
+  /* Filter bar sits close under the hero, not separated by the
+     global section gap. */
+  .section-tool-filter {
+    margin-top: clamp(24px, 3vw, 40px);
+    margin-bottom: clamp(32px, 4vw, 56px);
+  }
   /* Bar shape per Figma frame 123:3121: pill background, search on the
      left at a fixed-ish width, filter chips beside it on a single row at
      desktop. Wraps cleanly to a two-row stack on narrow viewports. */
@@ -1803,8 +1825,11 @@
       justify-content: flex-start;
     }
   }
-  /* Tools grid: drop the dark demos-section background. Inherit page bg. */
-  #tools-grid { background: transparent; }
+  /* Tools grid: drop the dark demos-section background. Inherit page bg.
+     Override the global .section margin so the grid sits close under
+     the filter bar (Figma 123:3121 places cards at y=536 inside the
+     hero frame, just 121px below the bar). */
+  #tools-grid { background: transparent; margin-top: 0; }
   #tools-grid .demos {
     padding-top: 0;
     grid-template-columns: repeat(3, minmax(0, 1fr));
