@@ -198,6 +198,55 @@
     margin: 0;
   }
 
+  /* Manifesto · pull quote + body framing for why CIBC exists.
+     Sits between the hero header and the meeting strip so the
+     reader gets the why before the logistics. */
+  .manifesto {
+    max-width: 720px;
+    margin: clamp(48px, 7vw, 88px) auto clamp(48px, 7vw, 88px);
+    padding: 0;
+  }
+  .manifesto-quote {
+    margin: 0 0 36px;
+    padding: 0 0 0 24px;
+    border-left: 3px solid var(--accent);
+  }
+  .manifesto-quote p {
+    font-family: var(--serif);
+    font-style: italic;
+    font-variation-settings: "opsz" 36, "SOFT" 60;
+    font-weight: 400;
+    font-size: clamp(20px, 2.4vw, 26px);
+    line-height: 1.4;
+    color: var(--ink);
+    margin: 0 0 14px;
+    text-wrap: pretty;
+  }
+  .manifesto-quote cite {
+    font-family: var(--mono);
+    font-style: normal;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    display: block;
+  }
+  .manifesto-body p {
+    font-family: var(--body);
+    font-size: clamp(16px, 1.6vw, 18px);
+    line-height: 1.65;
+    color: var(--ink);
+    margin: 0 0 18px;
+    text-wrap: pretty;
+  }
+  .manifesto-body p:last-child { margin-bottom: 0; }
+  @media (max-width: 720px) {
+    .manifesto {
+      margin: clamp(36px, 8vw, 56px) auto;
+    }
+    .manifesto-quote { padding-left: 18px; }
+  }
+
   /* Meeting details strip */
   .meeting-strip {
     display: grid;
@@ -2100,6 +2149,17 @@ const ATLAS_DATA = {
       <a href="ecosystem-map.html" class="hero-btn hero-btn-ghost">Find resources</a>
     </div>
   </header>
+
+  <section class="manifesto" aria-label="Why CIBC exists">
+    <blockquote class="manifesto-quote">
+      <p>"If you want to teach people a new way of thinking, don't bother trying to teach them. Instead, give them a tool, the use of which will lead to new ways of thinking."</p>
+      <cite>Buckminster Fuller</cite>
+    </blockquote>
+    <div class="manifesto-body">
+      <p>We build digital pitchforks: citizen infrastructure that teaches collective action, solidarity, and shared stewardship through use. Not apps or platforms in the traditional sense, but tools crafted to reshape how people relate to each other and to their communities.</p>
+      <p>In an age of techno-feudalism, where digital platforms have replaced markets with fiefdoms and users have become digital serfs, the antidote is not better regulation of feudal tools. It's building tools that nurture citizen empowerment and the people's capacity to act together.</p>
+    </div>
+  </section>
 
   <div class="meeting-strip">
     <div class="meeting-item">
