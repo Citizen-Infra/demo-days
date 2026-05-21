@@ -163,8 +163,12 @@
   /* Dark hero · full-bleed band per Figma 154:1971. Uses design
      system tokens: --bg-deep for the dark band, --bg-warm for
      cream text, --accent for the title. rgba uses the --bg-warm
-     RGB triplet (246, 236, 217) for derived transparency stops. */
+     RGB triplet (246, 236, 217) for derived transparency stops.
+     position: relative + isolation so the field-canvas particle
+     layer can sit absolutely positioned behind the inner content. */
   .cibc-hero-dark {
+    position: relative;
+    isolation: isolate;
     margin-left: calc(-50vw + 50%);
     margin-right: calc(-50vw + 50%);
     width: 100vw;
@@ -172,8 +176,26 @@
     color: var(--bg-warm);
     padding: clamp(56px, 9vw, 112px) clamp(20px, 4vw, 56px) clamp(48px, 7vw, 88px);
     margin-bottom: 0;
+    overflow: hidden;
+  }
+  .cibc-hero-dark .field-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .cibc-hero-dark .field-veil {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: rgba(20, 17, 13, 0.18);
+    z-index: 1;
   }
   .cibc-hero-inner {
+    position: relative;
+    z-index: 2;
     max-width: 1080px;
     margin: 0 auto;
   }
@@ -2431,6 +2453,8 @@ const ATLAS_DATA = {
 <div class="page">
 
   <header class="header cibc-hero-dark">
+    <canvas class="field-canvas" id="field-canvas-hero" aria-hidden="true"></canvas>
+    <div class="field-veil" aria-hidden="true"></div>
     <div class="cibc-hero-inner">
       <h1>Citizen Infrastructure Builders Club</h1>
       <p class="lede">We build digital pitchforks: citizen infrastructure that teaches collective action, solidarity, and shared stewardship through use. Not apps or platforms in the traditional sense, but tools crafted to reshape how people relate to each other and to their communities.</p>
@@ -2942,6 +2966,28 @@ initFieldAtmosphere({
     mainDotSize: 3.6,
     whisperDotSize: 1.8,
     speed: 0.4,
+  }
+});
+
+// Dark hero atmosphere · denser particles, dark backdrop (the
+// section background already paints --bg-deep so the canvas
+// runs transparent + 'lighter' composite for the glow lift).
+initFieldAtmosphere({
+  sectionSelector: '.cibc-hero-dark',
+  canvasId: 'field-canvas-hero',
+  config: {
+    transparentBackground: true,
+    glowComposite: 'lighter',
+    lineColor: '#d4793d',
+    mainCount: 140,
+    whisperCount: 90,
+    mainAlpha: 0.42,
+    mainDotAlpha: 0.7,
+    whisperMaxAlpha: 0.28,
+    whisperDotMaxAlpha: 0.45,
+    mainDotSize: 3.2,
+    whisperDotSize: 1.6,
+    speed: 0.35,
   }
 });
 </script>
