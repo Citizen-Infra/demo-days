@@ -1804,16 +1804,22 @@
     align-items: center;
   }
 
-  /* Coral-outlined category chips on dark. Uppercase mono label,
-     coral text, coral stroke icon, transparent fill. Padding /
-     letter-spacing tuned to fit all four labels on one row at
-     1280-bar max width inside the standard page container. */
+  /* Category chips on dark · light coral-to-peach gradient on the
+     border, label text, and icon stroke. Gradient is the same
+     --gradient-light-text token already used elsewhere in the
+     design system, mirrored as an SVG <linearGradient
+     id="lightPillGradient"> so the icons can pick it up too. */
   .tool-chip {
     cursor: pointer;
     font: inherit;
-    background: transparent;
-    border: 1.5px solid var(--accent);
-    color: var(--accent);
+    /* Two-layer background = dark fill INSIDE, light gradient
+       living in the BORDER area, surfaced via the
+       padding-box / border-box trick. */
+    background:
+      linear-gradient(#0e0a07, #0e0a07) padding-box,
+      var(--gradient-light-text) border-box;
+    border: 1.5px solid transparent;
+    color: transparent;
     padding: 8px 13px;
     gap: 7px;
     font-family: var(--mono);
@@ -1822,51 +1828,67 @@
     line-height: 1;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
+    transition: filter 0.18s ease, transform 0.18s ease;
   }
   .tool-chip .topic-pill-label {
-    background: none;
-    -webkit-text-fill-color: var(--accent);
-    color: var(--accent);
+    background: var(--gradient-light-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
     text-transform: uppercase;
     letter-spacing: 0.08em;
   }
-  .tool-chip .topic-pill-icon { width: 16px; height: 16px; color: var(--accent); }
-  .tool-chip .topic-pill-icon svg { stroke: var(--accent); }
-  .tool-chip:hover {
-    background: rgba(212, 121, 61, 0.10);
-  }
+  .tool-chip .topic-pill-icon { width: 16px; height: 16px; }
+  .tool-chip .topic-pill-icon svg { stroke: url(#lightPillGradient); }
+  .tool-chip:hover { filter: brightness(1.08); }
   .tool-chip:active { transform: scale(0.98); }
+
+  /* Active state · solid coral fill, white label. Wins via the
+     padding-box hack getting replaced with a solid coral fill. */
   .tool-chip.is-active {
-    background: var(--accent);
-    border-color: var(--accent);
+    background:
+      linear-gradient(var(--accent), var(--accent)) padding-box,
+      var(--accent) border-box;
   }
-  .tool-chip.is-active .topic-pill-label,
-  .tool-chip.is-active {
+  .tool-chip.is-active .topic-pill-label {
+    background: none;
     -webkit-text-fill-color: #ffffff;
     color: #ffffff;
   }
   .tool-chip.is-active .topic-pill-icon svg { stroke: #ffffff; }
 
   /* "ALL" pill — filled cream by default, dark text, sits at the
-     head of the chip row. Acts as the default-selected filter. */
+     head of the chip row. Acts as the default-selected filter.
+     Overrides the gradient-border background trick used on the
+     other chips with a solid cream fill. */
   .tool-chip-all {
-    background: #f0d8c0;
-    border-color: #f0d8c0;
+    background:
+      linear-gradient(#f0d8c0, #f0d8c0) padding-box,
+      #f0d8c0 border-box;
     color: var(--ink);
     padding: 8px 18px;
   }
   .tool-chip-all .topic-pill-label {
+    background: none;
     -webkit-text-fill-color: var(--ink);
     color: var(--ink);
   }
   .tool-chip-all:hover {
-    background: #f5e0c8;
-    border-color: #f5e0c8;
+    background:
+      linear-gradient(#f5e0c8, #f5e0c8) padding-box,
+      #f5e0c8 border-box;
+    filter: none;
   }
   .tool-chip-all.is-active {
-    background: #f0d8c0;
-    border-color: #f0d8c0;
+    background:
+      linear-gradient(#f0d8c0, #f0d8c0) padding-box,
+      #f0d8c0 border-box;
+  }
+  .tool-chip-all.is-active .topic-pill-label {
+    background: none;
+    -webkit-text-fill-color: var(--ink);
+    color: var(--ink);
   }
   .tool-chip-all.is-active .topic-pill-label {
     -webkit-text-fill-color: var(--ink);
@@ -1916,7 +1938,7 @@
 
 <div class="page">
 
-<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="pillGradient" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#e96243"/><stop offset="100%" stop-color="#e67c48"/></linearGradient></defs></svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="pillGradient" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#e96243"/><stop offset="100%" stop-color="#e67c48"/></linearGradient><linearGradient id="lightPillGradient" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#e78873"/><stop offset="63%" stop-color="#e5a27b"/><stop offset="100%" stop-color="#e2b99e"/></linearGradient></defs></svg>
 
 <!-- ===== NAV COMPONENT ===== -->
 <nav class="nav" aria-label="Primary">
