@@ -37,8 +37,8 @@
     --paper-deep: var(--bg-warm);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { background: var(--bg-warm-2); min-height: 100vh; }
   html, body {
-    background: var(--paper-white);
     color: var(--ink);
     font-family: var(--body);
     font-size: 16px;
@@ -46,6 +46,7 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
+  body { background: var(--paper-white); }
   ::selection { background: var(--accent); color: var(--paper-white); }
   a { color: inherit; }
 
@@ -57,7 +58,7 @@
   .page {
     max-width: 1080px;
     margin: 0 auto;
-    padding: 0 clamp(20px, 4vw, 48px) 120px;
+    padding: 0 clamp(20px, 4vw, 48px) 0;
     position: relative;
     z-index: 1;
   }
