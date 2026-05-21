@@ -154,10 +154,15 @@
   }
 
   /* ============ Page layout ============ */
+  /* Top padding zeroed so the dark hero sits flush against the
+     nav. The hero's own padding-top clamp(56, 9vw, 112) handles
+     internal spacing. Horizontal padding kept so the in-page
+     sections (professionals, meeting strip, action cards) get
+     their gutter when not breaking out. */
   .page {
     max-width: 1080px;
     margin: 0 auto;
-    padding: clamp(48px, 7vw, 80px) clamp(20px, 5vw, 56px) clamp(80px, 10vw, 120px);
+    padding: 0 clamp(20px, 5vw, 56px) clamp(80px, 10vw, 120px);
   }
 
   /* Dark hero · full-bleed band per Figma 154:1971. Uses design
