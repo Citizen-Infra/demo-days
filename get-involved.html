@@ -1469,12 +1469,14 @@
     position: fixed; inset: 0;
     background: var(--bg-deep);
     color: #e8dcc6;
-    z-index: 10;
-    display: flex; flex-direction: column;
-    opacity: 0; pointer-events: none;
-    transition: opacity 0.35s ease;
+    z-index: 100;
+    display: none;
+    flex-direction: column;
   }
-  #trainer-view.active { opacity: 1; pointer-events: auto; }
+  #trainer-view.active {
+    display: flex;
+    opacity: 1;
+  }
   #trainer-view::before {
     content: ''; position: absolute; inset: 0;
     background:
@@ -1484,34 +1486,43 @@
   }
 
   .trainer-header {
-    padding: 14px 18px;
-    display: flex; align-items: center; gap: 14px;
+    padding: 24px 32px;
+    display: flex; align-items: center; gap: 20px;
     position: relative; z-index: 3;
     border-bottom: 1px solid rgba(232, 220, 198, 0.08);
     background: rgba(20, 17, 13, 0.85);
     backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    min-height: 107px;
   }
   .icon-btn {
-    width: 38px; height: 38px; border-radius: 50%;
-    background: rgba(232, 220, 198, 0.08);
+    width: 48px; height: 48px; border-radius: 50%;
+    background: rgba(232, 220, 198, 0.05);
     border: 1px solid rgba(232, 220, 198, 0.12);
-    color: #e8dcc6; font-size: 18px; cursor: pointer;
+    color: #e8dcc6; font-size: 22px; cursor: pointer;
     display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0; transition: background 0.2s ease;
+    flex-shrink: 0; transition: background 0.2s ease, border-color 0.2s ease;
     -webkit-tap-highlight-color: transparent;
   }
-  .icon-btn:hover { background: rgba(232, 220, 198, 0.14); }
+  .icon-btn:hover { background: rgba(232, 220, 198, 0.12); border-color: rgba(232, 220, 198, 0.22); }
 
-  .trainer-header-avatar { width: 48px; height: 48px; flex-shrink: 0; }
+  .trainer-header-avatar { width: 56px; height: 56px; flex-shrink: 0; }
   .trainer-header-text { flex: 1; min-width: 0; }
   .trainer-header-name {
     font-family: 'Fraunces', serif;
-    font-variation-settings: "opsz" 40, "SOFT" 60;
-    font-weight: 600; font-size: 20px; margin: 0; line-height: 1.1;
+    font-variation-settings: "opsz" 144, "SOFT" 60;
+    font-weight: 600;
+    font-size: clamp(24px, 3vw, 32px);
+    margin: 0; line-height: 1.05;
+    color: #f4ebda;
   }
   .trainer-header-role {
     font-family: 'Newsreader', serif; font-style: italic;
-    font-size: 12px; color: rgba(232, 220, 198, 0.6); margin: 2px 0 0;
+    font-size: 14px; line-height: 1.45;
+    color: rgba(232, 220, 198, 0.62);
+    margin: 4px 0 0;
+    max-width: 880px;
+    overflow: hidden;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
   }
 
   /* Map */
@@ -1529,23 +1540,21 @@
   }
 
   .reset-btn {
-    position: absolute; top: 12px; right: 12px;
-    padding: 8px 14px; border-radius: 100px;
-    background: rgba(20, 17, 13, 0.85);
-    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(232, 220, 198, 0.18);
-    color: rgba(232, 220, 198, 0.55);
-    font-family: 'Fraunces', serif;
-    font-variation-settings: "opsz" 14;
+    flex-shrink: 0;
+    padding: 9px 18px; border-radius: 100px;
+    background: transparent;
+    border: 1px solid rgba(232, 220, 198, 0.28);
+    color: rgba(232, 220, 198, 0.7);
+    font-family: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
     font-size: 12px; letter-spacing: 0.04em;
-    cursor: pointer; z-index: 5;
+    cursor: pointer;
     -webkit-tap-highlight-color: transparent;
     transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease;
   }
   .reset-btn:hover {
     color: var(--lens-color, #e8a05b);
     border-color: var(--lens-color, #e8a05b);
-    background: rgba(20, 17, 13, 0.95);
+    background: rgba(232, 220, 198, 0.04);
   }
   /* When a node is focused, the button glows in the lens color so it reads as actionable. */
   .reset-btn.visible {
@@ -1715,117 +1724,148 @@
   .map-node-label.focused { fill: rgba(255, 250, 235, 1); font-size: 19px; font-weight: 600; }
   .map-node-label.dimmed { opacity: 0.18; }
 
-  /* Inventory carousel (horizontal swipe; scrolling repositions the map) */
+  /* Inventory drawer (cards row with chevron navigation flanking it) */
   .inventory-wrap {
     flex: 0 0 auto;
     background: linear-gradient(to bottom, rgba(20, 17, 13, 0.7), rgba(20, 17, 13, 0.96) 40px);
-    border-top: 1px solid rgba(232, 220, 198, 0.1);
+    border-top: 1px solid rgba(232, 220, 198, 0.08);
     position: relative; z-index: 2;
-    display: flex; flex-direction: column;
-    padding-bottom: env(safe-area-inset-bottom, 0);
+    padding: 16px 0 calc(16px + env(safe-area-inset-bottom, 0));
+    display: grid;
+    grid-template-columns: 64px 1fr 64px;
+    align-items: center;
   }
-  .inventory-header {
-    padding: 10px 18px 2px;
-    display: flex; justify-content: space-between; align-items: baseline; gap: 10px;
+  /* Chevron buttons sit in the side cells of the grid, centered vertically. */
+  .inv-nav {
+    justify-self: center;
+    width: 48px; height: 48px; border-radius: 50%;
+    background: rgba(232, 220, 198, 0.05);
+    border: 1px solid rgba(232, 220, 198, 0.14);
+    color: #e8dcc6;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
   }
-  .inventory-title {
-    font-family: 'Fraunces', serif; font-style: italic;
-    font-variation-settings: "opsz" 18, "SOFT" 60;
-    font-size: 15px; color: rgba(232, 220, 198, 0.85); margin: 0;
+  .inv-nav:hover {
+    background: rgba(232, 220, 198, 0.12);
+    border-color: rgba(232, 220, 198, 0.28);
+    color: #fff5e0;
   }
-  .inventory-count {
-    font-family: 'Newsreader', serif;
-    font-size: 11px; color: rgba(232, 220, 198, 0.5); font-style: italic;
-  }
-  .inventory-summary {
-    padding: 0 18px 8px;
-    font-family: 'Newsreader', serif; font-style: italic;
-    font-size: 12px; color: rgba(232, 220, 198, 0.55);
-    line-height: 1.4; margin: 0;
-    overflow: hidden;
-    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
-  }
+  .inv-nav:active { transform: scale(0.96); }
+  .inv-nav svg { display: block; }
+
   .inventory-carousel {
     display: flex;
     overflow-x: auto;
-    scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
-    gap: 10px;
-    /* Generous left/right padding so the first and last cards can scroll into center */
-    padding: 8px max(50% - 80px, 16px) 16px;
+    gap: 8px;
+    padding: 4px 4px 4px 0;
     scrollbar-width: none;
   }
   .inventory-carousel::-webkit-scrollbar { display: none; }
-  .carousel-progress {
-    display: flex; gap: 5px; justify-content: center; align-items: center;
-    padding: 0 18px 12px;
-  }
-  .carousel-dot {
-    width: 5px; height: 5px; border-radius: 50%;
-    background: rgba(232, 220, 198, 0.2);
-    transition: background 0.2s ease, transform 0.2s ease;
-  }
-  .carousel-dot.active {
-    background: var(--lens-color, #e8a05b);
-    transform: scale(1.5);
-  }
 
   .inv-item {
-    flex: 0 0 160px;
-    scroll-snap-align: center;
-    display: flex; flex-direction: column; align-items: center;
-    padding: 14px 12px 12px;
-    gap: 6px;
-    background: rgba(232, 220, 198, 0.04);
-    border: 1px solid rgba(232, 220, 198, 0.08);
-    border-radius: 14px;
+    flex: 0 0 140px;
+    height: 106px;
+    display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+    padding: 8px 8px 10px;
+    background: rgba(232, 220, 198, 0.03);
+    border: 1px solid rgba(232, 220, 198, 0.10);
+    border-radius: 12px;
     cursor: pointer;
-    transition: background 0.2s ease, border-color 0.2s ease, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
     -webkit-tap-highlight-color: transparent;
     text-align: center; color: inherit;
     user-select: none;
+    /* Reset native button styling */
+    font: inherit;
+    appearance: none;
   }
   .inv-item:hover {
-    background: rgba(232, 220, 198, 0.08);
-    border-color: var(--lens-color, rgba(232, 220, 198, 0.2));
+    background: rgba(232, 220, 198, 0.07);
+    border-color: rgba(232, 220, 198, 0.20);
   }
-  .inv-item:active { transform: scale(0.97); }
+  .inv-item:active { transform: scale(0.98); }
   .inv-item.active {
-    background: rgba(232, 220, 198, 0.12);
+    background: rgba(212, 121, 61, 0.10);
     border-color: var(--lens-color, #e8a05b);
-    box-shadow: 0 0 0 1px var(--lens-color, #e8a05b), 0 0 22px rgba(232, 160, 91, 0.22);
-    transform: scale(1.05);
+    box-shadow: 0 0 0 1px var(--lens-color, #e8a05b);
   }
-  .inv-critter { width: 56px; height: 56px; flex-shrink: 0; }
-  .inv-info { min-width: 0; width: 100%; }
+  .inv-critter {
+    width: 36px; height: 36px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 6px;
+  }
+  .inv-critter svg { width: 100%; height: 100%; display: block; }
   .inv-name {
     font-family: 'Fraunces', serif;
-    font-variation-settings: "opsz" 16, "SOFT" 60;
-    font-weight: 500; font-size: 13px;
-    color: rgba(255, 245, 225, 0.95);
-    line-height: 1.2; margin: 0;
+    font-variation-settings: "opsz" 18, "SOFT" 60;
+    font-weight: 600; font-size: 14px;
+    color: rgba(255, 245, 225, 0.96);
+    line-height: 1.15; margin: 0;
     overflow: hidden;
     display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
-    min-height: 32px;
+    width: 100%;
   }
   .inv-type {
-    font-family: 'Newsreader', serif; font-style: italic;
-    font-size: 10px; color: rgba(232, 220, 198, 0.5);
-    margin-top: 3px; text-transform: lowercase; letter-spacing: 0.04em;
-  }
-  .inv-state-pill {
-    display: inline-block;
-    padding: 2px 7px; border-radius: 100px;
-    font-family: 'Fraunces', serif;
-    font-variation-settings: "opsz" 9;
-    font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase;
+    font-family: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 10px;
+    color: rgba(232, 220, 198, 0.42);
     margin-top: 4px;
+    text-transform: lowercase;
+    letter-spacing: 0.04em;
   }
-  .inv-state-pill.caught { background: rgba(122,146,104,0.22); color: #b8d09e; }
-  .inv-state-pill.spotted { background: rgba(212,121,61,0.22); color: #f0a572; }
-  .inv-state-pill.rumored { background: rgba(180,150,208,0.25); color: #d4b8ec; }
-  .inv-state-pill.unverified { background: rgba(255,136,112,0.2); color: #ff9d80; }
+  /* State pills are hidden in the redesigned drawer; identity comes from card alone. */
+  .inv-state-pill { display: none; }
+
+  /* "All" filter card: no critter, centered serif label, sits at the head of the row. */
+  .inv-item-all {
+    justify-content: center;
+  }
+  .inv-item-all .inv-name-all {
+    font-family: 'Fraunces', serif;
+    font-variation-settings: "opsz" 24, "SOFT" 60;
+    font-weight: 600; font-size: 18px;
+    line-height: 1; margin: 0;
+    color: rgba(255, 245, 225, 0.95);
+  }
+  .inv-item-all.active {
+    background: rgba(212, 121, 61, 0.18);
+    border-color: var(--lens-color, #e8a05b);
+    box-shadow: 0 0 0 1px var(--lens-color, #e8a05b), 0 0 24px rgba(212, 121, 61, 0.22) inset;
+  }
+
+  /* ---- Trainer overlay · mobile (≤720px) ---- */
+  @media (max-width: 720px) {
+    .trainer-header {
+      padding: 14px 16px;
+      gap: 12px;
+      min-height: 0;
+    }
+    .icon-btn { width: 40px; height: 40px; font-size: 18px; }
+    .trainer-header-avatar { width: 44px; height: 44px; }
+    .trainer-header-name { font-size: clamp(20px, 6vw, 24px); }
+    .trainer-header-role { font-size: 12px; -webkit-line-clamp: 3; }
+    .reset-btn {
+      padding: 7px 12px; font-size: 11px;
+    }
+    /* Hide chevrons on touch screens — swipe is the natural gesture. */
+    .inventory-wrap {
+      grid-template-columns: 0 1fr 0;
+      padding: 12px 0 calc(12px + env(safe-area-inset-bottom, 0));
+    }
+    .inv-nav { display: none; }
+    .inventory-carousel {
+      padding: 4px 16px;
+      scroll-snap-type: x mandatory;
+    }
+    .inv-item {
+      flex: 0 0 124px;
+      scroll-snap-align: start;
+    }
+  }
 
   @media (prefers-reduced-motion: reduce) {
     .trainer-card .avatar-wrap svg,
@@ -2564,12 +2604,13 @@ initFieldAtmosphere({
 
 <div id="trainer-view">
   <div class="trainer-header">
-    <button class="icon-btn" id="back-btn" aria-label="Back to roster">&larr;</button>
+    <button class="icon-btn" id="back-btn" aria-label="Back to roster" type="button">&larr;</button>
     <div class="trainer-header-avatar" id="trainer-header-avatar"></div>
     <div class="trainer-header-text">
       <h2 class="trainer-header-name" id="trainer-header-name"></h2>
       <p class="trainer-header-role" id="trainer-header-role"></p>
     </div>
+    <button class="reset-btn" id="reset-btn" aria-label="Reset map view" type="button">reset view</button>
   </div>
 
   <div class="map-wrap">
@@ -2577,17 +2618,16 @@ initFieldAtmosphere({
       <g class="map-inner" id="map-inner"></g>
     </svg>
     <div class="map-tooltip" id="map-tooltip"></div>
-    <button class="reset-btn" id="reset-btn" aria-label="Reset map view">reset view</button>
   </div>
 
   <div class="inventory-wrap">
-    <div class="inventory-header">
-      <h3 class="inventory-title" id="inventory-title">Roster</h3>
-      <span class="inventory-count" id="inventory-count"></span>
-    </div>
-    <p class="inventory-summary" id="inventory-summary"></p>
+    <button class="inv-nav inv-nav-prev" id="inv-nav-prev" aria-label="Scroll cards left" type="button">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
     <div class="inventory-carousel" id="inventory-carousel"></div>
-    <div class="carousel-progress" id="carousel-progress" aria-hidden="true"></div>
+    <button class="inv-nav inv-nav-next" id="inv-nav-next" aria-label="Scroll cards right" type="button">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
   </div>
 </div>
 
@@ -2746,7 +2786,8 @@ const mapInner = document.getElementById('map-inner');
 const tooltip = document.getElementById('map-tooltip');
 const resetBtn = document.getElementById('reset-btn');
 const inventoryCarousel = document.getElementById('inventory-carousel');
-const carouselProgress = document.getElementById('carousel-progress');
+const invNavPrev = document.getElementById('inv-nav-prev');
+const invNavNext = document.getElementById('inv-nav-next');
 
 let currentTrainer = null;
 let focusedNodeId = null;
@@ -2757,10 +2798,7 @@ function openTrainer(t) {
 
   document.getElementById('trainer-header-avatar').innerHTML = trainerSVG(t);
   document.getElementById('trainer-header-name').textContent = t.name;
-  document.getElementById('trainer-header-role').textContent = t.role;
-  document.getElementById('inventory-title').textContent = `${t.name}'s roster`;
-  document.getElementById('inventory-count').textContent = `${t.count} caught`;
-  document.getElementById('inventory-summary').textContent = `"${t.summary}"`;
+  document.getElementById('trainer-header-role').textContent = `"${t.summary}"`;
 
   trainerView.style.setProperty('--lens-color', t.color);
 
@@ -2829,7 +2867,18 @@ function renderMap() {
 function renderInventory() {
   const roster = currentTrainer.touchedNodeIds.map(id => nodes.find(n => n.id === id));
   inventoryCarousel.innerHTML = '';
-  carouselProgress.innerHTML = '';
+
+  // "All" filter card sits at the head of the row. Active by default; clicking it
+  // clears any focused node so the full caught network is lit again.
+  const allCard = document.createElement('button');
+  allCard.className = 'inv-item inv-item-all active';
+  allCard.setAttribute('data-id', '__all');
+  allCard.setAttribute('aria-label', 'Show all caught items');
+  allCard.type = 'button';
+  allCard.innerHTML = '<div class="inv-name inv-name-all">All</div>';
+  allCard.addEventListener('click', () => resetFocus());
+  inventoryCarousel.appendChild(allCard);
+
   // Sort: entities first, concepts second, people third
   const order = { cibc: 0, 'civic-tech': 1, deliberation: 1, governance: 1, research: 1, regen: 1, unknown: 1, concept: 2, person: 3, fragment: 4 };
   roster.sort((a,b) => (order[a.type] ?? 5) - (order[b.type] ?? 5));
@@ -2838,22 +2887,14 @@ function renderInventory() {
     item.className = 'inv-item';
     item.setAttribute('data-id', node.id);
     item.setAttribute('aria-label', `Focus on ${node.label}`);
-    const statePill = node.state ? `<span class="inv-state-pill ${node.state}">${node.state}</span>` : '';
+    item.type = 'button';
     item.innerHTML = `
       <div class="inv-critter">${critterSVG(node)}</div>
-      <div class="inv-info">
-        <div class="inv-name">${node.label}</div>
-        <div class="inv-type">${node.type}</div>
-        ${statePill}
-      </div>
+      <div class="inv-name">${node.label}</div>
+      <div class="inv-type">${node.type}</div>
     `;
     item.addEventListener('click', () => focusOnNode(node.id));
     inventoryCarousel.appendChild(item);
-
-    const dot = document.createElement('span');
-    dot.className = 'carousel-dot';
-    dot.setAttribute('data-id', node.id);
-    carouselProgress.appendChild(dot);
   });
 }
 
@@ -2916,9 +2957,6 @@ function focusOnNode(nodeId) {
       it.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
     }
   });
-  carouselProgress.querySelectorAll('.carousel-dot').forEach(d => {
-    d.classList.toggle('active', d.getAttribute('data-id') === nodeId);
-  });
 
   mapInner.classList.add('focusing');
   zoomToNode(node);
@@ -2957,8 +2995,13 @@ function resetFocus() {
   focusedNodeId = null;
   renderMap();
   mapInner.classList.remove('focusing');
-  inventoryCarousel.querySelectorAll('.inv-item').forEach(it => it.classList.remove('active'));
-  carouselProgress.querySelectorAll('.carousel-dot').forEach(d => d.classList.remove('active'));
+  // Light up the "All" filter card; clear any item-specific active state.
+  inventoryCarousel.querySelectorAll('.inv-item').forEach(it => {
+    it.classList.toggle('active', it.getAttribute('data-id') === '__all');
+  });
+  // Scroll the All card back into view so the user sees the filter snap home.
+  const allCard = inventoryCarousel.querySelector('.inv-item-all');
+  if (allCard) allCard.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
   tooltip.classList.remove('visible');
   resetBtn.classList.remove('visible');
 }
@@ -2979,10 +3022,29 @@ inventoryCarousel.addEventListener('scroll', () => {
     });
     if (closest) {
       const id = closest.getAttribute('data-id');
+      // The All card is a filter, not a node. Settling on it clears focus.
+      if (id === '__all') {
+        if (focusedNodeId !== null) resetFocus();
+        return;
+      }
       if (id !== focusedNodeId) focusOnNode(id);
     }
   }, 140);
 }, { passive: true });
+
+// Chevron buttons: scroll the carousel by roughly one card-width per click.
+function scrollCarousel(direction) {
+  // Snap to the next/previous card boundary rather than a fixed pixel delta,
+  // so the row reads as paged movement instead of a sloppy nudge.
+  const cards = inventoryCarousel.querySelectorAll('.inv-item');
+  if (!cards.length) return;
+  const cardWidth = cards[0].offsetWidth;
+  const gap = parseFloat(getComputedStyle(inventoryCarousel).columnGap || '0') || 8;
+  const step = cardWidth + gap;
+  inventoryCarousel.scrollBy({ left: direction * step * 2, behavior: 'smooth' });
+}
+if (invNavPrev) invNavPrev.addEventListener('click', () => scrollCarousel(-1));
+if (invNavNext) invNavNext.addEventListener('click', () => scrollCarousel(1));
 
 resetBtn.addEventListener('click', resetFocus);
 
@@ -3294,5 +3356,25 @@ renderFrontMap();
 </script>
 
 <!-- /ATLAS SECTION: render-engine -->
+
+<script>
+/* ============ Deep-link a trainer via ?focus=ID ============ */
+(function() {
+  function openFromQuery() {
+    const params = new URLSearchParams(location.search);
+    const id = params.get('focus');
+    if (!id) return;
+    const card = document.querySelector(`.trainer-card[data-trainer-id="${id}"]`);
+    if (card) { card.click(); return; }
+    // Fallback: match by name (lowercased)
+    const all = document.querySelectorAll('.trainer-card');
+    const match = Array.from(all).find(c => c.textContent.trim().toLowerCase().startsWith(id.toLowerCase()));
+    if (match) match.click();
+  }
+  if (document.readyState === 'complete') openFromQuery();
+  else window.addEventListener('load', openFromQuery);
+})();
+</script>
+
 </body>
 </html>
