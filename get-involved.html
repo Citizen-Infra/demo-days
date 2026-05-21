@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Get Involved · CIBC Demo Day</title>
+<title>CIBC · Learn More</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -739,6 +739,394 @@
     .nav-link-current { border-bottom-color: var(--rule-soft); }
   }
 
+
+  /* ============ HERO CTAs on Learn More page ============ */
+  .header-ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 32px; }
+  .header-ctas .hero-btn {
+    font-family: var(--body);
+    font-weight: 600;
+    font-size: 14px;
+    padding: 14px 28px;
+    border-radius: 100px;
+    border: 1.5px solid var(--ink);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: filter 150ms;
+  }
+  .header-ctas .hero-btn-primary {
+    background: linear-gradient(90deg, #e96243 0%, #e67c48 100%);
+    color: #fefdf9;
+    border-color: transparent;
+  }
+  .header-ctas .hero-btn-primary:hover { filter: brightness(0.92); }
+  .header-ctas .hero-btn-ghost { background: transparent; color: var(--ink); }
+  .header-ctas .hero-btn-ghost:hover { background: rgba(42, 34, 24, 0.06); }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    line-height: 1;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+  }
+  .ecosystem-section-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: clamp(60px, 8vw, 96px) 0 24px;
+  }
+
+  /* ============ ORG CARDS (ported from old ecosystem-map) ============ */
+  .filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 0 auto 32px;
+    max-width: 1080px;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+  .filter-chip {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 8px 14px;
+    background: transparent;
+    border: 1px solid var(--rule);
+    border-radius: 100px;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 150ms;
+  }
+  .filter-chip:hover { background: var(--bg-card); color: var(--ink); }
+  .filter-chip.active {
+    background: var(--ink);
+    color: var(--bg-warm);
+    border-color: var(--ink);
+  }
+
+  /* ============ Card grid (ported from pokedex) ============ */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 24px;
+    margin: 0 auto 64px;
+    max-width: 1280px;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+    border-radius: 18px;
+    padding: 0;
+    overflow: hidden;
+    box-shadow: 0 4px 14px var(--paper-shadow);
+    display: flex;
+    flex-direction: column;
+    transition: transform 200ms, box-shadow 200ms;
+    position: relative;
+  }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(60, 40, 20, 0.12); }
+  .card.status-caught { border-top: 4px solid var(--moss); }
+  .card.status-spotted { border-top: 4px solid var(--accent); }
+  .card.status-rumored { border-top: 4px solid var(--indigo); }
+  .card.status-unverified { border-top: 4px solid var(--ink-faint); border-style: dashed; }
+  .card.status-unverified .card-body { opacity: 0.78; }
+  .card-head {
+    padding: 18px 22px 14px;
+    border-bottom: 1px solid var(--rule-soft);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .card-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-faint);
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+  }
+  .card-name {
+    font-family: var(--serif);
+    font-variation-settings: "opsz" 36, "SOFT" 60;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 1.1;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  .card-name em { font-style: italic; color: var(--accent); font-weight: 500; }
+  .status-badge {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    border-radius: 100px;
+    border: 1px solid currentColor;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .status-badge.caught { color: var(--moss); background: var(--moss-soft); }
+  .status-badge.spotted { color: var(--accent); background: var(--accent-soft); }
+  .status-badge.rumored { color: var(--indigo); background: var(--indigo-soft); }
+  .status-badge.unverified { color: var(--ink-faint); background: rgba(153, 135, 116, 0.1); }
+  .badges-row {
+    padding: 12px 22px 0;
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .type-badge {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 9px;
+    border-radius: 4px;
+    background: rgba(60, 40, 20, 0.06);
+    color: var(--ink-soft);
+  }
+  .type-badge.tier-1 { background: var(--ink); color: var(--bg-warm); }
+  .type-badge.tier-2 { background: var(--accent-soft); color: var(--accent); }
+  .type-badge.disputed { background: var(--indigo-soft); color: var(--indigo); }
+  .card-body {
+    padding: 16px 22px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    flex: 1;
+  }
+  .one-line {
+    font-family: var(--serif);
+    font-style: italic;
+    font-variation-settings: "opsz" 24, "SOFT" 80;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 1.45;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  .role-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    background: var(--bg-warm-2);
+    border-radius: 8px;
+    border: 1px solid var(--rule);
+  }
+  .role-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .role-value {
+    font-family: var(--serif);
+    font-variation-settings: "opsz" 14, "SOFT" 80;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--ink);
+  }
+  .role-value.invite { color: var(--moss); }
+  .role-value.share-link { color: var(--accent); }
+  .role-value.awareness { color: var(--indigo); }
+  .role-value.unverified, .role-value.cannot-assess { color: var(--ink-faint); }
+  .section-h {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .stat-block {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 4px 12px;
+    margin: 0;
+  }
+  .stat-block dt {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-faint);
+    padding-top: 1px;
+  }
+  .stat-block dd {
+    font-family: var(--body);
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--ink);
+    margin: 0;
+  }
+  .stat-block a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-color: rgba(212, 121, 61, 0.4);
+  }
+  .overlap {
+    display: grid;
+    grid-template-columns: 1fr max-content;
+    row-gap: 5px;
+    column-gap: 14px;
+  }
+  .overlap-dim {
+    font-family: var(--body);
+    font-size: 12px;
+    color: var(--ink-soft);
+    line-height: 1.3;
+  }
+  .overlap-state {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 100px;
+    text-align: center;
+    align-self: center;
+    white-space: nowrap;
+  }
+  .overlap-state.strong { background: var(--moss); color: var(--bg-card); }
+  .overlap-state.partial { background: var(--accent-soft); color: var(--accent); }
+  .overlap-state.none { background: rgba(60, 40, 20, 0.06); color: var(--ink-faint); }
+  .overlap-state.cannot { background: rgba(153, 135, 116, 0.14); color: var(--ink-faint); font-style: italic; }
+  .list { display: flex; flex-direction: column; gap: 6px; list-style: none; margin: 0; padding: 0; }
+  .list li {
+    font-family: var(--body);
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ink);
+    padding-left: 12px;
+    position: relative;
+  }
+  .list li::before {
+    content: "·";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: bold;
+    font-size: 1.4em;
+    line-height: 1;
+    top: 0;
+  }
+  .list li strong { font-family: var(--serif); font-weight: 500; font-variation-settings: "opsz" 14; color: var(--ink); }
+  .list li em { font-style: italic; color: var(--ink-soft); }
+  .list a { color: var(--accent); text-decoration: underline; text-decoration-color: rgba(212, 121, 61, 0.3); }
+  .none-note {
+    font-family: var(--body);
+    font-style: italic;
+    font-size: 12px;
+    color: var(--ink-faint);
+    padding-left: 12px;
+    margin: 0;
+  }
+  .trainer-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    padding: 10px 14px;
+    background: rgba(122, 146, 104, 0.08);
+    border-radius: 8px;
+    border-left: 3px solid var(--moss);
+  }
+  .trainer-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--moss);
+  }
+  .trainer-value {
+    font-family: var(--serif);
+    font-variation-settings: "opsz" 14, "SOFT" 60;
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--ink);
+  }
+  .relations { display: flex; flex-direction: column; gap: 8px; }
+  .relation {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 10px;
+    align-items: baseline;
+  }
+  .relation .verb {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    padding-top: 2px;
+  }
+  .relation .who {
+    font-family: var(--serif);
+    font-style: italic;
+    font-variation-settings: "opsz" 14, "SOFT" 80;
+    font-size: 13px;
+    color: var(--ink);
+  }
+  .strategic-read {
+    background: var(--bg-warm-2);
+    border-radius: 8px;
+    padding: 14px 16px;
+    border-left: 3px solid var(--accent);
+  }
+  .strategic-read p {
+    font-family: var(--serif);
+    font-variation-settings: "opsz" 18, "SOFT" 60;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin: 0;
+  }
+  .strategic-read em { color: var(--accent); }
+  .open-q {
+    background: rgba(153, 135, 116, 0.07);
+    border-radius: 8px;
+    padding: 12px 14px;
+    border-left: 3px dashed var(--ink-faint);
+  }
+  .open-q .label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 6px;
+  }
+  .open-q p {
+    font-family: var(--body);
+    font-style: italic;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin: 0;
+  }
 </style>
 </head>
 <body>
@@ -782,9 +1170,13 @@
 <div class="page">
 
   <header class="header">
-    <div class="eyebrow">Learn more</div>
-    <h1>Pick your <em>way in</em>.</h1>
-    <p class="deck">CIBC's first demo day is a two-hour session built around five in-progress tools, written Q&amp;A, and a recap that lands in your inbox. Pick the channel that fits and we'll keep you in the loop.</p>
+    <p class="eyebrow">Citizen Infra &middot; Learn More &middot; Last updated 5/21/2026</p>
+    <h1>Citizen Infrastructure <em>Builders Club</em></h1>
+    <p class="lede">A builder community for anti-extractive civic infrastructure. Practitioners, leaders across academia, industry, civil society, and government.</p>
+    <div class="header-ctas">
+      <a href="https://app.harmonica.chat/chat?s=fc325b1d-2abb-4869-b2b5-6e35bfb274bb" target="_blank" rel="noopener" class="hero-btn hero-btn-primary">Apply to lead <span class="hero-btn-arrow" aria-hidden="true"><svg style="width:1em;height:1em;vertical-align:-0.12em;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></a>
+      <a href="ecosystem-map.html" class="hero-btn hero-btn-ghost">Find resources</a>
+    </div>
   </header>
 
   <div class="meeting-strip">
@@ -923,6 +1315,517 @@
 
 
 </div>
+
+
+  <div class="ecosystem-section-label">Who CIBC works alongside</div>
+
+  <!-- ===== STATUS FILTER CHIPS ===== -->
+  <div class="filters" id="cards" role="tablist" aria-label="Filter cards by status">
+    <button class="filter-chip active" data-filter="all">All · 9</button>
+    <button class="filter-chip" data-filter="caught">Caught · 3</button>
+    <button class="filter-chip" data-filter="spotted">Spotted · 3</button>
+    <button class="filter-chip" data-filter="rumored">Rumored · 2</button>
+    <button class="filter-chip" data-filter="unverified">Unverified · 1</button>
+  </div>
+
+  <!-- ===== CARD GRID ===== -->
+  <section class="card-grid">
+
+    <!-- =========== CARD 01 · DML =========== -->
+    <article class="card status-caught" data-status="caught">
+      <header class="card-head">
+        <div>
+          <div class="card-num">No. 001</div>
+          <h3 class="card-name">Dark Matter <em>Labs</em></h3>
+        </div>
+        <span class="status-badge caught">Caught</span>
+      </header>
+      <div class="badges-row">
+        <span class="type-badge tier-1">Tier 1</span>
+        <span class="type-badge">Peer Org</span>
+      </div>
+      <div class="card-body">
+        <p class="one-line">Not-for-profit research and prototyping org building institutions, instruments, and infrastructure for civic economies.</p>
+        <div class="role-row">
+          <span class="role-label">Strategic role</span>
+          <span class="role-value invite">Invite</span>
+        </div>
+        <div>
+          <div class="section-h">Stat block</div>
+          <dl class="stat-block">
+            <dt>Geography</dt><dd>Distributed. Berlin, London, Seoul, Canada.</dd>
+            <dt>Founded</dt><dd>2016</dd>
+            <dt>Stage / size</dt><dd>Mid-size. Dozens of named members across Labs, Arcs, Studios.</dd>
+            <dt>Funding</dt><dd>Not-for-profit. Partners and clients. Rockefeller, Omidyar named.</dd>
+            <dt>Source</dt><dd><a href="https://darkmatterlabs.org">darkmatterlabs.org</a></dd>
+          </dl>
+        </div>
+        <div>
+          <div class="section-h">Overlap with CIBC's territory</div>
+          <div class="overlap">
+            <span class="overlap-dim">Civic Tech</span><span class="overlap-state strong">Strong</span>
+            <span class="overlap-dim">Deliberative Democracy</span><span class="overlap-state partial">Partial</span>
+            <span class="overlap-dim">Local-First / Data Sovereignty</span><span class="overlap-state partial">Partial</span>
+            <span class="overlap-dim">AT Protocol</span><span class="overlap-state none">None</span>
+            <span class="overlap-dim">Knowledge Graphs</span><span class="overlap-state none">None</span>
+            <span class="overlap-dim">Regenerative Systems</span><span class="overlap-state strong">Strong</span>
+          </div>
+        </div>
+        <div>
+          <div class="section-h">Moves · what they ship</div>
+          <ul class="list">
+            <li>Research, prototypes, civic tech tools, reports</li>
+            <li><strong>CircuLaw</strong> · regulatory tooling for the circular economy</li>
+            <li><strong>TreesAI</strong> · urban forest financing</li>
+            <li><strong>Material Registry</strong> · <strong>Permissioning the City</strong> · <strong>CivicAI</strong></li>
+          </ul>
+        </div>
+        <div>
+          <div class="section-h">Known people</div>
+          <ul class="list">
+            <li><strong>Indy Johar</strong> · Mission Steward, co-founder</li>
+            <li><strong>Gurden Batra</strong> · Civic Tech Co-Lead, Berlin · <em>likely match for the "Gordon" reference</em></li>
+            <li><strong>Charlie Fisher</strong> · Strategic Designer · currently at Komma Systems</li>
+            <li><strong>Jonathan Lapalme</strong> · DML Canada</li>
+          </ul>
+        </div>
+        <div>
+          <div class="section-h">Habitat · public surfaces</div>
+          <ul class="list">
+            <li><a href="https://darkmatterlabs.org">Main site</a></li>
+            <li><a href="https://civictech.darkmatterlabs.org/">Civic Tech Studio</a></li>
+            <li><a href="https://github.com/Dark-Matter-Labs/">GitHub</a></li>
+            <li>Medium · LinkedIn</li>
+          </ul>
+        </div>
+        <div class="strategic-read">
+          <p>Invite Gurden Batra to demo day. DML is parallel to CIBC and a relationship makes sense both as ecosystem peer and as a target for the share-link blast. The framing of "infrastructures of <em>tenderness, doubt, and attentiveness</em>" on the Civic Tech Studio page maps closely to the anti-extractive frame.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- =========== CARD 02 · Coma (Komma) =========== -->
+    <article class="card status-rumored" data-status="rumored">
+      <header class="card-head">
+        <div>
+          <div class="card-num">No. 002</div>
+          <h3 class="card-name">Coma <em>(Komma Systems?)</em></h3>
+        </div>
+        <span class="status-badge rumored">Rumored</span>
+      </header>
+      <div class="badges-row">
+        <span class="type-badge tier-1">Tier 1</span>
+        <span class="type-badge">Peer Org</span>
+        <span class="type-badge disputed">Disputed Identity</span>
+      </div>
+      <div class="card-body">
+        <p class="one-line">Berlin-based consultancy or studio led by Charlie Fisher, focused on regenerative land, housing, and governance.</p>
+        <div class="role-row">
+          <span class="role-label">Strategic role</span>
+          <span class="role-value invite">Invite (after confirm)</span>
+        </div>
+        <div>
+          <div class="section-h">Stat block</div>
+          <dl class="stat-block">
+            <dt>Geography</dt><dd>Berlin</dd>
+            <dt>Founded</dt><dd>Not publicly available</dd>
+            <dt>Stage / size</dt><dd>Solo to small. No other staff under Komma Systems on LinkedIn.</dd>
+            <dt>Funding</dt><dd>Not publicly available. Consulting fees and project-based revenue likely.</dd>
+            <dt>Source</dt><dd>No standalone domain. LinkedIn only.</dd>
+          </dl>
+        </div>
+        <div>
+          <div class="section-h">Overlap with CIBC's territory</div>
+          <div class="overlap">
+            <span class="overlap-dim">Civic Tech</span><span class="overlap-state partial">Partial</span>
+            <span class="overlap-dim">Deliberative Democracy</span><span class="overlap-state none">None</span>
+            <span class="overlap-dim">Local-First / Data Sovereignty</span><span class="overlap-state partial">Partial</span>
+            <span class="overlap-dim">AT Protocol</span><span class="overlap-state none">None</span>
+            <span class="overlap-dim">Knowledge Graphs</span><span class="overlap-state none">None</span>
+            <span class="overlap-dim">Regenerative Systems</span><span class="overlap-state strong">Strong</span>
+          </div>
+        </div>
+        <div>
+          <div class="section-h">Known people</div>
+          <ul class="list">
+            <li><strong>Charlie Fisher</strong> · founder · ex-DML · founding committee OASA</li>
+          </ul>
+        </div>
+        <div class="strategic-read">
+          <p>Invite Charlie Fisher directly. He sits at the personal bridge between CIBC, DML, and OASA. If Komma Systems is presenting-ready, invite as a <em>demo-day participant</em>; otherwise invite as ecosystem peer and discussant. <strong>Confirm whether "Coma" and "Komma Systems" are the same entity before public outreach.</strong></p>
+        </div>
+        <div class="open-q">
+          <div class="label">Confidence · open question</div>
+          <p>Is "Coma" actually "Komma Systems"? Strongest available match but unconfirmed. Resolves with: ask Charlie Fisher or check the original CIBC reference for spelling.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- =========== CARD 03 · DemNext =========== -->
+    <article class="card status-caught" data-status="caught">
+      <header class="card-head">
+        <div>
+          <div class="card-num">No. 003</div>
+          <h3 class="card-name">Democracy <em>Next</em></h3>
+        </div>
+        <span class="status-badge caught">Caught</span>
+      </header>
+      <div class="badges-row">
+        <span class="type-badge tier-1">Tier 1</span>
+        <span class="type-badge">Peer Org</span>
+      </div>
+      <div class="card-body">
+        <p class="one-line">International nonprofit research and action institute building citizens' assemblies based on sortition, deliberation, and rotation.</p>
+        <div class="role-row">
+          <span class="role-label">Strategic role</span>
+          <span class="role-value awareness">Awareness</span>
+        </div>
+        <div>
+          <div class="section-h">Stat block</div>
+          <dl class="stat-block">
+            <dt>Geography</dt><dd>The Hague, Netherlands. Stichting DemocracyNext at Humanity Hub.</dd>
+            <dt>Founded</dt><dd>2022 by Claudia Chwalisz</dd>
+            <dt>Stage / size</dt><dd>Small core team. Headcount not publicly available.</dd>
+            <dt>Funding</dt><dd>Grants. Rockefeller, NED, Open Society, One Project. Plus consultancy and donations.</dd>
+            <dt>Source</dt><dd><a href="https://www.demnext.org">demnext.org</a></dd>
+          </dl>
+        </div>
+        <div>
+          <div class="section-h">Overlap with CIBC's territory</div>
+          <div class="overlap">
+            <span class="overlap-dim">Civic Tech</span><span class="overlap-state partial">Partial</span>
+            <span class="overlap-dim">Deliberative Democracy</span><span class="overlap-state strong">Strong</span>
+            <span class="overlap-dim">Local-First / Data Sovereignty</span><span class="overlap-state none">None</span>
+            <span class="overlap-dim">AT Protocol</span><span class="overlap-state none">None</span>
+            <span class="overlap-dim">Knowledge Graphs</span><span class="overlap-state none">None</span>
+            <span class="overlap-dim">Regenerative Systems</span><span class="overlap-state none">None</span>
+          </div>
+        </div>
+        <div>
+          <div class="section-h">Known people</div>
+          <ul class="list">
+            <li><strong>Claudia Chwalisz</strong> · founder, CEO · in network</li>
+            <li><strong>Sammy McKinney</strong> · AI and Deliberation Fellow · Cambridge PhD</li>
+            <li><strong>Ieva Česnulaitytė</strong> · Founding Head of Research and Learning</li>
+            <li><strong>Audrey Tang</strong> · International Advisory Council · <em>bridges to Plurality</em></li>
+          </ul>
+        </div>
+        <div class="strategic-read">
+          <p>Send a share link via a Claudia Chwalisz intro if available. The demo day is plausibly relevant to their portfolio if framed around <em>tech-enhanced deliberation</em>. Best route is via the DelibTech Network rather than a direct DemNext partnership ask. Mutual ecosystem awareness at minimum.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- =========== CARD 04 · DelibTech =========== -->
+    <article class="card status-spotted" data-status="spotted">
+      <header class="card-head">
+        <div>
+          <div class="card-num">No. 004</div>
+          <h3 class="card-name">Deliberative <em>Network</em> (DelibTech)</h3>
+        </div>
+        <span class="status-badge spotted">Spotted</span>
+      </header>
+      <div class="badges-row">
+        <span class="type-badge tier-2">Tier 2</span>
+        <span class="type-badge">Peer Org</span>
+      </div>
+      <div class="card-body">
+        <p class="one-line">Invite-only network of technologists, practitioners, and researchers building or studying technology for deliberation.</p>
+        <div class="role-row">
+          <span class="role-label">Strategic role</span>
+          <span class="role-value awareness">Awareness</span>
+        </div>
+        <div>
+          <div class="section-h">Stat block</div>
+          <dl class="stat-block">
+            <dt>Geography</dt><dd>International. Members from MIT, OpenAI, City of Toronto, Cambridge, Notre Dame, Stanford, Berkman Klein.</dd>
+            <dt>Stage / size</dt><dd>Small invite-only. Goal: keep size such that "everybody knows one another."</dd>
+            <dt>Funding</dt><dd>"Small amount of seed funding." Seeking funds over next months.</dd>
+            <dt>Source</dt><dd><a href="https://www.demnext.org/projects/delibtech-network">demnext.org/projects/delibtech-network</a></dd>
+          </dl>
+        </div>
+        <div>
+          <div class="section-h">Overlap with CIBC's territory</div>
+          <div class="overlap">
+            <span class="overlap-dim">Civic Tech</span><span class="overlap-state strong">Strong</span>
+            <span class="overlap-dim">Deliberative Democracy</span><span class="overlap-state strong">Strong</span>
+            <span class="overlap-dim">Local-First / Data Sovereignty</span><span class="overlap-state partial">Partial</span>
+            <span class="overlap-dim">AT Protocol</span><span class="overlap-state none">None</span>
+            <span class="overlap-dim">Knowledge Graphs</span><span class="overlap-state none">None</span>
+            <span class="overlap-dim">Regenerative Systems</span><span class="overlap-state none">None</span>
+          </div>
+        </div>
+        <div>
+          <div class="section-h">Known people</div>
+          <ul class="list">
+            <li>Co-coordinators · <strong>Chwalisz</strong> + <strong>McKinney</strong> (DemNext); <strong>Aviv Ovadya</strong> + <strong>Kyle Redman</strong> (AI &amp; Democracy)</li>
+            <li>Members · Dimitrakopoulou (MIT), Eloundou (OpenAI), Fusca (Toronto), Schirch (Notre Dame), Siu (Stanford), Shireman (Berkman Klein)</li>
+          </ul>
+        </div>
+        <div class="strategic-read">
+          <p>Not invitable as a group, since invite-only and Chatham House rules. Best path is to ask Chwalisz (or separately Aviv Ovadya) for a <em>private network-internal mention</em> of the demo day. Mutual ecosystem awareness is the realistic ceiling here.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- =========== CARD 05 · Agora =========== -->
+    <article class="card status-caught" data-status="caught">
+      <header class="card-head">
+        <div>
+          <div class="card-num">No. 005</div>
+          <h3 class="card-name">Agora <em>Citizen Network</em></h3>
+        </div>
+        <span class="status-badge caught">Caught</span>
+      </header>
+      <div class="badges-row">
+        <span class="type-badge tier-1">Tier 1</span>
+        <span class="type-badge">Peer Org</span>
+      </div>
+      <div class="card-body">
+        <p class="one-line">Open-source citizen network built by ZKorum for large-scale public debate using zero-knowledge proofs and LLM-based sensemaking.</p>
+        <div class="role-row">
+          <span class="role-label">Strategic role</span>
+          <span class="role-value invite">Invite</span>
+        </div>
+        <div>
+          <div class="section-h">Stat block</div>
+          <dl class="stat-block">
+            <dt>Geography</dt><dd>Paris, France</dd>
+            <dt>Founded</dt><dd>Twitter handle joined March 2023. Exact incorporation date not publicly available.</dd>
+            <dt>Stage / size</dt><dd>Small. Crunchbase: 1 to 10 headcount, two employee profiles.</dd>
+            <dt>Funding</dt><dd>Grant. European Commission lead.</dd>
+            <dt>Source</dt><dd><a href="https://www.agoracitizen.network/">agoracitizen.network</a></dd>
+          </dl>
+        </div>
+        <div>
+          <div class="section-h">Overlap with CIBC's territory</div>
+          <div class="overlap">
+            <span class="overlap-dim">Civic Tech</span><span class="overlap-state strong">Strong</span>
+            <span class="overlap-dim">Deliberative Democracy</span><span class="overlap-state strong">Strong</span>
+            <span class="overlap-dim">Local-First / Data Sovereignty</span><span class="overlap-state strong">Strong</span>
+            <span class="overlap-dim">AT Protocol</span><span class="overlap-state strong">Strong</span>
+            <span class="overlap-dim">Knowledge Graphs</span><span class="overlap-state none">None</span>
+            <span class="overlap-dim">Regenerative Systems</span><span class="overlap-state none">None</span>
+          </div>
+        </div>
+        <div>
+          <div class="section-h">Known people</div>
+          <ul class="list">
+            <li><strong>Yuting Jiang</strong> · co-founder, CEO</li>
+            <li><strong>Nicolas Gimenez</strong> · co-founder, CTO · <em>almost certainly the "Nicola" referenced in the brief</em></li>
+          </ul>
+        </div>
+        <div class="strategic-read">
+          <p>Invite Nicolas Gimenez to demo day. <em>Highest match score</em> of the six peer orgs for the specific tech stack (AT Protocol plus deliberation tooling). Likely demo-day presenter or commenter.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- =========== CARD 06 · Metagov =========== -->
+    <article class="card status-spotted" data-status="spotted">
+      <header class="card-head">
+        <div>
+          <div class="card-num">No. 006</div>
+          <h3 class="card-name">Meta<em>gov</em></h3>
+        </div>
+        <span class="status-badge spotted">Spotted</span>
+      </header>
+      <div class="badges-row">
+        <span class="type-badge tier-1">Tier 1</span>
+        <span class="type-badge">Peer Org</span>
+        <span class="type-badge">Marketing Channel</span>
+      </div>
+      <div class="card-body">
+        <p class="one-line">Research collective for governance of online communities and AI, with fiscally hosted projects and an active member network.</p>
+        <div class="role-row">
+          <span class="role-label">Strategic role</span>
+          <span class="role-value share-link">Share-Link</span>
+        </div>
+        <div>
+          <div class="section-h">Stat block</div>
+          <dl class="stat-block">
+            <dt>Geography</dt><dd>Distributed and US-based. Public AI project has explicit Switzerland focus.</dd>
+            <dt>Stage / size</dt><dd>Mid-size network. Project Directors plus membership tier.</dd>
+            <dt>Funding</dt><dd>Grants. Fiscally hosts member projects.</dd>
+            <dt>Source</dt><dd><a href="https://metagov.org">metagov.org</a></dd>
+          </dl>
+        </div>
+        <div>
+          <div class="section-h">Overlap with CIBC's territory</div>
+          <div class="overlap">
+            <span class="overlap-dim">Civic Tech</span><span class="overlap-state strong">Strong</span>
+            <span class="overlap-dim">Deliberative Democracy</span><span class="overlap-state partial">Partial</span>
+            <span class="overlap-dim">Local-First / Data Sovereignty</span><span class="overlap-state partial">Partial</span>
+            <span class="overlap-dim">AT Protocol</span><span class="overlap-state none">None</span>
+            <span class="overlap-dim">Knowledge Graphs</span><span class="overlap-state partial">Partial</span>
+            <span class="overlap-dim">Regenerative Systems</span><span class="overlap-state none">None</span>
+          </div>
+        </div>
+        <div>
+          <div class="section-h">Known people</div>
+          <ul class="list">
+            <li><strong>Liz Barry</strong> · Executive Director and Research Director (deliberation facilitation)</li>
+            <li><strong>Josh Tan</strong> + <strong>Nick Vincent</strong> · Public AI Research Directors</li>
+            <li><strong>Nathan Schneider</strong> · member contributor</li>
+          </ul>
+        </div>
+        <div class="strategic-read">
+          <p>Invite Liz Barry and post the share link in the Metagov Slack after onboarding. Metagov's Playtester program is the <em>highest-leverage soft entry</em> for a demo day. Treat Metagov as parallel and as a high-fit marketing channel.</p>
+        </div>
+        <div class="open-q">
+          <div class="label">Confidence · open question</div>
+          <p>The "Metagov local AI server in Maine, Portland" claim is unsupported. Public AI is Switzerland-oriented. Maine data-center activity is unrelated to Metagov. Treat the original Maine reference as unverified.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- =========== CARD 07 · RegenOS =========== -->
+    <article class="card status-rumored" data-status="rumored">
+      <header class="card-head">
+        <div>
+          <div class="card-num">No. 007</div>
+          <h3 class="card-name">Regen<em>OS</em></h3>
+        </div>
+        <span class="status-badge rumored">Rumored</span>
+      </header>
+      <div class="badges-row">
+        <span class="type-badge tier-2">Tier 2</span>
+        <span class="type-badge">Marketing Channel</span>
+        <span class="type-badge disputed">Disputed Identity</span>
+      </div>
+      <div class="card-body">
+        <p class="one-line">Community and network. Discord-anchored, blockchain-adjacent network around regenerative finance and ecological credits.</p>
+        <div class="role-row">
+          <span class="role-label">Strategic role</span>
+          <span class="role-value share-link">Share-Link</span>
+        </div>
+        <div>
+          <div class="section-h">Stat block</div>
+          <dl class="stat-block">
+            <dt>Geography</dt><dd>Global · US, Brazil (Amazon biodiversity credits), European concentrations</dd>
+            <dt>Stage / size</dt><dd>3,246 Discord members at snapshot. Re-verify before decision.</dd>
+            <dt>Funding</dt><dd>Token economy · Community Incentives Program · KYC + membership form</dd>
+            <dt>Source</dt><dd><a href="https://www.regen.network/">regen.network</a></dd>
+          </dl>
+        </div>
+        <div>
+          <div class="section-h">Overlap with CIBC's territory</div>
+          <div class="overlap">
+            <span class="overlap-dim">Civic Tech</span><span class="overlap-state partial">Partial</span>
+            <span class="overlap-dim">Deliberative Democracy</span><span class="overlap-state none">None</span>
+            <span class="overlap-dim">Local-First / Data Sovereignty</span><span class="overlap-state partial">Partial</span>
+            <span class="overlap-dim">AT Protocol</span><span class="overlap-state none">None</span>
+            <span class="overlap-dim">Knowledge Graphs</span><span class="overlap-state partial">Partial</span>
+            <span class="overlap-dim">Regenerative Systems</span><span class="overlap-state strong">Strong</span>
+          </div>
+        </div>
+        <div>
+          <div class="section-h">Known people</div>
+          <p class="none-note">Not publicly enumerated. Brayden is the active member.</p>
+        </div>
+        <div class="strategic-read">
+          <p>Strong fit if framed around <em>agentic organization design, KOI, or regenerative coordination tooling</em>. A long-form forum post will outperform a Discord drop alone. Brayden, as an existing member, is the right poster.</p>
+        </div>
+        <div class="open-q">
+          <div class="label">Confidence · open question</div>
+          <p>"RegenOS" most plausibly refers to Regen Network's RegenOS + KOI substrate. Confirm with Brayden which surface he is active on.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- =========== CARD 08 · Newsweek =========== -->
+    <article class="card status-unverified" data-status="unverified">
+      <header class="card-head">
+        <div>
+          <div class="card-num">No. 008</div>
+          <h3 class="card-name">News<em>week</em> <span style="font-size: 14px; color: var(--ink-faint); font-style: italic;">(political tech?)</span></h3>
+        </div>
+        <span class="status-badge unverified">Unverified</span>
+      </header>
+      <div class="badges-row">
+        <span class="type-badge">Marketing Channel</span>
+        <span class="type-badge disputed">Cannot identify</span>
+      </div>
+      <div class="card-body">
+        <p class="one-line">Not identifiable from available public sources. Search returned only the news magazine and unrelated Telegram coverage.</p>
+        <div class="role-row">
+          <span class="role-label">Strategic role</span>
+          <span class="role-value cannot-assess">Cannot Assess</span>
+        </div>
+        <div>
+          <div class="section-h">Stat block</div>
+          <dl class="stat-block">
+            <dt>Geography</dt><dd>Not publicly available</dd>
+            <dt>Stage / size</dt><dd>Not publicly available</dd>
+            <dt>Funding</dt><dd>Not publicly available</dd>
+            <dt>Source</dt><dd>None located</dd>
+          </dl>
+        </div>
+        <div class="strategic-read">
+          <p>Ask Artem directly for: the channel link or invite, the canonical name (CIBC may be misremembering the spelling), and the platform (Telegram, Discord, or Signal). <em>Card still exists. It says so explicitly.</em></p>
+        </div>
+        <div class="open-q">
+          <div class="label">Confidence · open question</div>
+          <p>Resolves with: ask Artem for the exact invite link, platform, and spelling. Without this, no other field on this card can be filled in.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- =========== CARD 09 · Plurality =========== -->
+    <article class="card status-spotted" data-status="spotted">
+      <header class="card-head">
+        <div>
+          <div class="card-num">No. 009</div>
+          <h3 class="card-name">Plural<em>ity</em></h3>
+        </div>
+        <span class="status-badge spotted">Spotted</span>
+      </header>
+      <div class="badges-row">
+        <span class="type-badge tier-1">Tier 1</span>
+        <span class="type-badge">Peer Org</span>
+        <span class="type-badge disputed">Disambiguated</span>
+      </div>
+      <div class="card-body">
+        <p class="one-line">Network and nonprofit. Plurality Institute as the institutional hub connecting researchers, practitioners, leaders across academia, industry, civil society, government.</p>
+        <div class="role-row">
+          <span class="role-label">Strategic role</span>
+          <span class="role-value awareness">Awareness</span>
+        </div>
+        <div>
+          <div class="section-h">Stat block</div>
+          <dl class="stat-block">
+            <dt>Geography</dt><dd>San Francisco (Institute team). Global community. Taiwan as foundational ref via Audrey Tang.</dd>
+            <dt>Stage / size</dt><dd>Not publicly disclosed. LLM Map references 70+ tools and contributors.</dd>
+            <dt>Funding</dt><dd>Not on a single page. Microgrant program named.</dd>
+            <dt>Source</dt><dd><a href="https://www.plurality.institute">plurality.institute</a></dd>
+          </dl>
+        </div>
+        <div>
+          <div class="section-h">Overlap with CIBC's territory</div>
+          <div class="overlap">
+            <span class="overlap-dim">Civic Tech</span><span class="overlap-state strong">Strong</span>
+            <span class="overlap-dim">Deliberative Democracy</span><span class="overlap-state strong">Strong</span>
+            <span class="overlap-dim">Local-First / Data Sovereignty</span><span class="overlap-state partial">Partial</span>
+            <span class="overlap-dim">AT Protocol</span><span class="overlap-state partial">Partial</span>
+            <span class="overlap-dim">Knowledge Graphs</span><span class="overlap-state strong">Strong</span>
+            <span class="overlap-dim">Regenerative Systems</span><span class="overlap-state none">None</span>
+          </div>
+        </div>
+        <div>
+          <div class="section-h">Known people</div>
+          <ul class="list">
+            <li><strong>Glen Weyl</strong> · co-author of Plurality, founder of RadicalxChange</li>
+            <li><strong>Audrey Tang</strong> · co-author · <em>bridges to DemNext via advisory council</em></li>
+            <li><strong>Firen</strong> · chief of staff · <strong>Rose</strong> · executive director</li>
+          </ul>
+        </div>
+        <div class="strategic-read">
+          <p>Fit is strong if framing emphasizes <em>plural technologies, bridging tools, AT Protocol or knowledge-graph deliberation work</em>. Weaker if framing leans purely local-first without a deliberation angle. Audrey Tang's role on the DemNext advisory council means a single intro could reach both Plurality and DemNext.</p>
+        </div>
+      </div>
+    </article>
+
+  </section>
 
 <footer class="footer">
   <div class="footer-inner">
@@ -1325,6 +2228,26 @@ initFieldAtmosphere({
     speed: 0.4,
   }
 });
+</script>
+
+<script>
+<script>
+/* ============ Status filter (ported from pokedex) ============ */
+(function() {
+  const chips = document.querySelectorAll('.filter-chip');
+  const cards = document.querySelectorAll('.card');
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      const f = chip.dataset.filter;
+      cards.forEach(card => {
+        card.style.display = (f === 'all' || card.dataset.status === f) ? '' : 'none';
+      });
+    });
+  });
+})();
+</script>
 </script>
 </body>
 </html>
