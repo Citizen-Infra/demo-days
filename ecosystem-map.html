@@ -1741,24 +1741,36 @@
      Dark wrapper, cream search input (icon on the right), a filled
      ALL pill that reads as the default selected filter, and four
      coral-outlined uppercase-mono category chips beside it. */
+  /* Section breaks out of the .page 1080 max-width so the dark bar
+     gets the full 1280 it needs to fit all six controls on a
+     single row at desktop, matching the spec image. */
+  .section-tool-filter {
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    width: 100vw;
+    padding: 0 clamp(20px, 4vw, 48px);
+    box-sizing: border-box;
+  }
   .tool-filter-bar {
     background: #0e0a07;
     border-radius: 28px;
-    padding: 14px 20px;
+    padding: 14px 18px;
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 14px;
     flex-wrap: wrap;
+    max-width: 1280px;
+    margin: 0 auto;
   }
   .tool-search {
     display: flex;
     align-items: center;
     gap: 12px;
-    flex: 1 1 280px;
-    max-width: 420px;
+    flex: 1 1 260px;
+    max-width: 360px;
     background: #ffffff;
     border-radius: 100px;
-    padding: 14px 22px;
+    padding: 12px 20px;
     border: 1px solid rgba(255, 255, 255, 0.04);
   }
   .tool-search input {
@@ -1785,7 +1797,7 @@
   /* Chips group sits to the right of the search. ALL pill leads. */
   .tool-filter-chips {
     display: flex;
-    gap: 10px;
+    gap: 8px;
     flex: 1 1 auto;
     flex-wrap: wrap;
     justify-content: flex-end;
@@ -1793,20 +1805,22 @@
   }
 
   /* Coral-outlined category chips on dark. Uppercase mono label,
-     coral text, coral stroke icon, transparent fill. */
+     coral text, coral stroke icon, transparent fill. Padding /
+     letter-spacing tuned to fit all four labels on one row at
+     1280-bar max width inside the standard page container. */
   .tool-chip {
     cursor: pointer;
     font: inherit;
     background: transparent;
     border: 1.5px solid var(--accent);
     color: var(--accent);
-    padding: 9px 16px;
-    gap: 8px;
+    padding: 8px 13px;
+    gap: 7px;
     font-family: var(--mono);
     font-weight: 500;
-    font-size: 11px;
+    font-size: 10.5px;
     line-height: 1;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
   }
@@ -1815,9 +1829,9 @@
     -webkit-text-fill-color: var(--accent);
     color: var(--accent);
     text-transform: uppercase;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.08em;
   }
-  .tool-chip .topic-pill-icon { width: 18px; height: 18px; color: var(--accent); }
+  .tool-chip .topic-pill-icon { width: 16px; height: 16px; color: var(--accent); }
   .tool-chip .topic-pill-icon svg { stroke: var(--accent); }
   .tool-chip:hover {
     background: rgba(212, 121, 61, 0.10);
@@ -1840,7 +1854,7 @@
     background: #f0d8c0;
     border-color: #f0d8c0;
     color: var(--ink);
-    padding: 9px 22px;
+    padding: 8px 18px;
   }
   .tool-chip-all .topic-pill-label {
     -webkit-text-fill-color: var(--ink);
