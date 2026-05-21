@@ -160,9 +160,55 @@
     padding: clamp(48px, 7vw, 80px) clamp(20px, 5vw, 56px) clamp(80px, 10vw, 120px);
   }
 
-  .header {
-    margin-bottom: clamp(36px, 5vw, 56px);
+  /* Dark hero · full-bleed band per Figma 154:1971. Breaks out of
+     the .page max-width via calc margins, paints the band dark
+     #0e0a07, and renders the title in coral with a cream lede
+     below it. CTAs sit at the bottom-left of the inner column. */
+  .cibc-hero-dark {
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    width: 100vw;
+    background: #0e0a07;
+    color: #f4ebda;
+    padding: clamp(56px, 9vw, 112px) clamp(20px, 4vw, 56px) clamp(48px, 7vw, 88px);
+    margin-bottom: 0;
   }
+  .cibc-hero-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  .cibc-hero-dark h1 {
+    font-family: var(--serif);
+    font-variation-settings: "opsz" 144, "SOFT" 30;
+    font-weight: 700;
+    font-size: clamp(40px, 5.6vw, 72px);
+    line-height: 1.05;
+    letter-spacing: -0.018em;
+    margin: 0 0 28px;
+    color: var(--accent);
+    max-width: 720px;
+  }
+  .cibc-hero-dark .lede {
+    font-family: var(--body);
+    font-size: clamp(15px, 1.5vw, 17px);
+    line-height: 1.6;
+    color: rgba(244, 235, 218, 0.82);
+    max-width: 720px;
+    margin: 0 0 32px;
+  }
+  /* Ghost CTA needs a light treatment so it reads on the dark bg.
+     Selector bumped to .header-ctas .hero-btn-ghost-dark to beat
+     the existing .header-ctas .hero-btn-ghost ink-on-cream rule. */
+  .header-ctas .hero-btn-ghost-dark {
+    color: #f4ebda;
+    border: 1.5px solid rgba(244, 235, 218, 0.55);
+    background: transparent;
+  }
+  .header-ctas .hero-btn-ghost-dark:hover {
+    border-color: #f4ebda;
+    background: rgba(244, 235, 218, 0.08);
+  }
+  /* Eyebrow class kept for legacy refs but unused on this layout. */
   .eyebrow {
     font-family: var(--mono);
     font-size: 11px;
@@ -171,22 +217,7 @@
     color: var(--accent);
     margin-bottom: 16px;
   }
-  h1 {
-    font-family: var(--serif);
-    font-variation-settings: "opsz" 72, "SOFT" 30;
-    font-weight: 700;
-    font-size: clamp(40px, 5.5vw, 64px);
-    line-height: 1.05;
-    letter-spacing: -0.02em;
-    margin: 0 0 18px;
-    color: var(--ink);
-    max-width: 880px;
-  }
-  h1 em {
-    font-style: italic;
-    color: var(--accent);
-    font-weight: 600;
-  }
+  /* Lede inherits .lede on light-theme variants. */
   .deck {
     font-family: var(--serif);
     font-variation-settings: "opsz" 24, "SOFT" 60;
@@ -198,53 +229,74 @@
     margin: 0;
   }
 
-  /* Manifesto · pull quote + body framing for why CIBC exists.
-     Sits between the hero header and the meeting strip so the
-     reader gets the why before the logistics. */
-  .manifesto {
-    max-width: 720px;
-    margin: clamp(48px, 7vw, 88px) auto clamp(48px, 7vw, 88px);
-    padding: 0;
+  /* Pull-quote section · cream band with massive quote marks
+     flanking the Buckminster Fuller quote. Sits right under the
+     dark hero so the visual rhythm goes dark to light to dark. */
+  .pull-quote {
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    width: 100vw;
+    background: var(--bg-warm);
+    padding: clamp(48px, 7vw, 88px) clamp(20px, 4vw, 56px);
   }
-  .manifesto-quote {
-    margin: 0 0 36px;
-    padding: 0 0 0 24px;
-    border-left: 3px solid var(--accent);
+  .pull-quote-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas:
+      "open text close"
+      "cite cite cite";
+    column-gap: clamp(16px, 2vw, 28px);
+    row-gap: 18px;
+    align-items: center;
   }
-  .manifesto-quote p {
+  .quote-mark {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(72px, 9vw, 128px);
+    line-height: 0.9;
+    color: var(--accent);
+    display: block;
+  }
+  .quote-mark-open { grid-area: open; align-self: start; }
+  .quote-mark-close { grid-area: close; align-self: end; }
+  .pull-quote-text {
+    grid-area: text;
     font-family: var(--serif);
     font-style: italic;
-    font-variation-settings: "opsz" 36, "SOFT" 60;
+    font-variation-settings: "opsz" 48, "SOFT" 60;
     font-weight: 400;
-    font-size: clamp(20px, 2.4vw, 26px);
-    line-height: 1.4;
+    font-size: clamp(22px, 2.4vw, 30px);
+    line-height: 1.35;
     color: var(--ink);
-    margin: 0 0 14px;
+    margin: 0;
     text-wrap: pretty;
   }
-  .manifesto-quote cite {
+  .pull-quote-cite {
+    grid-area: cite;
     font-family: var(--mono);
     font-style: normal;
     font-size: 11px;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--ink-soft);
+    text-align: center;
     display: block;
+    margin-top: 6px;
   }
-  .manifesto-body p {
-    font-family: var(--body);
-    font-size: clamp(16px, 1.6vw, 18px);
-    line-height: 1.65;
-    color: var(--ink);
-    margin: 0 0 18px;
-    text-wrap: pretty;
-  }
-  .manifesto-body p:last-child { margin-bottom: 0; }
   @media (max-width: 720px) {
-    .manifesto {
-      margin: clamp(36px, 8vw, 56px) auto;
+    .pull-quote { padding: clamp(36px, 8vw, 56px) clamp(18px, 5vw, 32px); }
+    .pull-quote-inner {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "open"
+        "text"
+        "close"
+        "cite";
+      row-gap: 12px;
     }
-    .manifesto-quote { padding-left: 18px; }
+    .quote-mark-close { justify-self: end; }
   }
 
   /* Meeting details strip */
@@ -1341,6 +1393,89 @@
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset, 0 8px 22px var(--paper-shadow);
     overflow: hidden;
   }
+
+  /* Dark-mode variant per Megan's redesign · the same map flips
+     palette: dark bg, accent-lit nodes, cream labels, lighter
+     edge strokes so connections read against the dark plane.
+     Keeps the light .front-map-wrap intact for the index page. */
+  .front-map-section-dark {
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    width: 100vw;
+    max-width: none;
+    padding: clamp(48px, 7vw, 88px) clamp(20px, 4vw, 56px);
+    margin-bottom: 0;
+    background: var(--bg-deep, #14110d);
+  }
+  .front-map-section-dark .front-map-eyebrow {
+    color: rgba(232, 220, 198, 0.62);
+    max-width: 1080px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    padding-left: 12px;
+  }
+  .front-map-wrap.is-dark {
+    background: var(--bg-deep-2, #1d1812);
+    border: 1px solid rgba(232, 220, 198, 0.10);
+    box-shadow: 0 1px 0 rgba(232, 220, 198, 0.04) inset, 0 18px 40px rgba(0, 0, 0, 0.4);
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  /* Color overrides for nodes / edges / labels inside the dark wrap. */
+  .front-map-wrap.is-dark .front-map-edge {
+    stroke: rgba(232, 220, 198, 0.16);
+  }
+  .front-map-wrap.is-dark .front-map-edge.neighbor {
+    stroke: var(--accent);
+  }
+  .front-map-wrap.is-dark .front-map-node-visual circle,
+  .front-map-wrap.is-dark .front-map-node-visual path {
+    stroke: rgba(232, 220, 198, 0.20);
+  }
+  .front-map-wrap.is-dark .front-map-node-label {
+    fill: rgba(232, 220, 198, 0.85);
+    stroke: rgba(20, 17, 13, 0.85);
+  }
+  .front-map-wrap.is-dark .front-map-node-label.focused {
+    fill: #fff5e0;
+  }
+  .front-map-wrap.is-dark .front-cluster-zone-label {
+    fill: rgba(232, 220, 198, 0.22);
+  }
+  /* Reset / tooltip recolored for dark surround. */
+  .front-map-wrap.is-dark .front-reset-btn {
+    background: rgba(20, 17, 13, 0.85);
+    border-color: rgba(232, 220, 198, 0.22);
+    color: rgba(232, 220, 198, 0.7);
+  }
+  .front-map-wrap.is-dark .front-reset-btn:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: rgba(20, 17, 13, 0.95);
+  }
+  .front-map-wrap.is-dark .front-map-tooltip {
+    background: rgba(20, 17, 13, 0.96);
+    border: 1px solid rgba(232, 220, 198, 0.2);
+    color: #e8dcc6;
+  }
+  .front-map-wrap.is-dark .front-map-tooltip strong { color: #fff5e0; }
+  .front-map-wrap.is-dark .front-map-tooltip .strategic {
+    border-top-color: rgba(232, 220, 198, 0.18);
+    color: rgba(232, 220, 198, 0.78);
+  }
+  .front-map-section-dark .front-map-hint {
+    color: rgba(232, 220, 198, 0.5);
+    max-width: 1080px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .front-map-section-dark .front-map-legend {
+    color: rgba(232, 220, 198, 0.5);
+    max-width: 1080px;
+    margin-left: auto;
+    margin-right: auto;
+  }
   #front-map-svg {
     width: 100%; height: 100%; display: block;
     touch-action: none;
@@ -2140,24 +2275,23 @@ const ATLAS_DATA = {
 
 <div class="page">
 
-  <header class="header">
-    <p class="eyebrow">Citizen Infra &middot; Learn More &middot; Last updated 5/21/2026</p>
-    <h1>Citizen Infrastructure <em>Builders Club</em></h1>
-    <p class="lede">A builder community for anti-extractive civic infrastructure. Practitioners, leaders across academia, industry, civil society, and government.</p>
-    <div class="header-ctas">
-      <a href="https://app.harmonica.chat/chat?s=fc325b1d-2abb-4869-b2b5-6e35bfb274bb" target="_blank" rel="noopener" class="hero-btn hero-btn-primary">Apply to lead <span class="hero-btn-arrow" aria-hidden="true"><svg style="width:1em;height:1em;vertical-align:-0.12em;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></a>
-      <a href="ecosystem-map.html" class="hero-btn hero-btn-ghost">Find resources</a>
+  <header class="header cibc-hero-dark">
+    <div class="cibc-hero-inner">
+      <h1>Citizen Infrastructure Builders Club</h1>
+      <p class="lede">We build digital pitchforks: citizen infrastructure that teaches collective action, solidarity, and shared stewardship through use. Not apps or platforms in the traditional sense, but tools crafted to reshape how people relate to each other and to their communities.</p>
+      <div class="header-ctas">
+        <a href="https://app.harmonica.chat/chat?s=fc325b1d-2abb-4869-b2b5-6e35bfb274bb" target="_blank" rel="noopener" class="hero-btn hero-btn-primary">Apply to lead <span class="hero-btn-arrow" aria-hidden="true"><svg style="width:1em;height:1em;vertical-align:-0.12em;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></a>
+        <a href="ecosystem-map.html" class="hero-btn hero-btn-ghost hero-btn-ghost-dark">Find resources</a>
+      </div>
     </div>
   </header>
 
-  <section class="manifesto" aria-label="Why CIBC exists">
-    <blockquote class="manifesto-quote">
-      <p>"If you want to teach people a new way of thinking, don't bother trying to teach them. Instead, give them a tool, the use of which will lead to new ways of thinking."</p>
-      <cite>Buckminster Fuller</cite>
-    </blockquote>
-    <div class="manifesto-body">
-      <p>We build digital pitchforks: citizen infrastructure that teaches collective action, solidarity, and shared stewardship through use. Not apps or platforms in the traditional sense, but tools crafted to reshape how people relate to each other and to their communities.</p>
-      <p>In an age of techno-feudalism, where digital platforms have replaced markets with fiefdoms and users have become digital serfs, the antidote is not better regulation of feudal tools. It's building tools that nurture citizen empowerment and the people's capacity to act together.</p>
+  <section class="pull-quote" aria-label="Why CIBC exists">
+    <div class="pull-quote-inner">
+      <span class="quote-mark quote-mark-open" aria-hidden="true">&ldquo;</span>
+      <p class="pull-quote-text">If you want to teach people a new way of thinking, don't bother trying to teach them. Instead, give them a tool, the use of which will lead to new ways of thinking.</p>
+      <span class="quote-mark quote-mark-close" aria-hidden="true">&rdquo;</span>
+      <cite class="pull-quote-cite">Buckminster Fuller</cite>
     </div>
   </section>
 
@@ -2221,9 +2355,9 @@ const ATLAS_DATA = {
   <div id="caught-counter" hidden></div>
   
 
-  <section class="front-map-section">
+  <section class="front-map-section front-map-section-dark">
     <p class="front-map-eyebrow">the whole ecosystem &middot; tap a node to focus</p>
-    <div class="front-map-wrap">
+    <div class="front-map-wrap is-dark">
       <svg id="front-map-svg" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid meet">
         <g class="front-map-inner" id="front-map-inner"></g>
       </svg>
