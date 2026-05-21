@@ -87,9 +87,9 @@
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background: rgba(246, 236, 217, 0.22);
-    backdrop-filter: blur(3px) saturate(1.06);
-    -webkit-backdrop-filter: blur(3px) saturate(1.06);
+    background: rgba(246, 236, 217, 0.11);
+    backdrop-filter: blur(1.5px) saturate(1.03);
+    -webkit-backdrop-filter: blur(1.5px) saturate(1.03);
     z-index: 1;
   }
   .nav-inner {
@@ -97,7 +97,7 @@
     z-index: 2;
     max-width: none;
     margin: 0;
-    padding: 0 16px;
+    padding: 0 24px 0 16px;
     display: flex;
     justify-content: space-between;
     align-items: stretch;
@@ -324,6 +324,7 @@
     transition: all 150ms ease;
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
     cursor: pointer;
     border: 1.5px solid var(--ink);
@@ -418,6 +419,7 @@
     text-decoration: none;
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
     border: 1.5px solid transparent;
     transition: filter 150ms, background 150ms, border-color 150ms;
@@ -687,6 +689,7 @@
     text-decoration: none;
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
     transition: filter 150ms, background 150ms, border-color 150ms;
     border: 1.5px solid transparent;
@@ -982,6 +985,7 @@
     text-decoration: none;
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
     background: var(--gradient-primary);
     padding: 12px 22px;
@@ -1689,7 +1693,7 @@
     <div class="nav-links" id="primary-links" role="navigation">
       <a href="#" class="nav-link nav-link-current" aria-current="page">Demo Day</a>
       <a href="ecosystem-map.html" class="nav-link">Infra Resources</a>
-      <a href="get-involved.html" class="nav-link">About us</a>
+      <a href="get-involved.html" class="nav-link">Learn more</a>
     </div>
     <a href="#register" class="nav-cta">Register</a>
     <button type="button" class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="primary-links" aria-label="Open menu">
@@ -1800,7 +1804,7 @@
 
     <article class="demo-card">
       <div class="demo-top">
-        <span class="topic-pill"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="url(#pillGradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg></span><span class="topic-pill-label">Knowledge Management</span></span>
+        <span class="topic-pill"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="url(#pillGradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg></span><span class="topic-pill-label">Knowledge Management</span></span>
       </div>
       <h3 class="demo-project">Gardens not Platforms</h3>
       <p class="demo-desc">An Obsidian + Claude workflow that renders private notes into artifacts collaborators can use. Do this instead of platforms or paid-for tools.</p>
@@ -1931,7 +1935,7 @@
   <div class="apply">
     <div>
       <div class="apply-eyebrow">For builders</div>
-      <h3>We're <span class="gradient-text">holding space</span> for this work.</h3>
+      <h3>We're <span class="gradient-text">holding space</span> for your work.</h3>
       <p class="apply-body">If you're building community infrastructure, deliberation tools, peer-knowledge systems, or something adjacent, we want to see it. Apply anytime. We'll keep you on the list and reach out as slots open.</p>
     </div>
     <div class="apply-side">
@@ -1992,6 +1996,7 @@
       <ul>
         <li><a href="#">CIBC Telegram</a></li>
         <li><a href="#">Substack digest</a></li>
+        <li><a href="https://github.com/Citizen-Infra" target="_blank" rel="noopener">GitHub · Citizen-Infra</a></li>
       </ul>
     </div>
   </div>
