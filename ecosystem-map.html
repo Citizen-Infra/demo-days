@@ -1709,38 +1709,94 @@
   .resources-hero .hero-eyebrow { margin-bottom: 18px; }
   .resources-hero .hero-deck { color: var(--ink-soft); }
   .section-tool-filter { margin-top: clamp(48px, 6vw, 80px); }
+  /* Bar shape per Figma frame 123:3121: pill background, search on the
+     left at a fixed-ish width, filter chips beside it on a single row at
+     desktop. Wraps cleanly to a two-row stack on narrow viewports. */
   .tool-filter-bar {
     background: var(--bg-warm);
-    border-radius: 100px;
-    padding: 14px 20px;
+    border-radius: 28px;
+    padding: 12px 16px;
     display: flex;
     align-items: center;
-    gap: 24px;
+    gap: 16px;
     flex-wrap: wrap;
   }
   .tool-search {
     display: flex;
     align-items: center;
     gap: 10px;
-    flex: 1;
-    min-width: 240px;
+    flex: 1 1 280px;
+    max-width: 380px;
+    background: var(--paper-white);
+    border-radius: 100px;
+    padding: 10px 16px;
+    border: 1px solid rgba(60, 40, 20, 0.10);
   }
-  .tool-search-icon { width: 18px; height: 18px; color: var(--ink-soft); flex-shrink: 0; }
+  .tool-search-icon { width: 16px; height: 16px; color: var(--ink-soft); flex-shrink: 0; }
   .tool-search-icon svg { width: 100%; height: 100%; display: block; }
   .tool-search input {
     flex: 1;
     background: transparent;
     border: none;
     font-family: var(--body);
-    font-size: 14px;
+    font-size: 13px;
     color: var(--ink);
-    padding: 6px 0;
+    padding: 2px 0;
     outline: none;
+    min-width: 0;
   }
   .tool-search input::placeholder { color: var(--ink-soft); }
-  .tool-filter-chips { display: flex; gap: 8px; flex-wrap: wrap; }
-  .tool-chip { cursor: pointer; font: inherit; }
-  .tool-chip:hover { filter: brightness(0.94); }
+  /* Filter chips sit beside search; Title Case label + small icon so the
+     four chips fit on one row inside the 1080-page container. */
+  .tool-filter-chips {
+    display: flex;
+    gap: 8px;
+    flex: 1 1 auto;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  .tool-chip {
+    cursor: pointer;
+    font: inherit;
+    /* Override topic-pill's uppercase mono treatment for the filter
+       variant. Inline padding and label sizing tuned to keep the four
+       chips on one row at 1080px max page width. */
+    text-transform: none;
+    letter-spacing: 0.01em;
+    font-family: var(--body);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 6px 12px;
+    gap: 6px;
+  }
+  .tool-chip .topic-pill-label {
+    background: none;
+    -webkit-text-fill-color: var(--ink);
+    color: var(--ink);
+    text-transform: none;
+    letter-spacing: 0.01em;
+  }
+  .tool-chip .topic-pill-icon { width: 18px; height: 18px; }
+  .tool-chip:hover { filter: brightness(0.96); border-color: var(--accent); }
+  .tool-chip.is-active .topic-pill-label {
+    -webkit-text-fill-color: #ffffff;
+    color: #ffffff;
+  }
+
+  @media (max-width: 720px) {
+    .tool-filter-bar {
+      border-radius: 20px;
+      padding: 12px;
+      gap: 12px;
+    }
+    .tool-search {
+      flex: 1 1 100%;
+      max-width: none;
+    }
+    .tool-filter-chips {
+      justify-content: flex-start;
+    }
+  }
   /* Tools grid: drop the dark demos-section background. Inherit page bg. */
   #tools-grid { background: transparent; }
   #tools-grid .demos {
