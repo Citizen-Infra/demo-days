@@ -261,15 +261,22 @@
   /* "Professionals, loosely tied." section · CIBC intro plus the
      trainer roster, restyled from the Atlas lens cards into a
      compact horizontal pattern (avatar dot, name, mono caps
-     section label). Uses design system tokens throughout. */
+     section label). Full-bleed white band so it reads as a
+     distinct surface from the cream pull-quote above. */
   .professionals {
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    width: 100vw;
+    background: var(--paper-white);
+    padding: clamp(56px, 8vw, 96px) clamp(20px, 4vw, 56px);
+  }
+  .professionals-inner {
     max-width: 1080px;
-    margin: clamp(56px, 8vw, 96px) auto;
-    padding: 0;
+    margin: 0 auto;
   }
   .professionals-head {
     max-width: 720px;
-    margin-bottom: clamp(36px, 5vw, 56px);
+    margin: 0 0 clamp(36px, 5vw, 56px);
   }
   .professionals-eyebrow {
     font-family: var(--mono);
@@ -2481,21 +2488,23 @@ const ATLAS_DATA = {
 
   <!-- ===== PROFESSIONALS, LOOSELY TIED · intro + trainer roster ===== -->
   <section class="professionals" aria-labelledby="professionals-title">
-    <div class="professionals-head">
-      <p class="professionals-eyebrow">002</p>
-      <h2 id="professionals-title">Professionals, <em>loosely tied</em>.</h2>
-      <p class="professionals-deck">CIBC isn't an organization. We're a group of professionals, loosely tied by our connections, determined to build tech for a better future.</p>
-      <a href="#" class="professionals-cta" data-todo="add-telegram-link">Join the Telegram</a>
-    </div>
-
-    <div class="professionals-grid">
-      <div class="trainer-grid-block">
-        <p class="trainer-section-label">CIBC team</p>
-        <div class="trainer-grid" id="cibc-grid"></div>
+    <div class="professionals-inner">
+      <div class="professionals-head">
+        <p class="professionals-eyebrow">002</p>
+        <h2 id="professionals-title">Professionals, <em>loosely tied</em>.</h2>
+        <p class="professionals-deck">CIBC isn't an organization. We're a group of professionals, loosely tied by our connections, determined to build tech for a better future.</p>
+        <a href="#" class="professionals-cta" data-todo="add-telegram-link">Join the Telegram</a>
       </div>
-      <div class="trainer-grid-block">
-        <p class="trainer-section-label">Ecosystem bridges</p>
-        <div class="trainer-grid" id="bridge-grid"></div>
+
+      <div class="professionals-grid">
+        <div class="trainer-grid-block">
+          <p class="trainer-section-label">CIBC team</p>
+          <div class="trainer-grid" id="cibc-grid"></div>
+        </div>
+        <div class="trainer-grid-block">
+          <p class="trainer-section-label">Ecosystem bridges</p>
+          <div class="trainer-grid" id="bridge-grid"></div>
+        </div>
       </div>
     </div>
   </section>
