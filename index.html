@@ -269,7 +269,7 @@
     line-height: 1.04;
     letter-spacing: -0.022em;
     color: var(--ink);
-    margin-bottom: 28px;
+    margin-bottom: 8px;
   }
   .hero h1 em {
     font-style: italic;
@@ -410,7 +410,7 @@
   .hero-ctas {
     display: flex;
     gap: 14px;
-    margin: 0 0 36px;
+    margin: 0 0 60px;
     flex-wrap: wrap;
   }
   .hero-btn {
@@ -1201,13 +1201,17 @@
   @media (max-width: 760px) { .apply { grid-template-columns: 1fr; gap: 24px; } }
   .apply-eyebrow {
     font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0;
-    color: var(--ink);
+    font-weight: 500;
+    font-size: 11px;
     line-height: 1;
-    margin-bottom: 14px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0 0 18px;
+    display: block;
   }
-  .apply h3 {
+  .apply h3,
+  .about-body h3 {
     font-family: var(--serif);
     font-variation-settings: "opsz" 72, "SOFT" 60;
     font-weight: 500;
@@ -1217,7 +1221,10 @@
     letter-spacing: -0.015em;
     margin-bottom: 14px;
   }
-  .apply h3 em { font-style: italic; color: var(--accent); font-weight: 400; }
+  .apply h3 .gradient-text,
+  .about-body h3 .gradient-text { color: var(--accent-deep); font-style: normal; }
+  .apply h3 em,
+  .about-body h3 em { font-style: italic; color: var(--accent); font-weight: 400; }
   .apply-body {
     font-family: var(--body);
     font-size: 15px;
@@ -1239,25 +1246,38 @@
     color: var(--ink);
     border-left: 3px solid var(--accent);
   }
-  .apply-meta strong { font-family: var(--mono); font-size: 9px; letter-spacing: 0; color: var(--ink); display: block; margin-bottom: 4px; line-height: 1; }
+  .apply-meta strong { font-family: var(--mono); font-weight: 500; font-size: 11px; line-height: 1; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-soft); display: block; margin-bottom: 10px; }
 
   /* ============ BLOCK 4 · WHO CIBC IS ============ */
   .about {
-    display: flex;
-    flex-direction: column;
-    gap: 36px;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: clamp(28px, 5vw, 56px);
+    align-items: center;
+  }
+  @media (max-width: 760px) {
+    .about { grid-template-columns: 1fr; gap: 28px; }
   }
   .about-body {
-    font-family: var(--serif);
-    font-variation-settings: "opsz" 24, "SOFT" 60;
-    font-weight: 400;
-    font-size: 17px;
-    line-height: 1.6;
-    color: var(--ink);
-    max-width: 64ch;
+    font-family: var(--body);
+    font-size: clamp(15px, 1.6vw, 17px);
+    line-height: 1.55;
+    color: var(--ink-soft);
   }
-  .about-body p { margin-bottom: 16px; }
+  .about-body p {
+    margin-bottom: 24px;
+    max-width: 52ch;
+  }
   .about-body em { font-style: italic; color: var(--accent); }
+  .about-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .cluster-map-card .map-head-row,
+  .cluster-map-card .map-view-cta {
+    display: none;
+  }
 
   /* Cluster map embed */
   .cluster-map-card {
@@ -1867,40 +1887,23 @@
   <div class="apply">
     <div>
       <div class="apply-eyebrow">For builders</div>
-      <h3>Built something?</h3>
-      <p class="apply-body">Apply through the Harmonica intake form. If the first session fills up, your application carries to the next. We're keeping this running.</p>
+      <h3>We're <span class="gradient-text">holding space</span> for this work.</h3>
+      <p class="apply-body">If you're building community infrastructure, deliberation tools, peer-knowledge systems, or something adjacent, we want to see it. Apply anytime. We'll keep you on the list and reach out as slots open.</p>
     </div>
     <div class="apply-side">
       <a href="https://app.harmonica.chat/chat?s=fc325b1d-2abb-4869-b2b5-6e35bfb274bb" target="_blank" rel="noopener" class="btn btn-primary">Apply to demo <span class="arrow">→</span></a>
       <div class="apply-meta">
-        <strong>Spots limited</strong>
-        The first session is targeting five presenters. Apply anyway · we're planning more sessions.
+        <strong>Apply first, schedule second</strong>
+        We schedule sessions when enough builders are ready. Your application is what gets the next one on the calendar.
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== BLOCK 4 · WHO CIBC IS ===== -->
+<!-- ===== BLOCK 4 · WHO ARE YOU BUILDING WITH ===== -->
 <section class="cluster section" id="about">
-  <div class="section-head">
-    <h2>Watch us plan this <em>in public</em></h2>
-  </div>
-
   <div class="about">
-    <div class="about-body">
-      <p>CIBC (<em>Citizen Infrastructure Builders Club</em>) publishes the ecosystem it works alongside. Nine orgs mapped, with overlap, status, and where the club is reaching in next. Code lives in the open at <a href="https://github.com/Citizen-Infra" target="_blank" rel="noopener">github.com/Citizen-Infra</a>.</p>
-    </div>
-
-    <aside class="cluster-map-card" aria-label="CIBC ecosystem map">
-      <div class="map-head-row" style="justify-content: flex-end;">
-        <div class="map-legend">
-          <span><span class="swatch" style="background: var(--moss)"></span>Caught</span>
-          <span><span class="swatch" style="background: var(--accent)"></span>Spotted</span>
-          <span><span class="swatch" style="background: var(--indigo)"></span>Rumored</span>
-          <span><span class="swatch" style="background: var(--ink-faint)"></span>Unverified</span>
-        </div>
-      </div>
-
+    <aside class="cluster-map-card" aria-label="CIBC ecosystem map preview">
       <svg class="map-svg" viewBox="0 0 1200 640" preserveAspectRatio="xMidYMid meet" aria-label="CIBC ecosystem network: entities and people connected by formalized and speculative ties">
         <!-- Connections: solid = formalized, dashed = loose / speculative -->
         <g stroke="#5a4d3a" stroke-width="1.5" fill="none" opacity="0.55">
@@ -2006,10 +2009,16 @@
         </div>
       </div>
 
-      <div class="map-view-cta">
-        <a href="ecosystem-map.html" class="btn btn-primary">View the map <span class="arrow">→</span></a>
-      </div>
     </aside>
+
+    <div class="about-body">
+      <h3>Who are you <span class="gradient-text">building with</span>?</h3>
+      <p>This map shows the people and orgs CIBC members collaborate with, build alongside, or quietly track.</p>
+      <div class="about-ctas">
+        <a href="ecosystem-map.html" class="btn btn-primary">View ecosystem map <span class="arrow">→</span></a>
+        <a href="#" class="btn btn-ghost">About CIBC</a>
+      </div>
+    </div>
   </div>
 </section>
 
