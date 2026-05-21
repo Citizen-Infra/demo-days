@@ -197,14 +197,15 @@
     margin: 0 0 32px;
   }
   /* Ghost CTA needs a light treatment so it reads on the dark bg.
-     Selector bumped to .header-ctas .hero-btn-ghost-dark to beat
-     the existing .header-ctas .hero-btn-ghost ink-on-cream rule. */
-  .header-ctas .hero-btn-ghost-dark {
+     Selector bumped to 3-class specificity so it beats the later
+     .header-ctas .hero-btn base rule's ink border. */
+  .cibc-hero-dark .header-ctas .hero-btn-ghost-dark {
     color: #f4ebda;
     border: 1.5px solid rgba(244, 235, 218, 0.55);
     background: transparent;
   }
-  .header-ctas .hero-btn-ghost-dark:hover {
+  .cibc-hero-dark .header-ctas .hero-btn-ghost-dark:hover {
+    color: #ffffff;
     border-color: #f4ebda;
     background: rgba(244, 235, 218, 0.08);
   }
@@ -375,15 +376,16 @@
   .professionals .trainer-card .trainer-role,
   .professionals .trainer-card .trainer-count { display: none; }
 
-  /* Pull-quote section · cream band with massive quote marks
-     flanking the Buckminster Fuller quote. Sits right under the
-     dark hero so the visual rhythm goes dark to light to dark. */
+  /* Pull-quote section · cream band, compact per Figma. Coral
+     glyph marks flank the line; attribution sits centered below
+     in italic serif (not big mono caps). Section vertical rhythm
+     stays tight so the quote reads as one breath, not a chapter. */
   .pull-quote {
     margin-left: calc(-50vw + 50%);
     margin-right: calc(-50vw + 50%);
     width: 100vw;
     background: var(--bg-warm);
-    padding: clamp(48px, 7vw, 88px) clamp(20px, 4vw, 56px);
+    padding: clamp(28px, 4vw, 48px) clamp(20px, 4vw, 56px);
   }
   .pull-quote-inner {
     max-width: 1080px;
@@ -392,47 +394,48 @@
     grid-template-columns: auto 1fr auto;
     grid-template-areas:
       "open text close"
-      "cite cite cite";
-    column-gap: clamp(16px, 2vw, 28px);
-    row-gap: 18px;
+      ".    cite .";
+    column-gap: clamp(12px, 1.6vw, 20px);
+    row-gap: 10px;
     align-items: center;
   }
   .quote-mark {
     font-family: var(--serif);
     font-weight: 700;
-    font-size: clamp(72px, 9vw, 128px);
+    font-size: clamp(36px, 4vw, 52px);
     line-height: 0.9;
     color: var(--accent);
     display: block;
   }
-  .quote-mark-open { grid-area: open; align-self: start; }
-  .quote-mark-close { grid-area: close; align-self: end; }
+  .quote-mark-open { grid-area: open; align-self: start; transform: translateY(4px); }
+  .quote-mark-close { grid-area: close; align-self: end; transform: translateY(-4px); }
   .pull-quote-text {
     grid-area: text;
     font-family: var(--serif);
     font-style: italic;
-    font-variation-settings: "opsz" 48, "SOFT" 60;
+    font-variation-settings: "opsz" 24, "SOFT" 60;
     font-weight: 400;
-    font-size: clamp(22px, 2.4vw, 30px);
-    line-height: 1.35;
+    font-size: clamp(17px, 1.7vw, 21px);
+    line-height: 1.4;
     color: var(--ink);
     margin: 0;
+    text-align: center;
     text-wrap: pretty;
   }
   .pull-quote-cite {
     grid-area: cite;
-    font-family: var(--mono);
-    font-style: normal;
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14px;
+    letter-spacing: 0;
+    text-transform: none;
     color: var(--ink-soft);
     text-align: center;
     display: block;
-    margin-top: 6px;
+    margin-top: 2px;
   }
   @media (max-width: 720px) {
-    .pull-quote { padding: clamp(36px, 8vw, 56px) clamp(18px, 5vw, 32px); }
+    .pull-quote { padding: clamp(28px, 6vw, 44px) clamp(18px, 5vw, 32px); }
     .pull-quote-inner {
       grid-template-columns: 1fr;
       grid-template-areas:
@@ -440,9 +443,10 @@
         "text"
         "close"
         "cite";
-      row-gap: 12px;
+      row-gap: 10px;
+      justify-items: center;
     }
-    .quote-mark-close { justify-self: end; }
+    .quote-mark-open, .quote-mark-close { transform: none; }
   }
 
   /* Meeting details strip */
@@ -988,12 +992,16 @@
 
 
   /* ============ HERO CTAs on Learn More page ============ */
-  .header-ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 32px; }
+  /* Uppercase JetBrains Mono matching the nav links + Demo Day
+     landing's hero CTAs; tracking 0.12em for clear pill rhythm. */
+  .header-ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px; }
   .header-ctas .hero-btn {
-    font-family: var(--body);
-    font-weight: 600;
-    font-size: 14px;
-    padding: 14px 28px;
+    font-family: var(--mono);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 13px 24px;
     border-radius: 100px;
     border: 1.5px solid var(--ink);
     text-decoration: none;
@@ -2452,7 +2460,7 @@ const ATLAS_DATA = {
 
     <div class="professionals-grid">
       <div class="trainer-grid-block">
-        <p class="trainer-section-label">CIBC connectors</p>
+        <p class="trainer-section-label">CIBC team</p>
         <div class="trainer-grid" id="cibc-grid"></div>
       </div>
       <div class="trainer-grid-block">
@@ -3110,7 +3118,7 @@ document.getElementById('caught-counter').textContent = `trainers · ${trainers.
 // compact trainer-card layout on Learn More renders name + small
 // mono caps label; the legacy role + count fields stay in the
 // markup but are hidden via the .professionals scope CSS.
-const sectionLabel = { cibc: 'CIBC connector', bridge: 'Ecosystem bridge' };
+const sectionLabel = { cibc: 'CIBC connectors', bridge: 'Ecosystem bridges' };
 trainers.forEach(t => {
   const card = document.createElement('button');
   card.className = 'trainer-card';
