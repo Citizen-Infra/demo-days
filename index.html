@@ -572,19 +572,32 @@
     font-family: var(--mono);
     font-weight: 500;
     font-size: 11px;
+    line-height: 1;
     letter-spacing: 0.10em;
     text-transform: uppercase;
-    color: var(--accent-deep);
     white-space: nowrap;
     box-sizing: border-box;
   }
-  .topic-pill-icon { width: 24px; height: 24px; color: var(--accent-deep); display: inline-flex; flex-shrink: 0; }
+  .topic-pill-label {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  .topic-pill-icon { width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .topic-pill-icon svg { width: 100%; height: 100%; }
   .topic-pill.is-active {
     background: var(--gradient-primary) padding-box, var(--gradient-primary) border-box;
+  }
+  .topic-pill.is-active .topic-pill-label {
+    background: none;
+    -webkit-text-fill-color: #ffffff;
     color: #ffffff;
   }
-  .topic-pill.is-active .topic-pill-icon { color: #ffffff; }
+  .topic-pill.is-active .topic-pill-icon svg {
+    stroke: #ffffff;
+  }
 
   /* Topic pill · same size in cards and side panel */
   .demo-card .topic-pill-icon { width: 24px; height: 24px; }
@@ -1279,6 +1292,34 @@
     display: none;
   }
 
+  /* Full-bleed building-with section: bg-warm wall, map flush-left, text-side padding only */
+  #about.section {
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    width: 100vw;
+    background: var(--bg-warm);
+    margin-bottom: 0;
+    padding: 0;
+  }
+  #about .cluster-map-card {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+  }
+  #about .about-body {
+    padding: clamp(40px, 6vw, 80px) clamp(24px, 4vw, 64px) clamp(40px, 6vw, 80px) 0;
+  }
+  @media (max-width: 760px) {
+    #about.section {
+      padding: clamp(40px, 8vw, 60px) clamp(20px, 4vw, 48px);
+    }
+    #about .about-body {
+      padding: 0;
+    }
+  }
+
   /* Cluster map embed */
   .cluster-map-card {
     background: var(--bg-warm);
@@ -1636,6 +1677,8 @@
 
 <div class="page">
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="pillGradient" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#e96243"/><stop offset="100%" stop-color="#e67c48"/></linearGradient></defs></svg>
+
 <!-- ===== NAV COMPONENT ===== -->
 <nav class="nav" aria-label="Primary">
   <canvas class="field-canvas" id="field-canvas-nav" aria-hidden="true"></canvas>
@@ -1710,11 +1753,11 @@
         <div class="field-veil" aria-hidden="true"></div>
         <span class="info-label">Tools being demoed</span>
         <div class="topic-pills">
-          <span class="topic-pill is-active"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg></span><span class="topic-pill-label">Civic technology</span></span>
-          <span class="topic-pill"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.856 6H16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-1.144"/><path d="M22 14v-4"/><path d="M7.144 6H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h1.144"/><path d="m11 7-3 5h4l-3 5"/></svg></span><span class="topic-pill-label">Capacity building</span></span>
-          <span class="topic-pill"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg></span><span class="topic-pill-label">Knowledge management</span></span>
-          <span class="topic-pill"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span class="topic-pill-label">Collaboration</span></span>
-          <span class="topic-pill"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span><span class="topic-pill-label">Deliberation</span></span>
+          <span class="topic-pill is-active"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="url(#pillGradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg></span><span class="topic-pill-label">Civic technology</span></span>
+          <span class="topic-pill"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="url(#pillGradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg></span><span class="topic-pill-label">Capacity building</span></span>
+          <span class="topic-pill"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="url(#pillGradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg></span><span class="topic-pill-label">Knowledge management</span></span>
+          <span class="topic-pill"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="url(#pillGradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span class="topic-pill-label">Collaboration</span></span>
+          <span class="topic-pill"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="url(#pillGradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span><span class="topic-pill-label">Deliberation</span></span>
         </div>
       </aside>
 
@@ -1756,7 +1799,7 @@
 
     <article class="demo-card">
       <div class="demo-top">
-        <span class="topic-pill"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg></span><span class="topic-pill-label">Knowledge Management</span></span>
+        <span class="topic-pill"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="url(#pillGradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg></span><span class="topic-pill-label">Knowledge Management</span></span>
       </div>
       <h3 class="demo-project">Gardens not Platforms</h3>
       <p class="demo-desc">An Obsidian + Claude workflow that renders private notes into artifacts collaborators can use. Do this instead of platforms or paid-for tools.</p>
@@ -1781,7 +1824,7 @@
 
     <article class="demo-card">
       <div class="demo-top">
-        <span class="topic-pill"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.856 6H16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-1.144"/><path d="M22 14v-4"/><path d="M7.144 6H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h1.144"/><path d="m11 7-3 5h4l-3 5"/></svg></span><span class="topic-pill-label">Capacity Building</span></span>
+        <span class="topic-pill"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="url(#pillGradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg></span><span class="topic-pill-label">Capacity Building</span></span>
       </div>
       <h3 class="demo-project">Critical Suit</h3>
       <p class="demo-desc">A modular MCP suite for designers, PMs, researchers, and job seekers. Each module ships with explicit schemas, validation, and decision traces.</p>
@@ -1806,7 +1849,7 @@
 
     <article class="demo-card">
       <div class="demo-top">
-        <span class="topic-pill"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span><span class="topic-pill-label">Deliberation</span></span>
+        <span class="topic-pill"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="url(#pillGradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span><span class="topic-pill-label">Deliberation</span></span>
       </div>
       <h3 class="demo-project">Book Power</h3>
       <p class="demo-desc">Hand-crafted MCP servers and Claude Code skills built from methodology books, so practitioners can query them at the moment of work. Four books live: Facilitating Deliberation, Governable Spaces, Think Like a Commoner, JTBD Knowledge.</p>
@@ -1831,7 +1874,7 @@
 
 <article class="demo-card">
       <div class="demo-top">
-        <span class="topic-pill"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span class="topic-pill-label">Collaboration</span></span>
+        <span class="topic-pill"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="url(#pillGradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span class="topic-pill-label">Collaboration</span></span>
       </div>
       <h3 class="demo-project">Collaboration under Constraint</h3>
       <p class="demo-desc">A platform that uses constraint strategies (lottocracy-elected editors, fixed deadlines, mandatory sharing) to take groups from forming to completion. Built for projects stuck in discussion.</p>
@@ -1856,7 +1899,7 @@
 
     <article class="demo-card">
       <div class="demo-top">
-        <span class="topic-pill"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span><span class="topic-pill-label">Deliberation</span></span>
+        <span class="topic-pill"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="url(#pillGradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span><span class="topic-pill-label">Deliberation</span></span>
       </div>
       <h3 class="demo-project">DelibAI</h3>
       <p class="demo-desc">A non-intrusive AI tool that flags fallacies in deliberation forums and suggests reformulations. The user decides what to do. Built for citizens and lawmakers.</p>
@@ -1891,11 +1934,11 @@
       <p class="apply-body">If you're building community infrastructure, deliberation tools, peer-knowledge systems, or something adjacent, we want to see it. Apply anytime. We'll keep you on the list and reach out as slots open.</p>
     </div>
     <div class="apply-side">
-      <a href="https://app.harmonica.chat/chat?s=fc325b1d-2abb-4869-b2b5-6e35bfb274bb" target="_blank" rel="noopener" class="btn btn-primary">Apply to demo <span class="arrow">→</span></a>
       <div class="apply-meta">
         <strong>Apply first, schedule second</strong>
         We schedule sessions when enough builders are ready. Your application is what gets the next one on the calendar.
       </div>
+      <a href="https://app.harmonica.chat/chat?s=fc325b1d-2abb-4869-b2b5-6e35bfb274bb" target="_blank" rel="noopener" class="btn btn-primary">Apply to demo <span class="arrow">→</span></a>
     </div>
   </div>
 </section>
