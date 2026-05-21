@@ -3,1349 +3,67 @@
 <head>
 <meta charset="UTF-8">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>CIBC Ecosystem Map</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CIBC · Infra Resources</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=JetBrains+Mono:wght@400;500&family=Press+Start+2P&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
   :root {
     --gradient-primary: linear-gradient(90deg, #e96243 0%, #e67c48 100%);
     --gradient-light-text: linear-gradient(135deg, #e78873 0%, #e5a27b 63%, #e2b99e 100%);
-    --accent-deep: #c45525;
     --paper-white: #fefdf9;
-    --pixel: 'Press Start 2P', monospace;
     --bg-warm: #f8f2e6;
     --bg-warm-2: #f0e3c8;
+    --bg-card: #fffaf0;
     --bg-deep: #14110d;
-    --bg-deep-2: #1d1812;
     --ink: #2a2218;
     --ink-soft: #5a4d3a;
     --ink-faint: #998774;
-    --accent: #c7725f;
-    --accent-soft: rgba(199, 114, 95, 0.14);
-    --moss: #7a9268;
-    --moss-soft: rgba(122, 146, 104, 0.16);
-    --indigo: #4a5878;
-    --indigo-soft: rgba(74, 88, 120, 0.14);
-    --plum: #8a5b6e;
-    --bg-card: #fffaf0;
     --rule: rgba(60, 40, 20, 0.16);
     --rule-soft: rgba(60, 40, 20, 0.08);
+    --accent: #c7725f;
+    --accent-deep: #c45525;
+    --accent-soft: rgba(199, 114, 95, 0.14);
+    --moss: #7a9268;
+    --indigo: #4a5878;
     --paper-shadow: rgba(60, 40, 20, 0.08);
-    --char-eye: #1a1410;
     --serif: 'Fraunces', 'Charter', Georgia, serif;
-    --body: 'Newsreader', Georgia, serif;
+    --body: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     --mono: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+    --pixel: 'Press Start 2P', 'JetBrains Mono', monospace;
+    --script: 'Caveat', 'Bradley Hand', 'Marker Felt', cursive;
+    --paper: var(--paper-white);
+    --paper-deep: var(--bg-warm);
   }
-
-  * { box-sizing: border-box; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
     html { background: var(--bg-warm-2); min-height: 100vh; }
-  html, body { margin: 0; padding: 0; overscroll-behavior: none; }
-  body {
-    font-family: 'Newsreader', Georgia, serif;
-    background: var(--bg-warm);
+  html, body {
     color: var(--ink);
-    min-height: 100vh;
-    overflow-x: hidden;
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.55;
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
-  button { font-family: inherit; }
+  body { background: var(--paper-white); }
+  ::selection { background: var(--accent); color: var(--paper-white); }
+  a { color: inherit; }
 
-  /* Roster */
-  #pokedex-view {
+  body {
+    background: var(--paper-white);
     min-height: 100vh;
-    padding: 32px 20px 80px;
-    position: relative;
-    background:
-      radial-gradient(circle at 20% 10%, rgba(212, 121, 61, 0.08), transparent 40%),
-      radial-gradient(circle at 80% 90%, rgba(122, 146, 104, 0.08), transparent 40%),
-      var(--bg-warm);
-  }
-  #pokedex-view::before {
-    content: '';
-    position: absolute; inset: 0;
-    background-image: radial-gradient(circle at 1px 1px, rgba(60, 40, 20, 0.06) 1px, transparent 0);
-    background-size: 22px 22px;
-    pointer-events: none; opacity: 0.6;
   }
 
-  .pokedex-header { text-align: center; margin-bottom: 36px; position: relative; z-index: 1; }
-  /* CIBC website variant: two-column layout with header text left, map right. */
-  .ecosystem-top {
-    display: grid;
-    grid-template-columns: 1.1fr 1fr;
-    gap: 48px;
-    max-width: 1200px;
-    margin: 0 auto 24px;
-    padding: 0 24px;
-    align-items: start;
-    position: relative;
-    z-index: 1;
-  }
-  @media (max-width: 880px) {
-    .ecosystem-top { grid-template-columns: 1fr; gap: 32px; }
-  }
-  .map-meta {
-    max-width: 1200px;
-    margin: 0 auto 36px;
-    padding: 0 24px;
-    text-align: center;
-    position: relative;
-    z-index: 1;
-  }
-  .pokedex-header--cibc {
-    text-align: left;
-    max-width: none;
-    margin: 0;
-    padding: 0;
-  }
-  .pokedex-header--cibc .pokedex-title {
-    font-size: clamp(36px, 6vw, 48px);
-    font-weight: 600;
-    margin-bottom: 10px;
-  }
-  .pokedex-header--cibc .pokedex-subtitle {
-    margin: 0 0 20px;
-    max-width: none;
-  }
-  .ecosystem-inputs {
-    list-style: disc;
-    padding: 0 0 0 22px;
-    margin: 0 0 24px;
-    font-family: 'Newsreader', serif;
-    font-size: 14px;
-    line-height: 1.7;
-    color: var(--ink-soft);
-  }
-  .ecosystem-inputs li { padding: 0; }
-  .ecosystem-inputs a {
-    color: var(--accent);
-    text-decoration: none;
-    border-bottom: 1px solid rgba(212, 121, 61, 0.35);
-    padding-bottom: 1px;
-    transition: border-color 150ms;
-  }
-  .ecosystem-inputs a:hover { border-bottom-color: var(--accent); }
-  .ecosystem-jump-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 10px 18px;
-    border-radius: 100px;
-    background: var(--accent);
-    color: var(--bg-warm);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    text-decoration: none;
-    font-weight: 500;
-    transition: filter 150ms;
-  }
-  .ecosystem-jump-btn:hover { filter: brightness(0.92); }
-
-  .ecosystem-cards-placeholder {
-    max-width: 1000px;
-    margin: 48px auto 0;
-    padding: 56px 24px;
-    border: 1px dashed rgba(60, 40, 20, 0.18);
-    border-radius: 16px;
-    text-align: center;
-    position: relative;
-    z-index: 1;
-  }
-  .ecosystem-cards-placeholder .placeholder-note {
-    font-family: 'Newsreader', serif;
-    font-style: italic;
-    font-size: 14px;
-    color: var(--ink-faint);
-    margin: 0;
-  }
-  .pokedex-eyebrow {
-    font-family: 'Fraunces', serif; font-style: italic;
-    font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--ink-soft); margin-bottom: 6px;
-  }
-  .pokedex-title {
-    font-family: 'Fraunces', serif;
-    font-variation-settings: "opsz" 144, "SOFT" 80;
-    font-weight: 600;
-    font-size: clamp(36px, 9vw, 56px);
-    line-height: 1; margin: 0 0 14px; color: var(--ink);
-  }
-  .pokedex-subtitle {
-    font-family: 'Newsreader', serif; font-style: italic;
-    font-size: 15px; line-height: 1.5; color: var(--ink-soft);
-    max-width: 460px; margin: 0 auto;
-  }
-  .caught-counter {
-    display: inline-flex; align-items: center; gap: 8px;
-    margin-top: 16px; padding: 6px 14px; border-radius: 100px;
-    background: rgba(212, 121, 61, 0.14);
-    border: 1px solid rgba(212, 121, 61, 0.25);
-    font-family: 'Fraunces', serif;
-    font-variation-settings: "opsz" 14;
-    font-weight: 500; font-size: 13px; color: var(--accent);
-  }
-  .caught-counter::before {
-    content: ''; width: 6px; height: 6px; border-radius: 50%;
-    background: var(--accent); animation: pulse 2.4s ease-in-out infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.6; transform: scale(0.8); }
-  }
-
-  .trainer-section { max-width: 1000px; margin: 0 auto; position: relative; z-index: 1; }
-
-  /* Companion deep content (Follow the leads) */
-  .companion-section {
-    max-width: 1000px;
-    margin: 56px auto 0;
-    position: relative;
-    z-index: 1;
-  }
-  .companion-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 14px;
-    margin-top: 12px;
-  }
-  a.companion-card {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding: 22px 22px 20px;
-    background: rgba(255, 255, 255, 0.55);
-    border: 1px solid rgba(60, 40, 20, 0.18);
-    border-radius: 14px;
-    text-decoration: none;
-    color: var(--ink);
-    transition: transform 150ms, border-color 150ms, box-shadow 150ms, background 150ms;
-  }
-  a.companion-card:hover {
-    transform: translateY(-2px);
-    border-color: var(--accent);
-    background: rgba(255, 255, 255, 0.78);
-    box-shadow: 0 8px 20px var(--paper-shadow);
-  }
-  .companion-kind {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-size: 12px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--accent);
-  }
-  .companion-label {
-    font-family: 'Fraunces', serif;
-    font-variation-settings: "opsz" 32, "SOFT" 60;
-    font-weight: 600;
-    font-size: 22px;
-    line-height: 1.15;
-    color: var(--ink);
-  }
-  .companion-meta {
-    font-family: 'Newsreader', serif;
-    font-size: 14px;
-    line-height: 1.55;
-    color: var(--ink-soft);
-  }
-  .companion-arrow {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-top: 6px;
-  }
-  .trainer-section-label {
-    font-family: 'Fraunces', serif; font-style: italic;
-    font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--ink-soft); margin: 28px 12px 12px;
-  }
-  .trainer-grid {
-    display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px;
-  }
-  @media (min-width: 560px) { .trainer-grid { grid-template-columns: repeat(3, 1fr); gap: 18px; } }
-  @media (min-width: 820px) { .trainer-grid { grid-template-columns: repeat(4, 1fr); gap: 22px; } }
-
-  .trainer-card {
-    position: relative;
-    background: #fffaf0;
-    border: 1px solid rgba(60, 40, 20, 0.08);
-    border-radius: 24px;
-    padding: 18px 14px 16px;
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset, 0 6px 16px var(--paper-shadow);
-    cursor: pointer; text-align: center;
-    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
-    user-select: none; -webkit-tap-highlight-color: transparent;
-  }
-  .trainer-card:hover, .trainer-card:focus-visible {
-    transform: translateY(-3px);
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.9) inset, 0 12px 24px rgba(60, 40, 20, 0.14);
-    outline: none;
-  }
-  .trainer-card:active { transform: translateY(-1px) scale(0.98); }
-
-  .trainer-card .avatar-wrap { width: 92px; height: 92px; margin: 0 auto 10px; }
-  .trainer-card .avatar-wrap svg {
-    width: 100%; height: 100%; animation: bob 4s ease-in-out infinite;
-  }
-  .trainer-card:nth-child(2n) .avatar-wrap svg { animation-delay: -1s; }
-  .trainer-card:nth-child(3n) .avatar-wrap svg { animation-delay: -2s; }
-  .trainer-card:nth-child(4n) .avatar-wrap svg { animation-delay: -3s; }
-  @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
-
-  .trainer-name {
-    font-family: 'Fraunces', serif;
-    font-variation-settings: "opsz" 40, "SOFT" 60;
-    font-weight: 600; font-size: 18px; margin: 0 0 2px;
-  }
-  .trainer-role {
-    font-family: 'Newsreader', serif; font-style: italic;
-    font-size: 12px; color: var(--ink-soft); margin: 0 0 8px;
-  }
-  .trainer-count {
-    display: inline-block; padding: 3px 9px; border-radius: 100px;
-    font-family: 'Fraunces', serif;
-    font-variation-settings: "opsz" 10;
-    font-weight: 500; font-size: 11px; letter-spacing: 0.04em;
-    background: rgba(60, 40, 20, 0.06); color: var(--ink-soft);
-  }
-
-  .footer-note {
-    text-align: center; margin-top: 36px;
-    font-family: 'Newsreader', serif; font-style: italic;
-    font-size: 12px; color: var(--ink-faint); line-height: 1.6;
-    max-width: 460px; margin-left: auto; margin-right: auto;
-    position: relative; z-index: 1;
-  }
-
-  /* Front-page map (the whole ecosystem, no trainer overlay) */
-  .front-map-section {
-    margin: 0;
-    position: relative; z-index: 1;
-  }
-  .front-map-eyebrow {
-    font-family: 'Fraunces', serif; font-style: italic;
-    font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--ink-soft); margin: 0 12px 10px;
-  }
-  .front-map-wrap {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    max-height: 520px;
-    background: #fffaf0;
-    border: 1px solid rgba(60, 40, 20, 0.08);
-    border-radius: 24px;
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset, 0 8px 22px var(--paper-shadow);
-    overflow: hidden;
-  }
-  @media (max-width: 880px) {
-    .front-map-wrap { aspect-ratio: 4 / 3; max-height: 460px; }
-  }
-  #front-map-svg {
-    width: 100%; height: 100%; display: block;
-    touch-action: pan-y pinch-zoom;
-  }
-  #front-map-svg .front-map-inner {
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-origin: 500px 500px;
-  }
-  .front-cluster-zone {
-    opacity: 0.07; pointer-events: none;
-  }
-  .front-cluster-zone-label {
-    fill: rgba(60, 40, 20, 0.32);
-    font-family: 'Fraunces', serif; font-style: italic;
-    font-size: 16px; text-anchor: middle; pointer-events: none;
-    letter-spacing: 0.08em; text-transform: lowercase;
-  }
-  .front-map-edge {
-    stroke: rgba(60, 40, 20, 0.18);
-    stroke-width: 1; fill: none;
-    transition: stroke 0.4s ease, stroke-width 0.4s ease, opacity 0.4s ease;
-  }
-  .front-map-edge.neighbor { stroke: var(--accent); stroke-width: 1.8; opacity: 1; }
-  .front-map-edge.dimmed { opacity: 0.15; }
-  .front-map-edge.loose { stroke-dasharray: 5 4; opacity: 0.5; }
-  .front-map-edge.neighbor.loose { opacity: 1; }
-
-  .front-map-node-visual {
-    transition: filter 0.4s ease, opacity 0.4s ease;
-  }
-  .front-map-node-visual circle, .front-map-node-visual path {
-    stroke: rgba(60, 40, 20, 0.12);
-    stroke-width: 0.8;
-    pointer-events: none;
-    transition: r 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-  .front-map-node-visual.focused {
-    filter: drop-shadow(0 0 10px var(--accent)) drop-shadow(0 0 18px rgba(212, 121, 61, 0.4));
-  }
-  .front-map-node-visual.neighbor {
-    filter: drop-shadow(0 0 4px var(--accent));
-  }
-  .front-map-node-visual.dimmed { opacity: 0.22; }
-  .front-map-node-label {
-    fill: rgba(60, 40, 20, 0.78);
-    font-family: 'Newsreader', serif;
-    font-size: 14px; text-anchor: middle;
-    pointer-events: none;
-    paint-order: stroke;
-    stroke: rgba(255, 250, 240, 0.95);
-    stroke-width: 3px; stroke-linejoin: round;
-    transition: fill 0.4s ease, font-size 0.4s ease, opacity 0.4s ease;
-  }
-  .front-map-node-label.focused { fill: var(--ink); font-size: 16px; font-weight: 600; }
-  .front-map-node-label.dimmed { opacity: 0.25; }
-  .front-state-ring {
-    fill: none; stroke-width: 2; pointer-events: none;
-  }
-  .front-state-ring.caught { stroke: #7a9268; }
-  .front-state-ring.spotted { stroke: #d4793d; }
-  .front-state-ring.rumored { stroke: #b496d0; stroke-dasharray: 4 3; }
-  .front-state-ring.unverified { stroke: #c95040; stroke-dasharray: 2 3; }
-  .front-map-node-hit {
-    fill: transparent; cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .front-map-tooltip {
-    position: absolute; top: 14px; left: 14px;
-    pointer-events: none;
-    background: #fffaf0;
-    border: 1px solid rgba(60, 40, 20, 0.18);
-    color: var(--ink);
-    padding: 12px 14px; border-radius: 12px;
-    font-family: 'Newsreader', serif;
-    font-size: 13px; line-height: 1.45;
-    max-width: calc(100% - 28px);
-    box-shadow: 0 8px 24px rgba(60, 40, 20, 0.18);
-    opacity: 0; transform: translateY(-8px);
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    z-index: 4;
-  }
-  .front-map-tooltip.visible { opacity: 1; transform: translateY(0); }
-  .front-map-tooltip strong {
-    font-family: 'Fraunces', serif; font-weight: 600;
-    display: block; margin-bottom: 4px; font-size: 15px;
-  }
-  .front-map-tooltip em {
-    color: var(--accent);
-    font-style: italic; font-size: 11px;
-    text-transform: uppercase; letter-spacing: 0.06em;
-  }
-  .front-map-tooltip .strategic {
-    margin-top: 8px; padding-top: 8px;
-    border-top: 1px dashed rgba(60, 40, 20, 0.18);
-    font-style: italic; color: var(--ink-soft);
-    font-size: 12px;
-  }
-  .front-map-tooltip .state-tag {
-    display: inline-block; margin-top: 6px;
-    padding: 2px 8px; border-radius: 100px;
-    font-family: 'Fraunces', serif;
-    font-variation-settings: "opsz" 10;
-    font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
-  }
-  .front-map-tooltip .state-tag.caught { background: rgba(122,146,104,0.22); color: #4a6238; }
-  .front-map-tooltip .state-tag.spotted { background: rgba(212,121,61,0.22); color: #b85f24; }
-  .front-map-tooltip .state-tag.rumored { background: rgba(180,150,208,0.25); color: #6e54a0; }
-  .front-map-tooltip .state-tag.unverified { background: rgba(201,80,64,0.18); color: #c95040; }
-  @media (min-width: 720px) {
-    .front-map-tooltip { left: auto; right: 14px; top: 14px; max-width: 320px; }
-  }
-  .front-reset-btn {
-    position: absolute; top: 14px; right: 14px;
-    padding: 8px 14px; border-radius: 100px;
-    background: var(--bg-warm);
-    border: 1px solid var(--accent);
-    color: var(--accent);
-    font-family: 'Fraunces', serif;
-    font-variation-settings: "opsz" 14;
-    font-size: 12px; letter-spacing: 0.04em;
-    cursor: pointer; z-index: 5;
-    -webkit-tap-highlight-color: transparent;
-    opacity: 0; pointer-events: none;
-    transition: opacity 0.25s ease, transform 0.25s ease;
-    transform: translateY(-6px);
-  }
-  .front-reset-btn.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
-  @media (min-width: 720px) {
-    .front-reset-btn { left: 14px; right: auto; }
-  }
-  .front-map-hint {
-    text-align: center; margin-top: 8px;
-    font-family: 'Newsreader', serif; font-style: italic;
-    font-size: 12px; color: var(--ink-faint);
-  }
-  .front-map-legend {
-    display: flex; flex-wrap: wrap; justify-content: center;
-    gap: 18px 22px; margin-top: 14px;
-    font-family: 'Fraunces', serif; font-style: italic;
-    font-variation-settings: "opsz" 12;
-    font-size: 11px; letter-spacing: 0.04em;
-    color: var(--ink-soft);
-  }
-  .legend-item {
-    display: inline-flex; align-items: center; gap: 6px;
-  }
-  .legend-item svg { flex-shrink: 0; }
-
-  /* Trainer detail view (map + inventory) */
-  #trainer-view {
-    position: fixed; inset: 0;
-    background: var(--bg-deep);
-    color: #e8dcc6;
-    z-index: 10;
-    display: flex; flex-direction: column;
-    opacity: 0; pointer-events: none;
-    transition: opacity 0.35s ease;
-  }
-  #trainer-view.active { opacity: 1; pointer-events: auto; }
-  #trainer-view::before {
-    content: ''; position: absolute; inset: 0;
-    background:
-      radial-gradient(circle at 30% 20%, rgba(212, 121, 61, 0.06), transparent 60%),
-      radial-gradient(circle at 70% 80%, rgba(180, 150, 208, 0.04), transparent 60%);
-    pointer-events: none;
-  }
-
-  .trainer-header {
-    padding: 14px 18px;
-    display: flex; align-items: center; gap: 14px;
-    position: relative; z-index: 3;
-    border-bottom: 1px solid rgba(232, 220, 198, 0.08);
-    background: rgba(20, 17, 13, 0.85);
-    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-  }
-  .icon-btn {
-    width: 38px; height: 38px; border-radius: 50%;
-    background: rgba(232, 220, 198, 0.08);
-    border: 1px solid rgba(232, 220, 198, 0.12);
-    color: #e8dcc6; font-size: 18px; cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0; transition: background 0.2s ease;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .icon-btn:hover { background: rgba(232, 220, 198, 0.14); }
-
-  .trainer-header-avatar { width: 48px; height: 48px; flex-shrink: 0; }
-  .trainer-header-text { flex: 1; min-width: 0; }
-  .trainer-header-name {
-    font-family: 'Fraunces', serif;
-    font-variation-settings: "opsz" 40, "SOFT" 60;
-    font-weight: 600; font-size: 20px; margin: 0; line-height: 1.1;
-  }
-  .trainer-header-role {
-    font-family: 'Newsreader', serif; font-style: italic;
-    font-size: 12px; color: rgba(232, 220, 198, 0.6); margin: 2px 0 0;
-  }
-
-  /* Map */
-  .map-wrap {
-    flex: 1 1 50%; position: relative; overflow: hidden;
-    background: var(--bg-deep); min-height: 280px;
-  }
-  #map-svg {
-    width: 100%; height: 100%; display: block;
-    touch-action: none;
-  }
-  #map-svg .map-inner {
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-origin: 500px 500px;
-  }
-
-  .reset-btn {
-    position: absolute; top: 12px; right: 12px;
-    padding: 8px 14px; border-radius: 100px;
-    background: rgba(20, 17, 13, 0.85);
-    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-    border: 1px solid var(--lens-color, rgba(232, 220, 198, 0.2));
-    color: var(--lens-color, #e8a05b);
-    font-family: 'Fraunces', serif;
-    font-variation-settings: "opsz" 14;
-    font-size: 12px; letter-spacing: 0.04em;
-    cursor: pointer; z-index: 5;
-    -webkit-tap-highlight-color: transparent;
-    opacity: 0; pointer-events: none;
-    transition: opacity 0.25s ease, transform 0.25s ease;
-    transform: translateY(-6px);
-  }
-  .reset-btn.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
-
-  .map-tooltip {
-    position: absolute; top: 12px; left: 12px;
-    pointer-events: none;
-    background: rgba(20, 17, 13, 0.96);
-    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(232, 220, 198, 0.2);
-    color: #e8dcc6;
-    padding: 12px 14px; border-radius: 12px;
-    font-family: 'Newsreader', serif;
-    font-size: 13px; line-height: 1.45;
-    max-width: calc(100% - 24px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-    opacity: 0; transform: translateY(-8px);
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    z-index: 4;
-  }
-  .map-tooltip.visible { opacity: 1; transform: translateY(0); }
-  .map-tooltip strong {
-    font-family: 'Fraunces', serif; font-weight: 600;
-    display: block; margin-bottom: 4px; font-size: 15px;
-  }
-  .map-tooltip em {
-    color: var(--lens-color, #e8a05b);
-    font-style: italic; font-size: 11px;
-    text-transform: uppercase; letter-spacing: 0.06em;
-  }
-  .map-tooltip .strategic {
-    margin-top: 8px; padding-top: 8px;
-    border-top: 1px dashed rgba(232, 220, 198, 0.18);
-    font-style: italic; color: rgba(232,220,198,0.78);
-    font-size: 12px;
-  }
-  .map-tooltip .state-tag {
-    display: inline-block; margin-top: 6px;
-    padding: 2px 8px; border-radius: 100px;
-    font-family: 'Fraunces', serif;
-    font-variation-settings: "opsz" 10;
-    font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
-  }
-  .map-tooltip .state-tag.caught { background: rgba(122,146,104,0.22); color: #b8d09e; }
-  .map-tooltip .state-tag.spotted { background: rgba(212,121,61,0.22); color: #f0a572; }
-  .map-tooltip .state-tag.rumored { background: rgba(180,150,208,0.25); color: #d4b8ec; }
-  .map-tooltip .state-tag.unverified { background: rgba(255,136,112,0.2); color: #ff9d80; }
-  @media (min-width: 640px) {
-    .map-tooltip { left: auto; right: 80px; top: 16px; max-width: 320px; }
-  }
-
-  .cluster-zone {
-    fill: var(--lens-color, #e8a05b);
-    opacity: 0.04;
-    pointer-events: none;
-  }
-  .cluster-zone-label {
-    fill: rgba(232, 220, 198, 0.28);
-    font-family: 'Fraunces', serif; font-style: italic;
-    font-size: 14px;
-    pointer-events: none;
-    text-anchor: middle;
-    letter-spacing: 0.08em;
-    text-transform: lowercase;
-  }
-
-  .map-edge {
-    stroke: rgba(232, 220, 198, 0.14);
-    stroke-width: 1; fill: none;
-    transition: stroke 0.5s ease, stroke-width 0.5s ease, opacity 0.4s ease;
-  }
-  .map-edge.lit { stroke: var(--lens-color, #e8a05b); stroke-width: 1.5; }
-  .map-edge.neighbor { stroke: var(--lens-color, #e8a05b); stroke-width: 1.8; opacity: 1; }
-  .map-edge.dimmed { opacity: 0.18; }
-  .map-edge.loose { stroke-dasharray: 5 4; opacity: 0.6; }
-  .map-edge.lit.loose, .map-edge.neighbor.loose { opacity: 1; }
-
-  .map-node-visual {
-    transition: filter 0.4s ease, opacity 0.4s ease;
-  }
-  .map-node-visual circle, .map-node-visual path {
-    fill: rgba(232, 220, 198, 0.22);
-    stroke: rgba(232, 220, 198, 0.14);
-    stroke-width: 0.5; pointer-events: none;
-    transition: fill 0.4s ease, r 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-  .map-node-visual.lit circle, .map-node-visual.lit path {
-    fill: var(--lens-color, #e8a05b);
-  }
-  .map-node-visual.lit {
-    filter: drop-shadow(0 0 6px var(--lens-color, #e8a05b));
-  }
-  .map-node-visual.focused circle, .map-node-visual.focused path {
-    fill: var(--lens-color, #e8a05b);
-  }
-  .map-node-visual.focused {
-    filter: drop-shadow(0 0 10px var(--lens-color, #e8a05b)) drop-shadow(0 0 18px var(--lens-color, #e8a05b));
-  }
-  .map-node-visual.neighbor circle, .map-node-visual.neighbor path {
-    fill: var(--lens-color, #e8a05b);
-    opacity: 0.7;
-  }
-  .map-node-visual.neighbor {
-    filter: drop-shadow(0 0 3px var(--lens-color, #e8a05b));
-  }
-  .map-node-visual.dimmed { opacity: 0.18; }
-
-  /* Confidence-state ring overlay on lit entity nodes */
-  .state-ring {
-    fill: none;
-    stroke-width: 2;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-  }
-  .state-ring.visible { opacity: 0.85; }
-  .state-ring.caught { stroke: #7a9268; }
-  .state-ring.spotted { stroke: #d4793d; }
-  .state-ring.rumored { stroke: #b496d0; stroke-dasharray: 4 3; }
-  .state-ring.unverified { stroke: #ff8870; stroke-dasharray: 2 3; }
-
-  .map-node-hit {
-    fill: transparent;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  .map-node-label {
-    fill: rgba(232, 220, 198, 0.55);
-    font-family: 'Newsreader', serif;
-    font-size: 16px; text-anchor: middle;
-    pointer-events: none;
-    paint-order: stroke;
-    stroke: rgba(20, 17, 13, 0.85);
-    stroke-width: 3px; stroke-linejoin: round;
-    transition: fill 0.5s ease, font-size 0.4s ease, opacity 0.4s ease;
-  }
-  .map-node-label.lit { fill: rgba(255, 245, 225, 0.98); font-size: 17px; font-weight: 500; }
-  .map-node-label.focused { fill: rgba(255, 250, 235, 1); font-size: 19px; font-weight: 600; }
-  .map-node-label.dimmed { opacity: 0.18; }
-
-  /* Inventory drawer */
-  .inventory-wrap {
-    flex: 0 0 auto;
-    max-height: 46vh;
-    background: linear-gradient(to bottom, rgba(20, 17, 13, 0.7), rgba(20, 17, 13, 0.96) 40px);
-    border-top: 1px solid rgba(232, 220, 198, 0.1);
-    position: relative; z-index: 2;
-    display: flex; flex-direction: column;
-  }
-  .inventory-header {
-    padding: 12px 18px 4px;
-    display: flex; justify-content: space-between; align-items: baseline; gap: 10px;
-  }
-  .inventory-title {
-    font-family: 'Fraunces', serif; font-style: italic;
-    font-variation-settings: "opsz" 18, "SOFT" 60;
-    font-size: 15px; color: rgba(232, 220, 198, 0.85); margin: 0;
-  }
-  .inventory-count {
-    font-family: 'Newsreader', serif;
-    font-size: 11px; color: rgba(232, 220, 198, 0.5); font-style: italic;
-  }
-  .inventory-summary {
-    padding: 0 18px 10px;
-    font-family: 'Newsreader', serif; font-style: italic;
-    font-size: 13px; color: rgba(232, 220, 198, 0.62);
-    line-height: 1.45; margin: 0;
-  }
-  .inventory-scroll {
-    overflow-y: auto; padding: 6px 12px 18px; flex: 1;
-    -webkit-overflow-scrolling: touch; scroll-behavior: smooth;
-  }
-  .inventory-scroll::-webkit-scrollbar { width: 6px; }
-  .inventory-scroll::-webkit-scrollbar-thumb { background: rgba(232, 220, 198, 0.15); border-radius: 100px; }
-  .inventory-scroll::-webkit-scrollbar-track { background: transparent; }
-  .inventory-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 8px;
-  }
-  .inv-item {
-    display: flex; align-items: center; gap: 10px;
-    padding: 8px 10px;
-    background: rgba(232, 220, 198, 0.05);
-    border: 1px solid rgba(232, 220, 198, 0.08);
-    border-radius: 12px;
-    cursor: pointer;
-    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
-    -webkit-tap-highlight-color: transparent;
-    text-align: left; color: inherit; width: 100%;
-  }
-  .inv-item:hover {
-    background: rgba(232, 220, 198, 0.1);
-    border-color: var(--lens-color, rgba(232, 220, 198, 0.2));
-  }
-  .inv-item:active { transform: scale(0.97); }
-  .inv-item.active {
-    background: rgba(232, 220, 198, 0.12);
-    border-color: var(--lens-color, #e8a05b);
-    box-shadow: 0 0 0 1px var(--lens-color, #e8a05b), 0 0 16px rgba(232, 160, 91, 0.15);
-  }
-  .inv-critter { width: 38px; height: 38px; flex-shrink: 0; }
-  .inv-info { min-width: 0; flex: 1; }
-  .inv-name {
-    font-family: 'Fraunces', serif;
-    font-variation-settings: "opsz" 14, "SOFT" 60;
-    font-weight: 500; font-size: 13px;
-    color: rgba(255, 245, 225, 0.95);
-    line-height: 1.2; margin: 0;
-    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-  }
-  .inv-type {
-    font-family: 'Newsreader', serif; font-style: italic;
-    font-size: 10px; color: rgba(232, 220, 198, 0.5);
-    margin-top: 2px; text-transform: lowercase; letter-spacing: 0.04em;
-  }
-  .inv-state-pill {
-    display: inline-block;
-    padding: 1px 6px; border-radius: 100px;
-    font-family: 'Fraunces', serif;
-    font-variation-settings: "opsz" 9;
-    font-size: 9px; letter-spacing: 0.04em; text-transform: uppercase;
-    margin-left: 6px;
-  }
-  .inv-state-pill.caught { background: rgba(122,146,104,0.22); color: #b8d09e; }
-  .inv-state-pill.spotted { background: rgba(212,121,61,0.22); color: #f0a572; }
-  .inv-state-pill.rumored { background: rgba(180,150,208,0.25); color: #d4b8ec; }
-  .inv-state-pill.unverified { background: rgba(255,136,112,0.2); color: #ff9d80; }
-
-  @media (prefers-reduced-motion: reduce) {
-    .trainer-card .avatar-wrap svg,
-    .caught-counter::before,
-    #map-svg .map-inner { animation: none !important; transition: none !important; }
-  }
-
-  /* ============ Global nav ============ */
-  .global-nav {
-    padding: 24px 56px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 14px;
-    flex-wrap: nowrap;
-    max-width: 1200px;
-    margin: 0 auto;
-    position: relative;
-    background: var(--bg-warm);
-  }
-  .global-nav .gn-brand { text-decoration: none; display: inline-block; flex-shrink: 0; }
-  .global-nav .gn-brand-mark {
-    font-family: 'Press Start 2P', monospace;
-    font-size: 13px;
-    line-height: 1;
-    background: var(--ink);
-    color: var(--bg-warm);
-    padding: 7px 9px 6px;
-    border-radius: 0;
-    display: inline-block;
-    letter-spacing: 0;
-  }
-  .global-nav .gn-links {
-    display: flex; align-items: center;
-    gap: 28px; flex: 1; justify-content: center;
-    min-width: 0; flex-wrap: wrap;
-  }
-  .global-nav .gn-link {
-    font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
-    font-size: 12px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    text-decoration: none;
-    padding: 6px 0;
-    border-bottom: 1px solid transparent;
-    transition: color 150ms, border-color 150ms;
-    white-space: nowrap;
-  }
-  .global-nav .gn-link:hover { color: var(--ink); border-bottom-color: var(--accent); }
-  .global-nav .gn-link-current { color: var(--ink); border-bottom-color: var(--accent); }
-  .global-nav .gn-cta {
-    background: var(--accent);
-    color: var(--bg-warm);
-    padding: 10px 18px;
-    border-radius: 100px;
-    font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
-    font-size: 11px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: filter 150ms;
-    flex-shrink: 0; white-space: nowrap;
-  }
-  .global-nav .gn-cta:hover { filter: brightness(0.92); }
-  .global-nav .gn-toggle {
-    display: none; background: none; border: none;
-    padding: 8px; margin: 0; cursor: pointer; color: var(--ink);
-    flex-shrink: 0; align-items: center; justify-content: center;
-  }
-  .global-nav .gn-toggle svg { display: block; width: 22px; height: 22px; }
-  .global-nav .gn-toggle .icon-close { display: none; }
-  .global-nav .gn-toggle[aria-expanded="true"] .icon-open { display: none; }
-  .global-nav .gn-toggle[aria-expanded="true"] .icon-close { display: block; }
-  @media (max-width: 720px) {
-    .global-nav { padding: 20px 24px 0; }
-    .global-nav .gn-toggle { display: inline-flex; }
-    .global-nav .gn-links {
-      position: absolute; top: calc(100% + 8px); left: 24px; right: 24px;
-      flex-direction: column; align-items: stretch; gap: 0;
-      padding: 8px 18px 12px;
-      background: var(--bg-warm-2, #f0e3c8);
-      border: 1px solid rgba(60, 40, 20, 0.16);
-      border-radius: 12px;
-      box-shadow: 0 12px 28px rgba(60, 40, 20, 0.10);
-      display: none; z-index: 50;
-    }
-    .global-nav .gn-links.is-open { display: flex; }
-    .global-nav .gn-link {
-      width: 100%; padding: 14px 0;
-      border-bottom: 1px solid rgba(60, 40, 20, 0.08);
-      font-size: 12px; letter-spacing: 0.06em;
-    }
-    .global-nav .gn-link:last-child { border-bottom: none; }
-    .global-nav .gn-link-current { border-bottom-color: rgba(60, 40, 20, 0.08); }
-  }
-
-  /* ============ Breadcrumb ============ */
-  .breadcrumb {
-    max-width: 1200px;
-    margin: 14px auto 0;
-    padding: 0 56px;
-    font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    position: relative;
-    z-index: 1;
-  }
-  .breadcrumb ol {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin: 0; padding: 0;
-  }
-  .breadcrumb li { display: flex; align-items: center; gap: 8px; }
-  .breadcrumb li:not(:last-child)::after { content: '/'; color: rgba(60, 40, 20, 0.32); }
-  .breadcrumb a {
-    color: #5a4d3a;
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: color 150ms, border-color 150ms;
-  }
-  .breadcrumb a:hover { color: #1c1814; border-bottom-color: #d4793d; }
-  .breadcrumb [aria-current="page"] { color: #1c1814; }
-  @media (max-width: 720px) {
-    .breadcrumb { padding: 0 24px; font-size: 10px; letter-spacing: 0.06em; }
-  }
-
-  /* ============ Site footer ============ */
-  .site-footer {
-    max-width: 1200px;
-    margin: 80px auto 0;
-    padding: 48px 56px 56px;
-    border-top: 1px solid var(--rule);
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    flex-wrap: wrap;
-    position: relative;
-    z-index: 1;
-  }
-  .footer-brand { text-decoration: none; display: inline-block; flex-shrink: 0; }
-  .footer-brand-mark {
-    font-family: 'Press Start 2P', monospace;
-    font-size: 14px;
-    line-height: 1;
-    background: var(--ink);
-    color: var(--bg-warm);
-    padding: 8px 11px 7px;
-    border-radius: 0;
-    display: inline-block;
-    letter-spacing: 0;
-  }
-  .footer-meta {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-  .footer-tagline {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-size: 15px;
-    color: var(--ink);
-  }
-  .footer-line {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.04em;
-    color: var(--ink-soft);
-  }
-  .footer-line a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(212, 121, 61, 0.45); padding-bottom: 1px; }
-  .footer-line a:hover { color: #b85e2a; border-bottom-color: #b85e2a; }
-  @media (max-width: 720px) {
-    .site-footer { padding: 36px 24px 44px; }
-  }
-
-  /* ============ Field atmosphere (light · paper-stain variant) ============ */
-  .atmosphere-canvas {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
-    mix-blend-mode: multiply;
-    opacity: 0.55;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .atmosphere-canvas { display: none; }
-  }
-
-  /* ============ Filter chips (ported from pokedex) ============ */
-  .filters {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin: 0 auto 32px;
+  .page {
     max-width: 1080px;
-    padding: 0 24px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 4vw, 48px) 0;
     position: relative;
     z-index: 1;
   }
-  .filter-chip {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    padding: 8px 14px;
-    background: transparent;
-    border: 1px solid var(--rule);
-    border-radius: 100px;
-    color: var(--ink-soft);
-    cursor: pointer;
-    transition: all 150ms;
-  }
-  .filter-chip:hover { background: var(--bg-card); color: var(--ink); }
-  .filter-chip.active {
-    background: var(--ink);
-    color: var(--bg-warm);
-    border-color: var(--ink);
-  }
 
-  /* ============ Card grid (ported from pokedex) ============ */
-  .card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-    gap: 24px;
-    margin: 0 auto 64px;
-    max-width: 1280px;
-    padding: 0 24px;
-    position: relative;
-    z-index: 1;
-  }
-  .card {
-    background: var(--bg-card);
-    border: 1px solid var(--rule);
-    border-radius: 18px;
-    padding: 0;
-    overflow: hidden;
-    box-shadow: 0 4px 14px var(--paper-shadow);
-    display: flex;
-    flex-direction: column;
-    transition: transform 200ms, box-shadow 200ms;
-    position: relative;
-  }
-  .card:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(60, 40, 20, 0.12); }
-  .card.status-caught { border-top: 4px solid var(--moss); }
-  .card.status-spotted { border-top: 4px solid var(--accent); }
-  .card.status-rumored { border-top: 4px solid var(--indigo); }
-  .card.status-unverified { border-top: 4px solid var(--ink-faint); border-style: dashed; }
-  .card.status-unverified .card-body { opacity: 0.78; }
-  .card-head {
-    padding: 18px 22px 14px;
-    border-bottom: 1px solid var(--rule-soft);
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 14px;
-    flex-wrap: wrap;
-  }
-  .card-num {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--ink-faint);
-    letter-spacing: 0.08em;
-    margin-bottom: 6px;
-  }
-  .card-name {
-    font-family: var(--serif);
-    font-variation-settings: "opsz" 36, "SOFT" 60;
-    font-weight: 600;
-    font-size: 24px;
-    line-height: 1.1;
-    color: var(--ink);
-    letter-spacing: -0.01em;
-    margin: 0;
-  }
-  .card-name em { font-style: italic; color: var(--accent); font-weight: 500; }
-  .status-badge {
-    font-family: var(--mono);
-    font-size: 9px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    padding: 5px 10px;
-    border-radius: 100px;
-    border: 1px solid currentColor;
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-  .status-badge.caught { color: var(--moss); background: var(--moss-soft); }
-  .status-badge.spotted { color: var(--accent); background: var(--accent-soft); }
-  .status-badge.rumored { color: var(--indigo); background: var(--indigo-soft); }
-  .status-badge.unverified { color: var(--ink-faint); background: rgba(153, 135, 116, 0.1); }
-  .badges-row {
-    padding: 12px 22px 0;
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-  }
-  .type-badge {
-    font-family: var(--mono);
-    font-size: 9px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 4px 9px;
-    border-radius: 4px;
-    background: rgba(60, 40, 20, 0.06);
-    color: var(--ink-soft);
-  }
-  .type-badge.tier-1 { background: var(--ink); color: var(--bg-warm); }
-  .type-badge.tier-2 { background: var(--accent-soft); color: var(--accent); }
-  .type-badge.disputed { background: var(--indigo-soft); color: var(--indigo); }
-  .card-body {
-    padding: 16px 22px 22px;
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    flex: 1;
-  }
-  .one-line {
-    font-family: var(--serif);
-    font-style: italic;
-    font-variation-settings: "opsz" 24, "SOFT" 80;
-    font-weight: 400;
-    font-size: 15px;
-    line-height: 1.45;
-    color: var(--ink-soft);
-    margin: 0;
-  }
-  .role-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 14px;
-    background: var(--bg-warm-2);
-    border-radius: 8px;
-    border: 1px solid var(--rule);
-  }
-  .role-label {
-    font-family: var(--mono);
-    font-size: 9px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-  }
-  .role-value {
-    font-family: var(--serif);
-    font-variation-settings: "opsz" 14, "SOFT" 80;
-    font-weight: 600;
-    font-size: 14px;
-    color: var(--ink);
-  }
-  .role-value.invite { color: var(--moss); }
-  .role-value.share-link { color: var(--accent); }
-  .role-value.awareness { color: var(--indigo); }
-  .role-value.unverified, .role-value.cannot-assess { color: var(--ink-faint); }
-  .section-h {
-    font-family: var(--mono);
-    font-size: 9px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    margin-bottom: 8px;
-    padding-bottom: 4px;
-    border-bottom: 1px solid var(--rule-soft);
-  }
-  .stat-block {
-    display: grid;
-    grid-template-columns: max-content 1fr;
-    gap: 4px 12px;
-    margin: 0;
-  }
-  .stat-block dt {
-    font-family: var(--mono);
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--ink-faint);
-    padding-top: 1px;
-  }
-  .stat-block dd {
-    font-family: var(--body);
-    font-size: 13px;
-    line-height: 1.45;
-    color: var(--ink);
-    margin: 0;
-  }
-  .stat-block a {
-    color: var(--accent);
-    text-decoration: underline;
-    text-decoration-color: rgba(212, 121, 61, 0.4);
-  }
-  .overlap {
-    display: grid;
-    grid-template-columns: 1fr max-content;
-    row-gap: 5px;
-    column-gap: 14px;
-  }
-  .overlap-dim {
-    font-family: var(--body);
-    font-size: 12px;
-    color: var(--ink-soft);
-    line-height: 1.3;
-  }
-  .overlap-state {
-    font-family: var(--mono);
-    font-size: 9px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 2px 8px;
-    border-radius: 100px;
-    text-align: center;
-    align-self: center;
-    white-space: nowrap;
-  }
-  .overlap-state.strong { background: var(--moss); color: var(--bg-card); }
-  .overlap-state.partial { background: var(--accent-soft); color: var(--accent); }
-  .overlap-state.none { background: rgba(60, 40, 20, 0.06); color: var(--ink-faint); }
-  .overlap-state.cannot { background: rgba(153, 135, 116, 0.14); color: var(--ink-faint); font-style: italic; }
-  .list { display: flex; flex-direction: column; gap: 6px; list-style: none; margin: 0; padding: 0; }
-  .list li {
-    font-family: var(--body);
-    font-size: 13px;
-    line-height: 1.5;
-    color: var(--ink);
-    padding-left: 12px;
-    position: relative;
-  }
-  .list li::before {
-    content: "·";
-    position: absolute;
-    left: 0;
-    color: var(--accent);
-    font-weight: bold;
-    font-size: 1.4em;
-    line-height: 1;
-    top: 0;
-  }
-  .list li strong { font-family: var(--serif); font-weight: 500; font-variation-settings: "opsz" 14; color: var(--ink); }
-  .list li em { font-style: italic; color: var(--ink-soft); }
-  .list a { color: var(--accent); text-decoration: underline; text-decoration-color: rgba(212, 121, 61, 0.3); }
-  .none-note {
-    font-family: var(--body);
-    font-style: italic;
-    font-size: 12px;
-    color: var(--ink-faint);
-    padding-left: 12px;
-    margin: 0;
-  }
-  .trainer-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 12px;
-    padding: 10px 14px;
-    background: rgba(122, 146, 104, 0.08);
-    border-radius: 8px;
-    border-left: 3px solid var(--moss);
-  }
-  .trainer-label {
-    font-family: var(--mono);
-    font-size: 9px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--moss);
-  }
-  .trainer-value {
-    font-family: var(--serif);
-    font-variation-settings: "opsz" 14, "SOFT" 60;
-    font-weight: 500;
-    font-size: 14px;
-    color: var(--ink);
-  }
-  .relations { display: flex; flex-direction: column; gap: 8px; }
-  .relation {
-    display: grid;
-    grid-template-columns: max-content 1fr;
-    gap: 10px;
-    align-items: baseline;
-  }
-  .relation .verb {
-    font-family: var(--mono);
-    font-size: 9px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    padding-top: 2px;
-  }
-  .relation .who {
-    font-family: var(--serif);
-    font-style: italic;
-    font-variation-settings: "opsz" 14, "SOFT" 80;
-    font-size: 13px;
-    color: var(--ink);
-  }
-  .strategic-read {
-    background: var(--bg-warm-2);
-    border-radius: 8px;
-    padding: 14px 16px;
-    border-left: 3px solid var(--accent);
-  }
-  .strategic-read p {
-    font-family: var(--serif);
-    font-variation-settings: "opsz" 18, "SOFT" 60;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 1.55;
-    color: var(--ink);
-    margin: 0;
-  }
-  .strategic-read em { color: var(--accent); }
-  .open-q {
-    background: rgba(153, 135, 116, 0.07);
-    border-radius: 8px;
-    padding: 12px 14px;
-    border-left: 3px dashed var(--ink-faint);
-  }
-  .open-q .label {
-    font-family: var(--mono);
-    font-size: 9px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    margin-bottom: 6px;
-  }
-  .open-q p {
-    font-family: var(--body);
-    font-style: italic;
-    font-size: 13px;
-    line-height: 1.5;
-    color: var(--ink-soft);
-    margin: 0;
-  }
-  @media (max-width: 760px) {
-    .card-grid { grid-template-columns: 1fr; }
-  }
-
-  /* hide legacy .global-nav in favor of new .nav component */
-  .global-nav { display: none !important; }
-
-/* ============ NAV COMPONENT ============
+  /* ============ NAV COMPONENT ============
      Full-bleed cream bar with a Field atmosphere layer behind the content.
      Active-state underline extends to the very bottom of the bar.
      Structure: .nav (full-width, cream) > [canvas, field-veil, .nav-inner > brand/links/cta] */
@@ -1509,9 +227,1534 @@
     .nav-link-current { border-bottom-color: var(--rule-soft); }
   }
 
+  /* ============ HERO ============ */
+  .hero {
+    position: relative;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    width: 100vw;
+    max-width: none;
+    padding: clamp(56px, 9vw, 100px) clamp(20px, 4vw, 48px) clamp(40px, 7vw, 72px);
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 820px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero .field-veil {
+    background: linear-gradient(to bottom, rgba(254, 253, 249, 0) 0%, rgba(254, 253, 249, 0.30) 100%);
+    backdrop-filter: blur(1.5px) saturate(1.03);
+    -webkit-backdrop-filter: blur(1.5px) saturate(1.03);
+  }
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 1;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0 0 18px;
+    display: block;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-variation-settings: "opsz" 144, "SOFT" 50;
+    font-weight: 500;
+    font-size: clamp(34px, 6.4vw, 72px);
+    line-height: 1.04;
+    letter-spacing: -0.022em;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100;
+    color: var(--accent);
+    font-weight: 400;
+  }
+  .hero-deck {
+    font-family: var(--serif);
+    font-variation-settings: "opsz" 36, "SOFT" 60;
+    font-size: clamp(18px, 2.2vw, 22px);
+    line-height: 1.5;
+    color: var(--ink-soft);
+    max-width: 58ch;
+    margin-bottom: 32px;
+    font-weight: 400;
+  }
+
+  .meta-strip {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+    padding: 18px 0 12px;
+    border-top: 1px solid var(--rule);
+  }
+  .meta-item { display: flex; flex-direction: column; gap: 4px; }
+  .meta-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .meta-value {
+    font-family: var(--serif);
+    font-variation-settings: "opsz" 18, "SOFT" 60;
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--ink);
+  }
+  .meta-value.tbd {
+    color: var(--accent-deep);
+    font-style: italic;
+  }
+
+  .cta-row { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn {
+    font-family: var(--body);
+    font-size: 12px;
+    padding: 14px 24px;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 100px;
+    transition: all 150ms ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    border: 1.5px solid var(--ink);
+  }
+  .btn-primary { background: var(--gradient-primary); color: var(--paper-white); border-color: transparent; }
+  .btn-primary:hover { filter: brightness(0.92); }
+  .btn-ghost { background: transparent; color: var(--ink); }
+  .btn-ghost:hover { background: var(--ink); color: var(--bg-warm); }
+  .btn .arrow { transition: transform 150ms; }
+  .btn:hover .arrow { transform: translateX(3px); }
+
+  /* ============ SECTION SCAFFOLDING ============ */
+  .section {
+    margin: clamp(72px, 11vw, 120px) 0;
+  }
+  .section-head { margin-bottom: 36px; max-width: 720px; }
+  .section-num {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0;
+    color: var(--ink-faint);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--rule);
+    display: inline-block;
+    line-height: 1;
+  }
+  .section h2 {
+    font-family: var(--serif);
+    font-variation-settings: "opsz" 96, "SOFT" 50;
+    font-weight: 500;
+    font-size: clamp(30px, 4.4vw, 48px);
+    line-height: 1.08;
+    letter-spacing: -0.018em;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+  .section h2 em {
+    font-style: italic;
+    font-variation-settings: "opsz" 96, "SOFT" 100;
+    color: var(--accent);
+    font-weight: 400;
+  }
+  .section-deck {
+    font-family: var(--serif);
+    font-variation-settings: "opsz" 24, "SOFT" 60;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: 56ch;
+  }
+
+
+  /* ============ HERO · v3 redesign ============ */
+  .hero-title {
+    font-family: var(--serif);
+    font-variation-settings: "opsz" 144, "SOFT" 50;
+    font-weight: 500;
+    font-size: clamp(40px, 6vw, 72px);
+    line-height: 1.04;
+    letter-spacing: -0.022em;
+    color: var(--ink);
+    margin: 0 0 8px;
+    text-wrap: balance;
+  }
+  .hero-title .gradient-text {
+    color: var(--accent-deep);
+    font-style: normal;
+  }
+  .hero-deck {
+    font-family: var(--body);
+    font-style: normal;
+    font-size: clamp(16px, 1.8vw, 19px);
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin: 0 0 24px;
+    max-width: 64ch;
+  }
+  .hero-ctas {
+    display: flex;
+    gap: 14px;
+    margin: 0 0 60px;
+    flex-wrap: wrap;
+  }
+  .hero-btn {
+    font-family: var(--body);
+    font-weight: 600;
+    font-size: 12px;
+    padding: 14px 26px;
+    border-radius: 100px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border: 1.5px solid transparent;
+    transition: filter 150ms, background 150ms, border-color 150ms;
+    cursor: pointer;
+  }
+  .hero-btn-primary { background: var(--gradient-primary); color: #ffffff; }
+  .hero-btn-primary:hover { filter: brightness(1.06); }
+  .hero-btn-primary .hero-btn-arrow { transition: transform 150ms; }
+  .hero-btn-primary:hover .hero-btn-arrow { transform: translateX(3px); }
+  .hero-btn-ghost { background: transparent; color: var(--ink); border-color: var(--ink); }
+  .hero-btn-ghost:hover { background: rgba(42, 34, 24, 0.06); }
+
+  /* Hero info card (cream main + slightly deeper side) */
+  .hero-info-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 296px;
+    background: var(--bg-warm);
+    border: 1px solid var(--ink);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 22px var(--paper-shadow);
+  }
+  .hero-info-main {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .info-block-when {
+    background: var(--bg-warm);
+    padding: 24px 28px 26px;
+    border-bottom: 1px solid var(--ink);
+  }
+  .info-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    display: block;
+    margin-bottom: 10px;
+    line-height: 1;
+  }
+  .info-when-row { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+  .info-when-icon { width: 14px; height: 14px; color: var(--accent); display: inline-flex; }
+  .info-when-icon svg { width: 100%; height: 100%; }
+  .info-when-date {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(17px, 1.6vw, 19px);
+    color: var(--accent-deep);
+  }
+  .info-when-note {
+    font-family: var(--body);
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin: 0 0 10px;
+    max-width: 56ch;
+  }
+  .hero-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: var(--bg-card);
+  }
+  .hero-info-grid > .info-block { padding: 24px 28px 26px; }
+  .hero-info-grid > .info-block:first-child { border-right: 1px solid var(--ink); }
+  .info-list {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--ink);
+    line-height: 1.55;
+    list-style: disc;
+    margin: 0 0 12px;
+    padding-left: 22px;
+  }
+  .info-list li { padding: 1px 0; }
+  .info-action-link {
+    font-family: var(--body);
+    font-weight: 600;
+    font-size: 10px;
+    color: var(--accent-deep);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 150ms;
+  }
+  .info-action-link:hover { color: var(--accent); }
+  .info-action-link .ext-arrow { width: 12px; height: 12px; display: inline-flex; }
+  .info-action-link .ext-arrow svg { width: 100%; height: 100%; }
+
+  /* Side panel · topic pills */
+  .hero-info-side {
+    position: relative;
+    padding: 26px 22px;
+    background:
+      linear-gradient(204deg, rgba(233, 98, 67, 0.14) 2.88%, rgba(227, 124, 73, 0.14) 82.38%),
+      var(--bg-warm-2);
+    border-left: 1px solid var(--ink);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .hero-info-side .field-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .hero-info-side .field-veil {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(to bottom, rgba(240, 227, 200, 0.10) 0%, rgba(240, 227, 200, 0.18) 100%);
+    backdrop-filter: blur(0.5px) saturate(1.015);
+    -webkit-backdrop-filter: blur(0.5px) saturate(1.015);
+    z-index: 1;
+  }
+  .hero-info-side > .info-label,
+  .hero-info-side > .topic-pills { position: relative; z-index: 2; }
+  .topic-pills {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .topic-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 12px;
+    background:
+      linear-gradient(var(--paper-white), var(--paper-white)) padding-box,
+      var(--gradient-primary) border-box;
+    border: 1.5px solid transparent;
+    border-radius: 100px;
+    font-family: var(--mono);
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 1;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    box-sizing: border-box;
+  }
+  .topic-pill-label {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  .topic-pill-icon { width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .topic-pill-icon svg { width: 100%; height: 100%; }
+  .topic-pill.is-active {
+    background: var(--ink);
+    border-color: var(--ink);
+  }
+  .topic-pill.is-active .topic-pill-label {
+    background: none;
+    -webkit-text-fill-color: #ffffff;
+    color: #ffffff;
+  }
+  .topic-pill.is-active .topic-pill-icon svg {
+    stroke: #ffffff;
+  }
+
+  /* Topic pill · same size in cards and side panel */
+  .demo-card .topic-pill-icon { width: 24px; height: 24px; }
+
+
+  @media (max-width: 820px) {
+    .hero-info-card { grid-template-columns: 1fr; }
+    .hero-info-side { border-left: none; border-top: 1px solid var(--ink); }
+    .hero-info-grid { grid-template-columns: 1fr; }
+    .hero-info-grid > .info-block:first-child { border-right: none; border-bottom: 1px solid var(--ink); }
+  }
+  /* ============ /HERO · v3 redesign ============ */
+
+  /* ============ BLOCK 3 · DEMOS · Field particle atmosphere behind title + grid ============ */
+  .section-demos {
+    position: relative;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    width: 100vw;
+    padding: clamp(72px, 10vw, 120px) clamp(20px, 4vw, 48px) clamp(80px, 11vw, 130px);
+    background: #0e0a07;
+    overflow: hidden;
+    margin-top: 0;
+    margin-bottom: clamp(72px, 11vw, 120px);
+    isolation: isolate;
+  }
+  .section-demos h2 { color: rgba(255, 248, 232, 0.98); }
+  .section-demos h2 em { color: var(--accent); }
+
+  /* Demos section header · gradient title + eyebrow + CTA pair */
+  .section-head-demos {
+    position: relative;
+    z-index: 2;
+    margin: 0 auto clamp(48px, 7vw, 72px);
+    text-align: center;
+    max-width: 960px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+  }
+  .demos-title {
+    font-family: var(--serif);
+    font-variation-settings: "opsz" 96, "SOFT" 50;
+    font-size: clamp(48px, 7vw, 76px);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: rgba(255, 248, 232, 0.98);
+    margin: 0;
+  }
+  .demos-title .gradient-text {
+    background: var(--gradient-light-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-style: italic;
+    font-variation-settings: "opsz" 96, "SOFT" 100;
+  }
+  .demos-eyebrow {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    margin-top: -8px;
+  }
+  .demos-eyebrow-icon {
+    width: 22px;
+    height: 22px;
+    display: inline-flex;
+  }
+  .demos-eyebrow-icon svg { width: 100%; height: 100%; display: block; }
+  .demos-eyebrow-text {
+    font-family: var(--body);
+    font-weight: 400;
+    font-size: 16px;
+    letter-spacing: 0;
+    text-transform: none;
+    color: rgba(255, 248, 232, 0.82);
+  }
+  .demos-ctas {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .demos-btn {
+    font-family: var(--body);
+    font-weight: 600;
+    font-size: 12px;
+    padding: 14px 28px;
+    border-radius: 100px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: filter 150ms, background 150ms, border-color 150ms;
+    border: 1.5px solid transparent;
+    cursor: pointer;
+  }
+  .demos-btn-primary {
+    background: var(--gradient-primary);
+    color: #ffffff;
+  }
+  .demos-btn-primary:hover { filter: brightness(1.06); }
+  .demos-btn-primary .demos-btn-arrow { transition: transform 150ms; }
+  .demos-btn-primary:hover .demos-btn-arrow { transform: translateX(3px); }
+  .demos-btn-ghost {
+    background: transparent;
+    color: rgba(255, 248, 232, 0.98);
+    border-color: rgba(255, 248, 232, 0.55);
+  }
+  .demos-btn-ghost:hover {
+    background: rgba(255, 248, 232, 0.08);
+    border-color: rgba(255, 248, 232, 0.85);
+  }
+  .field-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .field-veil {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: rgba(14, 10, 7, 0.025);
+    backdrop-filter: blur(0.6px) saturate(1.04);
+    -webkit-backdrop-filter: blur(0.6px) saturate(1.04);
+    z-index: 1;
+  }
+  .section-demos > .demos {
+    position: relative;
+    z-index: 2;
+    max-width: 1080px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Signals strip · lexicon hashtags (on light bg in hero) */
+  .signals {
+    margin: 0 0 36px;
+    padding: 14px 0 18px;
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 10px;
+    align-items: center;
+  }
+  .signals-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1;
+    color: var(--ink-faint);
+    margin-right: 6px;
+    white-space: nowrap;
+  }
+  .signal {
+    font-family: var(--mono);
+    font-size: 11px;
+    line-height: 1;
+    padding: 7px 12px;
+    border-radius: 100px;
+    border: 1px solid rgba(212, 121, 61, 0.4);
+    color: var(--ink);
+    background: rgba(212, 121, 61, 0.08);
+    white-space: nowrap;
+    transition: background 150ms, border-color 150ms, color 150ms;
+  }
+  .signal .hash { color: var(--accent); margin-right: 3px; font-weight: 500; }
+  .signal:hover {
+    background: rgba(212, 121, 61, 0.16);
+    border-color: rgba(212, 121, 61, 0.6);
+  }
+
+  /* Hero info card · cream background, contains meta-strip + signals */
+  .hero-card {
+    background: var(--bg-warm);
+    border-radius: 14px;
+    padding: clamp(22px, 3vw, 28px) clamp(22px, 3.5vw, 32px);
+    margin: 0 0 32px;
+    border: 1px solid rgba(212, 121, 61, 0.20);
+    box-shadow: 0 2px 10px rgba(26, 26, 26, 0.04);
+  }
+  .hero-card .meta-strip {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px 28px;
+    padding: 0 0 18px;
+    border-top: none;
+    border-bottom: 1px solid rgba(26, 26, 26, 0.10);
+    margin-bottom: 16px;
+  }
+  @media (max-width: 640px) {
+    .hero-card .meta-strip {
+      grid-template-columns: 1fr;
+      gap: 14px;
+      padding-bottom: 16px;
+      margin-bottom: 14px;
+    }
+  }
+  .hero-card .signals {
+    margin: 0;
+    padding: 0;
+    border-bottom: none;
+  }
+  .hero-card .signal {
+    background: rgba(254, 253, 249, 0.85);
+    border-color: rgba(212, 121, 61, 0.45);
+  }
+  .hero-card .signal:hover {
+    background: var(--paper-white);
+    border-color: rgba(212, 121, 61, 0.7);
+  }
+
+  .demos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+    align-items: start;
+  }
+  .demo-card {
+    background:
+      linear-gradient(var(--paper-white), var(--paper-white)) padding-box,
+      var(--gradient-light-text) border-box;
+    border: 1px solid transparent;
+    border-radius: 14px;
+    padding: 28px 24px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    box-shadow:
+      0 18px 40px rgba(0, 0, 0, 0.55),
+      0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 200ms, box-shadow 200ms;
+    position: relative;
+  }
+  .demo-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px var(--paper-shadow);
+  }
+  .demo-card.tbd {
+    background: rgba(20, 14, 8, 0.55);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    border-style: dashed;
+    border-color: rgba(212, 121, 61, 0.42);
+  }
+  .demo-card.tbd .demo-project { color: rgba(255, 220, 180, 0.9); }
+  .demo-card.tbd .demo-desc { color: rgba(232, 220, 198, 0.82); }
+  .demo-card.tbd .demo-presenter { color: rgba(255, 248, 232, 0.95); }
+  .demo-card.tbd .demo-bio { color: rgba(232, 220, 198, 0.7); }
+  .demo-card.tbd .demo-presenter-label { color: rgba(232, 220, 198, 0.45); }
+  .demo-card.tbd .demo-footer { border-top-color: rgba(232, 220, 198, 0.18); }
+
+  /* Top row · tag pills, left-aligned */
+  .demo-top {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: -4px;
+  }
+  .demo-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 100px;
+    background: transparent;
+    color: var(--accent-deep);
+    border: 1px solid var(--accent);
+    white-space: nowrap;
+  }
+  .demo-tag.tbd { color: var(--ink-faint); border-color: rgba(0, 0, 0, 0.18); }
+
+  .demo-top {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+  }
+
+  /* Demo card footer · cream presenter strip + gradient action strip */
+  .demo-footer {
+    margin: 6px -24px -22px;
+    border-top: 1px solid rgba(212, 121, 61, 0.22);
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .demo-presenter-zone {
+    background: var(--bg-warm);
+    padding: 18px 22px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .demo-presenter-row { flex: 1; min-width: 0; }
+  .presenter-linkedin {
+    width: 24px;
+    height: 24px;
+    color: var(--ink);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: color 150ms;
+  }
+  .presenter-linkedin:hover { color: var(--accent-deep); }
+  .presenter-linkedin svg { width: 100%; height: 100%; display: block; fill: currentColor; }
+
+  .demo-action-zone {
+    background: var(--gradient-primary);
+    padding: 0;
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    border-top: 0;
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px;
+    min-height: 50px;
+  }
+  .demo-action-github,
+  .demo-action-arrow {
+    width: 56px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    transition: filter 150ms;
+  }
+  .demo-action-github {
+    background: var(--gradient-light-text);
+    border-bottom-left-radius: 14px;
+  }
+  .demo-action-arrow { border-bottom-right-radius: 14px; }
+  .demo-action-github:hover,
+  .demo-action-arrow:hover { filter: brightness(1.06); }
+  .demo-action-github svg { width: 22px; height: 22px; display: block; fill: currentColor; }
+  .demo-action-arrow svg { width: 22px; height: 22px; display: block; }
+  .demo-action-product {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-family: var(--body);
+    font-weight: 600;
+    font-size: 12px;
+    text-decoration: none;
+    padding: 14px 8px;
+    transition: filter 150ms;
+  }
+  .demo-action-product:hover { filter: brightness(1.05); }
+  .demo-action-product.tbd { color: rgba(255,255,255,0.85); }
+  .demo-action-zone .demo-social {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    padding: 12px 22px;
+  }
+  .demo-action-zone .demo-social-link {
+    width: 20px;
+    height: 20px;
+    color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 150ms;
+  }
+  .demo-action-zone .demo-social-link:hover { opacity: 0.78; }
+  .demo-action-zone .demo-social-link svg { width: 100%; height: 100%; display: block; fill: currentColor; }
+  .demo-action-zone .demo-product-link {
+    color: #ffffff;
+    font-family: var(--mono);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    font-style: normal;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: var(--gradient-primary);
+    padding: 12px 22px;
+    border-radius: 0;
+    border-bottom-right-radius: 14px;
+    transition: filter 150ms, transform 150ms;
+  }
+  .demo-action-zone .demo-product-link:hover { filter: brightness(1.06); }
+  .demo-action-zone .demo-product-link:active { transform: translateY(1px); }
+  .demo-action-zone .demo-product-link .ext-arrow {
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+  }
+  .demo-action-zone .demo-product-link .ext-arrow svg { width: 100%; height: 100%; display: block; }
+  .demo-action-zone .demo-product-link.tbd { color: rgba(255,255,255,0.92); }
+
+  .demo-presenter-row {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+  }
+  .demo-avatar {
+    width: 52px;
+    height: 52px;
+    min-width: 52px;
+    border-radius: 50%;
+    background: rgba(212, 121, 61, 0.14);
+    border: 1px solid rgba(212, 121, 61, 0.32);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--accent-deep);
+    overflow: hidden;
+  }
+  .demo-avatar.has-photo { background: transparent; }
+  .demo-avatar.has-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .demo-presenter-text { flex: 1; min-width: 0; }
+
+  .demo-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(212, 121, 61, 0.18);
+    flex-wrap: wrap;
+  }
+  .demo-social {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+  }
+  .demo-social-link {
+    width: 18px;
+    height: 18px;
+    color: var(--ink);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 150ms;
+  }
+  .demo-social-link:hover { color: var(--accent); }
+  .demo-social-link svg { width: 100%; height: 100%; display: block; }
+  .demo-product-link {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 150ms;
+  }
+  .demo-link {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent-deep);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(212, 121, 61, 0.4);
+    padding-bottom: 1px;
+    transition: color 150ms, border-color 150ms;
+  }
+  .demo-link:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+  .demo-link.tbd {
+    color: var(--ink-faint);
+    border-color: rgba(0, 0, 0, 0.15);
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0;
+    cursor: default;
+  }
+
+  .demo-project {
+    font-family: var(--serif);
+    font-variation-settings: "opsz" 36, "SOFT" 50;
+    font-weight: 600;
+    font-size: 26px;
+    color: var(--ink);
+    line-height: 1.12;
+    letter-spacing: -0.018em;
+  }
+  .demo-desc {
+    font-family: var(--body);
+    font-size: 15.5px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin-top: -8px;
+  }
+  .demo-explore {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    margin-top: -2px;
+  }
+  .demo-explore a {
+    color: var(--accent-deep);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(164, 84, 28, 0.35);
+    padding-bottom: 1px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .demo-explore a:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+  .demo-feedback {
+    background: var(--bg-warm-2);
+    border-left: 3px solid var(--accent);
+    border-radius: 6px;
+    padding: 12px 14px;
+  }
+  .demo-feedback .label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .demo-feedback p {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .demo-card.tbd .demo-feedback {
+    background: rgba(0, 0, 0, 0.32);
+    border-left-color: rgba(212, 121, 61, 0.6);
+  }
+  .demo-card.tbd .demo-feedback .label { color: rgba(212, 121, 61, 0.9); }
+  .demo-card.tbd .demo-feedback p { color: rgba(232, 220, 198, 0.85); }
+
+
+
+  .demo-presenter-label {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+  .demo-presenter {
+    font-family: var(--serif);
+    font-variation-settings: "opsz" 24, "SOFT" 60;
+    font-weight: 600;
+    font-size: 17px;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  .demo-bio {
+    font-family: var(--body);
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    margin-top: 3px;
+    line-height: 1.45;
+  }
+  .demo-bio-tbd {
+    font-family: var(--body);
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-top: 2px;
+    line-height: 1.4;
+  }
+  .demo-card.tbd .demo-bio-tbd {
+    color: rgba(232, 220, 198, 0.62);
+    background: rgba(212, 121, 61, 0.12);
+    border-color: rgba(212, 121, 61, 0.4);
+  }
+
+  /* ============ APPLY TO DEMO ============ */
+  .apply {
+    background: var(--bg-warm);
+    border: 1.5px solid var(--ink);
+    border-radius: 14px;
+    padding: clamp(28px, 4vw, 44px);
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 36px;
+    align-items: center;
+  }
+  .apply > :first-child { align-self: center; display: flex; flex-direction: column; justify-content: center; }
+  .apply > .apply-side { align-self: center; }
+  @media (max-width: 760px) { .apply { grid-template-columns: 1fr; gap: 24px; } }
+  .apply-eyebrow {
+    font-family: var(--mono);
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 1;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0 0 18px;
+    display: block;
+  }
+  .apply h3,
+  .about-body h3 {
+    font-family: var(--serif);
+    font-variation-settings: "opsz" 72, "SOFT" 60;
+    font-weight: 500;
+    font-size: clamp(26px, 3.6vw, 36px);
+    line-height: 1.12;
+    color: var(--ink);
+    letter-spacing: -0.015em;
+    margin-bottom: 14px;
+  }
+  .apply h3 .gradient-text,
+  .about-body h3 .gradient-text { color: var(--accent-deep); font-style: normal; }
+  .apply h3 em,
+  .about-body h3 em { font-style: italic; color: var(--accent); font-weight: 400; }
+  .apply-body {
+    font-family: var(--body);
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+  .apply-side {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .apply-meta {
+    padding: 14px 16px;
+    background: var(--bg-warm-2);
+    border-radius: 0;
+    font-family: var(--body);
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ink);
+    border-left: 3px solid var(--accent);
+  }
+  .apply-meta strong { font-family: var(--mono); font-weight: 500; font-size: 11px; line-height: 1; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-soft); display: block; margin-bottom: 10px; }
+
+  /* ============ BLOCK 4 · WHO CIBC IS ============ */
+  .about {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: clamp(28px, 5vw, 56px);
+    align-items: stretch;
+  }
+  #about .cluster-map-card { display: flex; align-items: stretch; overflow: hidden; }
+  #about .map-svg { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+  #about .about-body { align-self: center; }
+  @media (max-width: 760px) {
+    .about { grid-template-columns: 1fr; gap: 28px; }
+  }
+  .about-body {
+    font-family: var(--body);
+    font-size: clamp(15px, 1.6vw, 17px);
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+  .about-body p {
+    margin-bottom: 24px;
+    max-width: 52ch;
+  }
+  .about-body em { font-style: italic; color: var(--accent); }
+  .about-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .cluster-map-card .map-head-row,
+  .cluster-map-card .map-view-cta {
+    display: none;
+  }
+
+  /* Full-bleed building-with section: bg-warm wall, map flush-left, text-side padding only */
+  #about.section {
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    width: 100vw;
+    background: var(--bg-warm);
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  #about .cluster-map-card {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+  }
+  #about .about-body {
+    padding: clamp(40px, 6vw, 80px) clamp(24px, 4vw, 64px) clamp(40px, 6vw, 80px) 0;
+  }
+  @media (max-width: 760px) {
+    #about.section {
+      padding: clamp(40px, 8vw, 60px) clamp(20px, 4vw, 48px);
+    }
+    #about .about-body {
+      padding: 0;
+    }
+  }
+
+  /* Cluster map embed */
+  .cluster-map-card {
+    background: var(--bg-warm);
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    padding: clamp(20px, 3vw, 28px);
+    box-shadow: 0 4px 14px var(--paper-shadow);
+  }
+  .map-head-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 16px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .map-head-left h4 {
+    font-family: var(--serif);
+    font-variation-settings: "opsz" 36, "SOFT" 60;
+    font-weight: 500;
+    font-size: 22px;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  .map-head-left h4 em { font-style: italic; color: var(--accent); }
+  .map-head-eyebrow {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--ink-faint);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .map-legend {
+    font-family: var(--body);
+    font-style: italic;
+    font-size: 11.5px;
+    color: var(--ink-faint);
+    display: inline-flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .map-legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .map-legend .swatch { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+  .map-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-top: 6px;
+  }
+  .map-stack { display: none; }
+  @media (max-width: 760px) {
+    .map-svg { display: none; }
+    .map-stack { display: flex; flex-direction: column; gap: 14px; margin-top: 4px; }
+    .map-stack .row {
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      gap: 8px 14px;
+      padding: 10px 0;
+      border-bottom: 1px dashed var(--rule-soft);
+      align-items: baseline;
+    }
+    .map-stack .row:last-child { border-bottom: none; }
+    .map-stack .rel {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--ink);
+      line-height: 1;
+      white-space: nowrap;
+      padding-top: 4px;
+    }
+    .map-stack .who {
+      font-family: var(--serif);
+      font-style: italic;
+      font-variation-settings: "opsz" 18, "SOFT" 60;
+      font-weight: 500;
+      font-size: 14.5px;
+      color: var(--ink);
+      line-height: 1.35;
+    }
+    .map-stack .who small {
+      display: block;
+      font-style: normal;
+      font-family: var(--body);
+      font-size: 12.5px;
+      color: var(--ink-soft);
+      margin-top: 3px;
+    }
+  }
+  /* Read-along surfaces · 3 link cards under the map */
+  /* ============ Map view CTA (replaces read-along in about section) ============ */
+  .map-view-cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px dashed var(--rule-soft);
+  }
+
+  /* ============ Follow along · Get involved section ============ */
+  .follow-along { padding-top: 0; }
+  .follow-along .section-head { margin-bottom: 32px; }
+  .follow-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .follow-meta-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    padding: 22px 24px;
+    background: var(--bg-warm);
+    border-radius: 12px;
+    margin-bottom: 24px;
+  }
+  .follow-meta-strip .meta-item { display: flex; flex-direction: column; gap: 6px; }
+  .follow-actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 14px;
+  }
+  a.follow-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 20px 22px 22px;
+    background: var(--paper-white);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    text-decoration: none;
+    transition: transform 150ms, border-color 150ms, box-shadow 150ms;
+    color: var(--ink);
+  }
+  a.follow-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+    box-shadow: 0 6px 16px var(--paper-shadow);
+  }
+  a.follow-card-primary {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--paper-white);
+  }
+  a.follow-card-primary:hover {
+    border-color: var(--accent);
+    box-shadow: 0 6px 16px rgba(212, 121, 61, 0.25);
+  }
+  .follow-card .kind {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .follow-card-primary .kind { color: var(--accent); }
+  .follow-card .label {
+    font-family: var(--serif);
+    font-variation-settings: "opsz" 32, "SOFT" 60;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 1.15;
+    color: var(--ink);
+  }
+  .follow-card-primary .label { color: var(--paper-white); }
+  .follow-card .meta {
+    font-family: var(--body);
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+  .follow-card-primary .meta { color: rgba(255, 248, 232, 0.78); }
+  .follow-card .arrow-end {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-top: 4px;
+  }
+  .follow-card-primary .arrow-end { color: var(--accent); }
+  @media (max-width: 720px) {
+    .follow-meta-strip { grid-template-columns: 1fr; gap: 16px; }
+  }
+
+  .read-along {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+    margin-top: 22px;
+    padding-top: 22px;
+    border-top: 1px dashed var(--rule-soft);
+  }
+  a.read-card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 16px 16px 18px;
+    background: var(--paper-white);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    text-decoration: none;
+    transition: transform 150ms, border-color 150ms, box-shadow 150ms;
+    color: var(--ink);
+  }
+  a.read-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+    box-shadow: 0 4px 12px var(--paper-shadow);
+  }
+  .read-card .kind {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .read-card .label {
+    font-family: var(--serif);
+    font-variation-settings: "opsz" 24, "SOFT" 60;
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+  .read-card .meta {
+    font-family: var(--body);
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    line-height: 1.45;
+  }
+  .read-card .arrow-end {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-top: 6px;
+  }
+
+  /* ============ BLOCK 5 · AFTER THE EVENT ============ */
+  .after {
+    background: var(--bg-warm);
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    padding: clamp(28px, 4vw, 40px);
+  }
+  .after-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 28px;
+    margin-top: 20px;
+  }
+  .after-item h4 {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .after-item p {
+    font-family: var(--body);
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+  .after-item .timing {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--ink-soft);
+  }
+
+  /* ============ FOOTER ============ */
+  .footer {
+    position: relative;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    width: 100vw;
+    background: var(--bg-warm-2);
+    overflow: hidden;
+    isolation: isolate;
+    margin-top: 0;
+    padding-top: clamp(60px, 8vw, 100px);
+    padding-bottom: clamp(40px, 5vw, 60px);
+    border-top: none;
+  }
+  .footer .field-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .footer .field-veil {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: rgba(240, 227, 200, 0.06);
+    z-index: 1;
+  }
+  .footer-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 4vw, 48px);
+  }
+  .footer-brand { text-decoration: none; display: inline-block; margin-bottom: 28px; }
+  .footer-brand-mark {
+    font-family: var(--pixel);
+    font-size: 14px;
+    line-height: 1;
+    background: var(--ink);
+    color: var(--bg-warm);
+    padding: 8px 11px 7px;
+    border-radius: 0;
+    display: inline-block;
+    letter-spacing: 0;
+  }
+  .footer-row {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 32px;
+    padding-bottom: 32px;
+  }
+  @media (max-width: 760px) {
+    .footer-row { grid-template-columns: 1fr; }
+  }
+  .footer-block h4 {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 12px;
+  }
+  .footer-block p {
+    font-family: var(--body);
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .footer-block a {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--rule);
+    text-underline-offset: 3px;
+  }
+  .footer-block a:hover { color: var(--accent); text-decoration-color: var(--accent); }
+  .footer-block a.btn { text-decoration: none; }
+  .footer-block a.btn-primary { color: var(--bg-warm); }
+  .footer-block a.btn-primary:hover { color: var(--bg-warm); }
+  .footer-block a.btn-ghost { color: var(--ink); }
+  .footer-block ul { list-style: none; }
+  .footer-block li { font-family: var(--body); font-size: 14px; padding: 4px 0; }
+  .footer-bottom {
+    padding: 20px 0;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .footer-bottom span { line-height: 1.6; }
+
+  /* ============ Mobile ============ */
+  @media (max-width: 760px) {
+    .demos { grid-template-columns: 1fr; }
+    .meta-strip { gap: 18px; }
+  }
+
+  /* ============ RESOURCES PAGE: TOOLS FILTER BAR ============ */
+  .resources-hero .hero-eyebrow { margin-bottom: 18px; }
+  .resources-hero .hero-deck { color: var(--ink-soft); }
+  .section-tool-filter { margin-top: clamp(48px, 6vw, 80px); }
+  .tool-filter-bar {
+    background: var(--bg-warm);
+    border-radius: 100px;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .tool-search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    min-width: 240px;
+  }
+  .tool-search-icon { width: 18px; height: 18px; color: var(--ink-soft); flex-shrink: 0; }
+  .tool-search-icon svg { width: 100%; height: 100%; display: block; }
+  .tool-search input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    font-family: var(--body);
+    font-size: 14px;
+    color: var(--ink);
+    padding: 6px 0;
+    outline: none;
+  }
+  .tool-search input::placeholder { color: var(--ink-soft); }
+  .tool-filter-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+  .tool-chip { cursor: pointer; font: inherit; }
+  .tool-chip:hover { filter: brightness(0.94); }
+  /* Tools grid: drop the dark demos-section background. Inherit page bg. */
+  #tools-grid { background: transparent; }
+  #tools-grid .demos { padding-top: 0; }
+  /* Harmonica placeholder card */
+  .demo-card-placeholder { opacity: 0.75; }
+  .demo-card-placeholder .demo-footer { background: transparent; }
+
 </style>
 </head>
 <body>
+
+<div class="page">
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="pillGradient" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#e96243"/><stop offset="100%" stop-color="#e67c48"/></linearGradient></defs></svg>
 
 <!-- ===== NAV COMPONENT ===== -->
 <nav class="nav" aria-label="Primary">
@@ -1520,8 +1763,8 @@
   <div class="nav-inner">
     <a href="#" class="brand" aria-label="CIBC home"><span class="brand-mark">CIBC</span></a>
     <div class="nav-links" id="primary-links" role="navigation">
-      <a href="index.html" class="nav-link">Demo Day</a>
-      <a href="#" class="nav-link nav-link-current" aria-current="page">Infra Resources</a>
+      <a href="#" class="nav-link">Demo Day</a>
+      <a href="ecosystem-map.html" class="nav-link nav-link-current" aria-current="page">Infra Resources</a>
       <a href="get-involved.html" class="nav-link">Learn more</a>
     </div>
     <a href="#register" class="nav-cta">Register</a>
@@ -1533,1554 +1776,248 @@
 </nav>
 <!-- ===== /NAV COMPONENT ===== -->
 
-
-<canvas class="atmosphere-canvas" id="atmosphere-canvas" aria-hidden="true"></canvas>
-
-<!-- ===== GLOBAL NAV ===== -->
-<nav class="global-nav" aria-label="Primary">
-  <a href="index.html" class="gn-brand" aria-label="CIBC home"><span class="gn-brand-mark">CIBC</span></a>
-  <div class="gn-links" id="primary-links" role="navigation">
-    <a href="index.html" class="gn-link">Demo Day</a>
-    <a href="#" class="gn-link gn-link-current" aria-current="page">Infra Resources</a>
-    <a href="get-involved.html" class="gn-link">Learn more</a>
-  </div>
-  <a href="index.html#register" class="gn-cta">Register</a>
-  <button type="button" class="gn-toggle" data-nav-toggle aria-expanded="false" aria-controls="primary-links" aria-label="Open menu">
-    <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
-    <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>
-  </button>
-</nav>
-
-<main id="pokedex-view">
-  <div class="ecosystem-top">
-    <header class="pokedex-header pokedex-header--cibc">
-      <h1 class="pokedex-title">Ecosystem map</h1>
-      <p class="pokedex-subtitle">Follow the connections we make along the way.</p>
-      <ul class="ecosystem-inputs" aria-label="Inputs that shape this map">
-        <li><a href="first-meeting-2026-05-08.html">Planning session · May 8</a></li>
-        <li><a href="planning-recap-2026-05-15.html">Planning session · May 15</a></li>
-        <li><a href="research-report.html">Research report</a></li>
-      </ul>
-      <a href="#cards" class="ecosystem-jump-btn">View connection details ↓</a>
-    </header>
-
-    <section class="front-map-section">
-      <div class="front-map-wrap">
-        <svg id="front-map-svg" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid meet">
-          <g class="front-map-inner" id="front-map-inner"></g>
-        </svg>
-        <div class="front-map-tooltip" id="front-map-tooltip"></div>
-        <button class="front-reset-btn" id="front-reset-btn" aria-label="Reset map view">reset view</button>
-      </div>
-    </section>
-  </div>
-
-  <div class="map-meta">
-    <div class="front-map-legend" aria-hidden="true">
-      <span class="legend-item"><svg width="36" height="6" viewBox="0 0 36 6"><line x1="2" y1="3" x2="34" y2="3" stroke="#5a4d3a" stroke-width="1.4"/></svg> formalized tie</span>
-      <span class="legend-item"><svg width="36" height="6" viewBox="0 0 36 6"><line x1="2" y1="3" x2="34" y2="3" stroke="#5a4d3a" stroke-width="1.4" stroke-dasharray="5 4"/></svg> loose / speculative</span>
-      <span class="legend-item"><svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="#c4a880"/></svg> entity / concept</span>
-      <span class="legend-item"><svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="4" r="2.4" fill="#c8b88c"/><path d="M 1 12 Q 3 7 7 7 Q 11 7 13 12 Z" fill="#c8b88c"/></svg> person</span>
+<!-- ===== HERO: INFRA RESOURCES ===== -->
+<header class="masthead resources-hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Citizen Infra &middot; Infra Resources &middot; Last updated 5/21/2026</div>
+    <h1 class="hero-title">Tools for you <span class="gradient-text">&amp; your community</span>.</h1>
+    <p class="hero-deck">&hellip;</p>
+    <div class="hero-ctas">
+      <a href="#tools" class="hero-btn hero-btn-primary">Find tools <span class="hero-btn-arrow" aria-hidden="true"><svg style="width:1em;height:1em;vertical-align:-0.12em;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></a>
+      <a href="https://app.harmonica.chat/chat?s=fc325b1d-2abb-4869-b2b5-6e35bfb274bb" target="_blank" rel="noopener" class="hero-btn hero-btn-ghost">Demo a tool</a>
     </div>
-    <p class="front-map-hint">pan: drag. zoom: pinch or scroll. focus: tap a node. reset: double-tap.</p>
   </div>
+</header>
 
-  <!-- Trainer + companion sections hidden for CIBC website context. Will revisit. -->
-  <section class="trainer-section" hidden>
-    <p class="trainer-section-label">CIBC team</p>
-    <div class="trainer-grid" id="cibc-grid"></div>
-
-    <p class="trainer-section-label">ecosystem bridges</p>
-    <div class="trainer-grid" id="bridge-grid"></div>
-  </section>
-
-  <!-- ===== STATUS FILTER CHIPS ===== -->
-  <div class="filters" id="cards" role="tablist" aria-label="Filter cards by status">
-    <button class="filter-chip active" data-filter="all">All · 9</button>
-    <button class="filter-chip" data-filter="caught">Caught · 3</button>
-    <button class="filter-chip" data-filter="spotted">Spotted · 3</button>
-    <button class="filter-chip" data-filter="rumored">Rumored · 2</button>
-    <button class="filter-chip" data-filter="unverified">Unverified · 1</button>
+<!-- ===== TOOLS FILTER ===== -->
+<section class="cluster section section-tool-filter" id="tools">
+  <div class="tool-filter-bar">
+    <div class="tool-search">
+      <span class="tool-search-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+      <input type="search" placeholder="Search for tools..." aria-label="Search for tools" data-todo="wire-up-search">
+    </div>
+    <div class="tool-filter-chips" role="group" aria-label="Filter by category">
+      <button class="topic-pill tool-chip" data-cat="capacity-building" type="button"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="url(#pillGradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg></span><span class="topic-pill-label">Capacity Building</span></button>
+      <button class="topic-pill tool-chip" data-cat="knowledge-management" type="button"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="url(#pillGradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg></span><span class="topic-pill-label">Knowledge Management</span></button>
+      <button class="topic-pill tool-chip" data-cat="collaboration" type="button"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="url(#pillGradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span class="topic-pill-label">Collaboration</span></button>
+      <button class="topic-pill tool-chip" data-cat="deliberation" type="button"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="url(#pillGradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span><span class="topic-pill-label">Deliberation</span></button>
+    </div>
   </div>
+</section>
 
-  <!-- ===== CARD GRID ===== -->
-  <section class="card-grid">
+<!-- ===== BLOCK 3 · THE DEMOS (Field particle atmosphere behind title + grid) ===== -->
+<section class="cluster section" id="tools-grid">
+  <div class="demos">
 
-    <!-- =========== CARD 01 · DML =========== -->
-    <article class="card status-caught" data-status="caught">
-      <header class="card-head">
-        <div>
-          <div class="card-num">No. 001</div>
-          <h3 class="card-name">Dark Matter <em>Labs</em></h3>
-        </div>
-        <span class="status-badge caught">Caught</span>
-      </header>
-      <div class="badges-row">
-        <span class="type-badge tier-1">Tier 1</span>
-        <span class="type-badge">Peer Org</span>
+    <article class="demo-card" data-category="knowledge-management">
+      <div class="demo-top">
+        <span class="topic-pill"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="url(#pillGradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg></span><span class="topic-pill-label">Knowledge Management</span></span>
       </div>
-      <div class="card-body">
-        <p class="one-line">Not-for-profit research and prototyping org building institutions, instruments, and infrastructure for civic economies.</p>
-        <div class="role-row">
-          <span class="role-label">Strategic role</span>
-          <span class="role-value invite">Invite</span>
-        </div>
-        <div>
-          <div class="section-h">Stat block</div>
-          <dl class="stat-block">
-            <dt>Geography</dt><dd>Distributed. Berlin, London, Seoul, Canada.</dd>
-            <dt>Founded</dt><dd>2016</dd>
-            <dt>Stage / size</dt><dd>Mid-size. Dozens of named members across Labs, Arcs, Studios.</dd>
-            <dt>Funding</dt><dd>Not-for-profit. Partners and clients. Rockefeller, Omidyar named.</dd>
-            <dt>Source</dt><dd><a href="https://darkmatterlabs.org">darkmatterlabs.org</a></dd>
-          </dl>
-        </div>
-        <div>
-          <div class="section-h">Overlap with CIBC's territory</div>
-          <div class="overlap">
-            <span class="overlap-dim">Civic Tech</span><span class="overlap-state strong">Strong</span>
-            <span class="overlap-dim">Deliberative Democracy</span><span class="overlap-state partial">Partial</span>
-            <span class="overlap-dim">Local-First / Data Sovereignty</span><span class="overlap-state partial">Partial</span>
-            <span class="overlap-dim">AT Protocol</span><span class="overlap-state none">None</span>
-            <span class="overlap-dim">Knowledge Graphs</span><span class="overlap-state none">None</span>
-            <span class="overlap-dim">Regenerative Systems</span><span class="overlap-state strong">Strong</span>
+      <h3 class="demo-project">Gardens not Platforms</h3>
+      <p class="demo-desc">An Obsidian + Claude workflow that renders private notes into artifacts collaborators can use. Do this instead of platforms or paid-for tools.</p>
+      <div class="demo-footer">
+        <div class="demo-presenter-zone">
+        <div class="demo-presenter-row">
+          <div class="demo-avatar has-photo" aria-hidden="true"><img src="assets/megan.webp" alt="" /></div>
+          <div class="demo-presenter-text">
+                <div class="demo-presenter">Megan Ducote</div>
+            <div class="demo-bio-tbd">Relational Technologist</div>
           </div>
         </div>
-        <div>
-          <div class="section-h">Moves · what they ship</div>
-          <ul class="list">
-            <li>Research, prototypes, civic tech tools, reports</li>
-            <li><strong>CircuLaw</strong> · regulatory tooling for the circular economy</li>
-            <li><strong>TreesAI</strong> · urban forest financing</li>
-            <li><strong>Material Registry</strong> · <strong>Permissioning the City</strong> · <strong>CivicAI</strong></li>
-          </ul>
+        <a class="presenter-linkedin" href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56V14.85c0-1.34-.03-3.06-1.87-3.06-1.87 0-2.15 1.46-2.15 2.97v5.69H9.31V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27zM5.34 7.43c-1.14 0-2.07-.93-2.07-2.07 0-1.14.93-2.07 2.07-2.07 1.14 0 2.07.93 2.07 2.07 0 1.14-.93 2.07-2.07 2.07zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.45c.97 0 1.78-.77 1.78-1.72V1.72C24 .77 23.19 0 22.22 0z"/></svg></a>
         </div>
-        <div>
-          <div class="section-h">Known people</div>
-          <ul class="list">
-            <li><strong>Indy Johar</strong> · Mission Steward, co-founder</li>
-            <li><strong>Gurden Batra</strong> · Civic Tech Co-Lead, Berlin · <em>likely match for the "Gordon" reference</em></li>
-            <li><strong>Charlie Fisher</strong> · Strategic Designer · currently at Komma Systems</li>
-            <li><strong>Jonathan Lapalme</strong> · DML Canada</li>
-          </ul>
-        </div>
-        <div>
-          <div class="section-h">Habitat · public surfaces</div>
-          <ul class="list">
-            <li><a href="https://darkmatterlabs.org">Main site</a></li>
-            <li><a href="https://civictech.darkmatterlabs.org/">Civic Tech Studio</a></li>
-            <li><a href="https://github.com/Dark-Matter-Labs/">GitHub</a></li>
-            <li>Medium · LinkedIn</li>
-          </ul>
-        </div>
-        <div class="strategic-read">
-          <p>Invite Gurden Batra to demo day. DML is parallel to CIBC and a relationship makes sense both as ecosystem peer and as a target for the share-link blast. The framing of "infrastructures of <em>tenderness, doubt, and attentiveness</em>" on the Civic Tech Studio page maps closely to the anti-extractive frame.</p>
+        <div class="demo-action-zone">
+          <a class="demo-action-github" href="#" target="_blank" rel="noopener" aria-label="GitHub"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></span></a>
+          <a class="demo-action-product tbd" href="#" target="_blank" rel="noopener">Try the workflow</a>
+          <a class="demo-action-arrow" href="#" target="_blank" rel="noopener" aria-label="Try the workflow"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg></span></a>
         </div>
       </div>
     </article>
 
-    <!-- =========== CARD 02 · Coma (Komma) =========== -->
-    <article class="card status-rumored" data-status="rumored">
-      <header class="card-head">
-        <div>
-          <div class="card-num">No. 002</div>
-          <h3 class="card-name">Coma <em>(Komma Systems?)</em></h3>
-        </div>
-        <span class="status-badge rumored">Rumored</span>
-      </header>
-      <div class="badges-row">
-        <span class="type-badge tier-1">Tier 1</span>
-        <span class="type-badge">Peer Org</span>
-        <span class="type-badge disputed">Disputed Identity</span>
+    <article class="demo-card" data-category="capacity-building">
+      <div class="demo-top">
+        <span class="topic-pill"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="url(#pillGradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg></span><span class="topic-pill-label">Capacity Building</span></span>
       </div>
-      <div class="card-body">
-        <p class="one-line">Berlin-based consultancy or studio led by Charlie Fisher, focused on regenerative land, housing, and governance.</p>
-        <div class="role-row">
-          <span class="role-label">Strategic role</span>
-          <span class="role-value invite">Invite (after confirm)</span>
-        </div>
-        <div>
-          <div class="section-h">Stat block</div>
-          <dl class="stat-block">
-            <dt>Geography</dt><dd>Berlin</dd>
-            <dt>Founded</dt><dd>Not publicly available</dd>
-            <dt>Stage / size</dt><dd>Solo to small. No other staff under Komma Systems on LinkedIn.</dd>
-            <dt>Funding</dt><dd>Not publicly available. Consulting fees and project-based revenue likely.</dd>
-            <dt>Source</dt><dd>No standalone domain. LinkedIn only.</dd>
-          </dl>
-        </div>
-        <div>
-          <div class="section-h">Overlap with CIBC's territory</div>
-          <div class="overlap">
-            <span class="overlap-dim">Civic Tech</span><span class="overlap-state partial">Partial</span>
-            <span class="overlap-dim">Deliberative Democracy</span><span class="overlap-state none">None</span>
-            <span class="overlap-dim">Local-First / Data Sovereignty</span><span class="overlap-state partial">Partial</span>
-            <span class="overlap-dim">AT Protocol</span><span class="overlap-state none">None</span>
-            <span class="overlap-dim">Knowledge Graphs</span><span class="overlap-state none">None</span>
-            <span class="overlap-dim">Regenerative Systems</span><span class="overlap-state strong">Strong</span>
+      <h3 class="demo-project">Compass Suite</h3>
+      <p class="demo-desc">A modular MCP suite for designers, PMs, researchers, and job seekers. Each module ships with explicit schemas, validation, and decision traces.</p>
+      <div class="demo-footer">
+        <div class="demo-presenter-zone">
+        <div class="demo-presenter-row">
+          <div class="demo-avatar" aria-hidden="true">KH</div>
+          <div class="demo-presenter-text">
+                <div class="demo-presenter">Kyle Hobson</div>
+            <div class="demo-bio-tbd">Title · Org · to fill</div>
           </div>
         </div>
-        <div>
-          <div class="section-h">Known people</div>
-          <ul class="list">
-            <li><strong>Charlie Fisher</strong> · founder · ex-DML · founding committee OASA</li>
-          </ul>
+        <a class="presenter-linkedin" href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56V14.85c0-1.34-.03-3.06-1.87-3.06-1.87 0-2.15 1.46-2.15 2.97v5.69H9.31V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27zM5.34 7.43c-1.14 0-2.07-.93-2.07-2.07 0-1.14.93-2.07 2.07-2.07 1.14 0 2.07.93 2.07 2.07 0 1.14-.93 2.07-2.07 2.07zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.45c.97 0 1.78-.77 1.78-1.72V1.72C24 .77 23.19 0 22.22 0z"/></svg></a>
         </div>
-        <div class="strategic-read">
-          <p>Invite Charlie Fisher directly. He sits at the personal bridge between CIBC, DML, and OASA. If Komma Systems is presenting-ready, invite as a <em>demo-day participant</em>; otherwise invite as ecosystem peer and discussant. <strong>Confirm whether "Coma" and "Komma Systems" are the same entity before public outreach.</strong></p>
-        </div>
-        <div class="open-q">
-          <div class="label">Confidence · open question</div>
-          <p>Is "Coma" actually "Komma Systems"? Strongest available match but unconfirmed. Resolves with: ask Charlie Fisher or check the original CIBC reference for spelling.</p>
+        <div class="demo-action-zone">
+          <a class="demo-action-github" href="#" target="_blank" rel="noopener" aria-label="GitHub"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></span></a>
+          <a class="demo-action-product" href="https://jonathankhobson.github.io/compass-suite/" target="_blank" rel="noopener">Try the suite</a>
+          <a class="demo-action-arrow" href="https://jonathankhobson.github.io/compass-suite/" target="_blank" rel="noopener" aria-label="Try the suite"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg></span></a>
         </div>
       </div>
     </article>
 
-    <!-- =========== CARD 03 · DemNext =========== -->
-    <article class="card status-caught" data-status="caught">
-      <header class="card-head">
-        <div>
-          <div class="card-num">No. 003</div>
-          <h3 class="card-name">Democracy <em>Next</em></h3>
-        </div>
-        <span class="status-badge caught">Caught</span>
-      </header>
-      <div class="badges-row">
-        <span class="type-badge tier-1">Tier 1</span>
-        <span class="type-badge">Peer Org</span>
+    <article class="demo-card" data-category="deliberation">
+      <div class="demo-top">
+        <span class="topic-pill"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="url(#pillGradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span><span class="topic-pill-label">Deliberation</span></span>
       </div>
-      <div class="card-body">
-        <p class="one-line">International nonprofit research and action institute building citizens' assemblies based on sortition, deliberation, and rotation.</p>
-        <div class="role-row">
-          <span class="role-label">Strategic role</span>
-          <span class="role-value awareness">Awareness</span>
-        </div>
-        <div>
-          <div class="section-h">Stat block</div>
-          <dl class="stat-block">
-            <dt>Geography</dt><dd>The Hague, Netherlands. Stichting DemocracyNext at Humanity Hub.</dd>
-            <dt>Founded</dt><dd>2022 by Claudia Chwalisz</dd>
-            <dt>Stage / size</dt><dd>Small core team. Headcount not publicly available.</dd>
-            <dt>Funding</dt><dd>Grants. Rockefeller, NED, Open Society, One Project. Plus consultancy and donations.</dd>
-            <dt>Source</dt><dd><a href="https://www.demnext.org">demnext.org</a></dd>
-          </dl>
-        </div>
-        <div>
-          <div class="section-h">Overlap with CIBC's territory</div>
-          <div class="overlap">
-            <span class="overlap-dim">Civic Tech</span><span class="overlap-state partial">Partial</span>
-            <span class="overlap-dim">Deliberative Democracy</span><span class="overlap-state strong">Strong</span>
-            <span class="overlap-dim">Local-First / Data Sovereignty</span><span class="overlap-state none">None</span>
-            <span class="overlap-dim">AT Protocol</span><span class="overlap-state none">None</span>
-            <span class="overlap-dim">Knowledge Graphs</span><span class="overlap-state none">None</span>
-            <span class="overlap-dim">Regenerative Systems</span><span class="overlap-state none">None</span>
+      <h3 class="demo-project">Book Power</h3>
+      <p class="demo-desc">Hand-crafted MCP servers and Claude Code skills built from methodology books, so practitioners can query them at the moment of work. Four books live: Facilitating Deliberation, Governable Spaces, Think Like a Commoner, JTBD Knowledge.</p>
+      <div class="demo-footer">
+        <div class="demo-presenter-zone">
+        <div class="demo-presenter-row">
+          <div class="demo-avatar" aria-hidden="true">AZ</div>
+          <div class="demo-presenter-text">
+                <div class="demo-presenter">Artem Zhiganov</div>
+            <div class="demo-bio-tbd">Title · Org · to fill</div>
           </div>
         </div>
-        <div>
-          <div class="section-h">Known people</div>
-          <ul class="list">
-            <li><strong>Claudia Chwalisz</strong> · founder, CEO · in network</li>
-            <li><strong>Sammy McKinney</strong> · AI and Deliberation Fellow · Cambridge PhD</li>
-            <li><strong>Ieva Česnulaitytė</strong> · Founding Head of Research and Learning</li>
-            <li><strong>Audrey Tang</strong> · International Advisory Council · <em>bridges to Plurality</em></li>
-          </ul>
+        <a class="presenter-linkedin" href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56V14.85c0-1.34-.03-3.06-1.87-3.06-1.87 0-2.15 1.46-2.15 2.97v5.69H9.31V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27zM5.34 7.43c-1.14 0-2.07-.93-2.07-2.07 0-1.14.93-2.07 2.07-2.07 1.14 0 2.07.93 2.07 2.07 0 1.14-.93 2.07-2.07 2.07zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.45c.97 0 1.78-.77 1.78-1.72V1.72C24 .77 23.19 0 22.22 0z"/></svg></a>
         </div>
-        <div class="strategic-read">
-          <p>Send a share link via a Claudia Chwalisz intro if available. The demo day is plausibly relevant to their portfolio if framed around <em>tech-enhanced deliberation</em>. Best route is via the DelibTech Network rather than a direct DemNext partnership ask. Mutual ecosystem awareness at minimum.</p>
+        <div class="demo-action-zone">
+          <a class="demo-action-github" href="#" target="_blank" rel="noopener" aria-label="GitHub"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></span></a>
+          <a class="demo-action-product" href="https://bookpower.org" target="_blank" rel="noopener">Try the library</a>
+          <a class="demo-action-arrow" href="https://bookpower.org" target="_blank" rel="noopener" aria-label="Try the library"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg></span></a>
         </div>
       </div>
     </article>
 
-    <!-- =========== CARD 04 · DelibTech =========== -->
-    <article class="card status-spotted" data-status="spotted">
-      <header class="card-head">
-        <div>
-          <div class="card-num">No. 004</div>
-          <h3 class="card-name">Deliberative <em>Network</em> (DelibTech)</h3>
-        </div>
-        <span class="status-badge spotted">Spotted</span>
-      </header>
-      <div class="badges-row">
-        <span class="type-badge tier-2">Tier 2</span>
-        <span class="type-badge">Peer Org</span>
+<article class="demo-card" data-category="collaboration">
+      <div class="demo-top">
+        <span class="topic-pill"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="url(#pillGradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span class="topic-pill-label">Collaboration</span></span>
       </div>
-      <div class="card-body">
-        <p class="one-line">Invite-only network of technologists, practitioners, and researchers building or studying technology for deliberation.</p>
-        <div class="role-row">
-          <span class="role-label">Strategic role</span>
-          <span class="role-value awareness">Awareness</span>
-        </div>
-        <div>
-          <div class="section-h">Stat block</div>
-          <dl class="stat-block">
-            <dt>Geography</dt><dd>International. Members from MIT, OpenAI, City of Toronto, Cambridge, Notre Dame, Stanford, Berkman Klein.</dd>
-            <dt>Stage / size</dt><dd>Small invite-only. Goal: keep size such that "everybody knows one another."</dd>
-            <dt>Funding</dt><dd>"Small amount of seed funding." Seeking funds over next months.</dd>
-            <dt>Source</dt><dd><a href="https://www.demnext.org/projects/delibtech-network">demnext.org/projects/delibtech-network</a></dd>
-          </dl>
-        </div>
-        <div>
-          <div class="section-h">Overlap with CIBC's territory</div>
-          <div class="overlap">
-            <span class="overlap-dim">Civic Tech</span><span class="overlap-state strong">Strong</span>
-            <span class="overlap-dim">Deliberative Democracy</span><span class="overlap-state strong">Strong</span>
-            <span class="overlap-dim">Local-First / Data Sovereignty</span><span class="overlap-state partial">Partial</span>
-            <span class="overlap-dim">AT Protocol</span><span class="overlap-state none">None</span>
-            <span class="overlap-dim">Knowledge Graphs</span><span class="overlap-state none">None</span>
-            <span class="overlap-dim">Regenerative Systems</span><span class="overlap-state none">None</span>
+      <h3 class="demo-project">Collaboration under Constraint</h3>
+      <p class="demo-desc">A platform that uses constraint strategies (lottocracy-elected editors, fixed deadlines, mandatory sharing) to take groups from forming to completion. Built for projects stuck in discussion.</p>
+      <div class="demo-footer">
+        <div class="demo-presenter-zone">
+        <div class="demo-presenter-row">
+          <div class="demo-avatar" aria-hidden="true">MM</div>
+          <div class="demo-presenter-text">
+                <div class="demo-presenter">Momcilo Mijovic</div>
+            <div class="demo-bio-tbd">Title · Org · to fill</div>
           </div>
         </div>
-        <div>
-          <div class="section-h">Known people</div>
-          <ul class="list">
-            <li>Co-coordinators · <strong>Chwalisz</strong> + <strong>McKinney</strong> (DemNext); <strong>Aviv Ovadya</strong> + <strong>Kyle Redman</strong> (AI &amp; Democracy)</li>
-            <li>Members · Dimitrakopoulou (MIT), Eloundou (OpenAI), Fusca (Toronto), Schirch (Notre Dame), Siu (Stanford), Shireman (Berkman Klein)</li>
-          </ul>
+        <a class="presenter-linkedin" href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56V14.85c0-1.34-.03-3.06-1.87-3.06-1.87 0-2.15 1.46-2.15 2.97v5.69H9.31V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27zM5.34 7.43c-1.14 0-2.07-.93-2.07-2.07 0-1.14.93-2.07 2.07-2.07 1.14 0 2.07.93 2.07 2.07 0 1.14-.93 2.07-2.07 2.07zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.45c.97 0 1.78-.77 1.78-1.72V1.72C24 .77 23.19 0 22.22 0z"/></svg></a>
         </div>
-        <div class="strategic-read">
-          <p>Not invitable as a group, since invite-only and Chatham House rules. Best path is to ask Chwalisz (or separately Aviv Ovadya) for a <em>private network-internal mention</em> of the demo day. Mutual ecosystem awareness is the realistic ceiling here.</p>
+        <div class="demo-action-zone">
+          <a class="demo-action-github" href="#" target="_blank" rel="noopener" aria-label="GitHub"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></span></a>
+          <a class="demo-action-product tbd" href="#" target="_blank" rel="noopener">Try the platform</a>
+          <a class="demo-action-arrow" href="#" target="_blank" rel="noopener" aria-label="Try the platform"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg></span></a>
         </div>
       </div>
     </article>
 
-    <!-- =========== CARD 05 · Agora =========== -->
-    <article class="card status-caught" data-status="caught">
-      <header class="card-head">
-        <div>
-          <div class="card-num">No. 005</div>
-          <h3 class="card-name">Agora <em>Citizen Network</em></h3>
-        </div>
-        <span class="status-badge caught">Caught</span>
-      </header>
-      <div class="badges-row">
-        <span class="type-badge tier-1">Tier 1</span>
-        <span class="type-badge">Peer Org</span>
+    <article class="demo-card" data-category="deliberation">
+      <div class="demo-top">
+        <span class="topic-pill"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="url(#pillGradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span><span class="topic-pill-label">Deliberation</span></span>
       </div>
-      <div class="card-body">
-        <p class="one-line">Open-source citizen network built by ZKorum for large-scale public debate using zero-knowledge proofs and LLM-based sensemaking.</p>
-        <div class="role-row">
-          <span class="role-label">Strategic role</span>
-          <span class="role-value invite">Invite</span>
-        </div>
-        <div>
-          <div class="section-h">Stat block</div>
-          <dl class="stat-block">
-            <dt>Geography</dt><dd>Paris, France</dd>
-            <dt>Founded</dt><dd>Twitter handle joined March 2023. Exact incorporation date not publicly available.</dd>
-            <dt>Stage / size</dt><dd>Small. Crunchbase: 1 to 10 headcount, two employee profiles.</dd>
-            <dt>Funding</dt><dd>Grant. European Commission lead.</dd>
-            <dt>Source</dt><dd><a href="https://www.agoracitizen.network/">agoracitizen.network</a></dd>
-          </dl>
-        </div>
-        <div>
-          <div class="section-h">Overlap with CIBC's territory</div>
-          <div class="overlap">
-            <span class="overlap-dim">Civic Tech</span><span class="overlap-state strong">Strong</span>
-            <span class="overlap-dim">Deliberative Democracy</span><span class="overlap-state strong">Strong</span>
-            <span class="overlap-dim">Local-First / Data Sovereignty</span><span class="overlap-state strong">Strong</span>
-            <span class="overlap-dim">AT Protocol</span><span class="overlap-state strong">Strong</span>
-            <span class="overlap-dim">Knowledge Graphs</span><span class="overlap-state none">None</span>
-            <span class="overlap-dim">Regenerative Systems</span><span class="overlap-state none">None</span>
+      <h3 class="demo-project">DelibAI</h3>
+      <p class="demo-desc">A non-intrusive AI tool that flags fallacies in deliberation forums and suggests reformulations. The user decides what to do. Built for citizens and lawmakers.</p>
+      <div class="demo-footer">
+        <div class="demo-presenter-zone">
+        <div class="demo-presenter-row">
+          <div class="demo-avatar" aria-hidden="true">SV</div>
+          <div class="demo-presenter-text">
+                <div class="demo-presenter">Simone Vagnoni</div>
+            <div class="demo-bio-tbd">Title · Org · to fill</div>
           </div>
         </div>
-        <div>
-          <div class="section-h">Known people</div>
-          <ul class="list">
-            <li><strong>Yuting Jiang</strong> · co-founder, CEO</li>
-            <li><strong>Nicolas Gimenez</strong> · co-founder, CTO · <em>almost certainly the "Nicola" referenced in the brief</em></li>
-          </ul>
+        <a class="presenter-linkedin" href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56V14.85c0-1.34-.03-3.06-1.87-3.06-1.87 0-2.15 1.46-2.15 2.97v5.69H9.31V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27zM5.34 7.43c-1.14 0-2.07-.93-2.07-2.07 0-1.14.93-2.07 2.07-2.07 1.14 0 2.07.93 2.07 2.07 0 1.14-.93 2.07-2.07 2.07zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.45c.97 0 1.78-.77 1.78-1.72V1.72C24 .77 23.19 0 22.22 0z"/></svg></a>
         </div>
-        <div class="strategic-read">
-          <p>Invite Nicolas Gimenez to demo day. <em>Highest match score</em> of the six peer orgs for the specific tech stack (AT Protocol plus deliberation tooling). Likely demo-day presenter or commenter.</p>
+        <div class="demo-action-zone">
+          <a class="demo-action-github" href="#" target="_blank" rel="noopener" aria-label="GitHub"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></span></a>
+          <a class="demo-action-product" href="https://platform.svagnoni.linkeddata.es" target="_blank" rel="noopener">Try the demo</a>
+          <a class="demo-action-arrow" href="https://platform.svagnoni.linkeddata.es" target="_blank" rel="noopener" aria-label="Try the demo"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg></span></a>
         </div>
       </div>
     </article>
 
-    <!-- =========== CARD 06 · Metagov =========== -->
-    <article class="card status-spotted" data-status="spotted">
-      <header class="card-head">
-        <div>
-          <div class="card-num">No. 006</div>
-          <h3 class="card-name">Meta<em>gov</em></h3>
-        </div>
-        <span class="status-badge spotted">Spotted</span>
-      </header>
-      <div class="badges-row">
-        <span class="type-badge tier-1">Tier 1</span>
-        <span class="type-badge">Peer Org</span>
-        <span class="type-badge">Marketing Channel</span>
+    <article class="demo-card demo-card-placeholder" data-category="coming-soon">
+      <div class="demo-top">
+        <span class="topic-pill"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="url(#pillGradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></span><span class="topic-pill-label">Coming soon</span></span>
       </div>
-      <div class="card-body">
-        <p class="one-line">Research collective for governance of online communities and AI, with fiscally hosted projects and an active member network.</p>
-        <div class="role-row">
-          <span class="role-label">Strategic role</span>
-          <span class="role-value share-link">Share-Link</span>
-        </div>
-        <div>
-          <div class="section-h">Stat block</div>
-          <dl class="stat-block">
-            <dt>Geography</dt><dd>Distributed and US-based. Public AI project has explicit Switzerland focus.</dd>
-            <dt>Stage / size</dt><dd>Mid-size network. Project Directors plus membership tier.</dd>
-            <dt>Funding</dt><dd>Grants. Fiscally hosts member projects.</dd>
-            <dt>Source</dt><dd><a href="https://metagov.org">metagov.org</a></dd>
-          </dl>
-        </div>
-        <div>
-          <div class="section-h">Overlap with CIBC's territory</div>
-          <div class="overlap">
-            <span class="overlap-dim">Civic Tech</span><span class="overlap-state strong">Strong</span>
-            <span class="overlap-dim">Deliberative Democracy</span><span class="overlap-state partial">Partial</span>
-            <span class="overlap-dim">Local-First / Data Sovereignty</span><span class="overlap-state partial">Partial</span>
-            <span class="overlap-dim">AT Protocol</span><span class="overlap-state none">None</span>
-            <span class="overlap-dim">Knowledge Graphs</span><span class="overlap-state partial">Partial</span>
-            <span class="overlap-dim">Regenerative Systems</span><span class="overlap-state none">None</span>
+      <h3 class="demo-project">Harmonica</h3>
+      <p class="demo-desc">More tools to come. The idea is to grow this surface as builders ship.</p>
+      <div class="demo-footer">
+        <div class="demo-presenter-zone">
+          <div class="demo-presenter-row">
+            <div class="demo-presenter-text">
+              <div class="demo-bio-tbd">To be announced</div>
+            </div>
           </div>
         </div>
-        <div>
-          <div class="section-h">Known people</div>
-          <ul class="list">
-            <li><strong>Liz Barry</strong> · Executive Director and Research Director (deliberation facilitation)</li>
-            <li><strong>Josh Tan</strong> + <strong>Nick Vincent</strong> · Public AI Research Directors</li>
-            <li><strong>Nathan Schneider</strong> · member contributor</li>
-          </ul>
-        </div>
-        <div class="strategic-read">
-          <p>Invite Liz Barry and post the share link in the Metagov Slack after onboarding. Metagov's Playtester program is the <em>highest-leverage soft entry</em> for a demo day. Treat Metagov as parallel and as a high-fit marketing channel.</p>
-        </div>
-        <div class="open-q">
-          <div class="label">Confidence · open question</div>
-          <p>The "Metagov local AI server in Maine, Portland" claim is unsupported. Public AI is Switzerland-oriented. Maine data-center activity is unrelated to Metagov. Treat the original Maine reference as unverified.</p>
-        </div>
       </div>
     </article>
 
-    <!-- =========== CARD 07 · RegenOS =========== -->
-    <article class="card status-rumored" data-status="rumored">
-      <header class="card-head">
-        <div>
-          <div class="card-num">No. 007</div>
-          <h3 class="card-name">Regen<em>OS</em></h3>
-        </div>
-        <span class="status-badge rumored">Rumored</span>
-      </header>
-      <div class="badges-row">
-        <span class="type-badge tier-2">Tier 2</span>
-        <span class="type-badge">Marketing Channel</span>
-        <span class="type-badge disputed">Disputed Identity</span>
-      </div>
-      <div class="card-body">
-        <p class="one-line">Community and network. Discord-anchored, blockchain-adjacent network around regenerative finance and ecological credits.</p>
-        <div class="role-row">
-          <span class="role-label">Strategic role</span>
-          <span class="role-value share-link">Share-Link</span>
-        </div>
-        <div>
-          <div class="section-h">Stat block</div>
-          <dl class="stat-block">
-            <dt>Geography</dt><dd>Global · US, Brazil (Amazon biodiversity credits), European concentrations</dd>
-            <dt>Stage / size</dt><dd>3,246 Discord members at snapshot. Re-verify before decision.</dd>
-            <dt>Funding</dt><dd>Token economy · Community Incentives Program · KYC + membership form</dd>
-            <dt>Source</dt><dd><a href="https://www.regen.network/">regen.network</a></dd>
-          </dl>
-        </div>
-        <div>
-          <div class="section-h">Overlap with CIBC's territory</div>
-          <div class="overlap">
-            <span class="overlap-dim">Civic Tech</span><span class="overlap-state partial">Partial</span>
-            <span class="overlap-dim">Deliberative Democracy</span><span class="overlap-state none">None</span>
-            <span class="overlap-dim">Local-First / Data Sovereignty</span><span class="overlap-state partial">Partial</span>
-            <span class="overlap-dim">AT Protocol</span><span class="overlap-state none">None</span>
-            <span class="overlap-dim">Knowledge Graphs</span><span class="overlap-state partial">Partial</span>
-            <span class="overlap-dim">Regenerative Systems</span><span class="overlap-state strong">Strong</span>
-          </div>
-        </div>
-        <div>
-          <div class="section-h">Known people</div>
-          <p class="none-note">Not publicly enumerated. Brayden is the active member.</p>
-        </div>
-        <div class="strategic-read">
-          <p>Strong fit if framed around <em>agentic organization design, KOI, or regenerative coordination tooling</em>. A long-form forum post will outperform a Discord drop alone. Brayden, as an existing member, is the right poster.</p>
-        </div>
-        <div class="open-q">
-          <div class="label">Confidence · open question</div>
-          <p>"RegenOS" most plausibly refers to Regen Network's RegenOS + KOI substrate. Confirm with Brayden which surface he is active on.</p>
-        </div>
-      </div>
-    </article>
 
-    <!-- =========== CARD 08 · Newsweek =========== -->
-    <article class="card status-unverified" data-status="unverified">
-      <header class="card-head">
-        <div>
-          <div class="card-num">No. 008</div>
-          <h3 class="card-name">News<em>week</em> <span style="font-size: 14px; color: var(--ink-faint); font-style: italic;">(political tech?)</span></h3>
-        </div>
-        <span class="status-badge unverified">Unverified</span>
-      </header>
-      <div class="badges-row">
-        <span class="type-badge">Marketing Channel</span>
-        <span class="type-badge disputed">Cannot identify</span>
-      </div>
-      <div class="card-body">
-        <p class="one-line">Not identifiable from available public sources. Search returned only the news magazine and unrelated Telegram coverage.</p>
-        <div class="role-row">
-          <span class="role-label">Strategic role</span>
-          <span class="role-value cannot-assess">Cannot Assess</span>
-        </div>
-        <div>
-          <div class="section-h">Stat block</div>
-          <dl class="stat-block">
-            <dt>Geography</dt><dd>Not publicly available</dd>
-            <dt>Stage / size</dt><dd>Not publicly available</dd>
-            <dt>Funding</dt><dd>Not publicly available</dd>
-            <dt>Source</dt><dd>None located</dd>
-          </dl>
-        </div>
-        <div class="strategic-read">
-          <p>Ask Artem directly for: the channel link or invite, the canonical name (CIBC may be misremembering the spelling), and the platform (Telegram, Discord, or Signal). <em>Card still exists. It says so explicitly.</em></p>
-        </div>
-        <div class="open-q">
-          <div class="label">Confidence · open question</div>
-          <p>Resolves with: ask Artem for the exact invite link, platform, and spelling. Without this, no other field on this card can be filled in.</p>
-        </div>
-      </div>
-    </article>
+  </div>
+</section>
 
-    <!-- =========== CARD 09 · Plurality =========== -->
-    <article class="card status-spotted" data-status="spotted">
-      <header class="card-head">
-        <div>
-          <div class="card-num">No. 009</div>
-          <h3 class="card-name">Plural<em>ity</em></h3>
+<!-- ===== BLOCK 4 · WHO ARE YOU BUILDING WITH ===== -->
+<section class="cluster section" id="about">
+  <div class="about">
+    <aside class="cluster-map-card" aria-label="CIBC ecosystem map preview">
+      <img class="map-svg" src="assets/ecosystem-preview.png" alt="CIBC ecosystem map preview: deliberation, plurality and metagov, dark matter labs, and regen clusters connected to CIBC at the center" />
+
+      <div class="map-stack" aria-label="CIBC ecosystem position">
+        <div class="row">
+          <span class="rel">upstream of</span>
+          <span class="who">Local-first &amp; data sovereignty<small>DemNext · DelibTech · Agora</small></span>
         </div>
-        <span class="status-badge spotted">Spotted</span>
-      </header>
-      <div class="badges-row">
-        <span class="type-badge tier-1">Tier 1</span>
-        <span class="type-badge">Peer Org</span>
-        <span class="type-badge disputed">Disambiguated</span>
-      </div>
-      <div class="card-body">
-        <p class="one-line">Network and nonprofit. Plurality Institute as the institutional hub connecting researchers, practitioners, leaders across academia, industry, civil society, government.</p>
-        <div class="role-row">
-          <span class="role-label">Strategic role</span>
-          <span class="role-value awareness">Awareness</span>
+        <div class="row">
+          <span class="rel">parallel to</span>
+          <span class="who">Civic-tech architecture<small>Dark Matter Labs · Metagov</small></span>
         </div>
-        <div>
-          <div class="section-h">Stat block</div>
-          <dl class="stat-block">
-            <dt>Geography</dt><dd>San Francisco (Institute team). Global community. Taiwan as foundational ref via Audrey Tang.</dd>
-            <dt>Stage / size</dt><dd>Not publicly disclosed. LLM Map references 70+ tools and contributors.</dd>
-            <dt>Funding</dt><dd>Not on a single page. Microgrant program named.</dd>
-            <dt>Source</dt><dd><a href="https://www.plurality.institute">plurality.institute</a></dd>
-          </dl>
-        </div>
-        <div>
-          <div class="section-h">Overlap with CIBC's territory</div>
-          <div class="overlap">
-            <span class="overlap-dim">Civic Tech</span><span class="overlap-state strong">Strong</span>
-            <span class="overlap-dim">Deliberative Democracy</span><span class="overlap-state strong">Strong</span>
-            <span class="overlap-dim">Local-First / Data Sovereignty</span><span class="overlap-state partial">Partial</span>
-            <span class="overlap-dim">AT Protocol</span><span class="overlap-state partial">Partial</span>
-            <span class="overlap-dim">Knowledge Graphs</span><span class="overlap-state strong">Strong</span>
-            <span class="overlap-dim">Regenerative Systems</span><span class="overlap-state none">None</span>
-          </div>
-        </div>
-        <div>
-          <div class="section-h">Known people</div>
-          <ul class="list">
-            <li><strong>Glen Weyl</strong> · co-author of Plurality, founder of RadicalxChange</li>
-            <li><strong>Audrey Tang</strong> · co-author · <em>bridges to DemNext via advisory council</em></li>
-            <li><strong>Firen</strong> · chief of staff · <strong>Rose</strong> · executive director</li>
-          </ul>
-        </div>
-        <div class="strategic-read">
-          <p>Fit is strong if framing emphasizes <em>plural technologies, bridging tools, AT Protocol or knowledge-graph deliberation work</em>. Weaker if framing leans purely local-first without a deliberation angle. Audrey Tang's role on the DemNext advisory council means a single intro could reach both Plurality and DemNext.</p>
+        <div class="row">
+          <span class="rel">downstream of</span>
+          <span class="who">Theory framing<small>Plurality</small></span>
         </div>
       </div>
-    </article>
 
-  </section>
-</main>
+    </aside>
 
-<footer class="site-footer">
-  <a href="index.html" class="footer-brand" aria-label="CIBC home"><span class="footer-brand-mark">CIBC</span></a>
-  <div class="footer-meta">
-    <div class="footer-tagline">Citizen Infrastructure Builders Club</div>
-    <div class="footer-line">Code in the open at <a href="https://github.com/Citizen-Infra" target="_blank" rel="noopener">github.com/Citizen-Infra</a></div>
+    <div class="about-body">
+      <h3>Who are you <span class="gradient-text">building with</span>?</h3>
+      <p>This map shows the people and orgs CIBC members collaborate with, build alongside, or quietly track.</p>
+      <div class="about-ctas">
+        <a href="ecosystem-map.html" class="btn btn-primary">View ecosystem map <span class="arrow"><svg style="width:1em;height:1em;vertical-align:-0.12em;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></a>
+        <a href="#" class="btn btn-ghost">About CIBC</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer" id="register">
+  <canvas class="field-canvas" id="field-canvas-footer" aria-hidden="true"></canvas>
+  <div class="field-veil" aria-hidden="true"></div>
+  <div class="footer-inner">
+    <a href="#" class="footer-brand" aria-label="CIBC home"><span class="footer-brand-mark">CIBC</span></a>
+    <div class="footer-row">
+      <div class="footer-block">
+        <h4>Register</h4>
+        <p>Registration goes to a Luma form for v1. We'll move it to a portable surface once we pick one. Data exportable in either case.</p>
+        <a href="#" class="btn btn-primary" style="margin-top: 16px;">Register on Luma <span class="arrow"><svg style="width:1em;height:1em;vertical-align:-0.12em;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></a>
+      </div>
+      <div class="footer-block">
+        <h4>Stay in touch</h4>
+        <ul>
+          <li><a href="#">CIBC Telegram</a></li>
+          <li><a href="#">Substack digest</a></li>
+          <li><a href="https://github.com/Citizen-Infra" target="_blank" rel="noopener">GitHub · Citizen-Infra</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>CIBC Demo Day · v1 landing · drafted 2026-05-15 · spine in demo-day-landing-page-spine</span>
+      <span>No tracking pixels · no third-party scripts beyond Google Fonts</span>
+    </div>
   </div>
 </footer>
 
-<!-- Trainer view -->
-<div id="trainer-view">
-  <div class="trainer-header">
-    <button class="icon-btn" id="back-btn" aria-label="Back to roster">&larr;</button>
-    <div class="trainer-header-avatar" id="trainer-header-avatar"></div>
-    <div class="trainer-header-text">
-      <h2 class="trainer-header-name" id="trainer-header-name"></h2>
-      <p class="trainer-header-role" id="trainer-header-role"></p>
-    </div>
-  </div>
-
-  <div class="map-wrap">
-    <svg id="map-svg" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid meet">
-      <g class="map-inner" id="map-inner"></g>
-    </svg>
-    <div class="map-tooltip" id="map-tooltip"></div>
-    <button class="reset-btn" id="reset-btn" aria-label="Reset map view">reset view</button>
-  </div>
-
-  <div class="inventory-wrap">
-    <div class="inventory-header">
-      <h3 class="inventory-title" id="inventory-title">Roster</h3>
-      <span class="inventory-count" id="inventory-count"></span>
-    </div>
-    <p class="inventory-summary" id="inventory-summary"></p>
-    <div class="inventory-scroll">
-      <div class="inventory-grid" id="inventory-grid"></div>
-    </div>
-  </div>
 </div>
-
-<script>
-/* ============ TRAINERS ============ */
-const trainers = [
-  // CIBC team · summaries reflect what each member actually named in the May 8 + May 15 planning calls
-  { id: 'megan', section: 'cibc', name: 'Megan',
-    color: '#d4793d', accent: 'sparkle',
-    summary: 'Named in the planning calls: Higher Grounds Institute (matchmaking model), League of Women Voters (aligned org type), Mentimeter (live word-cloud tool), Kyle (CIBC submitter), Alex Okubo, Houston networking channels.' },
-  { id: 'artem', section: 'cibc', name: 'Artem',
-    color: '#6FA9B5', accent: 'lines',
-    summary: 'Named in the planning calls: Newspeak House, Matt (prior CIBC presenter), life itself, Book Power (his), Avails (his), Claudia Chwalisz, Democracy Next, Deliberative Network, Simone (CIBC), Nicolas / Agora, Alex Soto, Gabriel, Nico (DDS), Gordon (DML), Charlie Fisher (Komma).' },
-  { id: 'brayden', section: 'cibc', name: 'Brayden',
-    color: '#D4A347', accent: 'triangle',
-    summary: 'Named in the planning calls: Newspeak House, Plurality, RegenOS.' },
-  { id: 'momcilo', section: 'cibc', name: 'Momcilo',
-    color: '#8a5b6e', accent: 'ring',
-    summary: 'Named in the planning calls: positiveslant.com (his portal for embedding and cross-platform community content).' },
-  { id: 'chris', section: 'cibc', name: 'Chris',
-    color: '#5a4d3a', accent: 'lines',
-    summary: 'Referenced story circles as a facilitation technique he uses, and "my communities" generally. No specific external person, organization, or community named.' },
-  // Connections named by team members
-  { id: 'chwalisz', section: 'bridge', name: 'Claudia Chwalisz',
-    color: '#9DB89E', accent: 'flower',
-    summary: 'Named by Artem. Founder of Democracy Next, co-coordinator of the Deliberative Network. Artem proposed her as a partnership target.' },
-  { id: 'fisher', section: 'bridge', name: 'Charlie Fisher',
-    color: '#7A9268', accent: 'leaf',
-    summary: 'Named by Artem. Ex-Dark Matter Labs, now runs the consultancy Coma in Germany. Inactive CIBC member.' },
-  { id: 'gimenez', section: 'bridge', name: 'Nicolas Gimenez',
-    color: '#6FA9B5', accent: 'ring',
-    summary: 'Named by Artem as "Nicola from Agora Citizen Network." CIBC member he messaged about presenting.' }
-];
-
-/* ============ NODES (creatures) ============ */
-// Entity types and confidence states drive visuals.
-const nodes = [
-  // CIBC center · the team's shared anchor (no individual contributor attribution)
-  { id: 'cibc', label: 'CIBC', x: 500, y: 500, r: 11, contributors: [], type: 'cibc', critter: 'circle' },
-  { id: 'demo-day', label: 'Demo Day', x: 560, y: 565, r: 7, contributors: [], type: 'cibc', critter: 'stage' },
-
-  // Megan's contributions (named by Megan in the planning calls)
-  { id: 'higher-grounds', label: 'Higher Grounds Institute', x: 620, y: 750, r: 5, contributors: ['megan'], type: 'civic-tech', critter: 'sparkle', state: 'caught' },
-  { id: 'lwv', label: 'League of Women Voters', x: 720, y: 770, r: 5, contributors: ['megan'], type: 'governance', critter: 'shield', state: 'spotted' },
-  { id: 'mentimeter', label: 'Mentimeter', x: 530, y: 700, r: 4, contributors: ['megan'], type: 'concept', critter: 'twin', state: 'caught' },
-  { id: 'kyle', label: 'Kyle', x: 440, y: 700, r: 4, contributors: ['megan'], type: 'person', critter: 'ring', state: 'caught' },
-  { id: 'alex-okubo', label: 'Alex Okubo', x: 480, y: 760, r: 4, contributors: ['megan'], type: 'person', critter: 'sparkle', state: 'spotted' },
-  { id: 'houston-net', label: 'Houston networks', x: 360, y: 780, r: 4, contributors: ['megan'], type: 'concept', critter: 'web', state: 'caught' },
-
-  // Artem's contributions (named by Artem in the planning calls)
-  { id: 'newspeak-house', label: 'Newspeak House', x: 600, y: 240, r: 7, contributors: ['artem','brayden'], type: 'civic-tech', critter: 'prism', state: 'spotted' },
-  { id: 'matt-au', label: 'Matt (AU)', x: 700, y: 165, r: 3, contributors: ['artem'], type: 'person', critter: 'tiny' },
-  { id: 'life-itself', label: 'life itself', x: 760, y: 220, r: 5, contributors: ['artem'], type: 'regen', critter: 'sprout', state: 'spotted' },
-  { id: 'book-power', label: 'Book Power', x: 545, y: 460, r: 5, contributors: ['artem'], type: 'cibc', critter: 'stage', state: 'caught' },
-  { id: 'avails', label: 'Avails', x: 580, y: 410, r: 4, contributors: ['artem'], type: 'concept', critter: 'twin' },
-  { id: 'demnext', label: 'DemNext', x: 290, y: 260, r: 8, contributors: ['artem'], type: 'deliberation', critter: 'circle', state: 'spotted',
-    strategic: 'Artem proposed Democracy Next as a partnership target via Claudia Chwalisz.' },
-  { id: 'delibtech', label: 'Deliberative Network', x: 200, y: 200, r: 6, contributors: ['artem'], type: 'deliberation', critter: 'web', state: 'spotted',
-    strategic: 'Invite-only community of practice. Artem flagged CIBC is not in it.' },
-  { id: 'agora', label: 'Agora Citizen Net', x: 330, y: 380, r: 7, contributors: ['artem','gimenez'], type: 'deliberation', critter: 'wave', state: 'caught',
-    strategic: 'Artem messaged Nicolas about presenting. Highest match score for our tech stack.' },
-  { id: 'chwalisz-node', label: 'Claudia Chwalisz', x: 240, y: 320, r: 4, contributors: ['artem'], type: 'person', critter: 'flower', state: 'spotted' },
-  { id: 'nicolas-node', label: 'Nicolas Gimenez', x: 360, y: 420, r: 4, contributors: ['artem','gimenez'], type: 'person', critter: 'ring', state: 'caught' },
-  { id: 'simone', label: 'Simone', x: 410, y: 380, r: 4, contributors: ['artem'], type: 'person', critter: 'ring', state: 'caught' },
-  { id: 'alex-soto', label: 'Alex Soto', x: 270, y: 480, r: 4, contributors: ['artem'], type: 'person', critter: 'tiny', state: 'rumored' },
-  { id: 'gabriel', label: 'Gabriel Chartier', x: 350, y: 540, r: 4, contributors: ['artem'], type: 'person', critter: 'sparkle', state: 'caught' },
-  { id: 'nico-dds', label: 'Nico (DDS)', x: 220, y: 410, r: 4, contributors: ['artem'], type: 'person', critter: 'ring', state: 'caught' },
-  { id: 'dml', label: 'Dark Matter Labs', x: 260, y: 550, r: 8, contributors: ['artem'], type: 'civic-tech', critter: 'prism', state: 'caught',
-    strategic: 'Reached via Gordon (Civic Tech Lead, Berlin) and ex-DML Charlie Fisher. Both in CIBC Telegram.' },
-  { id: 'gurden-node', label: 'Gordon (DML)', x: 320, y: 480, r: 4, contributors: ['artem'], type: 'person', critter: 'sparkle', state: 'caught' },
-  { id: 'komma', label: 'Komma (Coma?)', x: 170, y: 620, r: 6, contributors: ['artem','fisher'], type: 'civic-tech', critter: 'twin', state: 'rumored',
-    strategic: 'Charlie Fisher\'s consultancy in Germany. Inactive CIBC member.' },
-  { id: 'fisher-node', label: 'Charlie Fisher', x: 215, y: 585, r: 4, contributors: ['artem','fisher'], type: 'person', critter: 'leaf', state: 'rumored' },
-
-  // Brayden's contributions (named by Brayden in the planning calls)
-  { id: 'plurality', label: 'Plurality', x: 700, y: 320, r: 7, contributors: ['brayden'], type: 'research', critter: 'orbit', state: 'spotted',
-    strategic: 'Brayden suggested as another technical community to invite.' },
-  { id: 'regenos', label: 'RegenOS', x: 700, y: 670, r: 7, contributors: ['brayden'], type: 'regen', critter: 'sprout', state: 'caught',
-    strategic: 'Brayden is in RegenOS; the right poster for any regen-adjacent share-link.' },
-
-  // Momcilo's contributions
-  { id: 'positiveslant', label: 'positiveslant.com', x: 800, y: 600, r: 5, contributors: ['momcilo'], type: 'civic-tech', critter: 'web', state: 'caught' }
-];
-
-// Edge tuples: [from, to, tie]. Tie: 'strong' = team member named the relationship explicitly.
-// 'loose' = inferred adjacency, ex-affiliation, or unconfirmed. Only edges sourced from transcripts.
-const edges = [
-  // CIBC center to demo day
-  ['cibc', 'demo-day', 'strong'],
-
-  // Megan's contributions
-  ['cibc', 'higher-grounds', 'loose'],
-  ['cibc', 'lwv', 'loose'],
-  ['cibc', 'mentimeter', 'loose'],
-  ['cibc', 'kyle', 'strong'],
-  ['cibc', 'alex-okubo', 'loose'],
-  ['cibc', 'houston-net', 'strong'],
-
-  // Artem's contributions
-  ['cibc', 'newspeak-house', 'loose'],
-  ['newspeak-house', 'matt-au', 'strong'],
-  ['cibc', 'life-itself', 'loose'],
-  ['cibc', 'book-power', 'strong'],
-  ['cibc', 'avails', 'strong'],
-  ['cibc', 'demnext', 'loose'],
-  ['demnext', 'chwalisz-node', 'strong'],
-  ['demnext', 'delibtech', 'strong'],
-  ['delibtech', 'chwalisz-node', 'strong'],
-  ['cibc', 'agora', 'strong'],
-  ['agora', 'nicolas-node', 'strong'],
-  ['cibc', 'simone', 'strong'],
-  ['cibc', 'alex-soto', 'loose'],
-  ['cibc', 'gabriel', 'strong'],
-  ['cibc', 'nico-dds', 'strong'],
-  ['cibc', 'dml', 'loose'],
-  ['dml', 'gurden-node', 'strong'],
-  ['dml', 'fisher-node', 'loose'],
-  ['fisher-node', 'komma', 'strong'],
-  ['cibc', 'komma', 'loose'],
-
-  // Brayden's contributions
-  ['cibc', 'plurality', 'loose'],
-  ['cibc', 'regenos', 'strong'],
-
-  // Momcilo's contributions
-  ['cibc', 'positiveslant', 'strong']
-];
-
-/* compute trainer rosters */
-trainers.forEach(t => {
-  t.touchedNodeIds = nodes.filter(n => n.contributors.includes(t.id)).map(n => n.id);
-  t.count = t.touchedNodeIds.length;
-});
-
-/* ============ SVG: TRAINER AVATAR (humanoid) ============ */
-function trainerSVG(c) {
-  const accents = {
-    leaf: `<path d="M50 12 Q44 4 50 0 Q56 4 50 12 Z" fill="#7a9268" opacity="0.95"/>
-           <line x1="50" y1="12" x2="50" y2="18" stroke="#5a7048" stroke-width="2" stroke-linecap="round"/>`,
-    sparkle: `<path d="M50 4 L52 12 L60 14 L52 16 L50 24 L48 16 L40 14 L48 12 Z" fill="#f5cd75"/>`,
-    lines: `<line x1="40" y1="14" x2="60" y2="14" stroke="${c.color}" stroke-width="2" stroke-linecap="round" opacity="0.85"/>
-            <line x1="44" y1="8" x2="56" y2="8" stroke="${c.color}" stroke-width="2" stroke-linecap="round" opacity="0.55"/>`,
-    ring: `<circle cx="50" cy="10" r="6" fill="none" stroke="${c.color}" stroke-width="2.5"/>`,
-    flower: `<g transform="translate(50 10)">
-               <circle cx="0" cy="-5" r="3.5" fill="#f0bcbc"/>
-               <circle cx="-5" cy="-1" r="3.5" fill="#f0bcbc"/>
-               <circle cx="5" cy="-1" r="3.5" fill="#f0bcbc"/>
-               <circle cx="-3" cy="4" r="3.5" fill="#f0bcbc"/>
-               <circle cx="3" cy="4" r="3.5" fill="#f0bcbc"/>
-               <circle cx="0" cy="0" r="2.5" fill="#f5cd75"/>
-             </g>`,
-    bloom: `<g transform="translate(50 10)">
-              <ellipse cx="0" cy="-4" rx="3" ry="6" fill="#c9b2dc"/>
-              <ellipse cx="-5" cy="0" rx="3" ry="6" transform="rotate(-50 -5 0)" fill="#b496d0"/>
-              <ellipse cx="5" cy="0" rx="3" ry="6" transform="rotate(50 5 0)" fill="#b496d0"/>
-              <circle cx="0" cy="2" r="2" fill="#f5cd75"/>
-            </g>`,
-    triangle: `<path d="M50 0 L58 14 L42 14 Z" fill="${c.color}" opacity="0.9"/>`
-  };
-
-  return `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="overflow:visible">
-    <ellipse cx="50" cy="94" rx="26" ry="3.5" fill="rgba(60, 40, 20, 0.18)"/>
-    ${accents[c.accent] || ''}
-    <path d="M22 92 Q22 70 32 64 L68 64 Q78 70 78 92 Z" fill="${c.color}"/>
-    <ellipse cx="38" cy="72" rx="6" ry="4" fill="rgba(255,255,255,0.16)"/>
-    <rect x="44" y="56" width="12" height="10" rx="3" fill="${c.color}" opacity="0.88"/>
-    <ellipse cx="50" cy="42" rx="20" ry="22" fill="${c.color}"/>
-    <ellipse cx="42" cy="34" rx="8" ry="5" fill="rgba(255,255,255,0.22)"/>
-    <ellipse cx="42" cy="44" rx="5" ry="6" fill="white"/>
-    <ellipse cx="58" cy="44" rx="5" ry="6" fill="white"/>
-    <ellipse cx="43" cy="46" rx="2.8" ry="3.8" fill="var(--char-eye)"/>
-    <ellipse cx="59" cy="46" rx="2.8" ry="3.8" fill="var(--char-eye)"/>
-    <circle cx="44" cy="44" r="1.2" fill="white"/>
-    <circle cx="60" cy="44" r="1.2" fill="white"/>
-    <ellipse cx="33" cy="52" rx="3" ry="2" fill="rgba(220, 100, 100, 0.32)"/>
-    <ellipse cx="67" cy="52" rx="3" ry="2" fill="rgba(220, 100, 100, 0.32)"/>
-    <path d="M46 56 Q50 58.5 54 56" stroke="var(--char-eye)" stroke-width="1.6" stroke-linecap="round" fill="none"/>
-  </svg>`;
-}
-
-/* ============ SVG: PERSON GLYPH (head + shoulders) ============ */
-function personGlyph(cx, cy, r, fill) {
-  const hR = r * 0.5;
-  const hY = cy - r * 0.45;
-  const bW = r * 1.3;
-  const bY = cy + r * 0.95;
-  const fillAttr = fill ? ` fill="${fill}"` : '';
-  return `
-    <circle cx="${cx}" cy="${hY}" r="${hR}"${fillAttr}/>
-    <path d="M ${cx - bW} ${bY} Q ${cx - bW * 0.85} ${cy + r * 0.05} ${cx} ${cy + r * 0.1} Q ${cx + bW * 0.85} ${cy + r * 0.05} ${cx + bW} ${bY} Z"${fillAttr}/>
-  `;
-}
-
-/* ============ SVG: CRITTER ============ */
-function critterSVG(node) {
-  const typeColors = {
-    cibc:         '#d4793d',
-    concept:      '#a89684',
-    deliberation: '#9aa9c4',
-    'civic-tech': '#c4a880',
-    research:     '#b496d0',
-    governance:   '#8db09c',
-    regen:        '#7a9268',
-    person:       '#c8b88c',
-    unknown:      '#7a7268',
-    fragment:     '#998774'
-  };
-  const c = typeColors[node.type] || '#a89684';
-  const dark = '#1a1410'; const w = 'white';
-  const isUnverified = node.state === 'unverified';
-
-  const details = {
-    circle: `<circle cx="50" cy="26" r="9" fill="none" stroke="${dark}" stroke-width="2" opacity="0.6"/><circle cx="50" cy="26" r="4" fill="${dark}" opacity="0.5"/>`,
-    stage:  `<rect x="38" y="26" width="24" height="10" fill="${dark}" opacity="0.5"/><path d="M42 26 L46 18 L54 18 L58 26 Z" fill="${dark}" opacity="0.4"/>`,
-    shield: `<path d="M50 18 L58 24 L58 36 L50 40 L42 36 L42 24 Z" fill="${dark}" opacity="0.5"/>`,
-    twin:   `<circle cx="44" cy="24" r="4" fill="${dark}" opacity="0.55"/><circle cx="56" cy="24" r="4" fill="${dark}" opacity="0.55"/>`,
-    block:  `<rect x="44" y="18" width="12" height="10" rx="2" fill="${dark}" opacity="0.55"/>`,
-    wave:   `<path d="M38 26 Q42 20 46 26 T54 26 T62 26" stroke="${dark}" stroke-width="2" fill="none" opacity="0.55"/>`,
-    sprout: `<path d="M50 36 L50 22" stroke="${dark}" stroke-width="2"/><path d="M50 22 Q44 18 42 12 Q48 16 50 22" fill="#7a9268"/><path d="M50 22 Q56 18 58 12 Q52 16 50 22" fill="#7a9268"/>`,
-    web:    `<g stroke="${dark}" stroke-width="1.2" fill="none" opacity="0.5"><line x1="50" y1="14" x2="50" y2="36"/><line x1="38" y1="20" x2="62" y2="32"/><line x1="62" y1="20" x2="38" y2="32"/><circle cx="50" cy="26" r="7"/></g>`,
-    flower: `<g transform="translate(50 24)"><circle cx="0" cy="-6" r="3.5" fill="${dark}" opacity="0.5"/><circle cx="-6" cy="-1" r="3.5" fill="${dark}" opacity="0.5"/><circle cx="6" cy="-1" r="3.5" fill="${dark}" opacity="0.5"/><circle cx="-4" cy="5" r="3.5" fill="${dark}" opacity="0.5"/><circle cx="4" cy="5" r="3.5" fill="${dark}" opacity="0.5"/><circle cx="0" cy="0" r="2.5" fill="#f5cd75"/></g>`,
-    bloom:  `<g transform="translate(50 24)"><ellipse cx="0" cy="-4" rx="3" ry="6" fill="${dark}" opacity="0.45"/><ellipse cx="-5" cy="0" rx="3" ry="6" transform="rotate(-50 -5 0)" fill="${dark}" opacity="0.5"/><ellipse cx="5" cy="0" rx="3" ry="6" transform="rotate(50 5 0)" fill="${dark}" opacity="0.5"/><circle cx="0" cy="2" r="2" fill="#f5cd75"/></g>`,
-    ring:   `<circle cx="50" cy="26" r="8" fill="none" stroke="${dark}" stroke-width="2.5" opacity="0.6"/>`,
-    sparkle:`<path d="M50 12 L52 22 L62 24 L52 26 L50 36 L48 26 L38 24 L48 22 Z" fill="#f5cd75"/>`,
-    leaf:   `<path d="M50 36 Q42 30 42 20 Q50 22 50 36 Z" fill="#7a9268"/><path d="M50 36 Q58 30 58 20 Q50 22 50 36 Z" fill="#7a9268" opacity="0.85"/>`,
-    starry: `<path d="M50 14 L53 22 L61 23 L55 28 L57 36 L50 32 L43 36 L45 28 L39 23 L47 22 Z" fill="${dark}" opacity="0.5"/>`,
-    prism:  `<path d="M50 16 L60 32 L40 32 Z" fill="${dark}" opacity="0.55"/>`,
-    orbit:  `<circle cx="50" cy="26" r="3" fill="${dark}" opacity="0.55"/><ellipse cx="50" cy="26" rx="10" ry="4" fill="none" stroke="${dark}" stroke-width="1.2" opacity="0.5"/><ellipse cx="50" cy="26" rx="4" ry="10" fill="none" stroke="${dark}" stroke-width="1.2" opacity="0.5"/>`,
-    gear:   `<g transform="translate(50 26)"><circle r="5" fill="${dark}" opacity="0.5"/><circle r="2" fill="${c}"/><g stroke="${dark}" stroke-width="2" opacity="0.5"><line x1="0" y1="-9" x2="0" y2="-6"/><line x1="0" y1="6" x2="0" y2="9"/><line x1="-9" y1="0" x2="-6" y2="0"/><line x1="6" y1="0" x2="9" y2="0"/></g></g>`,
-    tiny:   `<text x="50" y="32" text-anchor="middle" font-family="Fraunces, serif" font-style="italic" font-size="14" fill="${dark}" opacity="0.5">?</text>`
-  };
-
-  return `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="overflow:visible">
-    <ellipse cx="50" cy="92" rx="22" ry="3" fill="rgba(0, 0, 0, 0.28)"/>
-    <path d="M22 62 Q22 30 50 30 Q78 30 78 62 Q78 86 50 86 Q22 86 22 62 Z" fill="${c}" opacity="${isUnverified ? 0.45 : 1}"/>
-    ${isUnverified ? '' : '<ellipse cx="38" cy="48" rx="10" ry="6" fill="rgba(255,255,255,0.18)"/>'}
-    ${details[node.critter] || details.tiny}
-    <ellipse cx="40" cy="60" rx="5.5" ry="6.5" fill="${w}"/>
-    <ellipse cx="60" cy="60" rx="5.5" ry="6.5" fill="${w}"/>
-    <ellipse cx="41" cy="62" rx="2.8" ry="3.8" fill="${dark}"/>
-    <ellipse cx="61" cy="62" rx="2.8" ry="3.8" fill="${dark}"/>
-    <circle cx="42.5" cy="60" r="1.2" fill="${w}"/>
-    <circle cx="62.5" cy="60" r="1.2" fill="${w}"/>
-    <ellipse cx="30" cy="70" rx="3.5" ry="2" fill="rgba(220, 100, 100, 0.3)"/>
-    <ellipse cx="70" cy="70" rx="3.5" ry="2" fill="rgba(220, 100, 100, 0.3)"/>
-    <path d="M46 75 Q50 77.5 54 75" stroke="${dark}" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-  </svg>`;
-}
-
-/* ============ RENDER ROSTER ============ */
-const cibcGrid = document.getElementById('cibc-grid');
-const bridgeGrid = document.getElementById('bridge-grid');
-{ const _c = document.getElementById('caught-counter'); if (_c) _c.textContent = `trainers · ${trainers.length}`; }
-
-trainers.forEach(t => {
-  const card = document.createElement('button');
-  card.className = 'trainer-card';
-  card.setAttribute('aria-label', `Open ${t.name}'s roster`);
-  card.innerHTML = `
-    <div class="avatar-wrap">${trainerSVG(t)}</div>
-    <div class="trainer-name">${t.name}</div>
-    <div class="trainer-role">${t.role}</div>
-    <div class="trainer-count">${t.count} caught</div>
-  `;
-  card.addEventListener('click', () => openTrainer(t));
-  (t.section === 'cibc' ? cibcGrid : bridgeGrid).appendChild(card);
-});
-
-/* ============ TRAINER VIEW ============ */
-const trainerView = document.getElementById('trainer-view');
-const mapSvg = document.getElementById('map-svg');
-const mapInner = document.getElementById('map-inner');
-const tooltip = document.getElementById('map-tooltip');
-const resetBtn = document.getElementById('reset-btn');
-const inventoryGrid = document.getElementById('inventory-grid');
-
-let currentTrainer = null;
-let focusedNodeId = null;
-
-function openTrainer(t) {
-  currentTrainer = t;
-  focusedNodeId = null;
-
-  document.getElementById('trainer-header-avatar').innerHTML = trainerSVG(t);
-  document.getElementById('trainer-header-name').textContent = t.name;
-  document.getElementById('trainer-header-role').textContent = t.role;
-  document.getElementById('inventory-title').textContent = `${t.name}'s roster`;
-  document.getElementById('inventory-count').textContent = `${t.count} caught`;
-  document.getElementById('inventory-summary').textContent = `"${t.summary}"`;
-
-  trainerView.style.setProperty('--lens-color', t.color);
-
-  renderMap();
-  renderInventory();
-
-  trainerView.classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
-
-function renderMap() {
-  const lit = new Set(currentTrainer.touchedNodeIds);
-  let svg = '';
-
-  // Cluster zone backgrounds (subtle tint behind cluster regions)
-  svg += `
-    <ellipse class="cluster-zone" cx="295" cy="320" rx="180" ry="160"/>
-    <text class="cluster-zone-label" x="295" y="170">deliberation</text>
-    <ellipse class="cluster-zone" cx="245" cy="555" rx="160" ry="140"/>
-    <text class="cluster-zone-label" x="245" y="720">dark matter labs</text>
-    <ellipse class="cluster-zone" cx="745" cy="385" rx="170" ry="150"/>
-    <text class="cluster-zone-label" x="745" y="230">plurality / metagov</text>
-    <ellipse class="cluster-zone" cx="690" cy="665" rx="100" ry="80"/>
-    <text class="cluster-zone-label" x="690" y="760">regen</text>
-  `;
-
-  // Edges (with tie class: strong = solid, loose = dashed)
-  edges.forEach(([a, b, tie]) => {
-    const nA = nodes.find(n => n.id === a);
-    const nB = nodes.find(n => n.id === b);
-    if (!nA || !nB) return;
-    const isLit = lit.has(a) && lit.has(b);
-    svg += `<line class="map-edge ${isLit ? 'lit' : ''} ${tie || 'strong'}" data-a="${a}" data-b="${b}" x1="${nA.x}" y1="${nA.y}" x2="${nB.x}" y2="${nB.y}"/>`;
-  });
-
-  // Nodes (people get head+shoulders glyph, entities/concepts get dots)
-  nodes.forEach(n => {
-    const isLit = lit.has(n.id);
-    const isPerson = n.type === 'person';
-    const r = isLit ? n.r + 2 : n.r;
-    const hitR = Math.max(r + 18, 22);
-    const showStateRing = isLit && n.state;
-    const visual = isPerson
-      ? personGlyph(n.x, n.y, r * 1.5)
-      : `<circle cx="${n.x}" cy="${n.y}" r="${r}"/>`;
-    svg += `<g class="map-node" data-id="${n.id}">
-      <g class="map-node-visual ${isLit ? 'lit' : ''}" data-id="${n.id}">${visual}</g>
-      ${showStateRing ? `<circle class="state-ring ${n.state} ${isLit ? 'visible' : ''}" data-id="${n.id}" cx="${n.x}" cy="${n.y}" r="${r + 5}"/>` : ''}
-      ${isLit ? `<text class="map-node-label lit" data-id="${n.id}" x="${n.x}" y="${n.y - r - 10}">${n.label}</text>` : ''}
-      <circle class="map-node-hit" cx="${n.x}" cy="${n.y}" r="${hitR}" data-id="${n.id}"/>
-    </g>`;
-  });
-
-  mapInner.innerHTML = svg;
-  resetMapTransform();
-
-  mapInner.querySelectorAll('.map-node-hit').forEach(hit => {
-    const handle = (e) => {
-      if (mapController && mapController.didMove()) return;
-      e.preventDefault();
-      e.stopPropagation();
-      const id = hit.getAttribute('data-id');
-      focusOnNode(id);
-    };
-    hit.addEventListener('click', handle);
-  });
-}
-
-function renderInventory() {
-  const roster = currentTrainer.touchedNodeIds.map(id => nodes.find(n => n.id === id));
-  inventoryGrid.innerHTML = '';
-  // Sort: entities first, concepts second, people third
-  const order = { cibc: 0, 'civic-tech': 1, deliberation: 1, governance: 1, research: 1, regen: 1, unknown: 1, concept: 2, person: 3, fragment: 4 };
-  roster.sort((a,b) => (order[a.type] ?? 5) - (order[b.type] ?? 5));
-  roster.forEach(node => {
-    const item = document.createElement('button');
-    item.className = 'inv-item';
-    item.setAttribute('data-id', node.id);
-    const statePill = node.state ? `<span class="inv-state-pill ${node.state}">${node.state}</span>` : '';
-    item.innerHTML = `
-      <div class="inv-critter">${critterSVG(node)}</div>
-      <div class="inv-info">
-        <div class="inv-name">${node.label}${statePill}</div>
-        <div class="inv-type">${node.type}</div>
-      </div>
-    `;
-    item.addEventListener('click', () => focusOnNode(node.id));
-    inventoryGrid.appendChild(item);
-  });
-}
-
-function focusOnNode(nodeId) {
-  const node = nodes.find(n => n.id === nodeId);
-  if (!node) return;
-  focusedNodeId = nodeId;
-
-  const neighbors = new Set();
-  edges.forEach(([a, b]) => {
-    if (a === nodeId) neighbors.add(b);
-    if (b === nodeId) neighbors.add(a);
-  });
-
-  mapInner.querySelectorAll('.map-node-visual').forEach(visual => {
-    const id = visual.getAttribute('data-id');
-    visual.classList.remove('focused', 'neighbor', 'dimmed');
-    if (id === nodeId) visual.classList.add('focused');
-    else if (neighbors.has(id)) visual.classList.add('neighbor');
-    else if (!currentTrainer.touchedNodeIds.includes(id)) visual.classList.add('dimmed');
-  });
-
-  mapInner.querySelectorAll('.map-edge').forEach(edge => {
-    const a = edge.getAttribute('data-a');
-    const b = edge.getAttribute('data-b');
-    edge.classList.remove('neighbor', 'dimmed');
-    if (a === nodeId || b === nodeId) edge.classList.add('neighbor');
-    else edge.classList.add('dimmed');
-  });
-
-  mapInner.querySelectorAll('.map-node-label').forEach(lbl => {
-    const id = lbl.getAttribute('data-id');
-    lbl.classList.remove('focused', 'dimmed');
-    if (id === nodeId) lbl.classList.add('focused');
-    else if (!neighbors.has(id)) lbl.classList.add('dimmed');
-  });
-
-  // Add labels to neighbors that don't already have them
-  neighbors.forEach(nid => {
-    if (mapInner.querySelector(`text[data-id="${nid}"]`)) return;
-    const nNode = nodes.find(n => n.id === nid);
-    if (!nNode) return;
-    const g = mapInner.querySelector(`g[data-id="${nid}"]`);
-    if (!g) return;
-    const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-    text.setAttribute('class', 'map-node-label');
-    text.setAttribute('data-id', nid);
-    text.setAttribute('x', nNode.x);
-    text.setAttribute('y', nNode.y - nNode.r - 10);
-    text.textContent = nNode.label;
-    g.insertBefore(text, g.querySelector('.map-node-hit'));
-  });
-
-  inventoryGrid.querySelectorAll('.inv-item').forEach(it => {
-    const isActive = it.getAttribute('data-id') === nodeId;
-    it.classList.toggle('active', isActive);
-    if (isActive) {
-      it.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
-    }
-  });
-
-  zoomToNode(node);
-  showTooltip(node);
-  resetBtn.classList.add('visible');
-}
-
-function zoomToNode(node) {
-  if (!mapController) return;
-  mapController.setView(1.9, 500 - node.x, 500 - node.y, true);
-}
-
-function resetMapTransform() {
-  if (!mapController) { mapInner.style.transform = 'scale(1) translate(0, 0)'; return; }
-  mapController.reset(true);
-}
-
-function showTooltip(node) {
-  const contribNames = node.contributors.map(cid => {
-    const t = trainers.find(tt => tt.id === cid);
-    return t ? t.name : cid;
-  }).join(', ');
-  const stateTag = node.state ? `<div><span class="state-tag ${node.state}">${node.state}</span></div>` : '';
-  const strategic = node.strategic ? `<div class="strategic">${node.strategic}</div>` : '';
-  const heldBy = contribNames ? `<em>${node.type} &middot; held by ${contribNames}</em>` : `<em>${node.type} &middot; no one holds this yet</em>`;
-  tooltip.innerHTML = `
-    <strong>${node.label}</strong>
-    ${heldBy}
-    ${stateTag}
-    ${strategic}
-  `;
-  tooltip.classList.add('visible');
-}
-
-function resetFocus() {
-  focusedNodeId = null;
-  renderMap();
-  inventoryGrid.querySelectorAll('.inv-item').forEach(it => it.classList.remove('active'));
-  tooltip.classList.remove('visible');
-  resetBtn.classList.remove('visible');
-}
-
-resetBtn.addEventListener('click', resetFocus);
-
-document.getElementById('back-btn').addEventListener('click', () => {
-  trainerView.classList.remove('active');
-  document.body.style.overflow = '';
-  tooltip.classList.remove('visible');
-  resetBtn.classList.remove('visible');
-  focusedNodeId = null;
-});
-
-mapSvg.addEventListener('click', (e) => {
-  if (e.target === mapSvg || e.target.tagName === 'g') {
-    tooltip.classList.remove('visible');
-  }
-});
-
-/* ============ FRONT-PAGE MAP (full ecosystem, no trainer overlay) ============ */
-const frontMapInner = document.getElementById('front-map-inner');
-const frontMapSvg = document.getElementById('front-map-svg');
-const frontTooltip = document.getElementById('front-map-tooltip');
-const frontResetBtn = document.getElementById('front-reset-btn');
-let frontFocusedNodeId = null;
-
-const frontTypeColors = {
-  cibc:         '#d4793d',
-  concept:      '#a89684',
-  deliberation: '#9aa9c4',
-  'civic-tech': '#c4a880',
-  research:     '#b496d0',
-  governance:   '#8db09c',
-  regen:        '#7a9268',
-  person:       '#c8b88c',
-  unknown:      '#a89684',
-  fragment:     '#bfae99'
-};
-
-function renderFrontMap() {
-  let svg = '';
-
-  // Cluster zone tints
-  svg += `
-    <ellipse class="front-cluster-zone" cx="295" cy="320" rx="200" ry="170" fill="#9aa9c4"/>
-    <text class="front-cluster-zone-label" x="295" y="155">deliberation</text>
-    <ellipse class="front-cluster-zone" cx="245" cy="555" rx="170" ry="150" fill="#c4a880"/>
-    <text class="front-cluster-zone-label" x="245" y="720">dark matter labs</text>
-    <ellipse class="front-cluster-zone" cx="745" cy="385" rx="180" ry="160" fill="#b496d0"/>
-    <text class="front-cluster-zone-label" x="745" y="215">plurality / metagov</text>
-    <ellipse class="front-cluster-zone" cx="690" cy="665" rx="110" ry="85" fill="#7a9268"/>
-    <text class="front-cluster-zone-label" x="690" y="760">regen</text>
-  `;
-
-  edges.forEach(([a, b, tie]) => {
-    const nA = nodes.find(n => n.id === a);
-    const nB = nodes.find(n => n.id === b);
-    if (!nA || !nB) return;
-    svg += `<line class="front-map-edge ${tie || 'strong'}" data-a="${a}" data-b="${b}" x1="${nA.x}" y1="${nA.y}" x2="${nB.x}" y2="${nB.y}"/>`;
-  });
-
-  nodes.forEach(n => {
-    const fill = frontTypeColors[n.type] || '#a89684';
-    const isPerson = n.type === 'person';
-    const hitR = Math.max(n.r + 18, 22);
-    const showLabel = n.r >= 6 || isPerson;
-    const showStateRing = !!n.state;
-    const visual = isPerson
-      ? personGlyph(n.x, n.y, n.r * 1.5, fill)
-      : `<circle cx="${n.x}" cy="${n.y}" r="${n.r}" fill="${fill}"/>`;
-    svg += `<g class="front-map-node" data-id="${n.id}">
-      <g class="front-map-node-visual" data-id="${n.id}">${visual}</g>
-      ${showStateRing ? `<circle class="front-state-ring ${n.state}" data-id="${n.id}" cx="${n.x}" cy="${n.y}" r="${n.r + 5}"/>` : ''}
-      ${showLabel ? `<text class="front-map-node-label" data-id="${n.id}" x="${n.x}" y="${n.y - n.r - 10}">${n.label}</text>` : ''}
-      <circle class="front-map-node-hit" cx="${n.x}" cy="${n.y}" r="${hitR}" data-id="${n.id}"/>
-    </g>`;
-  });
-
-  frontMapInner.innerHTML = svg;
-  resetFrontMapTransform();
-
-  frontMapInner.querySelectorAll('.front-map-node-hit').forEach(hit => {
-    const handle = (e) => {
-      if (frontController && frontController.didMove()) return;
-      e.preventDefault(); e.stopPropagation();
-      focusFrontNode(hit.getAttribute('data-id'));
-    };
-    hit.addEventListener('click', handle);
-  });
-}
-
-function focusFrontNode(nodeId) {
-  const node = nodes.find(n => n.id === nodeId);
-  if (!node) return;
-  frontFocusedNodeId = nodeId;
-
-  const neighbors = new Set();
-  edges.forEach(([a, b]) => {
-    if (a === nodeId) neighbors.add(b);
-    if (b === nodeId) neighbors.add(a);
-  });
-
-  frontMapInner.querySelectorAll('.front-map-node-visual').forEach(visual => {
-    const id = visual.getAttribute('data-id');
-    visual.classList.remove('focused', 'neighbor', 'dimmed');
-    if (id === nodeId) visual.classList.add('focused');
-    else if (neighbors.has(id)) visual.classList.add('neighbor');
-    else visual.classList.add('dimmed');
-  });
-
-  frontMapInner.querySelectorAll('.front-map-edge').forEach(e => {
-    const a = e.getAttribute('data-a');
-    const b = e.getAttribute('data-b');
-    e.classList.remove('neighbor', 'dimmed');
-    if (a === nodeId || b === nodeId) e.classList.add('neighbor');
-    else e.classList.add('dimmed');
-  });
-
-  frontMapInner.querySelectorAll('.front-map-node-label').forEach(lbl => {
-    const id = lbl.getAttribute('data-id');
-    lbl.classList.remove('focused', 'dimmed');
-    if (id === nodeId) lbl.classList.add('focused');
-    else if (!neighbors.has(id)) lbl.classList.add('dimmed');
-  });
-
-  neighbors.forEach(nid => {
-    if (frontMapInner.querySelector(`text[data-id="${nid}"]`)) return;
-    const nNode = nodes.find(n => n.id === nid);
-    if (!nNode) return;
-    const g = frontMapInner.querySelector(`g[data-id="${nid}"]`);
-    if (!g) return;
-    const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-    text.setAttribute('class', 'front-map-node-label');
-    text.setAttribute('data-id', nid);
-    text.setAttribute('x', nNode.x);
-    text.setAttribute('y', nNode.y - nNode.r - 10);
-    text.textContent = nNode.label;
-    g.insertBefore(text, g.querySelector('.front-map-node-hit'));
-  });
-
-  zoomFrontToNode(node);
-  showFrontTooltip(node);
-  frontResetBtn.classList.add('visible');
-}
-
-function zoomFrontToNode(node) {
-  if (!frontController) return;
-  frontController.setView(1.9, 500 - node.x, 500 - node.y, true);
-}
-function resetFrontMapTransform() {
-  if (!frontController) { frontMapInner.style.transform = 'scale(1) translate(0, 0)'; return; }
-  frontController.reset(true);
-}
-
-function showFrontTooltip(node) {
-  const contribNames = node.contributors.map(cid => {
-    const t = trainers.find(tt => tt.id === cid);
-    return t ? t.name : cid;
-  }).join(', ');
-  const stateTag = node.state ? `<div><span class="state-tag ${node.state}">${node.state}</span></div>` : '';
-  const strategic = node.strategic ? `<div class="strategic">${node.strategic}</div>` : '';
-  const heldBy = contribNames ? `<em>${node.type} &middot; held by ${contribNames}</em>` : `<em>${node.type} &middot; no one holds this yet</em>`;
-  frontTooltip.innerHTML = `
-    <strong>${node.label}</strong>
-    ${heldBy}
-    ${stateTag}
-    ${strategic}
-  `;
-  frontTooltip.classList.add('visible');
-}
-
-function resetFrontFocus() {
-  frontFocusedNodeId = null;
-  renderFrontMap();
-  frontTooltip.classList.remove('visible');
-  frontResetBtn.classList.remove('visible');
-}
-
-frontResetBtn.addEventListener('click', resetFrontFocus);
-frontMapSvg.addEventListener('click', (e) => {
-  if (e.target === frontMapSvg || e.target.tagName === 'g') {
-    frontTooltip.classList.remove('visible');
-  }
-});
-
-/* ============ PAN + ZOOM (wheel, drag, pinch, double-tap reset) ============ */
-function attachPanZoom(svgEl, innerEl) {
-  let scale = 1, tx = 0, ty = 0;
-  let dragging = false;
-  let dragStart = null;
-  let didMoveFlag = false;
-  const pointers = new Map();
-  let pinchStartDist = null;
-  let pinchStartScale = 1;
-  let pinchAnchor = null;
-  const MOVE_THRESHOLD = 5;
-  const MIN_SCALE = 0.4;
-  const MAX_SCALE = 6;
-  const ORIGIN_X = 500, ORIGIN_Y = 500;
-
-  const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
-
-  function applyTransform(animate) {
-    innerEl.style.transition = animate ? 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)' : 'transform 0s';
-    innerEl.style.transform = `scale(${scale}) translate(${tx}px, ${ty}px)`;
-  }
-  function setView(s, x, y, animate) {
-    scale = clamp(s, MIN_SCALE, MAX_SCALE);
-    tx = x; ty = y;
-    applyTransform(animate !== false);
-  }
-  function reset(animate) { setView(1, 0, 0, animate); }
-
-  function clientToVB(cx, cy) {
-    const rect = svgEl.getBoundingClientRect();
-    if (rect.width === 0) return { x: ORIGIN_X, y: ORIGIN_Y };
-    const vb = svgEl.viewBox.baseVal;
-    return {
-      x: ((cx - rect.left) / rect.width) * vb.width,
-      y: ((cy - rect.top) / rect.height) * vb.height
-    };
-  }
-
-  function zoomAt(newScale, anchorVB) {
-    newScale = clamp(newScale, MIN_SCALE, MAX_SCALE);
-    if (newScale === scale) return;
-    tx = (scale / newScale) * (anchorVB.x - ORIGIN_X + tx) - (anchorVB.x - ORIGIN_X);
-    ty = (scale / newScale) * (anchorVB.y - ORIGIN_Y + ty) - (anchorVB.y - ORIGIN_Y);
-    scale = newScale;
-    applyTransform(false);
-  }
-
-  svgEl.style.touchAction = 'none';
-
-  svgEl.addEventListener('wheel', (e) => {
-    e.preventDefault();
-    const factor = Math.exp(-e.deltaY * 0.0015);
-    zoomAt(scale * factor, clientToVB(e.clientX, e.clientY));
-  }, { passive: false });
-
-  svgEl.addEventListener('pointerdown', (e) => {
-    try { svgEl.setPointerCapture(e.pointerId); } catch (_) {}
-    pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
-    didMoveFlag = false;
-    if (pointers.size === 1) {
-      dragging = true;
-      dragStart = { x: e.clientX, y: e.clientY, tx, ty };
-    } else if (pointers.size === 2) {
-      dragging = false;
-      const [p1, p2] = [...pointers.values()];
-      pinchStartDist = Math.hypot(p2.x - p1.x, p2.y - p1.y);
-      pinchStartScale = scale;
-      pinchAnchor = clientToVB((p1.x + p2.x) / 2, (p1.y + p2.y) / 2);
-    }
-  });
-
-  svgEl.addEventListener('pointermove', (e) => {
-    if (!pointers.has(e.pointerId)) return;
-    pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
-
-    if (pointers.size === 2 && pinchStartDist) {
-      const [p1, p2] = [...pointers.values()];
-      const dist = Math.hypot(p2.x - p1.x, p2.y - p1.y);
-      zoomAt(pinchStartScale * (dist / pinchStartDist), pinchAnchor);
-      didMoveFlag = true;
-    } else if (dragging && pointers.size === 1) {
-      const dx = e.clientX - dragStart.x;
-      const dy = e.clientY - dragStart.y;
-      if (Math.abs(dx) > MOVE_THRESHOLD || Math.abs(dy) > MOVE_THRESHOLD) didMoveFlag = true;
-      const rect = svgEl.getBoundingClientRect();
-      const vb = svgEl.viewBox.baseVal;
-      const ratioX = vb.width / rect.width;
-      const ratioY = vb.height / rect.height;
-      tx = dragStart.tx + (dx * ratioX) / scale;
-      ty = dragStart.ty + (dy * ratioY) / scale;
-      applyTransform(false);
-    }
-  });
-
-  function endPointer(e) {
-    pointers.delete(e.pointerId);
-    if (pointers.size < 2) { pinchStartDist = null; pinchAnchor = null; }
-    if (pointers.size === 0) { dragging = false; dragStart = null; }
-  }
-  svgEl.addEventListener('pointerup', endPointer);
-  svgEl.addEventListener('pointercancel', endPointer);
-
-  svgEl.addEventListener('dblclick', (e) => {
-    e.preventDefault();
-    reset(true);
-  });
-
-  // Double-tap on touch
-  let lastTapAt = 0;
-  svgEl.addEventListener('pointerup', (e) => {
-    if (e.pointerType !== 'touch') return;
-    const now = Date.now();
-    if (now - lastTapAt < 320 && !didMoveFlag) {
-      reset(true);
-      lastTapAt = 0;
-    } else {
-      lastTapAt = now;
-    }
-  });
-
-  return { setView, reset, didMove: () => didMoveFlag };
-}
-
-let mapController = attachPanZoom(mapSvg, mapInner);
-let frontController = attachPanZoom(frontMapSvg, frontMapInner);
-
-renderFrontMap();
-
-/* ============ Hash-based trainer view trigger ============
-   When the page loads (or the hash changes) with #trainer-{id}, open
-   that trainer's view. This is what makes the character cards on the
-   Get Involved page route into the right view here. */
-function openTrainerFromHash() {
-  var hash = window.location.hash;
-  if (!hash || hash.indexOf('#trainer-') !== 0) return;
-  var id = hash.slice('#trainer-'.length);
-  var t = trainers.find(function(tr) { return tr.id === id; });
-  if (t) openTrainer(t);
-}
-window.addEventListener('hashchange', openTrainerFromHash);
-openTrainerFromHash();
-</script>
-
-<script>
-/* ============ Status filter (ported from pokedex) ============ */
-(function() {
-  const chips = document.querySelectorAll('.filter-chip');
-  const cards = document.querySelectorAll('.card');
-  chips.forEach(chip => {
-    chip.addEventListener('click', () => {
-      chips.forEach(c => c.classList.remove('active'));
-      chip.classList.add('active');
-      const f = chip.dataset.filter;
-      cards.forEach(card => {
-        card.style.display = (f === 'all' || card.dataset.status === f) ? '' : 'none';
-      });
-    });
-  });
-})();
-</script>
-
-<script>
-/* ============ Light Field atmosphere (paper-stain variant)
-   Terra particles drifting on cream paper at multiply blend. */
-(function() {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var canvas = document.getElementById('atmosphere-canvas');
-  if (!canvas) return;
-  var ctx = canvas.getContext('2d');
-  var W, H, dpr;
-  var TERRA = [212, 121, 61];
-  var COUNT_MAIN = 70;
-  var COUNT_WHISPER = 35;
-  var SPEED = 0.55;
-  var DAMPING = 0.974;
-  var MAX_SPEED = 1.35;
-  var HISTORY = 80;
-
-  function resize() {
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
-    W = window.innerWidth;
-    H = window.innerHeight;
-    canvas.width = W * dpr;
-    canvas.height = H * dpr;
-    canvas.style.width = W + 'px';
-    canvas.style.height = H + 'px';
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  }
-  resize();
-  window.addEventListener('resize', resize, { passive: true });
-
-  var particles = [];
-  function seed() {
-    particles.length = 0;
-    for (var i = 0; i < COUNT_MAIN; i++) {
-      particles.push({ kind: 'main', x: Math.random() * W, y: Math.random() * H, vx: 0, vy: 0, seed: Math.random() * 1000, depth: Math.random(), history: [] });
-    }
-    for (var j = 0; j < COUNT_WHISPER; j++) {
-      particles.push({ kind: 'whisper', x: Math.random() * W, y: Math.random() * H, vx: 0, vy: 0, seed: Math.random() * 1000, depth: Math.random(), history: [] });
-    }
-  }
-  seed();
-  window.addEventListener('resize', seed, { passive: true });
-
-  function curl(x, y, t) {
-    var s = 0.0014;
-    var n1 = Math.sin(x * s + t * 0.00015) + Math.cos(y * s * 1.2 - t * 0.00012);
-    var n2 = Math.cos(x * s * 1.3 + t * 0.00018) - Math.sin(y * s - t * 0.00011);
-    return { ax: n1 * 0.045, ay: n2 * 0.045 };
-  }
-
-  function step(t) {
-    for (var i = 0; i < particles.length; i++) {
-      var p = particles[i];
-      var f = curl(p.x, p.y, t + p.seed * 100);
-      var depthMul = p.kind === 'whisper' ? (0.4 + p.depth * 0.5) : (0.6 + p.depth * 0.6);
-      p.vx = (p.vx + f.ax * SPEED * depthMul) * DAMPING;
-      p.vy = (p.vy + f.ay * SPEED * depthMul) * DAMPING;
-      var sp = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
-      if (sp > MAX_SPEED) { p.vx = (p.vx / sp) * MAX_SPEED; p.vy = (p.vy / sp) * MAX_SPEED; }
-      p.x += p.vx; p.y += p.vy;
-      if (p.x < -50) p.x = W + 50; else if (p.x > W + 50) p.x = -50;
-      if (p.y < -50) p.y = H + 50; else if (p.y > H + 50) p.y = -50;
-      p.history.push([p.x, p.y]);
-      if (p.history.length > HISTORY) p.history.shift();
-    }
-  }
-
-  function draw() {
-    ctx.clearRect(0, 0, W, H);
-    for (var i = 0; i < particles.length; i++) {
-      var p = particles[i];
-      if (p.history.length < 2) continue;
-      var isMain = p.kind === 'main';
-      var baseAlpha = isMain ? (0.20 + p.depth * 0.15) : (0.07 + p.depth * 0.06);
-      var width = isMain ? (0.5 + p.depth * 0.4) : (0.25 + p.depth * 0.2);
-      ctx.strokeStyle = 'rgba(' + TERRA[0] + ',' + TERRA[1] + ',' + TERRA[2] + ',' + baseAlpha + ')';
-      ctx.lineWidth = width;
-      ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-      ctx.beginPath();
-      ctx.moveTo(p.history[0][0], p.history[0][1]);
-      for (var h = 1; h < p.history.length; h++) {
-        ctx.lineTo(p.history[h][0], p.history[h][1]);
-      }
-      ctx.stroke();
-      if (isMain) {
-        ctx.fillStyle = 'rgba(' + TERRA[0] + ',' + TERRA[1] + ',' + TERRA[2] + ',' + (baseAlpha + 0.15) + ')';
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, 1.4 + p.depth * 0.8, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    }
-  }
-
-  var lastT = performance.now();
-  function loop(t) { step(t - lastT); lastT = t; draw(); requestAnimationFrame(loop); }
-  requestAnimationFrame(loop);
-})();
-</script>
-
-<script>
-/* ============ Mobile nav toggle ============ */
-(function() {
-  function ready(fn) { if (document.readyState !== 'loading') { fn(); } else { document.addEventListener('DOMContentLoaded', fn); } }
-  ready(function() {
-    document.querySelectorAll('[data-nav-toggle]').forEach(function(btn) {
-      var panel = document.getElementById(btn.getAttribute('aria-controls'));
-      if (!panel) return;
-      function setOpen(open) {
-        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-        btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-        panel.classList.toggle('is-open', open);
-      }
-      btn.addEventListener('click', function() { setOpen(btn.getAttribute('aria-expanded') !== 'true'); });
-      panel.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', function() { setOpen(false); }); });
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') { setOpen(false); btn.focus(); }
-      });
-    });
-  });
-})();
-</script>
 
 <script>
 /* ============ Field atmosphere · reusable factory ============
@@ -3434,6 +2371,11 @@ function initFieldAtmosphere(opts) {
 }
 
 initFieldAtmosphere({
+  sectionSelector: '.section-demos',
+  canvasId: 'field-canvas'
+});
+
+initFieldAtmosphere({
   sectionSelector: '.nav',
   canvasId: 'field-canvas-nav',
   config: {
@@ -3451,6 +2393,109 @@ initFieldAtmosphere({
     speed: 0.4,
   }
 });
+
+initFieldAtmosphere({
+  sectionSelector: '.hero-info-side',
+  canvasId: 'field-canvas-topics',
+  config: {
+    transparentBackground: true,
+    glowComposite: 'source-over',
+    lineColor: '#c45525',
+    mainCount: 60,
+    whisperCount: 40,
+    mainAlpha: 0.32,
+    mainDotAlpha: 0.55,
+    whisperMaxAlpha: 0.18,
+    whisperDotMaxAlpha: 0.28,
+    mainDotSize: 3.0,
+    whisperDotSize: 1.5,
+    speed: 0.5,
+  }
+});
+
+initFieldAtmosphere({
+  sectionSelector: '.footer',
+  canvasId: 'field-canvas-footer',
+  config: {
+    transparentBackground: true,
+    glowComposite: 'source-over',
+    lineColor: '#c45525',
+    mainCount: 60,
+    whisperCount: 40,
+    mainAlpha: 0.28,
+    mainDotAlpha: 0.5,
+    whisperMaxAlpha: 0.16,
+    whisperDotMaxAlpha: 0.24,
+    mainDotSize: 3.0,
+    whisperDotSize: 1.5,
+    speed: 0.4,
+  }
+});
+
+/* ============ Tools filter ============ */
+(function() {
+  const chips = document.querySelectorAll('.tool-chip');
+  const cards = document.querySelectorAll('.demo-card[data-category]');
+  let activeFilter = null;
+
+  function applyFilter() {
+    cards.forEach(c => {
+      if (!activeFilter) {
+        c.style.display = '';
+      } else {
+        const cats = (c.dataset.category || '').split(',').map(s => s.trim());
+        c.style.display = cats.includes(activeFilter) ? '' : 'none';
+      }
+    });
+  }
+
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      const cat = chip.dataset.cat;
+      if (activeFilter === cat) {
+        activeFilter = null;
+        chips.forEach(c => c.classList.remove('is-active'));
+      } else {
+        activeFilter = cat;
+        chips.forEach(c => c.classList.toggle('is-active', c.dataset.cat === cat));
+      }
+      applyFilter();
+    });
+  });
+})();
 </script>
+
+<script>
+/* ============ Mobile nav toggle ============ */
+(function() {
+  function ready(fn) {
+    if (document.readyState !== 'loading') { fn(); } else { document.addEventListener('DOMContentLoaded', fn); }
+  }
+  ready(function() {
+    document.querySelectorAll('[data-nav-toggle]').forEach(function(btn) {
+      var panel = document.getElementById(btn.getAttribute('aria-controls'));
+      if (!panel) return;
+      function setOpen(open) {
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        panel.classList.toggle('is-open', open);
+      }
+      btn.addEventListener('click', function() {
+        setOpen(btn.getAttribute('aria-expanded') !== 'true');
+      });
+      panel.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() { setOpen(false); });
+      });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') {
+          setOpen(false);
+          btn.focus();
+        }
+      });
+    });
+  });
+})();
+</script>
+
 </body>
 </html>
