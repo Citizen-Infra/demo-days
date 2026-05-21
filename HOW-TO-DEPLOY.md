@@ -101,7 +101,7 @@ These are tracked in `Obsidian_MCP/@SORT/Session Carryover - 2026-05-20.md` and 
 - Real GitHub URLs for the 5 presenters (currently `#`)
 - Real product URL for Momcilo (currently `#`)
 - Demo Day first session date (currently "Mid-June 2026 · TBD")
-- "Critical Suit" title (Kyle's card) — likely typo for "Critical Suite" or "Compass Suite", needs confirmation
+- ~~"Critical Suit" title fix~~ resolved: "Compass Suite" per Kyle's `compass-suite` URL slug
 - Real Substack subscribe URL on the get-involved page
 - Real Telegram invite URL on the get-involved page
 - OG social-share image

@@ -588,7 +588,8 @@
   .topic-pill-icon { width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .topic-pill-icon svg { width: 100%; height: 100%; }
   .topic-pill.is-active {
-    background: var(--gradient-primary) padding-box, var(--gradient-primary) border-box;
+    background: var(--ink);
+    border-color: var(--ink);
   }
   .topic-pill.is-active .topic-pill-label {
     background: none;
@@ -1252,7 +1253,7 @@
   .apply-meta {
     padding: 14px 16px;
     background: var(--bg-warm-2);
-    border-radius: 8px;
+    border-radius: 0;
     font-family: var(--body);
     font-size: 13px;
     line-height: 1.55;
@@ -1816,8 +1817,8 @@
         </div>
         <div class="demo-action-zone">
           <a class="demo-action-github" href="#" target="_blank" rel="noopener" aria-label="GitHub"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></span></a>
-          <a class="demo-action-product tbd" href="#" target="_blank" rel="noopener">Product page</a>
-          <a class="demo-action-arrow" href="#" target="_blank" rel="noopener" aria-label="Open product page"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg></span></a>
+          <a class="demo-action-product tbd" href="#" target="_blank" rel="noopener">Explore the system</a>
+          <a class="demo-action-arrow" href="#" target="_blank" rel="noopener" aria-label="Explore the system"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg></span></a>
         </div>
       </div>
     </article>
@@ -1826,7 +1827,7 @@
       <div class="demo-top">
         <span class="topic-pill"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="url(#pillGradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg></span><span class="topic-pill-label">Capacity Building</span></span>
       </div>
-      <h3 class="demo-project">Critical Suit</h3>
+      <h3 class="demo-project">Compass Suite</h3>
       <p class="demo-desc">A modular MCP suite for designers, PMs, researchers, and job seekers. Each module ships with explicit schemas, validation, and decision traces.</p>
       <div class="demo-footer">
         <div class="demo-presenter-zone">
@@ -1841,8 +1842,8 @@
         </div>
         <div class="demo-action-zone">
           <a class="demo-action-github" href="#" target="_blank" rel="noopener" aria-label="GitHub"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></span></a>
-          <a class="demo-action-product" href="https://jonathankhobson.github.io/compass-suite/" target="_blank" rel="noopener">Product page</a>
-          <a class="demo-action-arrow" href="https://jonathankhobson.github.io/compass-suite/" target="_blank" rel="noopener" aria-label="Open product page"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg></span></a>
+          <a class="demo-action-product" href="https://jonathankhobson.github.io/compass-suite/" target="_blank" rel="noopener">View the suite</a>
+          <a class="demo-action-arrow" href="https://jonathankhobson.github.io/compass-suite/" target="_blank" rel="noopener" aria-label="View the suite"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg></span></a>
         </div>
       </div>
     </article>
@@ -1866,8 +1867,8 @@
         </div>
         <div class="demo-action-zone">
           <a class="demo-action-github" href="#" target="_blank" rel="noopener" aria-label="GitHub"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></span></a>
-          <a class="demo-action-product" href="https://bookpower.org" target="_blank" rel="noopener">Product page</a>
-          <a class="demo-action-arrow" href="https://bookpower.org" target="_blank" rel="noopener" aria-label="Open product page"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg></span></a>
+          <a class="demo-action-product" href="https://bookpower.org" target="_blank" rel="noopener">Browse the library</a>
+          <a class="demo-action-arrow" href="https://bookpower.org" target="_blank" rel="noopener" aria-label="Browse the library"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg></span></a>
         </div>
       </div>
     </article>
@@ -1891,8 +1892,8 @@
         </div>
         <div class="demo-action-zone">
           <a class="demo-action-github" href="#" target="_blank" rel="noopener" aria-label="GitHub"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></span></a>
-          <a class="demo-action-product tbd" href="#" target="_blank" rel="noopener">Product page</a>
-          <a class="demo-action-arrow" href="#" target="_blank" rel="noopener" aria-label="Open product page"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg></span></a>
+          <a class="demo-action-product tbd" href="#" target="_blank" rel="noopener">See the patterns</a>
+          <a class="demo-action-arrow" href="#" target="_blank" rel="noopener" aria-label="See the patterns"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg></span></a>
         </div>
       </div>
     </article>
@@ -1916,8 +1917,8 @@
         </div>
         <div class="demo-action-zone">
           <a class="demo-action-github" href="#" target="_blank" rel="noopener" aria-label="GitHub"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></span></a>
-          <a class="demo-action-product" href="https://platform.svagnoni.linkeddata.es" target="_blank" rel="noopener">Product page</a>
-          <a class="demo-action-arrow" href="https://platform.svagnoni.linkeddata.es" target="_blank" rel="noopener" aria-label="Open product page"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg></span></a>
+          <a class="demo-action-product" href="https://platform.svagnoni.linkeddata.es" target="_blank" rel="noopener">Try the demo</a>
+          <a class="demo-action-arrow" href="https://platform.svagnoni.linkeddata.es" target="_blank" rel="noopener" aria-label="Try the demo"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg></span></a>
         </div>
       </div>
     </article>
