@@ -39,6 +39,7 @@
     --accent: var(--terra);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { background: var(--bg-warm-2); min-height: 100vh; }
   html, body {
     background: var(--bg);
     color: var(--ink);
@@ -53,7 +54,7 @@
   .page {
     max-width: 920px;
     margin: 0 auto;
-    padding: 0 clamp(20px, 4vw, 56px) 120px;
+    padding: 0 clamp(20px, 4vw, 56px) 0;
   }
 
   .topbar {
