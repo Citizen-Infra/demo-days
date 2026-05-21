@@ -1737,93 +1737,144 @@
     margin-top: clamp(24px, 3vw, 40px);
     margin-bottom: clamp(32px, 4vw, 56px);
   }
-  /* Bar shape per Figma frame 123:3121: pill background, search on the
-     left at a fixed-ish width, filter chips beside it on a single row at
-     desktop. Wraps cleanly to a two-row stack on narrow viewports. */
+  /* Filter bar · dark band per the latest spec.
+     Dark wrapper, cream search input (icon on the right), a filled
+     ALL pill that reads as the default selected filter, and four
+     coral-outlined uppercase-mono category chips beside it. */
   .tool-filter-bar {
-    background: var(--bg-warm);
+    background: #0e0a07;
     border-radius: 28px;
-    padding: 12px 16px;
+    padding: 14px 20px;
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 20px;
     flex-wrap: wrap;
   }
   .tool-search {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     flex: 1 1 280px;
-    max-width: 380px;
-    background: var(--paper-white);
+    max-width: 420px;
+    background: #ffffff;
     border-radius: 100px;
-    padding: 10px 16px;
-    border: 1px solid rgba(60, 40, 20, 0.10);
+    padding: 14px 22px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
   }
-  .tool-search-icon { width: 16px; height: 16px; color: var(--ink-soft); flex-shrink: 0; }
-  .tool-search-icon svg { width: 100%; height: 100%; display: block; }
   .tool-search input {
     flex: 1;
     background: transparent;
     border: none;
     font-family: var(--body);
-    font-size: 13px;
+    font-size: 15px;
     color: var(--ink);
     padding: 2px 0;
     outline: none;
     min-width: 0;
+    order: 1;
   }
-  .tool-search input::placeholder { color: var(--ink-soft); }
-  /* Filter chips sit beside search; Title Case label + small icon so the
-     four chips fit on one row inside the 1080-page container. */
+  .tool-search input::placeholder { color: var(--ink-soft); opacity: 0.7; }
+  .tool-search-icon {
+    width: 18px; height: 18px;
+    color: var(--ink-soft);
+    flex-shrink: 0;
+    order: 2;
+  }
+  .tool-search-icon svg { width: 100%; height: 100%; display: block; }
+
+  /* Chips group sits to the right of the search. ALL pill leads. */
   .tool-filter-chips {
     display: flex;
-    gap: 8px;
+    gap: 10px;
     flex: 1 1 auto;
     flex-wrap: wrap;
     justify-content: flex-end;
+    align-items: center;
   }
+
+  /* Coral-outlined category chips on dark. Uppercase mono label,
+     coral text, coral stroke icon, transparent fill. */
   .tool-chip {
     cursor: pointer;
     font: inherit;
-    /* Override topic-pill's uppercase mono treatment for the filter
-       variant. Inline padding and label sizing tuned to keep the four
-       chips on one row at 1080px max page width. */
-    text-transform: none;
-    letter-spacing: 0.01em;
-    font-family: var(--body);
-    font-size: 12px;
+    background: transparent;
+    border: 1.5px solid var(--accent);
+    color: var(--accent);
+    padding: 9px 16px;
+    gap: 8px;
+    font-family: var(--mono);
     font-weight: 500;
-    padding: 6px 12px;
-    gap: 6px;
+    font-size: 11px;
+    line-height: 1;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
   }
   .tool-chip .topic-pill-label {
     background: none;
-    -webkit-text-fill-color: var(--ink);
-    color: var(--ink);
-    text-transform: none;
-    letter-spacing: 0.01em;
+    -webkit-text-fill-color: var(--accent);
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
   }
-  .tool-chip .topic-pill-icon { width: 18px; height: 18px; }
-  .tool-chip:hover { filter: brightness(0.96); border-color: var(--accent); }
-  .tool-chip.is-active .topic-pill-label {
+  .tool-chip .topic-pill-icon { width: 18px; height: 18px; color: var(--accent); }
+  .tool-chip .topic-pill-icon svg { stroke: var(--accent); }
+  .tool-chip:hover {
+    background: rgba(212, 121, 61, 0.10);
+  }
+  .tool-chip:active { transform: scale(0.98); }
+  .tool-chip.is-active {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .tool-chip.is-active .topic-pill-label,
+  .tool-chip.is-active {
     -webkit-text-fill-color: #ffffff;
     color: #ffffff;
+  }
+  .tool-chip.is-active .topic-pill-icon svg { stroke: #ffffff; }
+
+  /* "ALL" pill — filled cream by default, dark text, sits at the
+     head of the chip row. Acts as the default-selected filter. */
+  .tool-chip-all {
+    background: #f0d8c0;
+    border-color: #f0d8c0;
+    color: var(--ink);
+    padding: 9px 22px;
+  }
+  .tool-chip-all .topic-pill-label {
+    -webkit-text-fill-color: var(--ink);
+    color: var(--ink);
+  }
+  .tool-chip-all:hover {
+    background: #f5e0c8;
+    border-color: #f5e0c8;
+  }
+  .tool-chip-all.is-active {
+    background: #f0d8c0;
+    border-color: #f0d8c0;
+  }
+  .tool-chip-all.is-active .topic-pill-label {
+    -webkit-text-fill-color: var(--ink);
+    color: var(--ink);
   }
 
   @media (max-width: 720px) {
     .tool-filter-bar {
       border-radius: 20px;
       padding: 12px;
-      gap: 12px;
+      gap: 10px;
     }
     .tool-search {
       flex: 1 1 100%;
       max-width: none;
+      padding: 12px 18px;
     }
     .tool-filter-chips {
       justify-content: flex-start;
+      gap: 8px;
     }
+    .tool-chip { padding: 7px 12px; font-size: 10px; letter-spacing: 0.10em; }
   }
   /* Tools grid: drop the dark demos-section background. Inherit page bg.
      Override the global .section margin so the grid sits close under
@@ -1894,6 +1945,7 @@
       <input type="search" placeholder="Search for tools..." aria-label="Search for tools" data-todo="wire-up-search">
     </div>
     <div class="tool-filter-chips" role="group" aria-label="Filter by category">
+      <button class="topic-pill tool-chip tool-chip-all is-active" data-cat="__all" type="button"><span class="topic-pill-label">All</span></button>
       <button class="topic-pill tool-chip" data-cat="capacity-building" type="button"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="url(#pillGradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg></span><span class="topic-pill-label">Capacity Building</span></button>
       <button class="topic-pill tool-chip" data-cat="knowledge-management" type="button"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="url(#pillGradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg></span><span class="topic-pill-label">Knowledge Management</span></button>
       <button class="topic-pill tool-chip" data-cat="collaboration" type="button"><span class="topic-pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="url(#pillGradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span class="topic-pill-label">Collaboration</span></button>
@@ -2532,8 +2584,9 @@ initFieldAtmosphere({
 /* ============ Tools filter ============ */
 (function() {
   const chips = document.querySelectorAll('.tool-chip');
+  const allChip = document.querySelector('.tool-chip-all');
   const cards = document.querySelectorAll('.demo-card[data-category]');
-  let activeFilter = null;
+  let activeFilter = null; // null means "All"
 
   function applyFilter() {
     cards.forEach(c => {
@@ -2546,17 +2599,31 @@ initFieldAtmosphere({
     });
   }
 
+  function setActive(cat) {
+    activeFilter = cat;
+    chips.forEach(c => {
+      const isAll = c === allChip;
+      const matches = cat === null ? isAll : c.dataset.cat === cat;
+      c.classList.toggle('is-active', matches);
+    });
+    applyFilter();
+  }
+
   chips.forEach(chip => {
     chip.addEventListener('click', () => {
       const cat = chip.dataset.cat;
-      if (activeFilter === cat) {
-        activeFilter = null;
-        chips.forEach(c => c.classList.remove('is-active'));
-      } else {
-        activeFilter = cat;
-        chips.forEach(c => c.classList.toggle('is-active', c.dataset.cat === cat));
+      // The All pill always clears any active category filter and
+      // remains the highlighted state until a real category is picked.
+      if (cat === '__all') {
+        setActive(null);
+        return;
       }
-      applyFilter();
+      // Clicking the same category twice clears it and falls back to All.
+      if (activeFilter === cat) {
+        setActive(null);
+      } else {
+        setActive(cat);
+      }
     });
   });
 })();
