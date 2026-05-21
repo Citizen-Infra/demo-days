@@ -86,12 +86,10 @@
     color: var(--bg-warm);
     padding: 10px 18px;
     border-radius: 100px;
-    font-family: var(--mono);
+    font-family: var(--body);
     font-size: 11px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 600;
     transition: filter 150ms;
     flex-shrink: 0; white-space: nowrap;
   }
@@ -601,9 +599,9 @@
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background: rgba(246, 236, 217, 0.06);
-    backdrop-filter: blur(0.75px) saturate(1.02);
-    -webkit-backdrop-filter: blur(0.75px) saturate(1.02);
+    background: rgba(246, 236, 217, 0.22);
+    backdrop-filter: blur(3px) saturate(1.06);
+    -webkit-backdrop-filter: blur(3px) saturate(1.06);
     z-index: 1;
   }
   .nav-inner {
@@ -655,12 +653,10 @@
     color: var(--bg-warm);
     padding: 10px 18px;
     border-radius: 100px;
-    font-family: var(--mono);
+    font-family: var(--body);
     font-size: 11px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 600;
     transition: filter 150ms;
   }
   .nav-cta:hover { filter: brightness(0.92); }
@@ -681,7 +677,7 @@
     text-transform: uppercase;
     color: var(--ink-soft);
     text-decoration: none;
-    padding: 24px 16px;
+    padding: 16px 16px;
     border-bottom: 3px solid transparent;
     transition: color 150ms, border-color 150ms;
     white-space: nowrap;
@@ -753,8 +749,8 @@
     <a href="#" class="brand" aria-label="CIBC home"><span class="brand-mark">CIBC</span></a>
     <div class="nav-links" id="primary-links" role="navigation">
       <a href="index.html" class="nav-link">Demo Day</a>
-      <a href="ecosystem-map.html" class="nav-link">Ecosystem Map</a>
-      <a href="#" class="nav-link nav-link-current" aria-current="page">Get Involved</a>
+      <a href="ecosystem-map.html" class="nav-link">Infra Resources</a>
+      <a href="#" class="nav-link nav-link-current" aria-current="page">About us</a>
     </div>
     <a href="#register" class="nav-cta">Register</a>
     <button type="button" class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="primary-links" aria-label="Open menu">
@@ -771,8 +767,8 @@
   <a href="index.html" class="gn-brand" aria-label="CIBC home"><span class="gn-brand-mark">CIBC</span></a>
   <div class="gn-links" id="primary-links" role="navigation">
     <a href="index.html" class="gn-link">Demo Day</a>
-    <a href="ecosystem-map.html" class="gn-link">Ecosystem Map</a>
-    <a href="#" class="gn-link gn-link-current" aria-current="page">Get Involved</a>
+    <a href="ecosystem-map.html" class="gn-link">Infra Resources</a>
+    <a href="#" class="gn-link gn-link-current" aria-current="page">About us</a>
   </div>
   <a href="#register" class="gn-cta">Register</a>
   <button type="button" class="gn-toggle" data-nav-toggle aria-expanded="false" aria-controls="primary-links" aria-label="Open menu">
@@ -784,7 +780,7 @@
 <div class="page">
 
   <header class="header">
-    <div class="eyebrow">Get Involved</div>
+    <div class="eyebrow">About us</div>
     <h1>Pick your <em>way in</em>.</h1>
     <p class="deck">CIBC's first demo day is a two-hour session built around five in-progress tools, written Q&amp;A, and a recap that lands in your inbox. Pick the channel that fits and we'll keep you in the loop.</p>
   </header>
@@ -809,19 +805,19 @@
       <span class="kind">Register</span>
       <span class="label">Save your spot</span>
       <span class="meta">Luma form for v1. Data exportable. No tracking pixels.</span>
-      <span class="arrow-end">Register →</span>
+      <span class="arrow-end">Register <svg style="width:1em;height:1em;vertical-align:-0.12em;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
     </a>
     <a href="research-report.html" class="action-card">
       <span class="kind">Read</span>
       <span class="label">The research report</span>
       <span class="meta">Nine entities, aggregate map, strategic actions, source attribution. Delivered May 15.</span>
-      <span class="arrow-end">Open →</span>
+      <span class="arrow-end">Open <svg style="width:1em;height:1em;vertical-align:-0.12em;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
     </a>
     <a href="first-meeting-2026-05-08.html" class="action-card">
       <span class="kind">Read</span>
       <span class="label">First planning meeting</span>
       <span class="meta">May 8 working call. Five members scoping the event. Recap with downloadable transcript.</span>
-      <span class="arrow-end">Open →</span>
+      <span class="arrow-end">Open <svg style="width:1em;height:1em;vertical-align:-0.12em;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
     </a>
 
     <form class="action-card action-card-substack" action="#" method="POST" aria-labelledby="substack-card-title">
@@ -843,7 +839,7 @@
     <p class="who-deck">CIBC isn't an organization. We're a group of professionals, loosely tied by our connections, determined to build tech for a better future.</p>
     <a href="#" class="telegram-cta" aria-label="Join the CIBC Telegram">
       <span class="telegram-cta-label">Join the Telegram</span>
-      <span class="telegram-cta-arrow">→</span>
+      <span class="telegram-cta-arrow"><svg style="width:1em;height:1em;vertical-align:-0.12em;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
     </a>
 
     <div class="characters-group">
@@ -855,7 +851,7 @@
             <span class="character-name">Megan</span>
             <span class="character-count">6 connections contributed</span>
           </span>
-          <span class="character-arrow" aria-hidden="true">→</span>
+          <span class="character-arrow" aria-hidden="true"><svg style="width:1em;height:1em;vertical-align:-0.12em;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
         </a>
         <a class="character-card" href="ecosystem-map.html#trainer-artem" data-character="artem">
           <span class="character-avatar" style="background: #6FA9B5;">A</span>
@@ -863,7 +859,7 @@
             <span class="character-name">Artem</span>
             <span class="character-count">15 connections contributed</span>
           </span>
-          <span class="character-arrow" aria-hidden="true">→</span>
+          <span class="character-arrow" aria-hidden="true"><svg style="width:1em;height:1em;vertical-align:-0.12em;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
         </a>
         <a class="character-card" href="ecosystem-map.html#trainer-brayden" data-character="brayden">
           <span class="character-avatar" style="background: #D4A347;">B</span>
@@ -871,7 +867,7 @@
             <span class="character-name">Brayden</span>
             <span class="character-count">3 connections contributed</span>
           </span>
-          <span class="character-arrow" aria-hidden="true">→</span>
+          <span class="character-arrow" aria-hidden="true"><svg style="width:1em;height:1em;vertical-align:-0.12em;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
         </a>
         <a class="character-card" href="ecosystem-map.html#trainer-momcilo" data-character="momcilo">
           <span class="character-avatar" style="background: #8a5b6e;">M</span>
@@ -879,7 +875,7 @@
             <span class="character-name">Momcilo</span>
             <span class="character-count">1 connection contributed</span>
           </span>
-          <span class="character-arrow" aria-hidden="true">→</span>
+          <span class="character-arrow" aria-hidden="true"><svg style="width:1em;height:1em;vertical-align:-0.12em;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
         </a>
         <a class="character-card" href="ecosystem-map.html#trainer-chris" data-character="chris">
           <span class="character-avatar" style="background: #5a4d3a;">C</span>
@@ -887,7 +883,7 @@
             <span class="character-name">Chris</span>
             <span class="character-count">0 connections contributed</span>
           </span>
-          <span class="character-arrow" aria-hidden="true">→</span>
+          <span class="character-arrow" aria-hidden="true"><svg style="width:1em;height:1em;vertical-align:-0.12em;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
         </a>
       </div>
     </div>
@@ -901,7 +897,7 @@
             <span class="character-name">Claudia Chwalisz</span>
             <span class="character-role">DemNext · DelibTech · named by Artem</span>
           </span>
-          <span class="character-arrow" aria-hidden="true">→</span>
+          <span class="character-arrow" aria-hidden="true"><svg style="width:1em;height:1em;vertical-align:-0.12em;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
         </a>
         <a class="character-card" href="ecosystem-map.html#trainer-fisher" data-character="fisher">
           <span class="character-avatar" style="background: #7A9268;">C</span>
@@ -909,7 +905,7 @@
             <span class="character-name">Charlie Fisher</span>
             <span class="character-role">Komma · ex-DML · named by Artem</span>
           </span>
-          <span class="character-arrow" aria-hidden="true">→</span>
+          <span class="character-arrow" aria-hidden="true"><svg style="width:1em;height:1em;vertical-align:-0.12em;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
         </a>
         <a class="character-card" href="ecosystem-map.html#trainer-gimenez" data-character="gimenez">
           <span class="character-avatar" style="background: #6FA9B5;">N</span>
@@ -917,7 +913,7 @@
             <span class="character-name">Nicolas Gimenez</span>
             <span class="character-role">Agora · named by Artem</span>
           </span>
-          <span class="character-arrow" aria-hidden="true">→</span>
+          <span class="character-arrow" aria-hidden="true"><svg style="width:1em;height:1em;vertical-align:-0.12em;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
         </a>
       </div>
     </div>

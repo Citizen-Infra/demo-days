@@ -87,9 +87,9 @@
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background: rgba(246, 236, 217, 0.06);
-    backdrop-filter: blur(0.75px) saturate(1.02);
-    -webkit-backdrop-filter: blur(0.75px) saturate(1.02);
+    background: rgba(246, 236, 217, 0.22);
+    backdrop-filter: blur(3px) saturate(1.06);
+    -webkit-backdrop-filter: blur(3px) saturate(1.06);
     z-index: 1;
   }
   .nav-inner {
@@ -141,12 +141,10 @@
     color: var(--bg-warm);
     padding: 10px 18px;
     border-radius: 100px;
-    font-family: var(--mono);
+    font-family: var(--body);
     font-size: 11px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 600;
     transition: filter 150ms;
   }
   .nav-cta:hover { filter: brightness(0.92); }
@@ -167,7 +165,7 @@
     text-transform: uppercase;
     color: var(--ink-soft);
     text-decoration: none;
-    padding: 24px 16px;
+    padding: 16px 16px;
     border-bottom: 3px solid transparent;
     transition: color 150ms, border-color 150ms;
     white-space: nowrap;
@@ -317,13 +315,11 @@
 
   .cta-row { display: flex; gap: 14px; flex-wrap: wrap; }
   .btn {
-    font-family: var(--mono);
+    font-family: var(--body);
     font-size: 12px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
     padding: 14px 24px;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 600;
     border-radius: 100px;
     transition: all 150ms ease;
     display: inline-flex;
@@ -414,11 +410,9 @@
     flex-wrap: wrap;
   }
   .hero-btn {
-    font-family: var(--mono);
-    font-weight: 500;
+    font-family: var(--body);
+    font-weight: 600;
     font-size: 12px;
-    letter-spacing: 0.10em;
-    text-transform: uppercase;
     padding: 14px 26px;
     border-radius: 100px;
     text-decoration: none;
@@ -503,13 +497,12 @@
   }
   .info-list li { padding: 1px 0; }
   .info-action-link {
-    font-family: var(--mono);
-    font-weight: 500;
+    font-family: var(--body);
+    font-weight: 600;
     font-size: 10px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
     color: var(--accent-deep);
-    text-decoration: none;
+    text-decoration: underline;
+    text-underline-offset: 3px;
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -686,11 +679,9 @@
     justify-content: center;
   }
   .demos-btn {
-    font-family: var(--mono);
-    font-weight: 500;
+    font-family: var(--body);
+    font-weight: 600;
     font-size: 12px;
-    letter-spacing: 0.10em;
-    text-transform: uppercase;
     padding: 14px 28px;
     border-radius: 100px;
     text-decoration: none;
@@ -954,11 +945,9 @@
     align-items: center;
     justify-content: center;
     color: #ffffff;
-    font-family: var(--mono);
-    font-weight: 500;
+    font-family: var(--body);
+    font-weight: 600;
     font-size: 12px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
     text-decoration: none;
     padding: 14px 8px;
     transition: filter 150ms;
@@ -1212,6 +1201,8 @@
     gap: 36px;
     align-items: center;
   }
+  .apply > :first-child { align-self: center; display: flex; flex-direction: column; justify-content: center; }
+  .apply > .apply-side { align-self: center; }
   @media (max-width: 760px) { .apply { grid-template-columns: 1fr; gap: 24px; } }
   .apply-eyebrow {
     font-family: var(--mono);
@@ -1267,8 +1258,11 @@
     display: grid;
     grid-template-columns: 1.1fr 1fr;
     gap: clamp(28px, 5vw, 56px);
-    align-items: center;
+    align-items: stretch;
   }
+  #about .cluster-map-card { display: flex; align-items: stretch; overflow: hidden; }
+  #about .map-svg { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+  #about .about-body { align-self: center; }
   @media (max-width: 760px) {
     .about { grid-template-columns: 1fr; gap: 28px; }
   }
@@ -1299,8 +1293,10 @@
     margin-right: calc(-50vw + 50%);
     width: 100vw;
     background: var(--bg-warm);
+    margin-top: 0;
     margin-bottom: 0;
-    padding: 0;
+    padding-top: 0;
+    padding-bottom: 0;
   }
   #about .cluster-map-card {
     background: transparent;
@@ -1600,9 +1596,13 @@
 
   /* ============ FOOTER ============ */
   .footer {
-    margin-top: clamp(80px, 12vw, 140px);
-    padding-top: 36px;
-    border-top: 2px solid var(--ink);
+    background: var(--bg-warm-2);
+    box-shadow: 0 0 0 100vmax var(--bg-warm-2);
+    clip-path: inset(0 -100vmax -100vmax -100vmax);
+    margin-top: 0;
+    padding-top: clamp(60px, 8vw, 100px);
+    padding-bottom: clamp(40px, 5vw, 60px);
+    border-top: none;
   }
   .footer-brand { text-decoration: none; display: inline-block; margin-bottom: 28px; }
   .footer-brand-mark {
@@ -1618,7 +1618,7 @@
   }
   .footer-row {
     display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr;
+    grid-template-columns: 1.5fr 1fr;
     gap: 32px;
     padding-bottom: 32px;
   }
@@ -1688,8 +1688,8 @@
     <a href="#" class="brand" aria-label="CIBC home"><span class="brand-mark">CIBC</span></a>
     <div class="nav-links" id="primary-links" role="navigation">
       <a href="#" class="nav-link nav-link-current" aria-current="page">Demo Day</a>
-      <a href="ecosystem-map.html" class="nav-link">Ecosystem Map</a>
-      <a href="get-involved.html" class="nav-link">Get Involved</a>
+      <a href="ecosystem-map.html" class="nav-link">Infra Resources</a>
+      <a href="get-involved.html" class="nav-link">About us</a>
     </div>
     <a href="#register" class="nav-cta">Register</a>
     <button type="button" class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="primary-links" aria-label="Open menu">
@@ -1709,7 +1709,7 @@
     <p class="hero-deck">Deliberation tools, peer-knowledge networks, and citizen-owned systems. Built for people by people. Come see what is growing.</p>
 
     <div class="hero-ctas">
-      <a href="#register" class="hero-btn hero-btn-primary">Register <span class="hero-btn-arrow" aria-hidden="true">→</span></a>
+      <a href="#register" class="hero-btn hero-btn-primary">Register <span class="hero-btn-arrow" aria-hidden="true"><svg style="width:1em;height:1em;vertical-align:-0.12em;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></a>
       <a href="#demos" class="hero-btn hero-btn-ghost">See the demos</a>
     </div>
 
@@ -1792,7 +1792,7 @@
       <span class="demos-eyebrow-text">Exact date TBD</span>
     </div>
     <div class="demos-ctas">
-      <a href="#register" class="demos-btn demos-btn-primary">Register <span class="demos-btn-arrow" aria-hidden="true">→</span></a>
+      <a href="#register" class="demos-btn demos-btn-primary">Register <span class="demos-btn-arrow" aria-hidden="true"><svg style="width:1em;height:1em;vertical-align:-0.12em;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></a>
       <a href="#apply" class="demos-btn demos-btn-ghost">Apply to demo</a>
     </div>
   </div>
@@ -1817,8 +1817,8 @@
         </div>
         <div class="demo-action-zone">
           <a class="demo-action-github" href="#" target="_blank" rel="noopener" aria-label="GitHub"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></span></a>
-          <a class="demo-action-product tbd" href="#" target="_blank" rel="noopener">Explore the system</a>
-          <a class="demo-action-arrow" href="#" target="_blank" rel="noopener" aria-label="Explore the system"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg></span></a>
+          <a class="demo-action-product tbd" href="#" target="_blank" rel="noopener">Try the workflow</a>
+          <a class="demo-action-arrow" href="#" target="_blank" rel="noopener" aria-label="Try the workflow"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg></span></a>
         </div>
       </div>
     </article>
@@ -1842,8 +1842,8 @@
         </div>
         <div class="demo-action-zone">
           <a class="demo-action-github" href="#" target="_blank" rel="noopener" aria-label="GitHub"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></span></a>
-          <a class="demo-action-product" href="https://jonathankhobson.github.io/compass-suite/" target="_blank" rel="noopener">View the suite</a>
-          <a class="demo-action-arrow" href="https://jonathankhobson.github.io/compass-suite/" target="_blank" rel="noopener" aria-label="View the suite"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg></span></a>
+          <a class="demo-action-product" href="https://jonathankhobson.github.io/compass-suite/" target="_blank" rel="noopener">Try the suite</a>
+          <a class="demo-action-arrow" href="https://jonathankhobson.github.io/compass-suite/" target="_blank" rel="noopener" aria-label="Try the suite"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg></span></a>
         </div>
       </div>
     </article>
@@ -1867,8 +1867,8 @@
         </div>
         <div class="demo-action-zone">
           <a class="demo-action-github" href="#" target="_blank" rel="noopener" aria-label="GitHub"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></span></a>
-          <a class="demo-action-product" href="https://bookpower.org" target="_blank" rel="noopener">Browse the library</a>
-          <a class="demo-action-arrow" href="https://bookpower.org" target="_blank" rel="noopener" aria-label="Browse the library"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg></span></a>
+          <a class="demo-action-product" href="https://bookpower.org" target="_blank" rel="noopener">Try the library</a>
+          <a class="demo-action-arrow" href="https://bookpower.org" target="_blank" rel="noopener" aria-label="Try the library"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg></span></a>
         </div>
       </div>
     </article>
@@ -1892,8 +1892,8 @@
         </div>
         <div class="demo-action-zone">
           <a class="demo-action-github" href="#" target="_blank" rel="noopener" aria-label="GitHub"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></span></a>
-          <a class="demo-action-product tbd" href="#" target="_blank" rel="noopener">See the patterns</a>
-          <a class="demo-action-arrow" href="#" target="_blank" rel="noopener" aria-label="See the patterns"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg></span></a>
+          <a class="demo-action-product tbd" href="#" target="_blank" rel="noopener">Try the platform</a>
+          <a class="demo-action-arrow" href="#" target="_blank" rel="noopener" aria-label="Try the platform"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg></span></a>
         </div>
       </div>
     </article>
@@ -1939,7 +1939,7 @@
         <strong>Apply first, schedule second</strong>
         We schedule sessions when enough builders are ready. Your application is what gets the next one on the calendar.
       </div>
-      <a href="https://app.harmonica.chat/chat?s=fc325b1d-2abb-4869-b2b5-6e35bfb274bb" target="_blank" rel="noopener" class="btn btn-primary">Apply to demo <span class="arrow">→</span></a>
+      <a href="https://app.harmonica.chat/chat?s=fc325b1d-2abb-4869-b2b5-6e35bfb274bb" target="_blank" rel="noopener" class="btn btn-primary">Apply to demo <span class="arrow"><svg style="width:1em;height:1em;vertical-align:-0.12em;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></a>
     </div>
   </div>
 </section>
@@ -1948,95 +1948,7 @@
 <section class="cluster section" id="about">
   <div class="about">
     <aside class="cluster-map-card" aria-label="CIBC ecosystem map preview">
-      <svg class="map-svg" viewBox="0 0 1200 640" preserveAspectRatio="xMidYMid meet" aria-label="CIBC ecosystem network: entities and people connected by formalized and speculative ties">
-        <!-- Connections: solid = formalized, dashed = loose / speculative -->
-        <g stroke="#5a4d3a" stroke-width="1.5" fill="none" opacity="0.55">
-          <!-- CIBC to entity nodes (formalized) -->
-          <line x1="600" y1="335" x2="300" y2="220"/>
-          <line x1="600" y1="335" x2="345" y2="305"/>
-          <line x1="600" y1="335" x2="245" y2="430"/>
-          <!-- CIBC to entity nodes (loose) -->
-          <line x1="600" y1="335" x2="900" y2="220" stroke-dasharray="5 5"/>
-          <line x1="600" y1="335" x2="990" y2="320" stroke-dasharray="5 5"/>
-          <line x1="600" y1="335" x2="880" y2="500" stroke-dasharray="5 5"/>
-          <line x1="600" y1="335" x2="120" y2="520" stroke-dasharray="5 5"/>
-          <!-- Cluster ties (intra-cluster) -->
-          <line x1="300" y1="220" x2="180" y2="155"/>
-          <line x1="300" y1="220" x2="345" y2="305"/>
-          <line x1="300" y1="220" x2="225" y2="270"/>
-          <line x1="300" y1="220" x2="420" y2="240"/>
-          <line x1="245" y1="430" x2="120" y2="520"/>
-          <line x1="245" y1="430" x2="190" y2="475"/>
-          <line x1="245" y1="430" x2="320" y2="395"/>
-          <line x1="900" y1="220" x2="1010" y2="290"/>
-          <line x1="900" y1="220" x2="820" y2="170"/>
-          <line x1="990" y1="320" x2="1080" y2="290"/>
-          <!-- Cross-cluster bridges (loose) -->
-          <line x1="900" y1="220" x2="300" y2="220" stroke-dasharray="3 6" stroke="#d4793d" opacity="0.5"/>
-          <line x1="990" y1="320" x2="245" y2="430" stroke-dasharray="3 6" opacity="0.45"/>
-          <line x1="900" y1="500" x2="660" y2="385" stroke-dasharray="3 6" opacity="0.45"/>
-        </g>
-
-        <!-- Entity nodes: status-colored, sized by salience -->
-        <g font-family="Fraunces, Georgia, serif" font-style="italic" font-size="14" font-weight="500" fill="#2a2218">
-          <!-- Deliberation cluster -->
-          <circle cx="300" cy="220" r="11" fill="#7a9268"/>
-          <text x="318" y="225">DemNext</text>
-          <circle cx="180" cy="155" r="8" fill="#d4793d"/>
-          <text x="196" y="159">DelibTech</text>
-          <circle cx="345" cy="305" r="10" fill="#7a9268"/>
-          <text x="362" y="310">Agora</text>
-
-          <!-- DML cluster -->
-          <circle cx="245" cy="430" r="11" fill="#7a9268"/>
-          <text x="263" y="435">Dark Matter Labs</text>
-          <circle cx="120" cy="520" r="8" fill="#4a5878"/>
-          <text x="136" y="524">Komma</text>
-
-          <!-- Plurality / Metagov cluster -->
-          <circle cx="900" cy="220" r="10" fill="#d4793d"/>
-          <text x="918" y="225">Plurality</text>
-          <circle cx="990" cy="320" r="10" fill="#d4793d"/>
-          <text x="1008" y="325">Metagov</text>
-
-          <!-- Regen + Unverified -->
-          <circle cx="880" cy="500" r="9" fill="#4a5878"/>
-          <text x="897" y="505">RegenOS</text>
-          <circle cx="1080" cy="565" r="7" fill="#998774" stroke="#998774" stroke-dasharray="2 3" fill-opacity="0.45"/>
-          <text x="1095" y="569" fill="#998774">Newsweek (?)</text>
-        </g>
-
-        <!-- Person nodes: smaller ringed circles, paper fill -->
-        <g font-family="Fraunces, Georgia, serif" font-style="italic" font-size="11" fill="#5a4d3a">
-          <!-- Deliberation people -->
-          <circle cx="225" cy="270" r="5" fill="#fffaf0" stroke="#5a4d3a" stroke-width="1.5"/>
-          <text x="237" y="273">Chwalisz</text>
-          <circle cx="420" cy="240" r="5" fill="#fffaf0" stroke="#5a4d3a" stroke-width="1.5"/>
-          <text x="432" y="243">Audrey Tang</text>
-          <!-- DML people -->
-          <circle cx="190" cy="475" r="5" fill="#fffaf0" stroke="#5a4d3a" stroke-width="1.5"/>
-          <text x="202" y="478">Charlie Fisher</text>
-          <circle cx="320" cy="395" r="5" fill="#fffaf0" stroke="#5a4d3a" stroke-width="1.5"/>
-          <text x="332" y="398">Gurden Batra</text>
-          <!-- Plurality / Metagov people -->
-          <circle cx="820" cy="170" r="5" fill="#fffaf0" stroke="#5a4d3a" stroke-width="1.5"/>
-          <text x="832" y="173">Glen Weyl</text>
-          <circle cx="1080" cy="290" r="5" fill="#fffaf0" stroke="#5a4d3a" stroke-width="1.5"/>
-          <text x="1063" y="278" text-anchor="end">Liz Barry</text>
-        </g>
-
-        <!-- CIBC center: black rect + Press Start 2P pixel mark -->
-        <rect x="552" y="320" width="96" height="40" fill="#2a2218"/>
-        <text x="600" y="347" text-anchor="middle" font-family="'Press Start 2P', monospace" font-size="18" fill="#f6ecd9" letter-spacing="1">CIBC</text>
-
-        <!-- Tie-type legend (bottom-left) -->
-        <g font-family="JetBrains Mono, monospace" font-size="10" fill="#998774">
-          <line x1="40" y1="600" x2="76" y2="600" stroke="#5a4d3a" stroke-width="1.5" opacity="0.7"/>
-          <text x="84" y="604">formalized</text>
-          <line x1="180" y1="600" x2="216" y2="600" stroke="#5a4d3a" stroke-width="1.5" stroke-dasharray="5 4" opacity="0.7"/>
-          <text x="224" y="604">speculative</text>
-        </g>
-      </svg>
+      <img class="map-svg" src="assets/ecosystem-preview.png" alt="CIBC ecosystem map preview: deliberation, plurality and metagov, dark matter labs, and regen clusters connected to CIBC at the center" />
 
       <div class="map-stack" aria-label="CIBC ecosystem position">
         <div class="row">
@@ -2059,7 +1971,7 @@
       <h3>Who are you <span class="gradient-text">building with</span>?</h3>
       <p>This map shows the people and orgs CIBC members collaborate with, build alongside, or quietly track.</p>
       <div class="about-ctas">
-        <a href="ecosystem-map.html" class="btn btn-primary">View ecosystem map <span class="arrow">→</span></a>
+        <a href="ecosystem-map.html" class="btn btn-primary">View ecosystem map <span class="arrow"><svg style="width:1em;height:1em;vertical-align:-0.12em;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></a>
         <a href="#" class="btn btn-ghost">About CIBC</a>
       </div>
     </div>
@@ -2073,22 +1985,13 @@
     <div class="footer-block">
       <h4>Register</h4>
       <p>Registration goes to a Luma form for v1. We'll move it to a portable surface once we pick one. Data exportable in either case.</p>
-      <a href="#" class="btn btn-primary" style="margin-top: 16px;">Register on Luma <span class="arrow">→</span></a>
+      <a href="#" class="btn btn-primary" style="margin-top: 16px;">Register on Luma <span class="arrow"><svg style="width:1em;height:1em;vertical-align:-0.12em;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></a>
     </div>
     <div class="footer-block">
       <h4>Stay in touch</h4>
       <ul>
         <li><a href="#">CIBC Telegram</a></li>
         <li><a href="#">Substack digest</a></li>
-      </ul>
-    </div>
-    <div class="footer-block">
-      <h4>Surface</h4>
-      <ul>
-        <li><a href="#">CIBC main link</a></li>
-        <li><a href="#">First demo day · open call</a></li>
-        <li><a href="#">Past planning logs</a></li>
-        <li><a href="https://github.com/Citizen-Infra" target="_blank" rel="noopener">GitHub · Citizen-Infra</a></li>
       </ul>
     </div>
   </div>

@@ -411,10 +411,8 @@
     border-radius: 100px;
     font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
     font-size: 11px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 600;
     transition: filter 150ms;
     flex-shrink: 0; white-space: nowrap;
   }
@@ -507,9 +505,9 @@
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background: rgba(246, 236, 217, 0.06);
-    backdrop-filter: blur(0.75px) saturate(1.02);
-    -webkit-backdrop-filter: blur(0.75px) saturate(1.02);
+    background: rgba(246, 236, 217, 0.22);
+    backdrop-filter: blur(3px) saturate(1.06);
+    -webkit-backdrop-filter: blur(3px) saturate(1.06);
     z-index: 1;
   }
   .nav-inner {
@@ -561,12 +559,10 @@
     color: var(--bg-warm);
     padding: 10px 18px;
     border-radius: 100px;
-    font-family: var(--mono);
+    font-family: var(--body);
     font-size: 11px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 600;
     transition: filter 150ms;
   }
   .nav-cta:hover { filter: brightness(0.92); }
@@ -587,7 +583,7 @@
     text-transform: uppercase;
     color: var(--ink-soft);
     text-decoration: none;
-    padding: 24px 16px;
+    padding: 16px 16px;
     border-bottom: 3px solid transparent;
     transition: color 150ms, border-color 150ms;
     white-space: nowrap;
@@ -659,8 +655,8 @@
     <a href="#" class="brand" aria-label="CIBC home"><span class="brand-mark">CIBC</span></a>
     <div class="nav-links" id="primary-links" role="navigation">
       <a href="#" class="nav-link nav-link-current" aria-current="page">Demo Day</a>
-      <a href="ecosystem-map.html" class="nav-link">Ecosystem Map</a>
-      <a href="get-involved.html" class="nav-link">Get Involved</a>
+      <a href="ecosystem-map.html" class="nav-link">Infra Resources</a>
+      <a href="get-involved.html" class="nav-link">About us</a>
     </div>
     <a href="#register" class="nav-cta">Register</a>
     <button type="button" class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="primary-links" aria-label="Open menu">
@@ -677,8 +673,8 @@
   <a href="index.html" class="gn-brand" aria-label="CIBC home"><span class="gn-brand-mark">CIBC</span></a>
   <div class="gn-links" id="primary-links" role="navigation">
     <a href="index.html" class="gn-link">Demo Day</a>
-    <a href="ecosystem-map.html" class="gn-link">Ecosystem Map</a>
-    <a href="get-involved.html" class="gn-link">Get Involved</a>
+    <a href="ecosystem-map.html" class="gn-link">Infra Resources</a>
+    <a href="get-involved.html" class="gn-link">About us</a>
   </div>
   <a href="index.html#register" class="gn-cta">Register</a>
   <button type="button" class="gn-toggle" data-nav-toggle aria-expanded="false" aria-controls="primary-links" aria-label="Open menu">
@@ -1012,7 +1008,7 @@
 <footer class="colophon">
   <a href="index.html" class="footer-brand" aria-label="CIBC home"><span class="footer-brand-mark">CIBC</span></a>
   <div>CIBC Research Report · Nine Organizations and Networks · drafted 2026-05-15 · Claude deep research</div>
-  <div>Companion · <a href="ecosystem-map.html">Ecosystem Map</a> · <a href="index.html">Demo Day landing</a></div>
+  <div>Companion · <a href="ecosystem-map.html">Infra Resources</a> · <a href="index.html">Demo Day landing</a></div>
   <div>Status · v1 web render · source markdown in `Initiatives/CIBC/Demo Days/_activity/`</div>
 </footer>
 
