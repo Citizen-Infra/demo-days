@@ -791,26 +791,47 @@
   }
   .stay-links a:hover { border-bottom-color: var(--accent); }
 
-  /* Footer */
+  /* ============ FOOTER · matches index.html + ecosystem-map.html ============
+     Full-bleed cream band with brand mark, Register + Stay in touch
+     blocks, and a hairline footer-bottom strip. Single source of
+     truth lives here on each page; restyle from one and propagate
+     via grep + script per the propagate-components-all-pages rule. */
   .footer {
-    border-top: 1px solid var(--rule);
-    background: var(--bg-warm);
-    padding: 36px 56px;
-    margin-top: 56px;
+    position: relative;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    width: 100vw;
+    background: var(--bg-warm-2);
+    overflow: hidden;
+    isolation: isolate;
+    margin-top: clamp(56px, 8vw, 96px);
+    padding-top: clamp(60px, 8vw, 100px);
+    padding-bottom: clamp(40px, 5vw, 60px);
+    border-top: none;
+  }
+  .footer .field-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .footer .field-veil {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: rgba(240, 227, 200, 0.06);
+    z-index: 1;
   }
   .footer-inner {
+    position: relative;
+    z-index: 2;
     max-width: 1080px;
     margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px 32px;
-    align-items: center;
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--ink-faint);
+    padding: 0 clamp(20px, 4vw, 48px);
   }
-  .footer-inner > span:nth-of-type(1) { flex: 1; }
-  .footer-brand { text-decoration: none; display: inline-block; flex-shrink: 0; }
+  .footer-brand { text-decoration: none; display: inline-block; margin-bottom: 28px; }
   .footer-brand-mark {
     font-family: var(--pixel);
     font-size: 14px;
@@ -822,6 +843,56 @@
     display: inline-block;
     letter-spacing: 0;
   }
+  .footer-row {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 32px;
+    padding-bottom: 32px;
+  }
+  @media (max-width: 760px) {
+    .footer-row { grid-template-columns: 1fr; }
+  }
+  .footer-block h4 {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 12px;
+  }
+  .footer-block p {
+    font-family: var(--body);
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .footer-block a {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--rule);
+    text-underline-offset: 3px;
+  }
+  .footer-block a:hover { color: var(--accent); text-decoration-color: var(--accent); }
+  .footer-block a.btn { text-decoration: none; }
+  .footer-block a.btn-primary { color: var(--bg-warm); }
+  .footer-block a.btn-primary:hover { color: var(--bg-warm); }
+  .footer-block a.btn-ghost { color: var(--ink); }
+  .footer-block ul { list-style: none; padding: 0; margin: 0; }
+  .footer-block li { font-family: var(--body); font-size: 14px; padding: 4px 0; }
+  .footer-bottom {
+    padding: 20px 0;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .footer-bottom span { line-height: 1.6; }
 
   /* hide legacy .global-nav in favor of new .nav component */
   .global-nav { display: none !important; }
@@ -2542,11 +2613,31 @@ const ATLAS_DATA = {
 
 </div>
 
-<footer class="footer">
+<!-- ===== FOOTER ===== -->
+<footer class="footer" id="register-footer">
+  <canvas class="field-canvas" id="field-canvas-footer" aria-hidden="true"></canvas>
+  <div class="field-veil" aria-hidden="true"></div>
   <div class="footer-inner">
     <a href="index.html" class="footer-brand" aria-label="CIBC home"><span class="footer-brand-mark">CIBC</span></a>
-    <span>CIBC Demo Day · Get Involved · drafted 2026-05-15</span>
-    <span>No tracking pixels · no third-party scripts beyond Google Fonts</span>
+    <div class="footer-row">
+      <div class="footer-block">
+        <h4>Register</h4>
+        <p>Registration goes to a Luma form for v1. We'll move it to a portable surface once we pick one. Data exportable in either case.</p>
+        <a href="#register" class="btn btn-primary" style="margin-top: 16px;">Register on Luma <span class="arrow"><svg style="width:1em;height:1em;vertical-align:-0.12em;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></a>
+      </div>
+      <div class="footer-block">
+        <h4>Stay in touch</h4>
+        <ul>
+          <li><a href="#">CIBC Telegram</a></li>
+          <li><a href="#">Substack digest</a></li>
+          <li><a href="https://github.com/Citizen-Infra" target="_blank" rel="noopener">GitHub · Citizen-Infra</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>CIBC Demo Day · Learn more · drafted 2026-05-15</span>
+      <span>No tracking pixels · no third-party scripts beyond Google Fonts</span>
+    </div>
   </div>
 </footer>
 
