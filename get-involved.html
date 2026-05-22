@@ -3383,8 +3383,13 @@ function focusOnNode(nodeId) {
     const isActive = it.getAttribute('data-id') === nodeId;
     it.classList.toggle('active', isActive);
     if (isActive) {
-      // Center the card horizontally so the carousel + map stay in sync
+      // Center the card horizontally so the carousel + map stay in sync.
+      // Suppress the scroll-listener while the smooth scroll plays so it
+      // doesn't re-snap onto whatever card is closest to center mid-animation.
+      suppressCarouselScroll = true;
       it.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      clearTimeout(suppressCarouselScrollTimer);
+      suppressCarouselScrollTimer = setTimeout(() => { suppressCarouselScroll = false; }, 600);
     }
   });
 
@@ -3421,6 +3426,13 @@ function showTooltip(node) {
   tooltip.classList.add('visible');
 }
 
+// Suppression flag for the carousel scroll listener · set true around
+// programmatic scrolls (resetFocus, focusOnNode, arrow key navigation)
+// so the listener doesn't fight the auto-snap by re-focusing whatever
+// card lands closest to center mid-animation.
+let suppressCarouselScroll = false;
+let suppressCarouselScrollTimer = null;
+
 function resetFocus() {
   focusedNodeId = null;
   renderMap();
@@ -3431,15 +3443,22 @@ function resetFocus() {
   });
   // Scroll the All card back into view so the user sees the filter snap home.
   const allCard = inventoryCarousel.querySelector('.inv-item-all');
-  if (allCard) allCard.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+  if (allCard) {
+    suppressCarouselScroll = true;
+    allCard.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+    clearTimeout(suppressCarouselScrollTimer);
+    suppressCarouselScrollTimer = setTimeout(() => { suppressCarouselScroll = false; }, 600);
+  }
   tooltip.classList.remove('visible');
   resetBtn.classList.remove('visible');
 }
 
 /* Carousel scroll → map focus.
-   Debounced. When the carousel settles, the centered card's node becomes focused. */
+   Debounced. When the carousel settles, the centered card's node becomes focused.
+   Skipped while a programmatic scroll is in flight (suppressCarouselScroll). */
 let carouselScrollTimer = null;
 inventoryCarousel.addEventListener('scroll', () => {
+  if (suppressCarouselScroll) return;
   clearTimeout(carouselScrollTimer);
   carouselScrollTimer = setTimeout(() => {
     const centerX = inventoryCarousel.scrollLeft + inventoryCarousel.offsetWidth / 2;
@@ -3475,6 +3494,31 @@ function scrollCarousel(direction) {
 }
 if (invNavPrev) invNavPrev.addEventListener('click', () => scrollCarousel(-1));
 if (invNavNext) invNavNext.addEventListener('click', () => scrollCarousel(1));
+
+// Keyboard navigation · ArrowLeft / ArrowRight step through the
+// inventory cards (including the All filter at index 0) whenever
+// the trainer overlay is open. Click the target card so focus +
+// scroll-into-view logic runs as if the user clicked it.
+document.addEventListener('keydown', (e) => {
+  if (!trainerView.classList.contains('active')) return;
+  if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+  // Don't hijack arrows when the user is typing in a form field.
+  const tag = (e.target.tagName || '').toLowerCase();
+  if (tag === 'input' || tag === 'textarea' || e.target.isContentEditable) return;
+
+  const cards = Array.from(inventoryCarousel.querySelectorAll('.inv-item'));
+  if (!cards.length) return;
+
+  const activeIdx = cards.findIndex(c => c.classList.contains('active'));
+  const currentIdx = activeIdx >= 0 ? activeIdx : 0;
+  const dir = e.key === 'ArrowLeft' ? -1 : 1;
+  const nextIdx = Math.max(0, Math.min(cards.length - 1, currentIdx + dir));
+
+  if (nextIdx !== currentIdx) {
+    e.preventDefault();
+    cards[nextIdx].click();
+  }
+});
 
 resetBtn.addEventListener('click', resetFocus);
 
