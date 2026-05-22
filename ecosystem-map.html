@@ -2642,7 +2642,7 @@ initFieldAtmosphere({
 
 /* ============ Tools filter ============ */
 (function() {
-  const chips = document.querySelectorAll('.tool-chip');
+  const chipsList = Array.from(document.querySelectorAll('.tool-chip'));
   const allChip = document.querySelector('.tool-chip-all');
   const cards = document.querySelectorAll('.demo-card[data-category]');
   let activeFilter = null; // null means "All"
@@ -2660,7 +2660,7 @@ initFieldAtmosphere({
 
   function setActive(cat) {
     activeFilter = cat;
-    chips.forEach(c => {
+    chipsList.forEach(c => {
       const isAll = c === allChip;
       const matches = cat === null ? isAll : c.dataset.cat === cat;
       c.classList.toggle('is-active', matches);
@@ -2668,7 +2668,7 @@ initFieldAtmosphere({
     applyFilter();
   }
 
-  chips.forEach(chip => {
+  chipsList.forEach(chip => {
     chip.addEventListener('click', () => {
       const cat = chip.dataset.cat;
       // The All pill always clears any active category filter and
@@ -2682,6 +2682,23 @@ initFieldAtmosphere({
         setActive(null);
       } else {
         setActive(cat);
+      }
+    });
+  });
+
+  // Keyboard navigation · ArrowLeft / ArrowRight step through the
+  // chips (including the All pill at index 0). Only fires when one
+  // of the chips currently has focus, so it doesn't hijack arrows
+  // elsewhere on the page.
+  chipsList.forEach((chip, i) => {
+    chip.addEventListener('keydown', (e) => {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      e.preventDefault();
+      const dir = e.key === 'ArrowLeft' ? -1 : 1;
+      const nextIdx = Math.max(0, Math.min(chipsList.length - 1, i + dir));
+      if (nextIdx !== i) {
+        chipsList[nextIdx].focus();
+        chipsList[nextIdx].click();
       }
     });
   });
