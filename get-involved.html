@@ -2313,22 +2313,11 @@ const ATLAS_DATA = {
       summary: 'Non-intrusive AI that flags fallacies in deliberation forums and suggests reformulations. The user decides what to do. Built for citizens and lawmakers.' },
     // Brayden is on the CIBC team but is not a pitch presenter; kept
     // in data for map contributor counts, not rendered as a card.
-    { id: 'brayden', section: 'cibc-team', name: 'Brayden', role: 'CIBC channels, the scout',
-      color: '#D4A347', accent: 'triangle',
-      summary: 'Holds RegenOS and adjacent regenerative surfaces. The poster for the regen-adjacent demo-day share-link. Lives inside systems-change networks.' },
-    // Ecosystem bridges (people who carry multi-relationship value)
-    { id: 'chwalisz', section: 'bridge', name: 'Claudia Chwalisz', role: 'DemNext founder, DelibTech co-coord',
-      color: '#9DB89E', accent: 'flower',
-      summary: 'Founded DemNext, co-coordinates DelibTech, sits adjacent to Plurality via Audrey Tang. A single intro through her reaches three orgs.' },
-    { id: 'audrey', section: 'bridge', name: 'Audrey Tang', role: 'Plurality co-author, DemNext advisor',
-      color: '#B496D0', accent: 'bloom',
-      summary: 'Plurality book co-author, DemNext International Advisory Council. Bridges deliberative democracy and Plurality clusters. One intro hits both.' },
-    { id: 'fisher', section: 'bridge', name: 'Charlie Fisher', role: 'Komma founder, ex-DML, OASA',
-      color: '#7A9268', accent: 'leaf',
-      summary: 'Personal bridge between DML, Komma, and OASA. CIBC flagged in network. Invite directly. Confirm "Coma" means "Komma" before public outreach.' },
-    { id: 'gimenez', section: 'bridge', name: 'Nicolas Gimenez', role: 'Agora co-founder, CTO',
-      color: '#6FA9B5', accent: 'ring',
-      summary: 'Almost certainly the "Nicola" in CIBC notes. Agora runs on AT Protocol via Bluesky and WhiteWind. Highest match score for CIBC tech stack.' }
+    { id: 'brayden', section: 'cibc-team', name: 'Brayden', role: 'CIBC channels',
+      color: '#D4A347', accent: 'triangle' },
+    // Bridge trainers (4 external people who haven't opted in) moved
+    // to assets/atlas-internal.js (gitignored). Re-merge from there
+    // for local-only views if you need the full network.
   ],
 
   /* ORGS · curated list of organizations, events, and concepts Megan
@@ -2374,47 +2363,33 @@ const ATLAS_DATA = {
 
     // CIBC values / concepts (background context)
     { id: 'anti-extractive', label: 'anti-extractive', x: 445, y: 470, r: 5, contributors: ['megan','artem'], type: 'concept', critter: 'shield' },
-    { id: 'at-protocol', label: 'AT Protocol', x: 570, y: 440, r: 5, contributors: ['megan','gimenez'], type: 'concept', critter: 'twin' },
-    { id: 'data-sovereignty', label: 'data sovereignty', x: 405, y: 545, r: 5, contributors: ['megan','artem','fisher'], type: 'concept', critter: 'block' },
-    { id: 'deliberation', label: 'deliberation', x: 380, y: 350, r: 5, contributors: ['megan','chwalisz','audrey'], type: 'concept', critter: 'wave' },
-    { id: 'regenerative', label: 'regenerative systems', x: 660, y: 660, r: 5, contributors: ['brayden','fisher'], type: 'concept', critter: 'sprout' },
+    { id: 'at-protocol', label: 'AT Protocol', x: 570, y: 440, r: 5, contributors: ['megan'], type: 'concept', critter: 'twin' },
+    { id: 'data-sovereignty', label: 'data sovereignty', x: 405, y: 545, r: 5, contributors: ['megan','artem'], type: 'concept', critter: 'block' },
+    { id: 'deliberation', label: 'deliberation', x: 380, y: 350, r: 5, contributors: ['megan'], type: 'concept', critter: 'wave' },
+    { id: 'regenerative', label: 'regenerative systems', x: 660, y: 660, r: 5, contributors: ['brayden'], type: 'concept', critter: 'sprout' },
 
-    // Deliberation cluster (upper-left)
-    { id: 'demnext', label: 'DemNext', x: 290, y: 260, r: 8, contributors: ['megan','artem','chwalisz','audrey'], type: 'deliberation', critter: 'circle', state: 'caught',
-      strategic: 'Share-link via Claudia Chwalisz intro. Best route is via DelibTech, not direct partnership.' },
-    { id: 'delibtech', label: 'DelibTech Network', x: 200, y: 200, r: 6, contributors: ['megan','chwalisz'], type: 'deliberation', critter: 'web', state: 'spotted',
-      strategic: 'Invite-only, Chatham House. Best path: Chwalisz or Aviv Ovadya for private mention.' },
-    { id: 'agora', label: 'Agora Citizen Net', x: 330, y: 380, r: 7, contributors: ['artem','gimenez'], type: 'deliberation', critter: 'wave', state: 'caught',
-      strategic: 'Invite Nicolas Gimenez. Highest match score for CIBC tech stack (AT Protocol + deliberation).' },
-    { id: 'chwalisz-node', label: 'Claudia Chwalisz', x: 240, y: 320, r: 4, contributors: ['megan','chwalisz'], type: 'person', critter: 'flower' },
-    { id: 'audrey-node', label: 'Audrey Tang', x: 430, y: 280, r: 4, contributors: ['megan','audrey','chwalisz'], type: 'person', critter: 'bloom' },
-    { id: 'nicolas-node', label: 'Nicolas Gimenez', x: 360, y: 420, r: 4, contributors: ['artem','gimenez'], type: 'person', critter: 'ring' },
+    // Deliberation cluster (upper-left). Person nodes are in
+    // assets/atlas-internal.js (gitignored), not on the public web.
+    // Strategic outreach notes are likewise gitignored.
+    { id: 'demnext',   label: 'DemNext',           x: 290, y: 260, r: 8, contributors: ['megan','artem'], type: 'deliberation', critter: 'circle', state: 'caught' },
+    { id: 'delibtech', label: 'DelibTech Network', x: 200, y: 200, r: 6, contributors: ['megan'],        type: 'deliberation', critter: 'web',    state: 'spotted' },
+    { id: 'agora',     label: 'Agora Citizen Net', x: 330, y: 380, r: 7, contributors: ['artem'],         type: 'deliberation', critter: 'wave',   state: 'caught' },
 
-    // DML cluster (left / lower-left)
-    { id: 'dml', label: 'Dark Matter Labs', x: 260, y: 550, r: 8, contributors: ['artem','fisher'], type: 'civic-tech', critter: 'prism', state: 'caught',
-      strategic: 'Invite Gurden Batra. DML is parallel to CIBC. Civic Tech Studio framing maps closely to anti-extractive.' },
-    { id: 'komma', label: 'Komma Systems', x: 170, y: 620, r: 6, contributors: ['artem','fisher'], type: 'civic-tech', critter: 'twin', state: 'rumored',
-      strategic: 'Invite Charlie Fisher directly. Confirm "Coma" means "Komma" before public outreach.' },
-    { id: 'indy-johar', label: 'Indy Johar', x: 200, y: 490, r: 4, contributors: ['artem'], type: 'person', critter: 'ring' },
-    { id: 'gurden-node', label: 'Gurden Batra', x: 320, y: 480, r: 4, contributors: ['artem'], type: 'person', critter: 'sparkle' },
-    { id: 'fisher-node', label: 'Charlie Fisher', x: 215, y: 585, r: 4, contributors: ['artem','fisher'], type: 'person', critter: 'leaf' },
+    // DML cluster (left / lower-left). Person nodes moved to
+    // atlas-internal.js.
+    { id: 'dml',   label: 'Dark Matter Labs', x: 260, y: 550, r: 8, contributors: ['artem'], type: 'civic-tech', critter: 'prism', state: 'caught' },
+    { id: 'komma', label: 'Komma Systems',    x: 170, y: 620, r: 6, contributors: ['artem'], type: 'civic-tech', critter: 'twin',  state: 'rumored' },
 
-    // Plurality / Metagov cluster (upper-right)
-    { id: 'plurality', label: 'Plurality (Institute)', x: 700, y: 320, r: 7, contributors: ['megan','audrey'], type: 'research', critter: 'orbit', state: 'spotted',
-      strategic: 'Strong fit if framing emphasizes plural tech and AT Protocol or knowledge-graph deliberation.' },
-    { id: 'metagov', label: 'Metagov', x: 760, y: 410, r: 7, contributors: ['megan'], type: 'governance', critter: 'gear', state: 'spotted',
-      strategic: 'Invite Liz Barry. Post share link in Metagov Slack after onboarding. Playtester program is highest-leverage soft entry.' },
-    { id: 'liz-barry-node', label: 'Liz Barry', x: 825, y: 380, r: 4, contributors: ['megan'], type: 'person', critter: 'starry' },
-    { id: 'glen-weyl', label: 'Glen Weyl', x: 640, y: 270, r: 4, contributors: ['megan','audrey'], type: 'person', critter: 'starry' },
-    { id: 'nathan-schneider', label: 'Nathan Schneider', x: 790, y: 470, r: 3, contributors: ['megan'], type: 'person', critter: 'tiny' },
+    // Plurality / Metagov cluster (upper-right). Person nodes
+    // moved to atlas-internal.js.
+    { id: 'plurality', label: 'Plurality (Institute)', x: 700, y: 320, r: 7, contributors: ['megan'], type: 'research',   critter: 'orbit', state: 'spotted' },
+    { id: 'metagov',   label: 'Metagov',               x: 760, y: 410, r: 7, contributors: ['megan'], type: 'governance', critter: 'gear',  state: 'spotted' },
 
     // Regen cluster (bottom-right)
-    { id: 'regenos', label: 'RegenOS', x: 700, y: 670, r: 7, contributors: ['brayden'], type: 'regen', critter: 'sprout', state: 'rumored',
-      strategic: 'Brayden is the right poster. Strong fit if framed around agentic org design or KOI. ReGenos.com is collagen, not this.' },
+    { id: 'regenos', label: 'RegenOS', x: 700, y: 670, r: 7, contributors: ['brayden'], type: 'regen', critter: 'sprout', state: 'rumored' },
 
     // Newsweek (floating, unverified, far edge)
-    { id: 'newsweek', label: 'Newsweek (?)', x: 905, y: 870, r: 5, contributors: [], type: 'unknown', critter: 'tiny', state: 'unverified',
-      strategic: 'Cannot assess. Ask Artem for the canonical name, link, and platform before any outreach.' },
+    { id: 'newsweek', label: 'Newsweek (?)', x: 905, y: 870, r: 5, contributors: [], type: 'unknown', critter: 'tiny', state: 'unverified' },
 
     // Orbital fragments (the vault is bigger than the map)
     { id: 'frag-1', label: 'unfiled lead', x: 120, y: 130, r: 3, contributors: [], type: 'fragment', critter: 'tiny' },
@@ -3519,18 +3494,15 @@ function resetMapTransform() {
 }
 
 function showTooltip(node) {
-  const contribNames = node.contributors.map(cid => {
-    const t = trainers.find(tt => tt.id === cid);
-    return t ? t.name : cid;
-  }).join(', ');
+  // Public tooltip: no "held by ${person names}" line, no strategic
+  // note. Both bits stayed too internal-feeling for the open web;
+  // the data they pulled from is now in the gitignored internal
+  // file. Just label + type + state tag remain.
   const stateTag = node.state ? `<div><span class="state-tag ${node.state}">${node.state}</span></div>` : '';
-  const strategic = node.strategic ? `<div class="strategic">${node.strategic}</div>` : '';
-  const heldBy = contribNames ? `<em>${node.type} &middot; held by ${contribNames}</em>` : `<em>${node.type} &middot; no one holds this yet</em>`;
   tooltip.innerHTML = `
     <strong>${node.label}</strong>
-    ${heldBy}
+    <em>${node.type}</em>
     ${stateTag}
-    ${strategic}
   `;
   tooltip.classList.add('visible');
 }
@@ -3781,18 +3753,13 @@ function resetFrontMapTransform() {
 }
 
 function showFrontTooltip(node) {
-  const contribNames = node.contributors.map(cid => {
-    const t = trainers.find(tt => tt.id === cid);
-    return t ? t.name : cid;
-  }).join(', ');
+  // Public tooltip · scrubbed for the open web (no held-by names,
+  // no strategic note). See showTooltip above for the rationale.
   const stateTag = node.state ? `<div><span class="state-tag ${node.state}">${node.state}</span></div>` : '';
-  const strategic = node.strategic ? `<div class="strategic">${node.strategic}</div>` : '';
-  const heldBy = contribNames ? `<em>${node.type} &middot; held by ${contribNames}</em>` : `<em>${node.type} &middot; no one holds this yet</em>`;
   frontTooltip.innerHTML = `
     <strong>${node.label}</strong>
-    ${heldBy}
+    <em>${node.type}</em>
     ${stateTag}
-    ${strategic}
   `;
   frontTooltip.classList.add('visible');
 }
