@@ -383,6 +383,13 @@
     background: var(--bg-warm);
   }
   .professionals .trainer-card .avatar-wrap svg { animation: none !important; }
+  .professionals .trainer-card .avatar-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
   .professionals .trainer-card .trainer-text {
     display: flex;
     flex-direction: column;
@@ -2278,7 +2285,7 @@ const ATLAS_DATA = {
   trainers: [
     // CIBC team
     { id: 'megan', section: 'cibc', name: 'Megan', role: 'CIBC strategy, the cartographer',
-      color: '#d4793d', accent: 'sparkle',
+      color: '#d4793d', accent: 'sparkle', photo: 'assets/megan.webp',
       summary: 'Holds the whole ecosystem in view. Direct relationships with DemNext, Metagov, Plurality. Surfaces the strategic shape for the rest of the room.' },
     { id: 'artem', section: 'cibc', name: 'Artem', role: 'CIBC co-founder, the insider',
       color: '#6FA9B5', accent: 'lines',
@@ -3184,8 +3191,13 @@ trainers.forEach(t => {
   const card = document.createElement('button');
   card.className = 'trainer-card';
   card.setAttribute('aria-label', `Open ${t.name}'s roster`);
+  // If the trainer has a photo field, render that as the avatar; else
+  // fall back to the generative critter SVG.
+  const avatar = t.photo
+    ? `<img class="avatar-photo" src="${t.photo}" alt="" loading="lazy">`
+    : trainerSVG(t);
   card.innerHTML = `
-    <div class="avatar-wrap">${trainerSVG(t)}</div>
+    <div class="avatar-wrap">${avatar}</div>
     <div class="trainer-text">
       <div class="trainer-name">${t.name}</div>
       <div class="trainer-label">${sectionLabel[t.section] || ''}</div>
