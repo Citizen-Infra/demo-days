@@ -1887,15 +1887,22 @@
   }
   .icon-btn:hover { background: rgba(232, 220, 198, 0.12); border-color: rgba(232, 220, 198, 0.22); }
 
-  .trainer-header-avatar { width: 56px; height: 56px; flex-shrink: 0; }
+  .trainer-header-avatar {
+    width: 48px; height: 48px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    overflow: hidden;
+    background: var(--bg-deep-2, #1d1812);
+  }
+  .trainer-header-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
   .trainer-header-text { flex: 1; min-width: 0; }
   .trainer-header-name {
     font-family: 'Fraunces', serif;
-    font-variation-settings: "opsz" 144, "SOFT" 60;
+    font-variation-settings: "opsz" 36, "SOFT" 60;
     font-weight: 600;
-    font-size: clamp(24px, 3vw, 32px);
-    margin: 0; line-height: 1.05;
-    color: #f4ebda;
+    font-size: clamp(18px, 2vw, 22px);
+    margin: 0; line-height: 1.1;
+    color: var(--bg-warm);
   }
   .trainer-header-role {
     font-family: 'Newsreader', serif; font-style: italic;
@@ -2228,7 +2235,7 @@
     }
     .icon-btn { width: 40px; height: 40px; font-size: 18px; }
     .trainer-header-avatar { width: 44px; height: 44px; }
-    .trainer-header-name { font-size: clamp(20px, 6vw, 24px); }
+    .trainer-header-name { font-size: clamp(16px, 5vw, 20px); }
     .trainer-header-role { font-size: 12px; -webkit-line-clamp: 3; }
     .reset-btn {
       padding: 7px 12px; font-size: 11px;
@@ -3258,7 +3265,10 @@ function openTrainer(t) {
   currentTrainer = t;
   focusedNodeId = null;
 
-  document.getElementById('trainer-header-avatar').innerHTML = trainerSVG(t);
+  // Use the trainer's photo if available; fall back to the generative critter.
+  document.getElementById('trainer-header-avatar').innerHTML = t.photo
+    ? `<img src="${t.photo}" alt="" loading="lazy">`
+    : trainerSVG(t);
   document.getElementById('trainer-header-name').textContent = t.name;
   document.getElementById('trainer-header-role').textContent = `"${t.summary}"`;
 
@@ -3327,7 +3337,12 @@ function renderMap() {
 }
 
 function renderInventory() {
-  const roster = currentTrainer.touchedNodeIds.map(id => nodes.find(n => n.id === id));
+  // touchedNodeIds is computed against the unfiltered node set so the
+  // count stays accurate, but person nodes are filtered out of the
+  // visible `nodes` array. Drop the lookups that come back undefined.
+  const roster = currentTrainer.touchedNodeIds
+    .map(id => nodes.find(n => n.id === id))
+    .filter(Boolean);
   inventoryCarousel.innerHTML = '';
 
   // "All" filter card sits at the head of the row. Active by default; clicking it
@@ -3876,18 +3891,21 @@ renderFrontMap();
 <!-- /ATLAS SECTION: render-engine -->
 
 <script>
-/* ============ Deep-link a trainer via ?focus=ID ============ */
+/* ============ Deep-link a trainer via ?focus=ID ============
+   Card grid is now orgs (static, no click handler), so this opens
+   the overlay by looking up the trainer in ATLAS_DATA directly and
+   calling openTrainer() with the match. */
 (function() {
   function openFromQuery() {
     const params = new URLSearchParams(location.search);
     const id = params.get('focus');
     if (!id) return;
-    const card = document.querySelector(`.trainer-card[data-trainer-id="${id}"]`);
-    if (card) { card.click(); return; }
-    // Fallback: match by name (lowercased)
-    const all = document.querySelectorAll('.trainer-card');
-    const match = Array.from(all).find(c => c.textContent.trim().toLowerCase().startsWith(id.toLowerCase()));
-    if (match) match.click();
+    if (typeof openTrainer !== 'function' || typeof ATLAS_DATA === 'undefined') return;
+    const want = id.toLowerCase();
+    const match = ATLAS_DATA.trainers.find(t =>
+      t.id.toLowerCase() === want || t.name.toLowerCase().startsWith(want)
+    );
+    if (match) openTrainer(match);
   }
   if (document.readyState === 'complete') openFromQuery();
   else window.addEventListener('load', openFromQuery);
