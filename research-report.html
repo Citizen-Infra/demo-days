@@ -651,6 +651,130 @@
 </style>
 </head>
 <body>
+<!-- ===== PASSWORD GATE · client-side barrier, not real security =====
+     The page contains internal strategic notes and names that aren't
+     for the open web. Anyone with devtools can bypass this gate by
+     reading the source; treat it as a "don't accidentally land here"
+     speed bump, not as access control. -->
+<div id="pw-gate" role="dialog" aria-modal="true" aria-labelledby="pw-title">
+  <div class="pw-inner">
+    <p class="pw-eyebrow">CIBC · internal</p>
+    <h1 id="pw-title" class="pw-title">Password required</h1>
+    <p class="pw-deck">This page is internal to the CIBC builder community. Enter the shared password to continue.</p>
+    <form class="pw-form" id="pw-form" autocomplete="off">
+      <input id="pw-input" type="password" placeholder="Password" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Password">
+      <button type="submit" class="pw-submit">Enter</button>
+    </form>
+    <p id="pw-error" class="pw-error" hidden>That's not it. Try again.</p>
+  </div>
+</div>
+<style>
+  #pw-gate {
+    position: fixed; inset: 0;
+    z-index: 9999;
+    background: #0e0a07;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    color: #f6ecd9;
+    font-family: 'Newsreader', Georgia, serif;
+  }
+  body.pw-locked { overflow: hidden; }
+  body.pw-unlocked #pw-gate { display: none; }
+  #pw-gate .pw-inner {
+    max-width: 440px;
+    text-align: center;
+  }
+  #pw-gate .pw-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(246, 236, 217, 0.5);
+    margin: 0 0 18px;
+  }
+  #pw-gate .pw-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(28px, 4vw, 40px);
+    line-height: 1.1;
+    margin: 0 0 12px;
+    color: #f6ecd9;
+  }
+  #pw-gate .pw-deck {
+    font-size: 15px;
+    line-height: 1.5;
+    color: rgba(246, 236, 217, 0.7);
+    margin: 0 0 28px;
+  }
+  #pw-gate .pw-form {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  #pw-gate #pw-input {
+    flex: 1 1 220px;
+    font-family: 'Newsreader', serif;
+    font-size: 16px;
+    padding: 12px 20px;
+    border-radius: 100px;
+    border: 1px solid rgba(246, 236, 217, 0.4);
+    background: transparent;
+    color: #f6ecd9;
+    outline: none;
+    text-align: center;
+  }
+  #pw-gate #pw-input:focus { border-color: #d4793d; }
+  #pw-gate .pw-submit {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 12px 24px;
+    border-radius: 100px;
+    border: none;
+    background: linear-gradient(90deg, #e96243 0%, #e67c48 100%);
+    color: #fff;
+    cursor: pointer;
+  }
+  #pw-gate .pw-error {
+    color: #e67c48;
+    font-size: 13px;
+    margin: 14px 0 0;
+    font-style: italic;
+  }
+</style>
+<script>
+(function(){
+  var KEY = 'cibc-internal-unlocked';
+  var PW = 'CIBC';
+  var gate = document.getElementById('pw-gate');
+  var form = document.getElementById('pw-form');
+  var input = document.getElementById('pw-input');
+  var err = document.getElementById('pw-error');
+  if (sessionStorage.getItem(KEY) === '1') {
+    document.body.classList.add('pw-unlocked');
+    return;
+  }
+  document.body.classList.add('pw-locked');
+  setTimeout(function(){ try { input.focus(); } catch (e) {} }, 50);
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if (input.value === PW) {
+      sessionStorage.setItem(KEY, '1');
+      document.body.classList.remove('pw-locked');
+      document.body.classList.add('pw-unlocked');
+    } else {
+      err.hidden = false;
+      input.select();
+    }
+  });
+  input.addEventListener('input', function(){ err.hidden = true; });
+})();
+</script>
+
 
 <!-- ===== NAV COMPONENT ===== -->
 <nav class="nav" aria-label="Primary">
@@ -729,20 +853,20 @@
 <section id="aggregate">
   <h2>Aggregate map and strategic reading</h2>
 
-  <p><strong>Relationships among the six peer orgs.</strong> Three of the six cluster around deliberative democracy with personal links. Democracy Next (DemNext) co-coordinates the DelibTech Network with the AI &amp; Democracy Foundation. DemNext lists Audrey Tang on its International Advisory Council, tying it to the Plurality cluster. Agora Citizen Network operates as an open-source deliberation tool in the same problem space. A second cluster sits around Dark Matter Labs (DML): Charlie Fisher's LinkedIn lists his current position as Komma Systems in Berlin while still affiliating with DML. DML co-hosted a March 2024 property conference with RadicalxChange Foundation, which sits inside the Plurality cluster via Glen Weyl. Metagov is the loosest cluster member: its Public AI project is fiscally hosted and runs through Switzerland, with no documented Maine or Portland local AI server project.</p>
+  <p><strong>Relationships among the six peer orgs.</strong> Three of the six cluster around deliberative democracy with personal links. Democracy Next (DemNext) co-coordinates the DelibTech Network with the AI &amp; Democracy Foundation. DemNext lists Audrey on its International Advisory Council, tying it to the Plurality cluster. Agora Citizen Network operates as an open-source deliberation tool in the same problem space. A second cluster sits around Dark Matter Labs (DML): Charlie's LinkedIn lists his current position as Komma Systems in Berlin while still affiliating with DML. DML co-hosted a March 2024 property conference with RadicalxChange Foundation, which sits inside the Plurality cluster via Glen. Metagov is the loosest cluster member: its Public AI project is fiscally hosted and runs through Switzerland, with no documented Maine or Portland local AI server project.</p>
 
   <p><strong>CIBC's position.</strong> CIBC is parallel-to-orthogonal to most of these. CIBC is upstream of DemNext, the DelibTech Network, and Agora on the local-first and data-sovereignty axis: those orgs need infrastructure CIBC is building. CIBC is parallel to Metagov on governance tooling and to DML on civic technology architecture. CIBC is downstream of Plurality on theory framing.</p>
 
   <p><strong>Highest-leverage actions.</strong></p>
   <ol class="actions">
-    <li>Invite Gurden Batra (DML Civic Tech Co-Lead, Berlin) to the demo day. He is the likely match for "Gordon."</li>
-    <li>Ask Charlie Fisher whether Komma Systems is presenting-ready, and use him as a bridge to DML's Civic Tech Studio.</li>
-    <li>Ask for an intro to Claudia Chwalisz to share the demo day with DelibTech Network members under Chatham House conditions.</li>
+    <li>Invite Gurden (DML Civic Tech Co-Lead, Berlin) to the demo day. He is the likely match for "Gordon."</li>
+    <li>Ask Charlie whether Komma Systems is presenting-ready, and use him as a bridge to DML's Civic Tech Studio.</li>
+    <li>Ask for an intro to Claudia to share the demo day with DelibTech Network members under Chatham House conditions.</li>
     <li>Post in the Metagov Slack (after completing their onboarding survey) 7 to 10 days before the event.</li>
     <li>Resolve the "Newsweek" reference with Artem before any outreach.</li>
   </ol>
 
-  <p><strong>Open questions.</strong> Identity of "Gordon" (Gurden Batra is the strongest match but not confirmed). Whether "Coma" is "Komma Systems." Identity of the "Newsweek" political-tech group. Whether RegenOS refers to the Regen Network RegenOS/KOI substrate or to a separate Discord or Telegram surface.</p>
+  <p><strong>Open questions.</strong> Identity of "Gordon" (Gurden is the strongest match but not confirmed). Whether "Coma" is "Komma Systems." Identity of the "Newsweek" political-tech group. Whether RegenOS refers to the Regen Network RegenOS/KOI substrate or to a separate Discord or Telegram surface.</p>
 </section>
 
 <!-- ============ DML ============ -->
@@ -766,16 +890,16 @@
   </div>
   <div class="field"><span class="field-label">Known people</span>
     <div class="field-value"><ul>
-      <li><strong>Indy Johar</strong> · Mission Steward, co-founder</li>
-      <li><strong>Gurden Batra</strong> · Civic Tech Co-Lead, Berlin · <em>likely match for CIBC's "Gordon"</em></li>
-      <li><strong>Charlie Fisher</strong> · Strategic Designer · LinkedIn shows current role at Komma Systems</li>
+      <li><strong>Indy</strong> · Mission Steward, co-founder</li>
+      <li><strong>Gurden</strong> · Civic Tech Co-Lead, Berlin · <em>likely match for CIBC's "Gordon"</em></li>
+      <li><strong>Charlie</strong> · Strategic Designer · LinkedIn shows current role at Komma Systems</li>
       <li><strong>Jonathan Lapalme</strong> · DML Canada</li>
       <li><strong>Emily Harris</strong> · contributing voice</li>
     </ul></div>
   </div>
   <div class="field"><span class="field-label">Habitat</span><div class="field-value">Main site · <a href="https://medium.com/dark-matter-laboratories">Medium</a> · <a href="https://github.com/Dark-Matter-Labs/">GitHub</a> · <a href="https://uk.linkedin.com/company/darkmatterlabs">LinkedIn</a></div></div>
   <div class="field"><span class="field-label">Overlap</span><div class="field-value">Strong on civic tech and regenerative systems. Civic Tech Studio explicitly names sovereignty, sensing technologies, classification and data ontologies, and shared infrastructure commons. Direct overlap on civic tech architecture and partial overlap on local-first and data sovereignty. No public evidence of AT Protocol or knowledge-graph work specifically. Some overlap with deliberative democracy through the CivicAI Collective Climate Action use case.</div></div>
-  <div class="field"><span class="field-label">Strategic read</span><div class="field-value">Invite Gurden Batra to demo day. DML is parallel to CIBC and a relationship makes sense both as ecosystem peer and as a target for the share-link blast. The framing of <em>"infrastructures of tenderness, doubt, and attentiveness"</em> on the Civic Tech Studio page maps closely to CIBC's anti-extractive frame.</div></div>
+  <div class="field"><span class="field-label">Strategic read</span><div class="field-value">Invite Gurden to demo day. DML is parallel to CIBC and a relationship makes sense both as ecosystem peer and as a target for the share-link blast. The framing of <em>"infrastructures of tenderness, doubt, and attentiveness"</em> on the Civic Tech Studio page maps closely to CIBC's anti-extractive frame.</div></div>
 </article>
 
 <!-- ============ COMA / KOMMA ============ -->
@@ -788,18 +912,18 @@
     <p>CIBC's "Coma" is almost certainly "Komma" (German for "comma"). No matching website found via available search.</p>
   </div>
 
-  <div class="field"><span class="field-label">One-line</span><div class="field-value">Berlin-based consultancy or studio led by Charlie Fisher, focused on regenerative land, housing, and governance.</div></div>
+  <div class="field"><span class="field-label">One-line</span><div class="field-value">Berlin-based consultancy or studio led by Charlie, focused on regenerative land, housing, and governance.</div></div>
   <div class="field"><span class="field-label">URL</span><div class="field-value">Not publicly available as a standalone domain. LinkedIn lists "Komma Systems" as current employer.</div></div>
   <div class="field"><span class="field-label">Geography</span><div class="field-value">Berlin</div></div>
-  <div class="field"><span class="field-label">Founded</span><div class="field-value">Not publicly available. Would require German Handelsregister or Charlie Fisher's CV.</div></div>
+  <div class="field"><span class="field-label">Founded</span><div class="field-value">Not publicly available. Would require German Handelsregister or Charlie's CV.</div></div>
   <div class="field"><span class="field-label">Stage / size</span><div class="field-value">Solo to small. LinkedIn does not list other staff under Komma Systems. Fisher's bio describes him as a "Multi-org Founder and Doctoral candidate."</div></div>
-  <div class="field"><span class="field-label">Funding</span><div class="field-value">Not publicly available. Charlie Fisher's profile describes "a decade of Director and Founding experience of social-enterprises," suggesting consulting fees and project-based revenue.</div></div>
+  <div class="field"><span class="field-label">Funding</span><div class="field-value">Not publicly available. Charlie's profile describes "a decade of Director and Founding experience of social-enterprises," suggesting consulting fees and project-based revenue.</div></div>
   <div class="field"><span class="field-label">What they ship</span><div class="field-value">Services and research. Applied research, participatory governance design for decentralized organizations, advisory work on cohousing, community land trusts, and decentralized housing finance.</div></div>
   <div class="field"><span class="field-label">Recent work</span><div class="field-value">No public output identified under the "Komma Systems" name in the last 12 months. Fisher is completing a <a href="https://creativebureaucracy.org/foundation/people/charlie-fisher">PhD on urban affordable housing delivery</a>. He remains active in <strong>OASA</strong>, the Swiss Association for tokenized land trusts.</div></div>
-  <div class="field"><span class="field-label">Known people</span><div class="field-value"><strong>Charlie Fisher</strong> · founder · ex-Dark Matter Labs · founding committee OASA. Flagged in CIBC network as ex-DML.</div></div>
+  <div class="field"><span class="field-label">Known people</span><div class="field-value"><strong>Charlie</strong> · founder · ex-Dark Matter Labs · founding committee OASA. Flagged in CIBC network as ex-DML.</div></div>
   <div class="field"><span class="field-label">Habitat</span><div class="field-value">Instagram <a href="https://www.instagram.com/ideafish/">@ideafish</a> · X <a href="https://x.com/fisher_charlie">@Fisher_Charlie</a> · <a href="https://www.linkedin.com/in/fishercharlie/">LinkedIn</a></div></div>
   <div class="field"><span class="field-label">Overlap</span><div class="field-value">Strong adjacency on regenerative systems, commons-based land holding, and decentralized technologies for housing. Direct overlap with data sovereignty through Fisher's OASA work on "tokenised trust" land. Less direct overlap on AT Protocol, knowledge graphs, or local-first software. Strong philosophical overlap on anti-extractive framings.</div></div>
-  <div class="field"><span class="field-label">Strategic read</span><div class="field-value">Invite Charlie Fisher directly. He sits at the personal bridge between CIBC, DML, and OASA. If Komma Systems is presenting-ready, invite as a demo-day participant; otherwise invite as ecosystem peer and discussant. <strong>Confirm whether "Coma" and "Komma Systems" are the same entity before public outreach.</strong></div></div>
+  <div class="field"><span class="field-label">Strategic read</span><div class="field-value">Invite Charlie directly. He sits at the personal bridge between CIBC, DML, and OASA. If Komma Systems is presenting-ready, invite as a demo-day participant; otherwise invite as ecosystem peer and discussant. <strong>Confirm whether "Coma" and "Komma Systems" are the same entity before public outreach.</strong></div></div>
 </article>
 
 <!-- ============ DEMNEXT ============ -->
@@ -810,7 +934,7 @@
   <div class="field"><span class="field-label">One-line</span><div class="field-value">International nonprofit research and action institute building citizens' assemblies based on sortition, deliberation, and rotation.</div></div>
   <div class="field"><span class="field-label">URL</span><div class="field-value"><a href="https://www.demnext.org">demnext.org</a></div></div>
   <div class="field"><span class="field-label">Geography</span><div class="field-value">Stichting DemocracyNext, The Hague, Netherlands. Humanity Hub, Fluwelen Burgwal 58, 2511 CJ. Team is small core, internationally based.</div></div>
-  <div class="field"><span class="field-label">Founded</span><div class="field-value">2022 by CEO Claudia Chwalisz</div></div>
+  <div class="field"><span class="field-label">Founded</span><div class="field-value">2022 by CEO Claudia</div></div>
   <div class="field"><span class="field-label">Stage / size</span><div class="field-value">Small core team. Exact headcount not publicly available.</div></div>
   <div class="field"><span class="field-label">Funding</span><div class="field-value">Grants and consultancy. Disclosed funders: Rockefeller Foundation, National Endowment for Democracy, Open Society Foundations, One Project. Also consultancy assignments and individual donations via <a href="https://www.every.org/democracynext">Open Collective Europe</a>.</div></div>
   <div class="field"><span class="field-label">What they ship</span><div class="field-value">Research, guides, training, network convening, technical advisory. Outputs include "Assembling an Assembly" guide and the OECD Deliberative Democracy Toolbox (Chwalisz's prior OECD work).</div></div>
@@ -824,16 +948,16 @@
   </div>
   <div class="field"><span class="field-label">Known people</span>
     <div class="field-value"><ul>
-      <li><strong>Claudia Chwalisz</strong> · founder, CEO · flagged in CIBC network</li>
+      <li><strong>Claudia</strong> · founder, CEO · flagged in CIBC network</li>
       <li><strong>Sammy McKinney</strong> · AI and Deliberation Fellow · Cambridge PhD</li>
       <li><strong>Ieva Česnulaitytė</strong> · Founding Head of Research and Learning</li>
-      <li><strong>Audrey Tang</strong> · International Advisory Council · <em>bridges to Plurality</em></li>
+      <li><strong>Audrey</strong> · International Advisory Council · <em>bridges to Plurality</em></li>
       <li>Board: Matt Abrams, Panthea Lee, Lucy Reid, Robbie Stamp</li>
     </ul></div>
   </div>
   <div class="field"><span class="field-label">Habitat</span><div class="field-value">Site · <a href="https://demnext.substack.com">Substack</a> · <a href="https://medium.com/@claudiachwalisz">Medium</a> · LinkedIn</div></div>
   <div class="field"><span class="field-label">Overlap</span><div class="field-value">Strong overlap with deliberative democracy. Partial overlap on civic tech via the DelibTech Network. Their AI-and-deliberation paper explicitly discusses civic infrastructure and the limits of technology-only solutions. No direct overlap with local-first, AT Protocol, or knowledge graphs.</div></div>
-  <div class="field"><span class="field-label">Strategic read</span><div class="field-value">Send a share link via a Claudia Chwalisz intro if available. The demo day is plausibly relevant to their portfolio if framed around tech-enhanced deliberation. Best route is via the DelibTech Network rather than a direct DemNext partnership ask. Mutual ecosystem awareness at minimum.</div></div>
+  <div class="field"><span class="field-label">Strategic read</span><div class="field-value">Send a share link via a Claudia intro if available. The demo day is plausibly relevant to their portfolio if framed around tech-enhanced deliberation. Best route is via the DelibTech Network rather than a direct DemNext partnership ask. Mutual ecosystem awareness at minimum.</div></div>
 </article>
 
 <!-- ============ DELIBTECH ============ -->
@@ -851,7 +975,7 @@
   <div class="field"><span class="field-label">Recent work</span><div class="field-value">No publicly listed publications attributed to the DelibTech Network as a body. Co-coordinators (Chwalisz, McKinney, Ovadya, Redman) publish individually.</div></div>
   <div class="field"><span class="field-label">Known people</span>
     <div class="field-value"><ul>
-      <li><strong>Co-coordinators</strong>: Claudia Chwalisz + Sammy McKinney (DemocracyNext); Aviv Ovadya + Kyle Redman (AI &amp; Democracy Foundation)</li>
+      <li><strong>Co-coordinators</strong>: Claudia + Sammy McKinney (DemocracyNext); Aviv Ovadya + Kyle Redman (AI &amp; Democracy Foundation)</li>
       <li><strong>Members</strong>: Dimitra Dimitrakopoulou (MIT), Tyna Eloundou (OpenAI), Daniel Fusca (Toronto), Lisa Schirch (Notre Dame), Alice Siu (Stanford), Samantha Shireman (Berkman Klein), Matthew Stempeck</li>
     </ul></div>
   </div>
@@ -882,12 +1006,12 @@
   <div class="field"><span class="field-label">Known people</span>
     <div class="field-value"><ul>
       <li><strong>Yuting Jiang</strong> · co-founder, CEO</li>
-      <li><strong>Nicolas Gimenez</strong> · co-founder, CTO · <em>almost certainly the "Nicola" referenced in the CIBC brief</em></li>
+      <li><strong>Nicolas</strong> · co-founder, CTO · <em>almost certainly the "Nicola" referenced in the CIBC brief</em></li>
     </ul></div>
   </div>
   <div class="field"><span class="field-label">Habitat</span><div class="field-value">Website · GitHub (zkorum) · X @join_agora · Bluesky @agoracitizen.network · WhiteWind blog</div></div>
   <div class="field"><span class="field-label">Overlap</span><div class="field-value">Direct overlap on civic tech, deliberation tools, and AT Protocol. Their WhiteWind and Bluesky presence is direct evidence of AT Protocol use, which is a precise match for CIBC's stack. Strong overlap on data sovereignty via ZK proof-of-personhood. No direct overlap on regenerative systems.</div></div>
-  <div class="field"><span class="field-label">Strategic read</span><div class="field-value">Invite Nicolas Gimenez to demo day. <strong>Highest match score</strong> of the six peer orgs for CIBC's specific tech stack (AT Protocol plus deliberation tooling). Likely demo-day presenter or commenter.</div></div>
+  <div class="field"><span class="field-label">Strategic read</span><div class="field-value">Invite Nicolas to demo day. <strong>Highest match score</strong> of the six peer orgs for CIBC's specific tech stack (AT Protocol plus deliberation tooling). Likely demo-day presenter or commenter.</div></div>
 </article>
 
 <!-- ============ METAGOV ============ -->
@@ -906,16 +1030,16 @@
     <div class="field-value"><ul>
       <li>Public AI Inference Utility hosting Apertus on Hugging Face · free public inference</li>
       <li><a href="https://metagov.org/projects/ai-renaissance">AI Renaissance residency</a> · open-source, decentralized, public AI</li>
-      <li>November 2025 zine-making session on AI and collective governance hosted by Nathan Schneider</li>
+      <li>November 2025 zine-making session on AI and collective governance hosted by Nathan</li>
       <li>Public AI Switzerland fellow role advertised</li>
     </ul></div>
   </div>
   <div class="field"><span class="field-label">Known people</span>
     <div class="field-value"><ul>
-      <li><strong>Liz Barry</strong> · Executive Director and Research Director (deliberation facilitation work)</li>
+      <li><strong>Liz</strong> · Executive Director and Research Director (deliberation facilitation work)</li>
       <li><strong>Josh Tan</strong> and <strong>Nick Vincent</strong> · Public AI Research Directors</li>
       <li><strong>Joseph Low</strong> · Public AI research engineer and technical lead</li>
-      <li><strong>Nathan Schneider</strong> · member contributor</li>
+      <li><strong>Nathan</strong> · member contributor</li>
       <li><em>None match CIBC's known network</em></li>
     </ul></div>
   </div>
@@ -927,7 +1051,7 @@
     <p>No Metagov project named or described as a "local AI server" in Maine or Portland has been identified. Metagov's Public AI work is explicitly oriented toward Switzerland. Maine has separately been in the news for AI data center policy and for a planned large data center at Loring Air Force Base in Limestone, but neither is a Metagov project. CIBC should treat the "Metagov local AI server in Maine, Portland" reference as unverified.</p>
   </div>
 
-  <div class="field"><span class="field-label">Strategic read</span><div class="field-value">Invite Liz Barry and post the share link in the Metagov Slack after onboarding. Metagov's Playtester program is the <strong>highest-leverage soft entry</strong> for a demo day. Treat Metagov as parallel and as a high-fit marketing channel.</div></div>
+  <div class="field"><span class="field-label">Strategic read</span><div class="field-value">Invite Liz and post the share link in the Metagov Slack after onboarding. Metagov's Playtester program is the <strong>highest-leverage soft entry</strong> for a demo day. Treat Metagov as parallel and as a high-fit marketing channel.</div></div>
 </article>
 
 <!-- ============ REGENOS ============ -->
@@ -975,7 +1099,7 @@
 
   <div class="callout">
     <div class="callout-label">Disambiguation</div>
-    <p>Three candidate surfaces exist. (1) The Plurality book at plurality.net by Glen Weyl, Audrey Tang, and the Plurality Community is the published manifesto and a community-translated open-source GitHub project. (2) The Plurality Institute at plurality.institute is a 501(c)(3) nonprofit that operates as the institutional hub. (3) RadicalxChange, founded by Weyl, is a parallel nonprofit. For CIBC's framing of "a community organized around plurality," the canonical organizing surface is the <strong>Plurality Institute</strong>, since it explicitly convenes the Plurality Network and runs research, programs, and a microgrant pipeline. The book at plurality.net is the canonical text rather than an active community surface.</p>
+    <p>Three candidate surfaces exist. (1) The Plurality book at plurality.net by Glen, Audrey, and the Plurality Community is the published manifesto and a community-translated open-source GitHub project. (2) The Plurality Institute at plurality.institute is a 501(c)(3) nonprofit that operates as the institutional hub. (3) RadicalxChange, founded by Weyl, is a parallel nonprofit. For CIBC's framing of "a community organized around plurality," the canonical organizing surface is the <strong>Plurality Institute</strong>, since it explicitly convenes the Plurality Network and runs research, programs, and a microgrant pipeline. The book at plurality.net is the canonical text rather than an active community surface.</p>
   </div>
 
   <div class="field"><span class="field-label">What it is</span><div class="field-value">Network and nonprofit. Plurality Institute is "a hub connecting researchers, practitioners, and leaders across academia, industry, civil society, and government."</div></div>
@@ -985,8 +1109,8 @@
   <div class="field"><span class="field-label">Audience size</span><div class="field-value">Not publicly available. The Institute does not disclose member counts. The LLM Map references more than 70 tools and contributors.</div></div>
   <div class="field"><span class="field-label">Audience profile</span><div class="field-value">Mix tilted toward researchers and policy-adjacent practitioners. Affiliations include Harvard, UC Berkeley, Jigsaw, Google.org, Microsoft Research, RadicalxChange. Builders are present but the dominant culture is research and policy.</div></div>
   <div class="field"><span class="field-label">Posting culture</span><div class="field-value">Formal. Outputs are research reports, peer-reviewed-style papers, and symposia. The Plurality Substack and book repository carry longer writing rather than rapid posts.</div></div>
-  <div class="field"><span class="field-label">Geography</span><div class="field-value">US-concentrated leadership (San Francisco for the Institute team page) with global community contributions, and Taiwan as a foundational reference point via Audrey Tang.</div></div>
-  <div class="field"><span class="field-label">Fit for share link</span><div class="field-value">Depends. Strong if the framing emphasizes plural technologies, bridging tools, and AT Protocol or knowledge-graph deliberation work. Weaker if framing leans purely local-first without a deliberation angle. Audrey Tang's role on the DemNext advisory council means a single intro could reach both Plurality and DemNext.</div></div>
+  <div class="field"><span class="field-label">Geography</span><div class="field-value">US-concentrated leadership (San Francisco for the Institute team page) with global community contributions, and Taiwan as a foundational reference point via Audrey.</div></div>
+  <div class="field"><span class="field-label">Fit for share link</span><div class="field-value">Depends. Strong if the framing emphasizes plural technologies, bridging tools, and AT Protocol or knowledge-graph deliberation work. Weaker if framing leans purely local-first without a deliberation angle. Audrey's role on the DemNext advisory council means a single intro could reach both Plurality and DemNext.</div></div>
   <div class="field"><span class="field-label">How to post</span>
     <div class="field-value"><ul>
       <li>Submit to the LLM Map if applicable</li>
@@ -1001,9 +1125,9 @@
 <section class="notes" id="notes">
   <h2>Notes on data quality and unresolved items</h2>
   <ul>
-    <li><strong>"Gordon" at Dark Matter Labs</strong> is most likely <strong>Gurden Batra</strong>, Civic Tech Co-Lead in Berlin. Confirm with the CIBC member who introduced the reference.</li>
-    <li><strong>"Coma"</strong> is most likely <strong>Komma Systems</strong>, Charlie Fisher's current Berlin employer per his LinkedIn. No standalone web property was found in available search, consistent with a small consultancy that operates primarily through LinkedIn and direct relationships.</li>
-    <li><strong>"Nicola" at Agora Citizen Network</strong> is almost certainly <strong>Nicolas Gimenez</strong>, co-founder and CTO of ZKorum.</li>
+    <li><strong>"Gordon" at Dark Matter Labs</strong> is most likely <strong>Gurden</strong>, Civic Tech Co-Lead in Berlin. Confirm with the CIBC member who introduced the reference.</li>
+    <li><strong>"Coma"</strong> is most likely <strong>Komma Systems</strong>, Charlie's current Berlin employer per his LinkedIn. No standalone web property was found in available search, consistent with a small consultancy that operates primarily through LinkedIn and direct relationships.</li>
+    <li><strong>"Nicola" at Agora Citizen Network</strong> is almost certainly <strong>Nicolas</strong>, co-founder and CTO of ZKorum.</li>
     <li>The <strong>Metagov "local AI server in Maine, Portland" claim</strong> is unsupported by available public sources. Metagov's Public AI work is Switzerland-oriented. Maine's data-center activity is policy and development news unrelated to Metagov.</li>
     <li><strong>"RegenOS"</strong> most plausibly refers to the Regen Network RegenOS / KOI substrate cluster, surfaced through the Regen Network forum and Discord. Confirm with Brayden which surface he is active on.</li>
     <li><strong>"Newsweek" as a political-tech group</strong> is not identifiable from public sources; ask Artem for the exact invite link, platform, and spelling.</li>

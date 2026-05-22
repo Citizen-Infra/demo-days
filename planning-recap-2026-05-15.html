@@ -981,6 +981,130 @@
 </style>
 </head>
 <body>
+<!-- ===== PASSWORD GATE · client-side barrier, not real security =====
+     The page contains internal strategic notes and names that aren't
+     for the open web. Anyone with devtools can bypass this gate by
+     reading the source; treat it as a "don't accidentally land here"
+     speed bump, not as access control. -->
+<div id="pw-gate" role="dialog" aria-modal="true" aria-labelledby="pw-title">
+  <div class="pw-inner">
+    <p class="pw-eyebrow">CIBC · internal</p>
+    <h1 id="pw-title" class="pw-title">Password required</h1>
+    <p class="pw-deck">This page is internal to the CIBC builder community. Enter the shared password to continue.</p>
+    <form class="pw-form" id="pw-form" autocomplete="off">
+      <input id="pw-input" type="password" placeholder="Password" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Password">
+      <button type="submit" class="pw-submit">Enter</button>
+    </form>
+    <p id="pw-error" class="pw-error" hidden>That's not it. Try again.</p>
+  </div>
+</div>
+<style>
+  #pw-gate {
+    position: fixed; inset: 0;
+    z-index: 9999;
+    background: #0e0a07;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    color: #f6ecd9;
+    font-family: 'Newsreader', Georgia, serif;
+  }
+  body.pw-locked { overflow: hidden; }
+  body.pw-unlocked #pw-gate { display: none; }
+  #pw-gate .pw-inner {
+    max-width: 440px;
+    text-align: center;
+  }
+  #pw-gate .pw-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(246, 236, 217, 0.5);
+    margin: 0 0 18px;
+  }
+  #pw-gate .pw-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(28px, 4vw, 40px);
+    line-height: 1.1;
+    margin: 0 0 12px;
+    color: #f6ecd9;
+  }
+  #pw-gate .pw-deck {
+    font-size: 15px;
+    line-height: 1.5;
+    color: rgba(246, 236, 217, 0.7);
+    margin: 0 0 28px;
+  }
+  #pw-gate .pw-form {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  #pw-gate #pw-input {
+    flex: 1 1 220px;
+    font-family: 'Newsreader', serif;
+    font-size: 16px;
+    padding: 12px 20px;
+    border-radius: 100px;
+    border: 1px solid rgba(246, 236, 217, 0.4);
+    background: transparent;
+    color: #f6ecd9;
+    outline: none;
+    text-align: center;
+  }
+  #pw-gate #pw-input:focus { border-color: #d4793d; }
+  #pw-gate .pw-submit {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 12px 24px;
+    border-radius: 100px;
+    border: none;
+    background: linear-gradient(90deg, #e96243 0%, #e67c48 100%);
+    color: #fff;
+    cursor: pointer;
+  }
+  #pw-gate .pw-error {
+    color: #e67c48;
+    font-size: 13px;
+    margin: 14px 0 0;
+    font-style: italic;
+  }
+</style>
+<script>
+(function(){
+  var KEY = 'cibc-internal-unlocked';
+  var PW = 'CIBC';
+  var gate = document.getElementById('pw-gate');
+  var form = document.getElementById('pw-form');
+  var input = document.getElementById('pw-input');
+  var err = document.getElementById('pw-error');
+  if (sessionStorage.getItem(KEY) === '1') {
+    document.body.classList.add('pw-unlocked');
+    return;
+  }
+  document.body.classList.add('pw-locked');
+  setTimeout(function(){ try { input.focus(); } catch (e) {} }, 50);
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if (input.value === PW) {
+      sessionStorage.setItem(KEY, '1');
+      document.body.classList.remove('pw-locked');
+      document.body.classList.add('pw-unlocked');
+    } else {
+      err.hidden = false;
+      input.select();
+    }
+  });
+  input.addEventListener('input', function(){ err.hidden = true; });
+})();
+</script>
+
 
 <!-- ===== NAV COMPONENT ===== -->
 <nav class="nav" aria-label="Primary">
