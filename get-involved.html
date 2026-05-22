@@ -2292,14 +2292,25 @@ const ATLAS_DATA = {
      carry multi-relationship value).
      accent: 'leaf' | 'sparkle' | 'lines' | 'ring' | 'flower' | 'bloom' | 'triangle' */
   trainers: [
-    // CIBC team
-    { id: 'megan', section: 'cibc', name: 'Megan', role: 'CIBC strategy, the cartographer',
+    // Members · pitch presenters who have opted in to appear here
+    { id: 'megan', section: 'member', name: 'Megan Ducote', role: 'Gardens not Platforms',
       color: '#d4793d', accent: 'sparkle', photo: 'assets/megan.webp',
       summary: 'Holds the whole ecosystem in view. Direct relationships with DemNext, Metagov, Plurality. Surfaces the strategic shape for the rest of the room.' },
-    { id: 'artem', section: 'cibc', name: 'Artem', role: 'CIBC co-founder, the insider',
+    { id: 'kyle', section: 'member', name: 'Kyle Hobson', role: 'Compass Suite',
       color: '#6FA9B5', accent: 'lines',
-      summary: 'Holds the dense relational center. DML, Komma, DemNext, Agora all run through him. Only person who can confirm the disputed identities (Gordon, Coma, Newsweek).' },
-    { id: 'brayden', section: 'cibc', name: 'Brayden', role: 'CIBC channels, the scout',
+      summary: 'Building Compass Suite: a modular MCP suite for designers, PMs, researchers, and job seekers. Every module ships with explicit schemas, validation, decision traces.' },
+    { id: 'artem', section: 'member', name: 'Artem Zhiganov', role: 'Book Power',
+      color: '#6FA9B5', accent: 'lines',
+      summary: 'Hand-crafts MCP servers + Claude Code skills out of methodology books so practitioners can query them at the moment of work. Four books live so far.' },
+    { id: 'momcilo', section: 'member', name: 'Momcilo Mijovic', role: 'Collaboration under Constraint',
+      color: '#D4A347', accent: 'triangle',
+      summary: 'A platform that uses constraint strategies (lottocracy-elected editors, fixed deadlines, mandatory sharing) to move groups from forming to completion.' },
+    { id: 'simone', section: 'member', name: 'Simone Vagnoni', role: 'DelibAI',
+      color: '#7a9268', accent: 'leaf',
+      summary: 'Non-intrusive AI that flags fallacies in deliberation forums and suggests reformulations. The user decides what to do. Built for citizens and lawmakers.' },
+    // Brayden is on the CIBC team but is not a pitch presenter; kept
+    // in data for map contributor counts, not rendered as a card.
+    { id: 'brayden', section: 'cibc-team', name: 'Brayden', role: 'CIBC channels, the scout',
       color: '#D4A347', accent: 'triangle',
       summary: 'Holds RegenOS and adjacent regenerative surfaces. The poster for the regen-adjacent demo-day share-link. Lives inside systems-change networks.' },
     // Ecosystem bridges (people who carry multi-relationship value)
@@ -2542,6 +2553,10 @@ const ATLAS_DATA = {
       </div>
 
       <div class="professionals-grid">
+        <div class="trainer-grid-block">
+          <p class="trainer-section-label">Members</p>
+          <div class="trainer-grid" id="members-grid"></div>
+        </div>
         <div class="trainer-grid-block">
           <p class="trainer-section-label">Orgs &amp; events</p>
           <div class="trainer-grid" id="cibc-grid"></div>
@@ -3224,20 +3239,58 @@ function critterSVG(node) {
   </svg>`;
 }
 
-/* ============ RENDER ORGS / EVENTS / CONCEPTS ============
-   Cards on Learn More are now orgs + events + concepts Megan works
-   with, not people. Static (no click handler) for v1. Grouped into
-   two sections: orgs + events (top), concepts (below). */
+/* ============ RENDER MEMBERS + ORGS + CONCEPTS ============
+   Three card groups on Learn More:
+   - Members: pitch presenters with opted-in visibility (Megan,
+     Kyle, Artem, Momcilo, Simone). Click opens trainer overlay.
+   - Orgs & events: clickable, scroll to front-map + focus that
+     node so the reader sees the org's neighbors.
+   - Concepts: same focus-on-map behavior as orgs. */
+const membersGrid = document.getElementById('members-grid');
 const cibcGrid = document.getElementById('cibc-grid');
 const bridgeGrid = document.getElementById('bridge-grid');
 document.getElementById('caught-counter').textContent = `orgs · ${orgs.length}`;
 
+// Members
+const members = trainers.filter(t => t.section === 'member');
+members.forEach(t => {
+  const card = document.createElement('button');
+  card.className = 'trainer-card member-card';
+  card.setAttribute('aria-label', `Open ${t.name}'s network`);
+  card.type = 'button';
+  const avatar = t.photo
+    ? `<img class="avatar-photo" src="${t.photo}" alt="" loading="lazy">`
+    : trainerSVG(t);
+  card.innerHTML = `
+    <div class="avatar-wrap">${avatar}</div>
+    <div class="trainer-text">
+      <div class="trainer-name">${t.name}</div>
+      <div class="trainer-label">${t.role || 'Member'}</div>
+    </div>
+  `;
+  card.addEventListener('click', () => openTrainer(t));
+  membersGrid.appendChild(card);
+});
+
+// Orgs + events + concepts · click scrolls to the front-map and
+// focuses the corresponding node.
 const kindLabel = { org: 'Organization', event: 'Event', concept: 'Concept' };
+function scrollToFrontMapAndFocus(nodeId) {
+  const section = document.querySelector('.front-map-section-dark') || document.querySelector('.front-map-section');
+  if (section && typeof section.scrollIntoView === 'function') {
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  // Defer focus call so the smooth scroll has time to commit.
+  setTimeout(() => {
+    if (typeof focusFrontNode === 'function') focusFrontNode(nodeId);
+  }, 400);
+}
+
 orgs.forEach(o => {
-  const card = document.createElement('div');
+  const card = document.createElement('button');
   card.className = 'trainer-card org-card';
-  // Avatar = solid colored circle (the cluster-zone palette). No
-  // interactive role; cards are info-only for now.
+  card.setAttribute('aria-label', `Focus on ${o.name} on the map`);
+  card.type = 'button';
   card.innerHTML = `
     <div class="avatar-wrap" style="background:${o.color}"></div>
     <div class="trainer-text">
@@ -3245,6 +3298,7 @@ orgs.forEach(o => {
       <div class="trainer-label">${kindLabel[o.kind] || o.kind}</div>
     </div>
   `;
+  card.addEventListener('click', () => scrollToFrontMapAndFocus(o.id));
   (o.kind === 'concept' ? bridgeGrid : cibcGrid).appendChild(card);
 });
 
