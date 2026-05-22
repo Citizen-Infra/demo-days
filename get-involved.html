@@ -1867,20 +1867,23 @@
     pointer-events: none;
   }
 
+  /* Top bar tightened to give the map more vertical room. Now that
+     the summary line is gone, the header content is just back btn
+     + avatar + name + reset, so it can collapse to a single 40 px
+     row with breathing-room padding. */
   .trainer-header {
-    padding: 24px 32px;
-    display: flex; align-items: center; gap: 20px;
+    padding: 12px 24px;
+    display: flex; align-items: center; gap: 14px;
     position: relative; z-index: 3;
     border-bottom: 1px solid rgba(232, 220, 198, 0.08);
     background: rgba(20, 17, 13, 0.85);
     backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-    min-height: 107px;
   }
   .icon-btn {
-    width: 48px; height: 48px; border-radius: 50%;
+    width: 36px; height: 36px; border-radius: 50%;
     background: rgba(232, 220, 198, 0.05);
     border: 1px solid rgba(232, 220, 198, 0.12);
-    color: #e8dcc6; font-size: 22px; cursor: pointer;
+    color: #e8dcc6; font-size: 18px; cursor: pointer;
     display: flex; align-items: center; justify-content: center;
     flex-shrink: 0; transition: background 0.2s ease, border-color 0.2s ease;
     -webkit-tap-highlight-color: transparent;
@@ -1888,7 +1891,7 @@
   .icon-btn:hover { background: rgba(232, 220, 198, 0.12); border-color: rgba(232, 220, 198, 0.22); }
 
   .trainer-header-avatar {
-    width: 48px; height: 48px;
+    width: 36px; height: 36px;
     flex-shrink: 0;
     border-radius: 50%;
     overflow: hidden;
