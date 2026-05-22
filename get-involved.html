@@ -2331,18 +2331,10 @@ const ATLAS_DATA = {
     // CIBC + Demo Day (the hub + the event)
     { id: 'cibc',        name: 'CIBC',                  kind: 'org',     color: '#d4793d' },
     { id: 'demo-day',    name: 'Demo Day',              kind: 'event',   color: '#d4793d' },
-    // Deliberation cluster
+    // Orgs Megan is directly in (per her trainer summary)
     { id: 'demnext',     name: 'DemNext',               kind: 'org',     color: '#9aa9c4' },
-    { id: 'delibtech',   name: 'DelibTech Network',     kind: 'org',     color: '#9aa9c4' },
-    { id: 'agora',       name: 'Agora Citizen Net',     kind: 'org',     color: '#9aa9c4' },
-    // Plurality / governance cluster
     { id: 'plurality',   name: 'Plurality (Institute)', kind: 'org',     color: '#b496d0' },
     { id: 'metagov',     name: 'Metagov',               kind: 'org',     color: '#b496d0' },
-    // DML / civic-tech cluster
-    { id: 'dml',         name: 'Dark Matter Labs',      kind: 'org',     color: '#c4a880' },
-    { id: 'komma',       name: 'Komma Systems',         kind: 'org',     color: '#c4a880' },
-    // Regen cluster
-    { id: 'regenos',     name: 'RegenOS',               kind: 'org',     color: '#7a9268' },
     // Houston · the local chapter Megan runs + the parent network +
     // four Houston orgs sharing values she's mapping into the web.
     { id: 'bloom-network',         name: 'Bloom Network',         kind: 'org', color: '#c89678' },
@@ -2351,11 +2343,8 @@ const ATLAS_DATA = {
     { id: 'west-street-recovery',  name: 'West Street Recovery',  kind: 'org', color: '#c89678' },
     { id: 'cooperation-texas',     name: 'Cooperation Texas',     kind: 'org', color: '#c89678' },
     { id: 'txrx-labs',             name: 'TXRX Labs',             kind: 'org', color: '#c89678' },
-    // Concepts she works through
-    { id: 'anti-extractive', name: 'Anti-extractive', kind: 'concept', color: '#998774' },
-    { id: 'data-sovereignty', name: 'Data sovereignty', kind: 'concept', color: '#998774' },
-    { id: 'deliberation', name: 'Deliberation', kind: 'concept', color: '#998774' },
-    { id: 'at-protocol', name: 'AT Protocol', kind: 'concept', color: '#998774' },
+    // Concepts moved off the cards entirely · now rendered as
+    // cluster zones on the map, circling the orgs that embody them.
   ],
 
   /* NODES · entities, people, concepts, fragments on the map.
@@ -2367,35 +2356,13 @@ const ATLAS_DATA = {
      strategic: optional. One-line strategic note shown in tooltip. */
   nodes: [
     // CIBC center
-    { id: 'cibc', label: 'CIBC', x: 500, y: 500, r: 11, contributors: ['megan','artem','brayden'], type: 'cibc', critter: 'circle' },
-    { id: 'demo-day', label: 'Demo Day', x: 560, y: 565, r: 7, contributors: ['megan','artem','brayden'], type: 'cibc', critter: 'stage' },
+    { id: 'cibc',     label: 'CIBC',     x: 500, y: 500, r: 11, contributors: ['megan','artem','brayden'], type: 'cibc',  critter: 'circle' },
+    { id: 'demo-day', label: 'Demo Day', x: 560, y: 565, r: 7,  contributors: ['megan','artem','brayden'], type: 'event', critter: 'stage' },
 
-    // CIBC values / concepts (background context)
-    { id: 'anti-extractive', label: 'anti-extractive', x: 445, y: 470, r: 5, contributors: ['megan','artem'], type: 'concept', critter: 'shield' },
-    { id: 'at-protocol', label: 'AT Protocol', x: 570, y: 440, r: 5, contributors: ['megan'], type: 'concept', critter: 'twin' },
-    { id: 'data-sovereignty', label: 'data sovereignty', x: 405, y: 545, r: 5, contributors: ['megan','artem'], type: 'concept', critter: 'block' },
-    { id: 'deliberation', label: 'deliberation', x: 380, y: 350, r: 5, contributors: ['megan'], type: 'concept', critter: 'wave' },
-    { id: 'regenerative', label: 'regenerative systems', x: 660, y: 660, r: 5, contributors: ['brayden'], type: 'concept', critter: 'sprout' },
-
-    // Deliberation cluster (upper-left). Person nodes are in
-    // assets/atlas-internal.js (gitignored), not on the public web.
-    // Strategic outreach notes are likewise gitignored.
-    { id: 'demnext',   label: 'DemNext',           x: 290, y: 260, r: 8, contributors: ['megan','artem'], type: 'deliberation', critter: 'circle', state: 'caught' },
-    { id: 'delibtech', label: 'DelibTech Network', x: 200, y: 200, r: 6, contributors: ['megan'],        type: 'deliberation', critter: 'web',    state: 'spotted' },
-    { id: 'agora',     label: 'Agora Citizen Net', x: 330, y: 380, r: 7, contributors: ['artem'],         type: 'deliberation', critter: 'wave',   state: 'caught' },
-
-    // DML cluster (left / lower-left). Person nodes moved to
-    // atlas-internal.js.
-    { id: 'dml',   label: 'Dark Matter Labs', x: 260, y: 550, r: 8, contributors: ['artem'], type: 'civic-tech', critter: 'prism', state: 'caught' },
-    { id: 'komma', label: 'Komma Systems',    x: 170, y: 620, r: 6, contributors: ['artem'], type: 'civic-tech', critter: 'twin',  state: 'rumored' },
-
-    // Plurality / Metagov cluster (upper-right). Person nodes
-    // moved to atlas-internal.js.
-    { id: 'plurality', label: 'Plurality (Institute)', x: 700, y: 320, r: 7, contributors: ['megan'], type: 'research',   critter: 'orbit', state: 'spotted' },
-    { id: 'metagov',   label: 'Metagov',               x: 760, y: 410, r: 7, contributors: ['megan'], type: 'governance', critter: 'gear',  state: 'spotted' },
-
-    // Regen cluster (bottom-right)
-    { id: 'regenos', label: 'RegenOS', x: 700, y: 670, r: 7, contributors: ['brayden'], type: 'regen', critter: 'sprout', state: 'rumored' },
+    // Orgs Megan is directly in (per her trainer summary)
+    { id: 'demnext',   label: 'DemNext',              x: 290, y: 260, r: 8, contributors: ['megan'], type: 'deliberation', critter: 'circle', state: 'caught' },
+    { id: 'plurality', label: 'Plurality (Institute)', x: 700, y: 320, r: 7, contributors: ['megan'], type: 'research',    critter: 'orbit',  state: 'caught' },
+    { id: 'metagov',   label: 'Metagov',              x: 760, y: 410, r: 7, contributors: ['megan'], type: 'governance',  critter: 'gear',   state: 'caught' },
 
     // Houston cluster (bottom-center) · Megan's local chapter +
     // parent network + four Houston orgs sharing values.
@@ -2405,85 +2372,43 @@ const ATLAS_DATA = {
     { id: 'west-street-recovery', label: 'West Street Recovery', x: 410, y: 920, r: 5, contributors: ['megan'], type: 'civic-tech', critter: 'leaf',   state: 'spotted' },
     { id: 'cooperation-texas',    label: 'Cooperation Texas',    x: 520, y: 910, r: 5, contributors: ['megan'], type: 'civic-tech', critter: 'ring',   state: 'spotted' },
     { id: 'txrx-labs',            label: 'TXRX Labs',            x: 600, y: 870, r: 5, contributors: ['megan'], type: 'civic-tech', critter: 'gear',   state: 'spotted' },
-
-    // Newsweek (floating, unverified, far edge)
-    { id: 'newsweek', label: 'Newsweek (?)', x: 905, y: 870, r: 5, contributors: [], type: 'unknown', critter: 'tiny', state: 'unverified' },
-
-    // Orbital fragments (the vault is bigger than the map)
-    { id: 'frag-1', label: 'unfiled lead', x: 120, y: 130, r: 3, contributors: [], type: 'fragment', critter: 'tiny' },
-    { id: 'frag-2', label: 'unfiled lead', x: 890, y: 140, r: 3, contributors: [], type: 'fragment', critter: 'tiny' },
-    { id: 'frag-3', label: 'unfiled lead', x: 90, y: 870, r: 3, contributors: [], type: 'fragment', critter: 'tiny' },
-    { id: 'frag-4', label: 'unfiled lead', x: 950, y: 580, r: 3, contributors: [], type: 'fragment', critter: 'tiny' }
   ],
 
   /* EDGES · [from, to, 'strong' | 'loose'].
      strong = formalized / confirmed / action-ready (solid line).
      loose  = speculative bridge, ex-affiliation, indirect, unconfirmed (dashed line). */
   edges: [
-    // CIBC center to its values (definitional, strong)
-    ['cibc', 'anti-extractive', 'strong'], ['cibc', 'at-protocol', 'strong'],
-    ['cibc', 'data-sovereignty', 'strong'], ['cibc', 'deliberation', 'strong'],
-    ['cibc', 'regenerative', 'strong'], ['cibc', 'demo-day', 'strong'],
-
-    // CIBC outreach surface (mix)
-    ['cibc', 'dml', 'strong'], ['cibc', 'demnext', 'strong'], ['cibc', 'agora', 'strong'],
-    ['cibc', 'metagov', 'loose'], ['cibc', 'plurality', 'loose'],
-    ['cibc', 'regenos', 'loose'], ['cibc', 'komma', 'loose'],
-
-    // Deliberation cluster
-    ['demnext', 'chwalisz-node', 'strong'],
-    ['demnext', 'audrey-node', 'strong'],
-    ['demnext', 'delibtech', 'strong'],
-    ['delibtech', 'chwalisz-node', 'strong'],
-    ['agora', 'nicolas-node', 'strong'],
-    ['agora', 'at-protocol', 'strong'],
-    ['demnext', 'deliberation', 'strong'],
-    ['delibtech', 'deliberation', 'strong'],
-    ['agora', 'deliberation', 'strong'],
-
-    // DML cluster
-    ['dml', 'indy-johar', 'strong'],
-    ['dml', 'gurden-node', 'strong'],
-    ['dml', 'fisher-node', 'loose'],
-    ['fisher-node', 'komma', 'strong'],
-    ['dml', 'anti-extractive', 'strong'],
-    ['komma', 'data-sovereignty', 'strong'],
-
-    // Plurality / Metagov cluster
-    ['plurality', 'audrey-node', 'strong'],
-    ['plurality', 'glen-weyl', 'strong'],
-    ['metagov', 'liz-barry-node', 'strong'],
-    ['metagov', 'nathan-schneider', 'loose'],
-    ['plurality', 'metagov', 'loose'],
-
-    // Cross-cluster bridges
-    ['plurality', 'demnext', 'loose'],
-    ['dml', 'agora', 'loose'],
-
-    // Regen
-    ['regenos', 'regenerative', 'strong'],
+    // CIBC center to Demo Day + her direct orgs
+    ['cibc', 'demo-day',  'strong'],
+    ['cibc', 'demnext',   'strong'],
+    ['cibc', 'metagov',   'strong'],
+    ['cibc', 'plurality', 'strong'],
 
     // Houston cluster · chapter at the center, parent network up,
     // local orgs spread out below.
-    ['houston-bloom', 'bloom-network',       'strong'],
-    ['houston-bloom', 'urban-harvest',       'strong'],
+    ['houston-bloom', 'bloom-network',        'strong'],
+    ['houston-bloom', 'urban-harvest',        'strong'],
     ['houston-bloom', 'west-street-recovery', 'strong'],
-    ['houston-bloom', 'cooperation-texas',   'strong'],
-    ['houston-bloom', 'txrx-labs',           'strong'],
+    ['houston-bloom', 'cooperation-texas',    'strong'],
+    ['houston-bloom', 'txrx-labs',            'strong'],
     // Cross-link to CIBC · sibling initiatives under Megan, loose
     // because they're different surfaces, not one inside the other.
     ['cibc', 'houston-bloom', 'loose']
   ],
 
-  /* CLUSTERS · background tint ellipses with labels.
-     Drawn at low opacity behind nodes. Fill is used on the front map;
-     trainer-overlay map ignores fill and uses a single deep-theme tint. */
+  /* CLUSTERS · background tint ellipses with labels. Concepts
+     Megan works through are rendered as cluster zones (not nodes)
+     circling the orgs that embody them. Each concept zone sits
+     loosely around the entities it applies to.
+     Drawn at low opacity behind nodes. */
   clusters: [
-    { id: 'deliberation', label: 'deliberation',       cx: 295, cy: 320, rx: 200, ry: 170, fill: '#9aa9c4', label_y: 160 },
-    { id: 'dml',          label: 'dark matter labs',   cx: 245, cy: 555, rx: 170, ry: 150, fill: '#c4a880', label_y: 720 },
-    { id: 'plurality',    label: 'plurality / metagov', cx: 745, cy: 385, rx: 180, ry: 160, fill: '#b496d0', label_y: 220 },
-    { id: 'regen',        label: 'regen',              cx: 690, cy: 665, rx: 110, ry: 85,  fill: '#7a9268', label_y: 760 },
-    { id: 'houston',      label: 'houston',            cx: 470, cy: 870, rx: 200, ry: 110, fill: '#c89678', label_y: 985 }
+    // The concept zones
+    { id: 'anti-extractive',  label: 'anti-extractive',  cx: 500, cy: 510, rx: 240, ry: 160, fill: '#998774', label_y: 360 },
+    { id: 'data-sovereignty', label: 'data sovereignty', cx: 480, cy: 540, rx: 200, ry: 130, fill: '#a89684', label_y: 685 },
+    { id: 'deliberation',     label: 'deliberation',     cx: 400, cy: 370, rx: 180, ry: 140, fill: '#9aa9c4', label_y: 230 },
+    { id: 'regenerative',     label: 'regenerative',     cx: 470, cy: 800, rx: 230, ry: 150, fill: '#7a9268', label_y: 660 },
+    // Houston · still here as a geographic anchor, not a concept
+    { id: 'houston',          label: 'houston',          cx: 470, cy: 870, rx: 200, ry: 110, fill: '#c89678', label_y: 985 }
   ]
 };
 </script>
@@ -3374,9 +3299,13 @@ function renderMap() {
     const r = isLit ? n.r + 2 : n.r;
     const hitR = Math.max(r + 18, 22);
     const showStateRing = isLit && n.state;
+    // type='event' renders as outer ring + inner filled circle, so
+    // it reads distinctly from regular org dots and concept zones.
     const visual = isPerson
       ? personGlyph(n.x, n.y, r * 1.5)
-      : `<circle cx="${n.x}" cy="${n.y}" r="${r}"/>`;
+      : (n.type === 'event'
+          ? `<circle cx="${n.x}" cy="${n.y}" r="${r * 1.7}" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="${n.x}" cy="${n.y}" r="${r * 0.55}"/>`
+          : `<circle cx="${n.x}" cy="${n.y}" r="${r}"/>`);
     svg += `<g class="map-node" data-id="${n.id}">
       <g class="map-node-visual ${isLit ? 'lit' : ''}" data-id="${n.id}">${visual}</g>
       ${showStateRing ? `<circle class="state-ring ${n.state} ${isLit ? 'visible' : ''}" data-id="${n.id}" cx="${n.x}" cy="${n.y}" r="${r + 5}"/>` : ''}
@@ -3659,6 +3588,7 @@ let frontFocusedNodeId = null;
 
 const frontTypeColors = {
   cibc:         '#d4793d',
+  event:        '#d4793d',
   concept:      '#a89684',
   deliberation: '#9aa9c4',
   'civic-tech': '#c4a880',
@@ -3694,9 +3624,13 @@ function renderFrontMap() {
     const hitR = Math.max(n.r + 18, 22);
     const showLabel = n.r >= 6 || isPerson;
     const showStateRing = !!n.state;
+    // type='event' renders as outer ring + inner filled circle on
+    // the front map too.
     const visual = isPerson
       ? personGlyph(n.x, n.y, n.r * 1.5, fill)
-      : `<circle cx="${n.x}" cy="${n.y}" r="${n.r}" fill="${fill}"/>`;
+      : (n.type === 'event'
+          ? `<circle cx="${n.x}" cy="${n.y}" r="${n.r * 1.7}" fill="none" stroke="${fill}" stroke-width="1.5"/><circle cx="${n.x}" cy="${n.y}" r="${n.r * 0.55}" fill="${fill}"/>`
+          : `<circle cx="${n.x}" cy="${n.y}" r="${n.r}" fill="${fill}"/>`);
     svg += `<g class="front-map-node" data-id="${n.id}">
       <g class="front-map-node-visual" data-id="${n.id}">${visual}</g>
       ${showStateRing ? `<circle class="front-state-ring ${n.state}" data-id="${n.id}" cx="${n.x}" cy="${n.y}" r="${n.r + 5}"/>` : ''}
