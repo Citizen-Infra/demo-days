@@ -18,3 +18,8 @@ dist/
 # Backup files
 *.bak
 *.orig
+
+# Internal-only data · do not commit · contains team contact info
+# and strategic outreach notes that aren't for the open web. See
+# the header of assets/atlas-internal.js for what's in here.
+assets/atlas-internal.js
