@@ -3324,7 +3324,9 @@ function openTrainer(t) {
     ? `<img src="${t.photo}" alt="" loading="lazy">`
     : trainerSVG(t);
   document.getElementById('trainer-header-name').textContent = t.name;
-  document.getElementById('trainer-header-role').textContent = `"${t.summary}"`;
+  // Summary line removed per Megan; element stays in markup but is
+  // cleared so it collapses to zero height.
+  document.getElementById('trainer-header-role').textContent = '';
 
   trainerView.style.setProperty('--lens-color', t.color);
 
@@ -3587,50 +3589,44 @@ inventoryCarousel.addEventListener('scroll', () => {
   }, 140);
 }, { passive: true });
 
-// Chevron buttons: scroll the carousel by roughly one card-width per click.
-function scrollCarousel(direction) {
-  // Snap to the next/previous card boundary rather than a fixed pixel delta,
-  // so the row reads as paged movement instead of a sloppy nudge.
-  const cards = inventoryCarousel.querySelectorAll('.inv-item');
+// Step the active card by `direction` (-1 = left, +1 = right). Used
+// by both the chevron buttons and the keyboard arrow keys, so the
+// two interactions behave identically: move the SELECTION one card
+// over (not scroll the carousel by N pixels) and only scroll the
+// row when the new active card would otherwise be off-screen.
+function stepCardSelection(direction) {
+  const cards = Array.from(inventoryCarousel.querySelectorAll('.inv-item'));
   if (!cards.length) return;
-  const cardWidth = cards[0].offsetWidth;
-  const gap = parseFloat(getComputedStyle(inventoryCarousel).columnGap || '0') || 8;
-  const step = cardWidth + gap;
-  inventoryCarousel.scrollBy({ left: direction * step * 2, behavior: 'smooth' });
+  const activeIdx = cards.findIndex(c => c.classList.contains('active'));
+  const currentIdx = activeIdx >= 0 ? activeIdx : 0;
+  const nextIdx = Math.max(0, Math.min(cards.length - 1, currentIdx + direction));
+  if (nextIdx === currentIdx) return;
+  const nextId = cards[nextIdx].getAttribute('data-id');
+  if (nextId === '__all') {
+    resetFocus('nearest');
+  } else {
+    focusOnNode(nextId, 'nearest');
+  }
 }
-if (invNavPrev) invNavPrev.addEventListener('click', () => scrollCarousel(-1));
-if (invNavNext) invNavNext.addEventListener('click', () => scrollCarousel(1));
 
-// Keyboard navigation · ArrowLeft / ArrowRight step through the
-// inventory cards (including the All filter at index 0) whenever
-// the trainer overlay is open. Calls focusOnNode / resetFocus
-// directly with scrollMode = 'nearest' so the carousel only
-// scrolls when the target card is off-screen, advancing one
-// card-width at a time instead of jumping to center.
+// Chevron buttons step the selection by one card · same as the
+// arrow keys. The previous implementation scrolled the row by a
+// fixed pixel delta and the scroll listener then auto-focused
+// whatever landed nearest center, which read as a "jump to
+// center" rather than a step.
+if (invNavPrev) invNavPrev.addEventListener('click', () => stepCardSelection(-1));
+if (invNavNext) invNavNext.addEventListener('click', () => stepCardSelection(1));
+
+// Keyboard navigation · ArrowLeft / ArrowRight when the trainer
+// overlay is open. Same step-by-one behavior as the chevrons.
 document.addEventListener('keydown', (e) => {
   if (!trainerView.classList.contains('active')) return;
   if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
   // Don't hijack arrows when the user is typing in a form field.
   const tag = (e.target.tagName || '').toLowerCase();
   if (tag === 'input' || tag === 'textarea' || e.target.isContentEditable) return;
-
-  const cards = Array.from(inventoryCarousel.querySelectorAll('.inv-item'));
-  if (!cards.length) return;
-
-  const activeIdx = cards.findIndex(c => c.classList.contains('active'));
-  const currentIdx = activeIdx >= 0 ? activeIdx : 0;
-  const dir = e.key === 'ArrowLeft' ? -1 : 1;
-  const nextIdx = Math.max(0, Math.min(cards.length - 1, currentIdx + dir));
-
-  if (nextIdx !== currentIdx) {
-    e.preventDefault();
-    const nextId = cards[nextIdx].getAttribute('data-id');
-    if (nextId === '__all') {
-      resetFocus('nearest');
-    } else {
-      focusOnNode(nextId, 'nearest');
-    }
-  }
+  e.preventDefault();
+  stepCardSelection(e.key === 'ArrowLeft' ? -1 : 1);
 });
 
 resetBtn.addEventListener('click', resetFocus);
