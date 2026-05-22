@@ -3328,7 +3328,7 @@ function renderInventory() {
   });
 }
 
-function focusOnNode(nodeId) {
+function focusOnNode(nodeId, scrollMode = 'center') {
   if (nodeId === focusedNodeId) return; // already focused; prevents carousel-scroll loop
   const node = nodes.find(n => n.id === nodeId);
   if (!node) return;
@@ -3383,11 +3383,14 @@ function focusOnNode(nodeId) {
     const isActive = it.getAttribute('data-id') === nodeId;
     it.classList.toggle('active', isActive);
     if (isActive) {
-      // Center the card horizontally so the carousel + map stay in sync.
+      // scrollMode = 'center' (default, used by clicks) keeps the active
+      // card centered in the carousel. 'nearest' (arrow-key nav) only
+      // scrolls when the card would otherwise be off-screen, so arrow
+      // presses advance one card-width instead of jumping to center.
       // Suppress the scroll-listener while the smooth scroll plays so it
       // doesn't re-snap onto whatever card is closest to center mid-animation.
       suppressCarouselScroll = true;
-      it.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      it.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: scrollMode });
       clearTimeout(suppressCarouselScrollTimer);
       suppressCarouselScrollTimer = setTimeout(() => { suppressCarouselScroll = false; }, 600);
     }
@@ -3433,7 +3436,7 @@ function showTooltip(node) {
 let suppressCarouselScroll = false;
 let suppressCarouselScrollTimer = null;
 
-function resetFocus() {
+function resetFocus(scrollMode = 'start') {
   focusedNodeId = null;
   renderMap();
   mapInner.classList.remove('focusing');
@@ -3441,11 +3444,13 @@ function resetFocus() {
   inventoryCarousel.querySelectorAll('.inv-item').forEach(it => {
     it.classList.toggle('active', it.getAttribute('data-id') === '__all');
   });
-  // Scroll the All card back into view so the user sees the filter snap home.
+  // Scroll the All card into view. Default 'start' (click / reset btn)
+  // snaps it to the left edge; 'nearest' (arrow-key nav) only scrolls
+  // if the card is off-screen.
   const allCard = inventoryCarousel.querySelector('.inv-item-all');
   if (allCard) {
     suppressCarouselScroll = true;
-    allCard.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+    allCard.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: scrollMode });
     clearTimeout(suppressCarouselScrollTimer);
     suppressCarouselScrollTimer = setTimeout(() => { suppressCarouselScroll = false; }, 600);
   }
@@ -3497,8 +3502,10 @@ if (invNavNext) invNavNext.addEventListener('click', () => scrollCarousel(1));
 
 // Keyboard navigation · ArrowLeft / ArrowRight step through the
 // inventory cards (including the All filter at index 0) whenever
-// the trainer overlay is open. Click the target card so focus +
-// scroll-into-view logic runs as if the user clicked it.
+// the trainer overlay is open. Calls focusOnNode / resetFocus
+// directly with scrollMode = 'nearest' so the carousel only
+// scrolls when the target card is off-screen, advancing one
+// card-width at a time instead of jumping to center.
 document.addEventListener('keydown', (e) => {
   if (!trainerView.classList.contains('active')) return;
   if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
@@ -3516,7 +3523,12 @@ document.addEventListener('keydown', (e) => {
 
   if (nextIdx !== currentIdx) {
     e.preventDefault();
-    cards[nextIdx].click();
+    const nextId = cards[nextIdx].getAttribute('data-id');
+    if (nextId === '__all') {
+      resetFocus('nearest');
+    } else {
+      focusOnNode(nextId, 'nearest');
+    }
   }
 });
 
