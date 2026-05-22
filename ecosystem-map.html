@@ -68,7 +68,9 @@
      Active-state underline extends to the very bottom of the bar.
      Structure: .nav (full-width, cream) > [canvas, field-veil, .nav-inner > brand/links/cta] */
   .nav {
-    position: relative;
+    position: sticky;
+    top: 0;
+    z-index: 100;
     margin-left: calc(-50vw + 50%);
     margin-right: calc(-50vw + 50%);
     width: 100vw;
@@ -181,8 +183,7 @@
     color: var(--accent-deep);
     border-bottom-color: var(--accent);
   }
-  /* Hamburger toggle (mobile only) */
-  .nav { position: relative; }
+  /* Hamburger toggle (mobile only) · .nav itself stays sticky (set above) */
   .nav-toggle {
     display: none;
     background: none;
@@ -202,8 +203,8 @@
   @media (max-width: 720px) {
     .nav-toggle { display: inline-flex; }
     .nav-links {
-      position: absolute;
-      top: calc(100% + 8px);
+      position: fixed;
+      top: 40px;
       left: 0;
       right: 0;
       flex-direction: column;
