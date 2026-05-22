@@ -2342,6 +2342,14 @@ const ATLAS_DATA = {
     { id: 'komma',       name: 'Komma Systems',         kind: 'org',     color: '#c4a880' },
     // Regen cluster
     { id: 'regenos',     name: 'RegenOS',               kind: 'org',     color: '#7a9268' },
+    // Houston · the local chapter Megan runs + the parent network +
+    // four Houston orgs sharing values she's mapping into the web.
+    { id: 'bloom-network',         name: 'Bloom Network',         kind: 'org', color: '#c89678' },
+    { id: 'houston-bloom',         name: 'Houston Bloom',         kind: 'org', color: '#d4793d' },
+    { id: 'urban-harvest',         name: 'Urban Harvest',         kind: 'org', color: '#c89678' },
+    { id: 'west-street-recovery',  name: 'West Street Recovery',  kind: 'org', color: '#c89678' },
+    { id: 'cooperation-texas',     name: 'Cooperation Texas',     kind: 'org', color: '#c89678' },
+    { id: 'txrx-labs',             name: 'TXRX Labs',             kind: 'org', color: '#c89678' },
     // Concepts she works through
     { id: 'anti-extractive', name: 'Anti-extractive', kind: 'concept', color: '#998774' },
     { id: 'data-sovereignty', name: 'Data sovereignty', kind: 'concept', color: '#998774' },
@@ -2387,6 +2395,15 @@ const ATLAS_DATA = {
 
     // Regen cluster (bottom-right)
     { id: 'regenos', label: 'RegenOS', x: 700, y: 670, r: 7, contributors: ['brayden'], type: 'regen', critter: 'sprout', state: 'rumored' },
+
+    // Houston cluster (bottom-center) · Megan's local chapter +
+    // parent network + four Houston orgs sharing values.
+    { id: 'houston-bloom',        label: 'Houston Bloom',        x: 470, y: 830, r: 8, contributors: ['megan'], type: 'regen',      critter: 'bloom',  state: 'caught' },
+    { id: 'bloom-network',        label: 'Bloom Network',        x: 380, y: 770, r: 7, contributors: ['megan'], type: 'regen',      critter: 'flower', state: 'caught' },
+    { id: 'urban-harvest',        label: 'Urban Harvest',        x: 320, y: 880, r: 5, contributors: ['megan'], type: 'civic-tech', critter: 'sprout', state: 'spotted' },
+    { id: 'west-street-recovery', label: 'West Street Recovery', x: 410, y: 920, r: 5, contributors: ['megan'], type: 'civic-tech', critter: 'leaf',   state: 'spotted' },
+    { id: 'cooperation-texas',    label: 'Cooperation Texas',    x: 520, y: 910, r: 5, contributors: ['megan'], type: 'civic-tech', critter: 'ring',   state: 'spotted' },
+    { id: 'txrx-labs',            label: 'TXRX Labs',            x: 600, y: 870, r: 5, contributors: ['megan'], type: 'civic-tech', critter: 'gear',   state: 'spotted' },
 
     // Newsweek (floating, unverified, far edge)
     { id: 'newsweek', label: 'Newsweek (?)', x: 905, y: 870, r: 5, contributors: [], type: 'unknown', critter: 'tiny', state: 'unverified' },
@@ -2443,17 +2460,29 @@ const ATLAS_DATA = {
     ['dml', 'agora', 'loose'],
 
     // Regen
-    ['regenos', 'regenerative', 'strong']
+    ['regenos', 'regenerative', 'strong'],
+
+    // Houston cluster · chapter at the center, parent network up,
+    // local orgs spread out below.
+    ['houston-bloom', 'bloom-network',       'strong'],
+    ['houston-bloom', 'urban-harvest',       'strong'],
+    ['houston-bloom', 'west-street-recovery', 'strong'],
+    ['houston-bloom', 'cooperation-texas',   'strong'],
+    ['houston-bloom', 'txrx-labs',           'strong'],
+    // Cross-link to CIBC · sibling initiatives under Megan, loose
+    // because they're different surfaces, not one inside the other.
+    ['cibc', 'houston-bloom', 'loose']
   ],
 
   /* CLUSTERS · background tint ellipses with labels.
      Drawn at low opacity behind nodes. Fill is used on the front map;
      trainer-overlay map ignores fill and uses a single deep-theme tint. */
   clusters: [
-    { id: 'deliberation', label: 'deliberation', cx: 295, cy: 320, rx: 200, ry: 170, fill: '#9aa9c4', label_y: 160 },
-    { id: 'dml',          label: 'dark matter labs', cx: 245, cy: 555, rx: 170, ry: 150, fill: '#c4a880', label_y: 720 },
+    { id: 'deliberation', label: 'deliberation',       cx: 295, cy: 320, rx: 200, ry: 170, fill: '#9aa9c4', label_y: 160 },
+    { id: 'dml',          label: 'dark matter labs',   cx: 245, cy: 555, rx: 170, ry: 150, fill: '#c4a880', label_y: 720 },
     { id: 'plurality',    label: 'plurality / metagov', cx: 745, cy: 385, rx: 180, ry: 160, fill: '#b496d0', label_y: 220 },
-    { id: 'regen',        label: 'regen', cx: 690, cy: 665, rx: 110, ry: 85,  fill: '#7a9268', label_y: 760 }
+    { id: 'regen',        label: 'regen',              cx: 690, cy: 665, rx: 110, ry: 85,  fill: '#7a9268', label_y: 760 },
+    { id: 'houston',      label: 'houston',            cx: 470, cy: 870, rx: 200, ry: 110, fill: '#c89678', label_y: 985 }
   ]
 };
 </script>
