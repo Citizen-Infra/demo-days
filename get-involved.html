@@ -2944,16 +2944,32 @@ function initFieldAtmosphere(opts) {
     }
     ctx.globalCompositeOperation = 'source-over';
   } else {
-    let simTime = 0, lastReal = 0;
+    // Only animate while this section is on-screen and the tab is visible.
+    // Previously all field canvases ran their rAF loops continuously, even
+    // off-screen and in background tabs. Also throttled to ~30fps. (perf #1)
+    let simTime = 0, lastDraw = 0, rafId = 0, onScreen = false;
+    const FRAME_MS = 1000 / 30;
     function loop(now) {
-      if (lastReal === 0) lastReal = now;
-      const realDelta = Math.min(50, now - lastReal);
-      lastReal = now;
-      simTime += realDelta * CONFIG.speed;
+      rafId = requestAnimationFrame(loop);
+      if (lastDraw === 0) lastDraw = now;
+      const realDelta = now - lastDraw;
+      if (realDelta < FRAME_MS) return;
+      lastDraw = now;
+      simTime += Math.min(50, realDelta) * CONFIG.speed;
       draw(simTime);
-      requestAnimationFrame(loop);
     }
-    requestAnimationFrame(loop);
+    function start() {
+      if (!rafId && onScreen && !document.hidden) { lastDraw = 0; rafId = requestAnimationFrame(loop); }
+    }
+    function stop() {
+      if (rafId) { cancelAnimationFrame(rafId); rafId = 0; }
+    }
+    const io = new IntersectionObserver((entries) => {
+      onScreen = entries.some((e) => e.isIntersecting);
+      onScreen ? start() : stop();
+    }, { rootMargin: '150px' });
+    io.observe(section);
+    document.addEventListener('visibilitychange', () => { document.hidden ? stop() : start(); });
   }
 }
 
