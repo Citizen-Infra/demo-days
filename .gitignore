@@ -23,3 +23,7 @@ dist/
 # and strategic outreach notes that aren't for the open web. See
 # the header of assets/atlas-internal.js for what's in here.
 assets/atlas-internal.js
+
+# Internal working checklist · canonical copy lives in the vault
+# (Initiatives/CIBC/Demo Days/). Not for the public repo.
+TO-FILL-IN.md

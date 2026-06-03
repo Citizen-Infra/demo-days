@@ -2423,7 +2423,7 @@ const ATLAS_DATA = {
     <a href="index.html" class="brand" aria-label="CIBC home"><span class="brand-mark">CIBC</span></a>
     <div class="nav-links" id="primary-links" role="navigation">
       <a href="index.html" class="nav-link">Demo Day</a>
-      <a href="ecosystem-map.html" class="nav-link">Infra Resources</a>
+      <a href="ecosystem-map.html" class="nav-link" style="display:none">Infra Resources</a>
       <a href="#" class="nav-link nav-link-current" aria-current="page">Learn more</a>
     </div>
     <a href="#register" class="nav-cta">Register</a>
@@ -2441,7 +2441,7 @@ const ATLAS_DATA = {
   <a href="index.html" class="gn-brand" aria-label="CIBC home"><span class="gn-brand-mark">CIBC</span></a>
   <div class="gn-links" id="primary-links" role="navigation">
     <a href="index.html" class="gn-link">Demo Day</a>
-    <a href="ecosystem-map.html" class="gn-link">Infra Resources</a>
+    <a href="ecosystem-map.html" class="gn-link" style="display:none">Infra Resources</a>
     <a href="#" class="gn-link gn-link-current" aria-current="page">Learn more</a>
   </div>
   <a href="#register" class="gn-cta">Register</a>
@@ -2461,7 +2461,7 @@ const ATLAS_DATA = {
       <p class="lede">We build digital pitchforks: citizen infrastructure that teaches collective action, solidarity, and shared stewardship through use. Not apps or platforms in the traditional sense, but tools crafted to reshape how people relate to each other and to their communities.</p>
       <div class="header-ctas">
         <a href="https://app.harmonica.chat/chat?s=fc325b1d-2abb-4869-b2b5-6e35bfb274bb" target="_blank" rel="noopener" class="hero-btn hero-btn-primary">Apply to lead <span class="hero-btn-arrow" aria-hidden="true"><svg style="width:1em;height:1em;vertical-align:-0.12em;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></a>
-        <a href="ecosystem-map.html" class="hero-btn hero-btn-ghost hero-btn-ghost-dark">Find resources</a>
+        <a href="ecosystem-map.html" class="hero-btn hero-btn-ghost hero-btn-ghost-dark" style="display:none">Find resources</a>
       </div>
     </div>
   </header>
@@ -2476,7 +2476,8 @@ const ATLAS_DATA = {
   </section>
 
   <!-- ===== PROFESSIONALS, LOOSELY TIED · intro + trainer roster ===== -->
-  <section class="professionals" aria-labelledby="professionals-title">
+  <!-- Hidden for now per Megan 2026-06-02: ecosystem card grid (002). Remove style="display:none" to restore. -->
+  <section class="professionals" aria-labelledby="professionals-title" style="display:none">
     <div class="professionals-inner">
       <div class="professionals-head">
         <p class="professionals-eyebrow">002</p>
@@ -2504,7 +2505,8 @@ const ATLAS_DATA = {
 
   <!-- ===== ATLAS MAP · dark ===== -->
   <div id="caught-counter" hidden></div>
-  <section class="front-map-section front-map-section-dark">
+  <!-- Hidden for now per Megan 2026-06-02: whole-ecosystem network map (003). Remove style="display:none" to restore. -->
+  <section class="front-map-section front-map-section-dark" style="display:none">
     <p class="front-map-eyebrow">003 &middot; the whole ecosystem &middot; tap a node to focus</p>
     <div class="front-map-wrap is-dark">
       <svg id="front-map-svg" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid meet">
