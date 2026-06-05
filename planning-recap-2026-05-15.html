@@ -7,37 +7,10 @@
 <title>CIBC Demo Days · May 15 Recap</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Press+Start+2P&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Crete+Round:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Caveat:wght@500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
 <style>
-  :root {
-    --gradient-primary: linear-gradient(90deg, #e96243 0%, #e67c48 100%);
-    --gradient-light-text: linear-gradient(135deg, #e78873 0%, #e5a27b 63%, #e2b99e 100%);
-    --accent-deep: #c45525;
-    --paper-white: #fefdf9;
-    --pixel: 'Press Start 2P', monospace;
-    --bg: #f4ede0;
-    --bg-deep: #ebe2d0;
-    --bg-card: #fbf6ec;
-    --ink: #1c1814;
-    --ink-soft: #3a322a;
-    --ink-muted: #6e6356;
-    --rule: #d9cfba;
-    --rule-soft: #e6dcc7;
-    --terra: #b54a2c;
-    --terra-soft: #d77556;
-    --moss: #4a6a3d;
-    --moss-soft: #7a9568;
-    --gold: #b58a2c;
-    --indigo: #354266;
-    --plum: #6e3a5b;
-    --serif: 'Fraunces', 'Charter', 'Iowan Old Style', Georgia, serif;
-    --sans: 'Inter Tight', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-    --mono: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
-    /* Aliases for the audio player */
-    --paper: var(--bg);
-    --paper-deep: var(--bg-card);
-    --accent: var(--terra);
-  }
+  
   * { box-sizing: border-box; margin: 0; padding: 0; }
     html { background: var(--bg-warm-2); min-height: 100vh; }
   html, body {
@@ -1008,7 +981,7 @@
     justify-content: center;
     padding: 24px;
     color: #f6ecd9;
-    font-family: 'Newsreader', Georgia, serif;
+    font-family: 'IBM Plex Sans', Georgia, serif;
   }
   body.pw-locked { overflow: hidden; }
   body.pw-unlocked #pw-gate { display: none; }
@@ -1017,7 +990,7 @@
     text-align: center;
   }
   #pw-gate .pw-eyebrow {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'IBM Plex Mono', monospace;
     font-size: 11px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
@@ -1025,7 +998,7 @@
     margin: 0 0 18px;
   }
   #pw-gate .pw-title {
-    font-family: 'Fraunces', serif;
+    font-family: 'Crete Round', serif;
     font-weight: 600;
     font-size: clamp(28px, 4vw, 40px);
     line-height: 1.1;
@@ -1046,7 +1019,7 @@
   }
   #pw-gate #pw-input {
     flex: 1 1 220px;
-    font-family: 'Newsreader', serif;
+    font-family: 'IBM Plex Sans', serif;
     font-size: 16px;
     padding: 12px 20px;
     border-radius: 100px;
@@ -1058,7 +1031,7 @@
   }
   #pw-gate #pw-input:focus { border-color: #d4793d; }
   #pw-gate .pw-submit {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'IBM Plex Mono', monospace;
     font-size: 11px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -2886,10 +2859,10 @@ function initFieldAtmosphere(opts) {
   const ctx = canvas.getContext('2d');
 
   const CONFIG = Object.assign({
-    backgroundColor: '#0e0a07',
+    backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--field-bg').trim() || '#0e0a07',
     transparentBackground: false,
     glowComposite: 'lighter',
-    lineColor: '#d4793d',
+    lineColor: getComputedStyle(document.documentElement).getPropertyValue('--field-line').trim() || '#d4793d',
     speed: 0.85,
     phaseDuration: 22000,
     transitionDuration: 7000,
@@ -3242,7 +3215,7 @@ initFieldAtmosphere({
   config: {
     transparentBackground: true,
     glowComposite: 'source-over',
-    lineColor: '#d4793d',
+    lineColor: getComputedStyle(document.documentElement).getPropertyValue('--field-line').trim() || '#d4793d',
     mainCount: 80,
     whisperCount: 50,
     mainAlpha: 0.55,

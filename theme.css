@@ -1,0 +1,81 @@
+/* ============================================================
+   CIBC Demo Day · SINGLE SOURCE OF TRUTH FOR THE BRAND
+   ------------------------------------------------------------
+   Every page links this file. To rebrand the whole site, edit
+   the CANONICAL PRIMITIVES block below. Everything else is an
+   alias or a derived value that follows the primitives, so a
+   palette or font swap here propagates to all six pages and to
+   the particle-field background.
+
+   2026-06-03: three older per-page palettes (event / recap /
+   report) were merged into one brand. Legacy token names from
+   those palettes (--terra, --sans, --bg, --ink-muted, ...) are
+   kept as aliases so no page loses its colors.
+
+   2026-06-03: brand updated to the "barn / farmhouse" palette
+   (barn-brick accent, bone paper, warm dark sections) with
+   Crete Round + IBM Plex Sans/Mono type.
+   ============================================================ */
+
+:root {
+  /* ---------- CANONICAL PRIMITIVES (edit these to rebrand) ---------- */
+
+  /* Paper + backgrounds */
+  --paper-white: #f9f5ea;   /* lightest paper, card-on-light */
+  --bg-warm: #e7ddc6;       /* page background (bone / putty) */
+  --bg-warm-2: #ddd1b6;     /* secondary warm panel */
+  --bg-card: #f3ecda;       /* card surfaces */
+  --bg-deep: #221b13;       /* dark sections (warm barn-wood near-black) */
+  --bg-deep-2: #2c2316;     /* dark section, one step lighter */
+
+  /* Ink / text */
+  --ink: #2a2117;
+  --ink-soft: #574a36;
+  --ink-faint: #8c7f63;
+
+  /* Hairline rules */
+  --rule: rgba(42,33,23,0.18);
+  --rule-soft: rgba(42,33,23,0.09);
+
+  /* Primary accent (faded barn brick) */
+  --accent: #a86048;
+  --accent-deep: #8f4f3a;
+  --accent-soft: rgba(168,96,72,0.14);
+
+  /* Secondary brand palette (categorical accents) */
+  --terra-soft: #b97058;    /* lighter brick */
+  --moss: #6e7150;          /* foliage olive */
+  --moss-soft: #889071;     /* lighter sage */
+  --gold: #c2913f;          /* ochre apron */
+  --indigo: #39434f;        /* denim */
+  --indigo-soft: rgba(57,67,79,0.16);
+  --plum: #6e3a4b;          /* shadow plum */
+
+  /* Brand gradients */
+  --gradient-primary: linear-gradient(90deg, #a86048 0%, #b97058 100%);
+  --gradient-light-text: linear-gradient(135deg, #c98a6e 0%, #cda07f 63%, #d6b89c 100%);
+
+  /* Type */
+  --serif: 'Crete Round', 'Charter', Georgia, serif;
+  --body: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --mono: 'IBM Plex Mono', 'SF Mono', Menlo, Consolas, monospace;
+  --pixel: 'Press Start 2P', 'IBM Plex Mono', monospace;
+  --script: 'Caveat', 'Bradley Hand', 'Marker Felt', cursive;
+
+  /* Particle-field atmosphere (read by initFieldAtmosphere) */
+  --field-bg: #1b150e;      /* canvas background, warm dark */
+  --field-line: #a86048;    /* particle / line color, barn brick */
+
+  /* Misc */
+  --paper-shadow: rgba(42,33,23,0.10);
+  --char-eye: #1a1410;          /* network-map critter eyes */
+  --lens-color: var(--accent);  /* runtime-overridden per trainer */
+
+  /* ---------- LEGACY ALIASES (follow the primitives above) ---------- */
+  --bg: var(--bg-warm);
+  --paper: var(--paper-white);
+  --paper-deep: var(--bg-warm);
+  --ink-muted: var(--ink-faint);
+  --terra: var(--accent);
+  --sans: var(--body);
+}

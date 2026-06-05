@@ -7,27 +7,10 @@
 <title>CIBC · Learn More</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Press+Start+2P&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Crete+Round:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Caveat:wght@500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
 <style>
-  :root {
-    --gradient-primary: linear-gradient(90deg, #e96243 0%, #e67c48 100%);
-    --gradient-light-text: linear-gradient(135deg, #e78873 0%, #e5a27b 63%, #e2b99e 100%);
-    --accent-deep: #c45525;
-    --paper-white: #fefdf9;
-    --bg-warm: #f8f2e6;
-    --bg-card: #fffaf0;
-    --ink: #2a2218;
-    --ink-soft: #5a4d3a;
-    --ink-faint: #998774;
-    --rule: rgba(60, 40, 20, 0.16);
-    --rule-soft: rgba(60, 40, 20, 0.08);
-    --accent: #c7725f;
-    --paper-shadow: rgba(60, 40, 20, 0.08);
-    --serif: 'Fraunces', Georgia, serif;
-    --body: 'Inter', -apple-system, system-ui, sans-serif;
-    --mono: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
-    --pixel: 'Press Start 2P', monospace;
-  }
+  
   * { box-sizing: border-box; }
     html { background: var(--bg-warm-2); min-height: 100vh; }
   html, body { margin: 0; padding: 0; }
@@ -1430,23 +1413,12 @@
 
   /* ========== ATLAS LENS · CSS (ported) ========== */
 
-  :root {
-    --bg-warm: #f6ecd9;
-    --bg-warm-2: #f0e3c8;
-    --bg-deep: #14110d;
-    --bg-deep-2: #1d1812;
-    --ink: #2a2218;
-    --ink-soft: #5a4d3a;
-    --ink-faint: #998774;
-    --accent: #d4793d;
-    --paper-shadow: rgba(60, 40, 20, 0.08);
-    --char-eye: #1a1410;
-  }
+  
 
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; overscroll-behavior: none; }
   body {
-    font-family: 'Newsreader', Georgia, serif;
+    font-family: 'IBM Plex Sans', Georgia, serif;
     background: var(--bg-warm);
     color: var(--ink);
     min-height: 100vh;
@@ -1475,19 +1447,19 @@
 
   .pokedex-header { text-align: center; margin-bottom: 36px; position: relative; z-index: 1; }
   .pokedex-eyebrow {
-    font-family: 'Fraunces', serif; font-style: italic;
+    font-family: 'Crete Round', serif; font-style: italic;
     font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase;
     color: var(--ink-soft); margin-bottom: 6px;
   }
   .pokedex-title {
-    font-family: 'Fraunces', serif;
+    font-family: 'Crete Round', serif;
     font-variation-settings: "opsz" 144, "SOFT" 80;
     font-weight: 600;
     font-size: clamp(36px, 9vw, 56px);
     line-height: 1; margin: 0 0 14px; color: var(--ink);
   }
   .pokedex-subtitle {
-    font-family: 'Newsreader', serif; font-style: italic;
+    font-family: 'IBM Plex Sans', serif; font-style: italic;
     font-size: 15px; line-height: 1.5; color: var(--ink-soft);
     max-width: 460px; margin: 0 auto;
   }
@@ -1496,7 +1468,7 @@
     margin-top: 16px; padding: 6px 14px; border-radius: 100px;
     background: rgba(212, 121, 61, 0.14);
     border: 1px solid rgba(212, 121, 61, 0.25);
-    font-family: 'Fraunces', serif;
+    font-family: 'Crete Round', serif;
     font-variation-settings: "opsz" 14;
     font-weight: 500; font-size: 13px; color: var(--accent);
   }
@@ -1511,7 +1483,7 @@
 
   .trainer-section { max-width: 1000px; margin: 0 auto; position: relative; z-index: 1; }
   .trainer-section-label {
-    font-family: 'Fraunces', serif; font-style: italic;
+    font-family: 'Crete Round', serif; font-style: italic;
     font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
     color: var(--ink-soft); margin: 28px 12px 12px;
   }
@@ -1549,17 +1521,17 @@
   @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
 
   .trainer-name {
-    font-family: 'Fraunces', serif;
+    font-family: 'Crete Round', serif;
     font-variation-settings: "opsz" 40, "SOFT" 60;
     font-weight: 600; font-size: 18px; margin: 0 0 2px;
   }
   .trainer-role {
-    font-family: 'Newsreader', serif; font-style: italic;
+    font-family: 'IBM Plex Sans', serif; font-style: italic;
     font-size: 12px; color: var(--ink-soft); margin: 0 0 8px;
   }
   .trainer-count {
     display: inline-block; padding: 3px 9px; border-radius: 100px;
-    font-family: 'Fraunces', serif;
+    font-family: 'Crete Round', serif;
     font-variation-settings: "opsz" 10;
     font-weight: 500; font-size: 11px; letter-spacing: 0.04em;
     background: rgba(60, 40, 20, 0.06); color: var(--ink-soft);
@@ -1567,7 +1539,7 @@
 
   .footer-note {
     text-align: center; margin-top: 36px;
-    font-family: 'Newsreader', serif; font-style: italic;
+    font-family: 'IBM Plex Sans', serif; font-style: italic;
     font-size: 12px; color: var(--ink-faint); line-height: 1.6;
     max-width: 460px; margin-left: auto; margin-right: auto;
     position: relative; z-index: 1;
@@ -1579,7 +1551,7 @@
     position: relative; z-index: 1;
   }
   .front-map-eyebrow {
-    font-family: 'Fraunces', serif; font-style: italic;
+    font-family: 'Crete Round', serif; font-style: italic;
     font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
     color: var(--ink-soft); margin: 0 12px 10px;
   }
@@ -1688,7 +1660,7 @@
   }
   .front-cluster-zone-label {
     fill: rgba(60, 40, 20, 0.32);
-    font-family: 'Fraunces', serif; font-style: italic;
+    font-family: 'Crete Round', serif; font-style: italic;
     font-size: 16px; text-anchor: middle; pointer-events: none;
     letter-spacing: 0.08em; text-transform: lowercase;
   }
@@ -1735,7 +1707,7 @@
   }
   .front-map-node-label {
     fill: rgba(60, 40, 20, 0.78);
-    font-family: 'Newsreader', serif;
+    font-family: 'IBM Plex Sans', serif;
     font-size: 14px; text-anchor: middle;
     pointer-events: none;
     paint-order: stroke;
@@ -1763,7 +1735,7 @@
     border: 1px solid rgba(60, 40, 20, 0.18);
     color: var(--ink);
     padding: 12px 14px; border-radius: 12px;
-    font-family: 'Newsreader', serif;
+    font-family: 'IBM Plex Sans', serif;
     font-size: 13px; line-height: 1.45;
     max-width: calc(100% - 28px);
     box-shadow: 0 8px 24px rgba(60, 40, 20, 0.18);
@@ -1773,7 +1745,7 @@
   }
   .front-map-tooltip.visible { opacity: 1; transform: translateY(0); }
   .front-map-tooltip strong {
-    font-family: 'Fraunces', serif; font-weight: 600;
+    font-family: 'Crete Round', serif; font-weight: 600;
     display: block; margin-bottom: 4px; font-size: 15px;
   }
   .front-map-tooltip em {
@@ -1790,7 +1762,7 @@
   .front-map-tooltip .state-tag {
     display: inline-block; margin-top: 6px;
     padding: 2px 8px; border-radius: 100px;
-    font-family: 'Fraunces', serif;
+    font-family: 'Crete Round', serif;
     font-variation-settings: "opsz" 10;
     font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
   }
@@ -1809,7 +1781,7 @@
     -webkit-backdrop-filter: blur(6px);
     border: 1px solid rgba(60, 40, 20, 0.18);
     color: rgba(60, 40, 20, 0.55);
-    font-family: 'Fraunces', serif;
+    font-family: 'Crete Round', serif;
     font-variation-settings: "opsz" 14;
     font-size: 12px; letter-spacing: 0.04em;
     cursor: pointer; z-index: 5;
@@ -1831,13 +1803,13 @@
   }
   .front-map-hint {
     text-align: center; margin-top: 8px;
-    font-family: 'Newsreader', serif; font-style: italic;
+    font-family: 'IBM Plex Sans', serif; font-style: italic;
     font-size: 12px; color: var(--ink-faint);
   }
   .front-map-legend {
     display: flex; flex-wrap: wrap; justify-content: center;
     gap: 18px 22px; margin-top: 14px;
-    font-family: 'Fraunces', serif; font-style: italic;
+    font-family: 'Crete Round', serif; font-style: italic;
     font-variation-settings: "opsz" 12;
     font-size: 11px; letter-spacing: 0.04em;
     color: var(--ink-soft);
@@ -1901,7 +1873,7 @@
   .trainer-header-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
   .trainer-header-text { flex: 1; min-width: 0; }
   .trainer-header-name {
-    font-family: 'Fraunces', serif;
+    font-family: 'Crete Round', serif;
     font-variation-settings: "opsz" 36, "SOFT" 60;
     font-weight: 600;
     font-size: clamp(18px, 2vw, 22px);
@@ -1909,7 +1881,7 @@
     color: var(--bg-warm);
   }
   .trainer-header-role {
-    font-family: 'Newsreader', serif; font-style: italic;
+    font-family: 'IBM Plex Sans', serif; font-style: italic;
     font-size: 14px; line-height: 1.45;
     color: rgba(232, 220, 198, 0.62);
     margin: 4px 0 0;
@@ -1938,7 +1910,7 @@
     background: transparent;
     border: 1px solid rgba(232, 220, 198, 0.28);
     color: rgba(232, 220, 198, 0.7);
-    font-family: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
+    font-family: 'IBM Plex Mono', 'IBM Plex Mono', ui-monospace, monospace;
     font-size: 12px; letter-spacing: 0.04em;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
@@ -1963,7 +1935,7 @@
     border: 1px solid rgba(232, 220, 198, 0.2);
     color: #e8dcc6;
     padding: 12px 14px; border-radius: 12px;
-    font-family: 'Newsreader', serif;
+    font-family: 'IBM Plex Sans', serif;
     font-size: 13px; line-height: 1.45;
     max-width: calc(100% - 24px);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
@@ -1973,7 +1945,7 @@
   }
   .map-tooltip.visible { opacity: 1; transform: translateY(0); }
   .map-tooltip strong {
-    font-family: 'Fraunces', serif; font-weight: 600;
+    font-family: 'Crete Round', serif; font-weight: 600;
     display: block; margin-bottom: 4px; font-size: 15px;
   }
   .map-tooltip em {
@@ -1990,7 +1962,7 @@
   .map-tooltip .state-tag {
     display: inline-block; margin-top: 6px;
     padding: 2px 8px; border-radius: 100px;
-    font-family: 'Fraunces', serif;
+    font-family: 'Crete Round', serif;
     font-variation-settings: "opsz" 10;
     font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
   }
@@ -2009,7 +1981,7 @@
   }
   .cluster-zone-label {
     fill: rgba(232, 220, 198, 0.28);
-    font-family: 'Fraunces', serif; font-style: italic;
+    font-family: 'Crete Round', serif; font-style: italic;
     font-size: 14px;
     pointer-events: none;
     text-anchor: middle;
@@ -2105,7 +2077,7 @@
 
   .map-node-label {
     fill: rgba(232, 220, 198, 0.55);
-    font-family: 'Newsreader', serif;
+    font-family: 'IBM Plex Sans', serif;
     font-size: 16px; text-anchor: middle;
     pointer-events: none;
     paint-order: stroke;
@@ -2193,7 +2165,7 @@
   }
   .inv-critter svg { width: 100%; height: 100%; display: block; }
   .inv-name {
-    font-family: 'Fraunces', serif;
+    font-family: 'Crete Round', serif;
     font-variation-settings: "opsz" 18, "SOFT" 60;
     font-weight: 600; font-size: 14px;
     color: rgba(255, 245, 225, 0.96);
@@ -2203,7 +2175,7 @@
     width: 100%;
   }
   .inv-type {
-    font-family: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
+    font-family: 'IBM Plex Mono', 'IBM Plex Mono', ui-monospace, monospace;
     font-size: 10px;
     color: rgba(232, 220, 198, 0.42);
     margin-top: 4px;
@@ -2218,7 +2190,7 @@
     justify-content: center;
   }
   .inv-item-all .inv-name-all {
-    font-family: 'Fraunces', serif;
+    font-family: 'Crete Round', serif;
     font-variation-settings: "opsz" 24, "SOFT" 60;
     font-weight: 600; font-size: 18px;
     line-height: 1; margin: 0;
@@ -2625,10 +2597,10 @@ function initFieldAtmosphere(opts) {
   const ctx = canvas.getContext('2d');
 
   const CONFIG = Object.assign({
-    backgroundColor: '#0e0a07',
+    backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--field-bg').trim() || '#0e0a07',
     transparentBackground: false,
     glowComposite: 'lighter',
-    lineColor: '#d4793d',
+    lineColor: getComputedStyle(document.documentElement).getPropertyValue('--field-line').trim() || '#d4793d',
     speed: 0.85,
     phaseDuration: 22000,
     transitionDuration: 7000,
@@ -2981,7 +2953,7 @@ initFieldAtmosphere({
   config: {
     transparentBackground: true,
     glowComposite: 'source-over',
-    lineColor: '#d4793d',
+    lineColor: getComputedStyle(document.documentElement).getPropertyValue('--field-line').trim() || '#d4793d',
     mainCount: 80,
     whisperCount: 50,
     mainAlpha: 0.55,
@@ -3003,7 +2975,7 @@ initFieldAtmosphere({
   config: {
     transparentBackground: true,
     glowComposite: 'lighter',
-    lineColor: '#d4793d',
+    lineColor: getComputedStyle(document.documentElement).getPropertyValue('--field-line').trim() || '#d4793d',
     mainCount: 140,
     whisperCount: 90,
     mainAlpha: 0.42,
@@ -3170,7 +3142,7 @@ function critterSVG(node) {
     prism:  `<path d="M50 16 L60 32 L40 32 Z" fill="${dark}" opacity="0.55"/>`,
     orbit:  `<circle cx="50" cy="26" r="3" fill="${dark}" opacity="0.55"/><ellipse cx="50" cy="26" rx="10" ry="4" fill="none" stroke="${dark}" stroke-width="1.2" opacity="0.5"/><ellipse cx="50" cy="26" rx="4" ry="10" fill="none" stroke="${dark}" stroke-width="1.2" opacity="0.5"/>`,
     gear:   `<g transform="translate(50 26)"><circle r="5" fill="${dark}" opacity="0.5"/><circle r="2" fill="${c}"/><g stroke="${dark}" stroke-width="2" opacity="0.5"><line x1="0" y1="-9" x2="0" y2="-6"/><line x1="0" y1="6" x2="0" y2="9"/><line x1="-9" y1="0" x2="-6" y2="0"/><line x1="6" y1="0" x2="9" y2="0"/></g></g>`,
-    tiny:   `<text x="50" y="32" text-anchor="middle" font-family="Fraunces, serif" font-style="italic" font-size="14" fill="${dark}" opacity="0.5">?</text>`
+    tiny:   `<text x="50" y="32" text-anchor="middle" font-family="Crete Round, serif" font-style="italic" font-size="14" fill="${dark}" opacity="0.5">?</text>`
   };
 
   return `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="overflow:visible">

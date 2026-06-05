@@ -7,27 +7,10 @@
 <title>CIBC Research Report · Nine Organizations and Networks</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=JetBrains+Mono:wght@400;500&family=Press+Start+2P&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Crete+Round:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Caveat:wght@500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
 <style>
-  :root {
-    --gradient-primary: linear-gradient(90deg, #e96243 0%, #e67c48 100%);
-    --gradient-light-text: linear-gradient(135deg, #e78873 0%, #e5a27b 63%, #e2b99e 100%);
-    --accent-deep: #c45525;
-    --paper-white: #fefdf9;
-    --pixel: 'Press Start 2P', monospace;
-    --bg-warm: #f8f2e6;
-    --bg-card: #fffaf0;
-    --bg-deep: #14110d;
-    --ink: #2a2218;
-    --ink-soft: #5a4d3a;
-    --ink-faint: #998774;
-    --rule: rgba(60, 40, 20, 0.16);
-    --rule-soft: rgba(60, 40, 20, 0.08);
-    --accent: #c7725f;
-    --serif: 'Fraunces', Georgia, serif;
-    --body: 'Newsreader', Georgia, serif;
-    --mono: 'JetBrains Mono', monospace;
-  }
+  
   * { box-sizing: border-box; margin: 0; padding: 0; }
     html { background: var(--bg-warm-2); min-height: 100vh; }
   html, body {
@@ -393,7 +376,7 @@
     min-width: 0; flex-wrap: wrap;
   }
   .global-nav .gn-link {
-    font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+    font-family: 'IBM Plex Mono', 'SF Mono', Menlo, Consolas, monospace;
     font-size: 12px;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -411,7 +394,7 @@
     color: #fbf6ec;
     padding: 10px 18px;
     border-radius: 100px;
-    font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+    font-family: 'IBM Plex Mono', 'SF Mono', Menlo, Consolas, monospace;
     font-size: 11px;
     text-decoration: none;
     font-weight: 600;
@@ -457,7 +440,7 @@
     max-width: 1200px;
     margin: 14px auto 0;
     padding: 0 56px;
-    font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+    font-family: 'IBM Plex Mono', 'SF Mono', Menlo, Consolas, monospace;
     font-size: 11px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -678,7 +661,7 @@
     justify-content: center;
     padding: 24px;
     color: #f6ecd9;
-    font-family: 'Newsreader', Georgia, serif;
+    font-family: 'IBM Plex Sans', Georgia, serif;
   }
   body.pw-locked { overflow: hidden; }
   body.pw-unlocked #pw-gate { display: none; }
@@ -687,7 +670,7 @@
     text-align: center;
   }
   #pw-gate .pw-eyebrow {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'IBM Plex Mono', monospace;
     font-size: 11px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
@@ -695,7 +678,7 @@
     margin: 0 0 18px;
   }
   #pw-gate .pw-title {
-    font-family: 'Fraunces', serif;
+    font-family: 'Crete Round', serif;
     font-weight: 600;
     font-size: clamp(28px, 4vw, 40px);
     line-height: 1.1;
@@ -716,7 +699,7 @@
   }
   #pw-gate #pw-input {
     flex: 1 1 220px;
-    font-family: 'Newsreader', serif;
+    font-family: 'IBM Plex Sans', serif;
     font-size: 16px;
     padding: 12px 20px;
     border-radius: 100px;
@@ -728,7 +711,7 @@
   }
   #pw-gate #pw-input:focus { border-color: #d4793d; }
   #pw-gate .pw-submit {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'IBM Plex Mono', monospace;
     font-size: 11px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -1184,10 +1167,10 @@ function initFieldAtmosphere(opts) {
   const ctx = canvas.getContext('2d');
 
   const CONFIG = Object.assign({
-    backgroundColor: '#0e0a07',
+    backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--field-bg').trim() || '#0e0a07',
     transparentBackground: false,
     glowComposite: 'lighter',
-    lineColor: '#d4793d',
+    lineColor: getComputedStyle(document.documentElement).getPropertyValue('--field-line').trim() || '#d4793d',
     speed: 0.85,
     phaseDuration: 22000,
     transitionDuration: 7000,
@@ -1540,7 +1523,7 @@ initFieldAtmosphere({
   config: {
     transparentBackground: true,
     glowComposite: 'source-over',
-    lineColor: '#d4793d',
+    lineColor: getComputedStyle(document.documentElement).getPropertyValue('--field-line').trim() || '#d4793d',
     mainCount: 80,
     whisperCount: 50,
     mainAlpha: 0.55,
