@@ -11,17 +11,19 @@
 <link rel="stylesheet" href="theme.css">
 <style>
   
-  * { box-sizing: border-box; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
     html { background: var(--bg-warm-2); min-height: 100vh; }
-  html, body { margin: 0; padding: 0; }
-  body {
-    background: var(--paper-white);
+  html, body {
     color: var(--ink);
     font-family: var(--body);
-    line-height: 1.6;
+    font-size: 16px;
+    line-height: 1.55;
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
-  a { color: var(--accent); }
+  body { background: var(--paper-white); }
+  ::selection { background: var(--accent); color: var(--paper-white); }
+  a { color: inherit; }
 
   /* ============ Global nav ============ */
   .global-nav {
@@ -145,7 +147,7 @@
   .page {
     max-width: 1080px;
     margin: 0 auto;
-    padding: 0 clamp(20px, 5vw, 56px) clamp(80px, 10vw, 120px);
+    padding: 0 clamp(20px, 4vw, 48px) clamp(80px, 10vw, 120px);
   }
 
   /* Dark hero · full-bleed band per Figma 154:1971. Uses design
@@ -189,8 +191,8 @@
   }
   .cibc-hero-dark h1 {
     font-family: var(--serif);
-    font-variation-settings: "opsz" 144, "SOFT" 30;
-    font-weight: 700;
+    font-variation-settings: "opsz" 144, "SOFT" 50;
+    font-weight: 500;
     font-size: clamp(40px, 5.6vw, 72px);
     line-height: 1.05;
     letter-spacing: -0.018em;
@@ -272,7 +274,7 @@
   .professionals h2 {
     font-family: var(--serif);
     font-variation-settings: "opsz" 72, "SOFT" 50;
-    font-weight: 700;
+    font-weight: 500;
     font-size: clamp(32px, 4vw, 48px);
     line-height: 1.08;
     letter-spacing: -0.018em;
@@ -281,7 +283,7 @@
   }
   .professionals h2 em {
     font-style: italic;
-    font-weight: 500;
+    font-weight: 400;
     color: var(--accent);
   }
   .professionals-deck {
@@ -524,7 +526,7 @@
   .who-title {
     font-family: var(--serif);
     font-variation-settings: "opsz" 72, "SOFT" 50;
-    font-weight: 700;
+    font-weight: 500;
     font-size: clamp(36px, 5vw, 52px);
     line-height: 1.05;
     letter-spacing: -0.02em;
@@ -533,7 +535,7 @@
   }
   .who-title em {
     font-style: italic;
-    font-weight: 600;
+    font-weight: 400;
     color: var(--accent);
   }
   .who-deck {
@@ -816,26 +818,66 @@
   }
   .stay-links a:hover { border-bottom-color: var(--accent); }
 
-  /* Footer · simple per Megan's intent for Learn More. */
+  /* Base button (shared with landing; needed by the footer Register CTA) */
+  .btn {
+    font-family: var(--body);
+    font-size: 12px;
+    padding: 14px 24px;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 100px;
+    transition: all 150ms ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    border: 1.5px solid var(--ink);
+  }
+  .btn-primary { background: var(--gradient-primary); color: var(--paper-white); border-color: transparent; }
+  .btn-primary:hover { filter: brightness(0.92); }
+  .btn-ghost { background: transparent; color: var(--ink); }
+  .btn-ghost:hover { background: var(--ink); color: var(--bg-warm); }
+  .btn .arrow { transition: transform 150ms; }
+  .btn:hover .arrow { transform: translateX(3px); }
+
+  /* Footer · matches landing (full-bleed, Field atmosphere). */
   .footer {
-    border-top: 1px solid var(--rule);
-    background: var(--bg-warm);
-    padding: 36px 56px;
-    margin-top: 56px;
+    position: relative;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    width: 100vw;
+    background: var(--bg-warm-2);
+    overflow: hidden;
+    isolation: isolate;
+    margin-top: 0;
+    padding-top: clamp(60px, 8vw, 100px);
+    padding-bottom: clamp(40px, 5vw, 60px);
+    border-top: none;
+  }
+  .footer .field-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .footer .field-veil {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: rgba(240, 227, 200, 0.06);
+    z-index: 1;
   }
   .footer-inner {
+    position: relative;
+    z-index: 2;
     max-width: 1080px;
     margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px 32px;
-    align-items: center;
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--ink-faint);
+    padding: 0 clamp(20px, 4vw, 48px);
   }
-  .footer-inner > span:nth-of-type(1) { flex: 1; }
-  .footer-brand { text-decoration: none; display: inline-block; flex-shrink: 0; }
+  .footer-brand { text-decoration: none; display: inline-block; margin-bottom: 28px; }
   .footer-brand-mark {
     font-family: var(--pixel);
     font-size: 14px;
@@ -847,6 +889,56 @@
     display: inline-block;
     letter-spacing: 0;
   }
+  .footer-row {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 32px;
+    padding-bottom: 32px;
+  }
+  @media (max-width: 760px) {
+    .footer-row { grid-template-columns: 1fr; }
+  }
+  .footer-block h4 {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 12px;
+  }
+  .footer-block p {
+    font-family: var(--body);
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .footer-block a {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--rule);
+    text-underline-offset: 3px;
+  }
+  .footer-block a:hover { color: var(--accent); text-decoration-color: var(--accent); }
+  .footer-block a.btn { text-decoration: none; }
+  .footer-block a.btn-primary { color: var(--bg-warm); }
+  .footer-block a.btn-primary:hover { color: var(--bg-warm); }
+  .footer-block a.btn-ghost { color: var(--ink); }
+  .footer-block ul { list-style: none; }
+  .footer-block li { font-family: var(--body); font-size: 14px; padding: 4px 0; }
+  .footer-bottom {
+    padding: 20px 0;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .footer-bottom span { line-height: 1.6; }
 
   /* hide legacy .global-nav in favor of new .nav component */
   .global-nav { display: none !important; }
@@ -1041,8 +1133,8 @@
     transition: filter 150ms;
   }
   .header-ctas .hero-btn-primary {
-    background: linear-gradient(90deg, #e96243 0%, #e67c48 100%);
-    color: #fefdf9;
+    background: var(--gradient-primary);
+    color: #ffffff;
     border-color: transparent;
   }
   .header-ctas .hero-btn-primary:hover { filter: brightness(0.92); }
@@ -2398,7 +2490,7 @@ const ATLAS_DATA = {
       <a href="ecosystem-map.html" class="nav-link" style="display:none">Infra Resources</a>
       <a href="#" class="nav-link nav-link-current" aria-current="page">Learn more</a>
     </div>
-    <a href="#register" class="nav-cta">Register</a>
+    <a href="https://luma.com/mha49cf5" target="_blank" rel="noopener" class="nav-cta">Register</a>
     <button type="button" class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="primary-links" aria-label="Open menu">
       <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
       <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>
@@ -2416,7 +2508,7 @@ const ATLAS_DATA = {
     <a href="ecosystem-map.html" class="gn-link" style="display:none">Infra Resources</a>
     <a href="#" class="gn-link gn-link-current" aria-current="page">Learn more</a>
   </div>
-  <a href="#register" class="gn-cta">Register</a>
+  <a href="https://luma.com/mha49cf5" target="_blank" rel="noopener" class="gn-cta">Register</a>
   <button type="button" class="gn-toggle" data-nav-toggle aria-expanded="false" aria-controls="primary-links" aria-label="Open menu">
     <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
     <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>
@@ -2455,7 +2547,6 @@ const ATLAS_DATA = {
         <p class="professionals-eyebrow">002</p>
         <h2 id="professionals-title">Orgs, events, <em>and concepts</em>.</h2>
         <p class="professionals-deck">The CIBC ecosystem: organizations and events we build inside, alongside, and adjacent to, plus the concepts we work through.</p>
-        <a href="#" class="professionals-cta" data-todo="add-telegram-link">Join the Telegram</a>
       </div>
 
       <div class="professionals-grid">
@@ -2512,7 +2603,7 @@ const ATLAS_DATA = {
   </div>
 
   <div class="actions" id="register">
-    <a href="#" class="action-card action-card-primary">
+    <a href="https://luma.com/mha49cf5" target="_blank" rel="noopener" class="action-card action-card-primary">
       <span class="kind">Register</span>
       <span class="label">Save your spot</span>
       <span class="meta">Luma form for v1. Data exportable. No tracking pixels.</span>
@@ -2531,16 +2622,6 @@ const ATLAS_DATA = {
       <span class="arrow-end">Open <svg style="width:1em;height:1em;vertical-align:-0.12em;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
     </a>
 
-    <form class="action-card action-card-substack" action="#" method="POST" aria-labelledby="substack-card-title">
-      <span class="kind">Subscribe</span>
-      <span class="label" id="substack-card-title">Get the digest</span>
-      <span class="meta">One Substack post per session: the recap, the follow-ups, and what's open. No tracking.</span>
-      <div class="substack-form-row">
-        <label class="visually-hidden" for="substack-email">Email address</label>
-        <input class="substack-email" type="email" id="substack-email" name="email" placeholder="you@email.com" required>
-        <button class="substack-submit" type="submit">Subscribe</button>
-      </div>
-    </form>
   </div>
 
   
@@ -2549,10 +2630,27 @@ const ATLAS_DATA = {
 </div>
 
 <footer class="footer">
+  <canvas class="field-canvas" id="field-canvas-footer" aria-hidden="true"></canvas>
+  <div class="field-veil" aria-hidden="true"></div>
   <div class="footer-inner">
     <a href="index.html" class="footer-brand" aria-label="CIBC home"><span class="footer-brand-mark">CIBC</span></a>
-    <span>CIBC Demo Day · Get Involved · drafted 2026-05-15</span>
-    <span>No tracking pixels · no third-party scripts beyond Google Fonts</span>
+    <div class="footer-row">
+      <div class="footer-block">
+        <h4>Register</h4>
+        <p>Registration goes to a Luma form for v1. We'll move it to a portable surface once we pick one. Data exportable in either case.</p>
+        <a href="https://luma.com/mha49cf5" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top: 16px;">Register on Luma <span class="arrow"><svg style="width:1em;height:1em;vertical-align:-0.12em;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></a>
+      </div>
+      <div class="footer-block">
+        <h4>Stay in touch</h4>
+        <ul>
+          <li><a href="https://github.com/Citizen-Infra" target="_blank" rel="noopener">GitHub · Citizen-Infra</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>CIBC Demo Day · Get Involved · drafted 2026-05-15</span>
+      <span>No tracking pixels · no third-party scripts beyond Google Fonts</span>
+    </div>
   </div>
 </footer>
 
@@ -2985,6 +3083,26 @@ initFieldAtmosphere({
     mainDotSize: 3.2,
     whisperDotSize: 1.6,
     speed: 0.35,
+  }
+});
+
+// Footer atmosphere · matches landing footer.
+initFieldAtmosphere({
+  sectionSelector: '.footer',
+  canvasId: 'field-canvas-footer',
+  config: {
+    transparentBackground: true,
+    glowComposite: 'source-over',
+    lineColor: getComputedStyle(document.documentElement).getPropertyValue('--accent-deep').trim() || '#c45525',
+    mainCount: 60,
+    whisperCount: 40,
+    mainAlpha: 0.28,
+    mainDotAlpha: 0.5,
+    whisperMaxAlpha: 0.16,
+    whisperDotMaxAlpha: 0.24,
+    mainDotSize: 3.0,
+    whisperDotSize: 1.5,
+    speed: 0.4,
   }
 });
 </script>

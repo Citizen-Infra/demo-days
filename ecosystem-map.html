@@ -910,6 +910,21 @@
     border-bottom-right-radius: 14px;
     min-height: 50px;
   }
+  /* Multi-resource action strip (e.g. Simone: platform + knowledge graph + paper) */
+  .demo-action-zone-multi { flex-direction: column; align-items: stretch; min-height: 0; }
+  .demo-action-resource {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding: 13px 22px; color: #ffffff; font-family: var(--body); font-weight: 600;
+    font-size: 12px; text-decoration: none;
+    border-top: 1px solid rgba(255, 248, 232, 0.20);
+    transition: filter 150ms, background 150ms;
+  }
+  .demo-action-resource:first-child { border-top: none; }
+  .demo-action-resource:last-child { border-bottom-left-radius: 14px; border-bottom-right-radius: 14px; }
+  .demo-action-resource:hover { filter: brightness(1.06); background: rgba(255, 248, 232, 0.08); }
+  .demo-action-resource .res-label { letter-spacing: 0.01em; }
+  .demo-action-resource .res-arrow { width: 16px; height: 16px; flex-shrink: 0; display: inline-flex; }
+  .demo-action-resource .res-arrow svg { width: 100%; height: 100%; display: block; }
   .demo-action-github,
   .demo-action-arrow {
     width: 56px;
@@ -1952,7 +1967,7 @@
       <a href="ecosystem-map.html" class="nav-link nav-link-current" aria-current="page">Infra Resources</a>
       <a href="get-involved.html" class="nav-link">Learn more</a>
     </div>
-    <a href="#register" class="nav-cta">Register</a>
+    <a href="https://luma.com/mha49cf5" target="_blank" rel="noopener" class="nav-cta">Register</a>
     <button type="button" class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="primary-links" aria-label="Open menu">
       <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
       <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>
@@ -2010,10 +2025,8 @@
             <div class="demo-bio-tbd">Relational Technologist</div>
           </div>
         </div>
-        <a class="presenter-linkedin" href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56V14.85c0-1.34-.03-3.06-1.87-3.06-1.87 0-2.15 1.46-2.15 2.97v5.69H9.31V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27zM5.34 7.43c-1.14 0-2.07-.93-2.07-2.07 0-1.14.93-2.07 2.07-2.07 1.14 0 2.07.93 2.07 2.07 0 1.14-.93 2.07-2.07 2.07zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.45c.97 0 1.78-.77 1.78-1.72V1.72C24 .77 23.19 0 22.22 0z"/></svg></a>
         </div>
         <div class="demo-action-zone">
-          <a class="demo-action-github" href="#" target="_blank" rel="noopener" aria-label="GitHub"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></span></a>
           <a class="demo-action-product" href="https://houstonbloom.github.io/local-legibility/Getting%20Started.html" target="_blank" rel="noopener">Adopt the System</a>
           <a class="demo-action-arrow" href="https://houstonbloom.github.io/local-legibility/Getting%20Started.html" target="_blank" rel="noopener" aria-label="Adopt the System"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg></span></a>
         </div>
@@ -2032,13 +2045,10 @@
           <div class="demo-avatar" aria-hidden="true">KH</div>
           <div class="demo-presenter-text">
                 <div class="demo-presenter">Kyle</div>
-            <div class="demo-bio-tbd">Title · Org · to fill</div>
           </div>
         </div>
-        <a class="presenter-linkedin" href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56V14.85c0-1.34-.03-3.06-1.87-3.06-1.87 0-2.15 1.46-2.15 2.97v5.69H9.31V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27zM5.34 7.43c-1.14 0-2.07-.93-2.07-2.07 0-1.14.93-2.07 2.07-2.07 1.14 0 2.07.93 2.07 2.07 0 1.14-.93 2.07-2.07 2.07zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.45c.97 0 1.78-.77 1.78-1.72V1.72C24 .77 23.19 0 22.22 0z"/></svg></a>
         </div>
         <div class="demo-action-zone">
-          <a class="demo-action-github" href="#" target="_blank" rel="noopener" aria-label="GitHub"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></span></a>
           <a class="demo-action-product" href="https://jonathankhobson.github.io/compass-suite/" target="_blank" rel="noopener">Try the suite</a>
           <a class="demo-action-arrow" href="https://jonathankhobson.github.io/compass-suite/" target="_blank" rel="noopener" aria-label="Try the suite"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg></span></a>
         </div>
@@ -2057,13 +2067,10 @@
           <div class="demo-avatar" aria-hidden="true">AZ</div>
           <div class="demo-presenter-text">
                 <div class="demo-presenter">Artem</div>
-            <div class="demo-bio-tbd">Title · Org · to fill</div>
           </div>
         </div>
-        <a class="presenter-linkedin" href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56V14.85c0-1.34-.03-3.06-1.87-3.06-1.87 0-2.15 1.46-2.15 2.97v5.69H9.31V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27zM5.34 7.43c-1.14 0-2.07-.93-2.07-2.07 0-1.14.93-2.07 2.07-2.07 1.14 0 2.07.93 2.07 2.07 0 1.14-.93 2.07-2.07 2.07zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.45c.97 0 1.78-.77 1.78-1.72V1.72C24 .77 23.19 0 22.22 0z"/></svg></a>
         </div>
         <div class="demo-action-zone">
-          <a class="demo-action-github" href="#" target="_blank" rel="noopener" aria-label="GitHub"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></span></a>
           <a class="demo-action-product" href="https://bookpower.org" target="_blank" rel="noopener">Try the library</a>
           <a class="demo-action-arrow" href="https://bookpower.org" target="_blank" rel="noopener" aria-label="Try the library"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg></span></a>
         </div>
@@ -2082,13 +2089,10 @@
           <div class="demo-avatar has-photo" aria-hidden="true"><img src="assets/momcilo.webp" alt="" /></div>
           <div class="demo-presenter-text">
                 <div class="demo-presenter">Momcilo</div>
-            <div class="demo-bio-tbd">Title · Org · to fill</div>
           </div>
         </div>
-        <a class="presenter-linkedin" href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56V14.85c0-1.34-.03-3.06-1.87-3.06-1.87 0-2.15 1.46-2.15 2.97v5.69H9.31V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27zM5.34 7.43c-1.14 0-2.07-.93-2.07-2.07 0-1.14.93-2.07 2.07-2.07 1.14 0 2.07.93 2.07 2.07 0 1.14-.93 2.07-2.07 2.07zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.45c.97 0 1.78-.77 1.78-1.72V1.72C24 .77 23.19 0 22.22 0z"/></svg></a>
         </div>
         <div class="demo-action-zone">
-          <a class="demo-action-github" href="#" target="_blank" rel="noopener" aria-label="GitHub"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></span></a>
           <a class="demo-action-product" href="https://quorum-indol.vercel.app/" target="_blank" rel="noopener">Try the platform</a>
           <a class="demo-action-arrow" href="https://quorum-indol.vercel.app/" target="_blank" rel="noopener" aria-label="Try the platform"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg></span></a>
         </div>
@@ -2107,15 +2111,13 @@
           <div class="demo-avatar" aria-hidden="true">SV</div>
           <div class="demo-presenter-text">
                 <div class="demo-presenter">Simone</div>
-            <div class="demo-bio-tbd">Title · Org · to fill</div>
           </div>
         </div>
-        <a class="presenter-linkedin" href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56V14.85c0-1.34-.03-3.06-1.87-3.06-1.87 0-2.15 1.46-2.15 2.97v5.69H9.31V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27zM5.34 7.43c-1.14 0-2.07-.93-2.07-2.07 0-1.14.93-2.07 2.07-2.07 1.14 0 2.07.93 2.07 2.07 0 1.14-.93 2.07-2.07 2.07zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.45c.97 0 1.78-.77 1.78-1.72V1.72C24 .77 23.19 0 22.22 0z"/></svg></a>
         </div>
-        <div class="demo-action-zone">
-          <a class="demo-action-github" href="#" target="_blank" rel="noopener" aria-label="GitHub"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></span></a>
-          <a class="demo-action-product" href="https://platform.svagnoni.linkeddata.es" target="_blank" rel="noopener">Try the demo</a>
-          <a class="demo-action-arrow" href="https://platform.svagnoni.linkeddata.es" target="_blank" rel="noopener" aria-label="Try the demo"><span class="demo-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg></span></a>
+        <div class="demo-action-zone demo-action-zone-multi">
+          <a class="demo-action-resource" href="https://citizen.svagnoni.linkeddata.es" target="_blank" rel="noopener"><span class="res-label">Platform</span><span class="res-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg></span></a>
+          <a class="demo-action-resource" href="https://dkg.svagnoni.linkeddata.es" target="_blank" rel="noopener"><span class="res-label">Knowledge graph</span><span class="res-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg></span></a>
+          <a class="demo-action-resource" href="https://link.springer.com/chapter/10.1007/978-3-032-02225-7_9" target="_blank" rel="noopener"><span class="res-label">Paper</span><span class="res-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg></span></a>
         </div>
       </div>
     </article>
@@ -2170,7 +2172,6 @@
       <p>This map shows the orgs, events, and concepts CIBC members build beside, collaborate with, or quietly track.</p>
       <div class="about-ctas">
         <a href="ecosystem-map.html" class="btn btn-primary">View ecosystem map <span class="arrow"><svg style="width:1em;height:1em;vertical-align:-0.12em;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></a>
-        <a href="#" class="btn btn-ghost">About CIBC</a>
       </div>
     </div>
   </div>
@@ -2181,18 +2182,16 @@
   <canvas class="field-canvas" id="field-canvas-footer" aria-hidden="true"></canvas>
   <div class="field-veil" aria-hidden="true"></div>
   <div class="footer-inner">
-    <a href="#" class="footer-brand" aria-label="CIBC home"><span class="footer-brand-mark">CIBC</span></a>
+    <a href="index.html" class="footer-brand" aria-label="CIBC home"><span class="footer-brand-mark">CIBC</span></a>
     <div class="footer-row">
       <div class="footer-block">
         <h4>Register</h4>
         <p>Registration goes to a Luma form for v1. We'll move it to a portable surface once we pick one. Data exportable in either case.</p>
-        <a href="#" class="btn btn-primary" style="margin-top: 16px;">Register on Luma <span class="arrow"><svg style="width:1em;height:1em;vertical-align:-0.12em;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></a>
+        <a href="https://luma.com/mha49cf5" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top: 16px;">Register on Luma <span class="arrow"><svg style="width:1em;height:1em;vertical-align:-0.12em;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></a>
       </div>
       <div class="footer-block">
         <h4>Stay in touch</h4>
         <ul>
-          <li><a href="#">CIBC Telegram</a></li>
-          <li><a href="#">Substack digest</a></li>
           <li><a href="https://github.com/Citizen-Infra" target="_blank" rel="noopener">GitHub · Citizen-Infra</a></li>
         </ul>
       </div>
