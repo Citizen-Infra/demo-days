@@ -1704,6 +1704,47 @@
   }
   .footer-bottom span { line-height: 1.6; }
 
+  /* ============ Toast (share-link confirmation) ============ */
+  .toast {
+    position: fixed;
+    left: 50%;
+    bottom: 28px;
+    transform: translateX(-50%) translateY(14px);
+    background: var(--ink);
+    color: var(--paper-white);
+    padding: 12px 20px;
+    border-radius: 100px;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    box-shadow: 0 8px 24px rgba(26, 18, 10, 0.28);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1000;
+    transition: opacity 220ms ease, transform 220ms ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    max-width: calc(100vw - 32px);
+  }
+  .toast::before {
+    content: "";
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    background: var(--accent);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center / contain no-repeat;
+  }
+  .toast.is-visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .toast { transition: opacity 220ms ease; transform: translateX(-50%); }
+    .toast.is-visible { transform: translateX(-50%); }
+  }
+
   /* ============ Mobile ============ */
   @media (max-width: 760px) {
     .demos { grid-template-columns: 1fr; }
@@ -1757,10 +1798,10 @@
           <span class="info-label">When</span>
           <div class="info-when-row">
             <span class="info-when-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
-            <span class="info-when-date">Mid-June 2026 · TBD</span>
+            <span class="info-when-date">July 3, 2026</span>
           </div>
-          <p class="info-when-note">Date locking soon. The first of more to come. Want to demo? Apply below.</p>
-          <a href="#apply" class="info-action-link">Apply to demo <span class="ext-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg></span></a>
+          <p class="info-when-note">The first of more to come. Want to demo? Apply below.</p>
+          <a href="https://app.harmonica.chat/chat?s=fc325b1d-2abb-4869-b2b5-6e35bfb274bb" target="_blank" rel="noopener" class="info-action-link">Apply to demo <span class="ext-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg></span></a>
         </div>
 
         <div class="hero-info-grid">
@@ -1780,7 +1821,7 @@
               <li>Free</li>
               <li>Recorded</li>
             </ul>
-            <a href="https://youtube.com" class="info-action-link">CIBC YouTube <span class="ext-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg></span></a>
+            <a href="https://www.youtube.com/@CitizenInfra" target="_blank" rel="noopener" class="info-action-link">CIBC YouTube<span class="ext-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg></span></a>
           </div>
         </div>
 
@@ -1809,7 +1850,7 @@
   <canvas class="field-canvas" id="field-canvas" aria-hidden="true"></canvas>
   <div class="field-veil" aria-hidden="true"></div>
   <div class="section-head-demos">
-    <h2 class="demos-title"><span class="gradient-text">Demo Day</span> June</h2>
+    <h2 class="demos-title"><span class="gradient-text">Demo Day</span> July</h2>
     <div class="demos-eyebrow">
       <span class="demos-eyebrow-icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1826,11 +1867,11 @@
           <line x1="3" y1="11" x2="21" y2="11" stroke="url(#cal-light-gradient)" stroke-width="2" stroke-linecap="round"/>
         </svg>
       </span>
-      <span class="demos-eyebrow-text">Exact date TBD</span>
+      <span class="demos-eyebrow-text">July 3, 2026</span>
     </div>
     <div class="demos-ctas">
       <a href="https://luma.com/mha49cf5" target="_blank" rel="noopener" class="demos-btn demos-btn-primary">Register <span class="demos-btn-arrow" aria-hidden="true"><svg style="width:1em;height:1em;vertical-align:-0.12em;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></a>
-      <a href="#apply" class="demos-btn demos-btn-ghost">Apply to demo</a>
+      <a href="https://app.harmonica.chat/chat?s=fc325b1d-2abb-4869-b2b5-6e35bfb274bb" target="_blank" rel="noopener" class="demos-btn demos-btn-ghost">Apply to demo</a>
     </div>
   </div>
   <div class="demos">
@@ -2020,6 +2061,7 @@
         <h4>Stay in touch</h4>
         <ul>
           <li><a href="https://github.com/Citizen-Infra" target="_blank" rel="noopener">GitHub · Citizen-Infra</a></li>
+          <li><a href="https://www.youtube.com/@CitizenInfra" target="_blank" rel="noopener">YouTube · @CitizenInfra</a></li>
         </ul>
       </div>
     </div>
@@ -2499,6 +2541,19 @@ initFieldAtmosphere({
 /* ============ Share this event ============ */
 (function() {
   function ready(fn) { if (document.readyState !== 'loading') { fn(); } else { document.addEventListener('DOMContentLoaded', fn); } }
+  var toastTimer;
+  function showToast(message) {
+    var t = document.getElementById('toast');
+    if (!t) { return; }
+    t.textContent = message;
+    t.classList.add('is-visible');
+    t.setAttribute('aria-hidden', 'false');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function() {
+      t.classList.remove('is-visible');
+      t.setAttribute('aria-hidden', 'true');
+    }, 2400);
+  }
   ready(function() {
     document.querySelectorAll('[data-share]').forEach(function(el) {
       el.addEventListener('click', function(e) {
@@ -2512,9 +2567,7 @@ initFieldAtmosphere({
         if (navigator.clipboard && navigator.clipboard.writeText) {
           e.preventDefault();
           navigator.clipboard.writeText(url).then(function() {
-            var original = el.textContent;
-            el.textContent = 'Link copied';
-            setTimeout(function() { el.textContent = original; }, 1800);
+            showToast('Link copied to clipboard');
           }).catch(function() { window.open(url, '_blank', 'noopener'); });
           return;
         }
@@ -2527,5 +2580,6 @@ initFieldAtmosphere({
 })();
 </script>
 
+<div class="toast" id="toast" role="status" aria-live="polite" aria-hidden="true"></div>
 </body>
 </html>
