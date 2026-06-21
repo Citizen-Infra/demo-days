@@ -1,0 +1,1013 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>CIBC Brand Options · Toggle Frame</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aldrich&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Familjen+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@500;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+@font-face { font-family: "Gulax"; src: url("../_assets/fonts/gulax/gulax-regular.woff2") format("woff2"); font-style: normal; font-weight: 400; font-display: swap; }
+
+:root {
+  --font-display: "Gulax", sans-serif;
+  --font-body: "Space Grotesk", system-ui, sans-serif;
+  --font-eyebrow: "Aldrich", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --eyebrow-case: uppercase;
+  --eyebrow-track: 0.28em;
+  --text-display: clamp(2.8rem, 7vw, 5rem);
+  --text-heading-xl: clamp(2rem, 4.6vw, 3rem);
+  --text-heading-lg: clamp(1.55rem, 3vw, 2rem);
+  --text-heading-md: clamp(1.25rem, 2.4vw, 1.55rem);
+  --text-card: 1.3rem;
+  --text-body-lg: 1.22rem;
+  --text-body: 1.06rem;
+  --text-body-sm: 0.94rem;
+  --text-eyebrow: 0.78rem;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-base: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-section: clamp(3.5rem, 8vw, 6rem);
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-xl: 28px;
+  --radius-full: 999px;
+}
+
+body[data-option="a"] {
+  --palette-paper: #F2E8D4;
+  --palette-cream: #FBF6EA;
+  --palette-sage: #A7B0A0;
+  --palette-clay: #C57B57;
+  --palette-brass: #B08D4F;
+  --palette-ink: #23291F;
+  --palette-line: #D8C9AC;
+  --palette-stone: #7A7166;
+  --color-bg: var(--palette-paper);
+  --color-surface: var(--palette-cream);
+  --color-text: var(--palette-ink);
+  --color-text-muted: var(--palette-stone);
+  --color-heading: var(--palette-ink);
+  --color-accent: var(--palette-clay);
+  --color-accent-2: var(--palette-brass);
+  --color-border: var(--palette-line);
+  --color-border-strong: var(--palette-sage);
+  --shadow-strong: transparent;
+  --nav-offset: 0px;
+  --tracking-display: 0;
+  background-image:
+    radial-gradient(120% 80% at 100% 0%, color-mix(in oklab, var(--palette-brass) 8%, transparent), transparent 60%),
+    radial-gradient(100% 70% at 0% 100%, color-mix(in oklab, var(--palette-ink) 4%, transparent), transparent 55%);
+}
+
+body[data-option="b"] {
+  --palette-cream: #F4EFE3;
+  --palette-surface: #FEFEFB;
+  --palette-navy: #2B3A8C;
+  --palette-orange: #E8743B;
+  --palette-ink: #26262E;
+  --palette-slate: #5A5A66;
+  --palette-border: #E3D9C6;
+  --palette-hub-green: #5BA86B;
+  --palette-hub-teal: #3FA6A0;
+  --palette-hub-purple: #8A6FB0;
+  --palette-hub-yellow: #F2C14E;
+  --palette-hub-red: #D9534F;
+  --color-bg: var(--palette-cream);
+  --color-surface: var(--palette-surface);
+  --color-text: var(--palette-ink);
+  --color-text-muted: var(--palette-slate);
+  --color-heading: var(--palette-navy);
+  --color-accent: var(--palette-orange);
+  --color-accent-2: var(--palette-navy);
+  --color-border: var(--palette-border);
+  --color-border-strong: var(--palette-navy);
+  --shadow-strong: var(--palette-navy);
+  --nav-offset: 16px;
+  --tracking-display: 0;
+  background-image: radial-gradient(color-mix(in oklab, var(--palette-navy) 16%, transparent) 1.2px, transparent 1.3px);
+  background-size: 26px 26px;
+  background-position: -13px -13px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+h1, h2, h3, h4 { font-family: var(--font-display); color: var(--color-heading); font-weight: 700; line-height: 1.06; letter-spacing: var(--tracking-display); }
+body[data-option="a"] h1, body[data-option="a"] h2, body[data-option="a"] h3, body[data-option="a"] h4 { font-weight: 400; }
+a { color: inherit; }
+.wrap { width: min(100% - clamp(2rem, 7vw, 8rem), 1160px); margin: 0 auto; }
+
+.topbar { position: sticky; top: var(--nav-offset); z-index: 30; padding-top: var(--space-base); }
+body[data-option="a"] .topbar { padding-top: 0; background: color-mix(in oklab, var(--color-bg) 91%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--color-border); }
+body[data-option="b"] .topbar { background: transparent; }
+.nav-shell {
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-base);
+}
+body[data-option="b"] .nav-shell {
+  background: var(--color-surface);
+  border: 2px solid var(--color-heading);
+  border-radius: var(--radius-full);
+  box-shadow: 6px 6px 0 var(--shadow-strong);
+  padding: 0.45rem 0.55rem 0.45rem 1.25rem;
+}
+.brand { display: inline-flex; align-items: center; gap: 0.55rem; min-width: 0; font-family: var(--font-display); color: var(--color-heading); font-size: 1.22rem; line-height: 1; white-space: nowrap; }
+.brand img { width: 32px; height: 32px; object-fit: contain; flex: 0 0 32px; }
+body[data-option="a"] .brand img { display: none; }
+body[data-option="b"] .brand { font-weight: 800; }
+.brand .dot { color: var(--color-accent); }
+.nav-links { display: flex; align-items: center; justify-content: flex-end; gap: clamp(0.6rem, 1.8vw, 1.35rem); flex-wrap: wrap; }
+.nav-links a { font-size: var(--text-body-sm); color: var(--color-text-muted); text-decoration: none; letter-spacing: 0.05em; text-transform: lowercase; }
+body[data-option="b"] .nav-links a { font-family: var(--font-mono); padding: 0.3em 0.72em; border-radius: var(--radius-full); }
+.nav-links a:hover { color: var(--color-accent); }
+body[data-option="b"] .nav-links a:hover { background: var(--color-accent); color: var(--palette-surface); }
+.option-toggle { display: inline-flex; border: 1px solid var(--color-border-strong); border-radius: var(--radius-full); overflow: hidden; background: var(--color-surface); }
+body[data-option="b"] .option-toggle { border: 1.5px solid var(--color-heading); }
+.option-toggle button { border: 0; background: transparent; color: var(--color-text-muted); font-family: var(--font-body); font-size: var(--text-body-sm); padding: 0.42em 0.82em; cursor: pointer; }
+body[data-option="b"] .option-toggle button { font-family: var(--font-mono); font-weight: 700; }
+.option-toggle button.on { background: var(--color-heading); color: var(--color-surface); }
+
+.eyebrow, .asset-label, .table th { font-family: var(--font-eyebrow); font-size: var(--text-eyebrow); letter-spacing: var(--eyebrow-track); text-transform: var(--eyebrow-case); color: var(--color-accent); }
+
+.masthead { padding: clamp(4rem, 9vw, 7rem) 0 clamp(2.4rem, 6vw, 4rem); }
+.masthead .eyebrow { display: inline-block; margin-bottom: var(--space-base); font-weight: 700; }
+.masthead h1 { font-size: var(--text-display); max-width: 14ch; }
+.masthead h1 em { color: var(--color-accent); font-style: normal; }
+.masthead .lede { max-width: 48ch; margin-top: var(--space-lg); color: var(--color-text-muted); font-size: var(--text-body-lg); }
+.meta-row { display: flex; gap: var(--space-sm); flex-wrap: wrap; margin-top: var(--space-xl); }
+.meta-chip { font-family: var(--font-mono); font-size: var(--text-body-sm); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-full); padding: 0.28em 0.9em; color: var(--color-text); }
+body[data-option="b"] .meta-chip { border: 1.5px solid var(--color-heading); box-shadow: 2px 2px 0 var(--color-heading); }
+.meta-chip b { color: var(--color-accent); }
+
+section { padding: var(--space-section) 0; border-top: 1px solid var(--color-border); }
+body[data-option="b"] section { border-top: 2px solid var(--color-heading); }
+.section-head { margin-bottom: var(--space-2xl); max-width: 62ch; }
+.section-head .eyebrow { display: block; margin-bottom: var(--space-sm); }
+.section-head h2 { font-size: var(--text-heading-xl); }
+.section-head p { color: var(--color-text-muted); margin-top: var(--space-sm); font-size: var(--text-body-lg); }
+
+.roles { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: var(--space-base); }
+.role {
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  align-items: center;
+  gap: var(--space-base);
+  padding: var(--space-base);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+body[data-option="b"] .role { border: 1.5px solid var(--color-border); }
+.swatch { width: 52px; height: 74px; border-radius: var(--radius-sm); border: 1px solid color-mix(in oklab, var(--color-text) 10%, transparent); box-shadow: inset 0 0 0 1px rgba(0,0,0,0.04); }
+.role h3 { font-size: var(--text-card); margin-bottom: 0.12rem; }
+.role p { color: var(--color-text-muted); font-size: var(--text-body-sm); word-break: break-word; }
+.hub-row { display: none; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: var(--space-base); margin-bottom: var(--space-xl); }
+body[data-option="b"] .hub-row { display: grid; }
+.hub { background: var(--color-surface); border: 2px solid var(--color-heading); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 3px 3px 0 var(--color-heading); }
+.hub .hub-swatch { height: 68px; }
+.hub .hub-meta { padding: var(--space-md); font-family: var(--font-mono); font-size: var(--text-body-sm); color: var(--color-text-muted); }
+
+.type-ramp { display: grid; gap: var(--space-md); }
+.spec-row { display: grid; grid-template-columns: minmax(120px, 180px) 1fr; gap: var(--space-lg); align-items: baseline; padding: var(--space-md) 0; border-top: 1px solid var(--color-border); }
+body[data-option="b"] .spec-row { border-top: 1.5px solid var(--color-border); }
+.spec-row:first-child { border-top: 0; }
+.spec-row .label { font-family: var(--font-mono); font-size: var(--text-body-sm); color: var(--color-text-muted); }
+.spec-row .label b { display: block; color: var(--color-accent); font-weight: 700; }
+.sample-display { font-family: var(--font-display); font-size: var(--text-display); line-height: 0.95; color: var(--color-heading); }
+.sample-h1 { font-family: var(--font-display); font-size: var(--text-heading-xl); color: var(--color-heading); }
+.sample-card { font-family: var(--font-display); font-size: var(--text-card); color: var(--color-heading); }
+.sample-body { color: var(--color-text-muted); max-width: 52ch; }
+
+.graphics-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(260px, 0.9fr); gap: var(--space-lg); align-items: start; }
+.graphic-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden; }
+body[data-option="b"] .graphic-card { border: 2px solid var(--color-heading); box-shadow: 4px 4px 0 var(--color-heading); }
+.image-zoom { display: block; width: 100%; border: 0; background: var(--color-surface); padding: var(--space-sm); cursor: zoom-in; }
+.image-zoom img { width: 100%; max-height: min(72vh, 620px); object-fit: contain; display: block; background: #fff; border-radius: var(--radius-sm); }
+.image-caption { padding: 0 var(--space-base) var(--space-base); color: var(--color-text-muted); font-size: var(--text-body-sm); }
+.reference-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--space-sm); margin-top: var(--space-base); }
+.thumb-button { border: 1px solid var(--color-border); border-radius: var(--radius-sm); background: var(--color-surface); padding: var(--space-xs); cursor: pointer; text-align: left; color: var(--color-text-muted); }
+body[data-option="b"] .thumb-button { border: 1.5px solid var(--color-heading); }
+.thumb-button.active { outline: 3px solid color-mix(in oklab, var(--color-accent) 45%, transparent); }
+.thumb-button img { width: 100%; aspect-ratio: 4 / 3; object-fit: contain; display: block; background: #fff; border-radius: calc(var(--radius-sm) - 1px); }
+.thumb-button span { display: block; margin-top: var(--space-xs); font-size: 0.78rem; line-height: 1.25; }
+.graphic-notes { display: grid; gap: var(--space-base); }
+.asset-note { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-lg); }
+body[data-option="b"] .asset-note { border: 2px solid var(--color-heading); box-shadow: 3px 3px 0 var(--color-heading); }
+.asset-note h3 { font-size: var(--text-heading-md); margin-bottom: var(--space-sm); }
+.asset-note p, .asset-note li { color: var(--color-text-muted); font-size: var(--text-body-sm); }
+.asset-note ul { padding-left: 1.1rem; display: grid; gap: 0.35rem; }
+
+.scales { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: var(--space-xl); }
+.bar-row { display: grid; grid-template-columns: 132px 1fr; align-items: center; gap: var(--space-md); margin-bottom: var(--space-md); font-family: var(--font-mono); font-size: var(--text-body-sm); color: var(--color-text-muted); }
+.bar-row .bar { display: block; height: 18px; background: var(--color-accent); border-radius: var(--radius-sm); }
+.radius-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-md); }
+.radius-box { aspect-ratio: 1; background: var(--color-surface); border: 1px solid var(--color-border); }
+body[data-option="b"] .radius-box { border: 2px solid var(--color-heading); box-shadow: 2px 2px 0 var(--color-heading); }
+.radius-row figcaption { margin-top: var(--space-sm); color: var(--color-text-muted); font-family: var(--font-mono); font-size: var(--text-body-sm); }
+
+.inuse { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, 0.9fr); gap: var(--space-xl); align-items: start; }
+.button-row, .tag-row { display: flex; gap: var(--space-sm); flex-wrap: wrap; }
+.btn { border: 1px solid var(--color-border-strong); border-radius: var(--radius-full); background: var(--color-surface); color: var(--color-heading); padding: 0.62em 1em; font-family: var(--font-body); font-size: var(--text-body-sm); cursor: pointer; }
+.btn.primary { background: var(--color-heading); color: var(--color-surface); border-color: var(--color-heading); }
+body[data-option="b"] .btn { border: 2px solid var(--color-heading); box-shadow: 2px 2px 0 var(--color-heading); font-weight: 700; }
+.tag { border: 1px solid var(--color-border); border-radius: var(--radius-full); padding: 0.3em 0.78em; color: var(--color-text-muted); background: var(--color-surface); font-family: var(--font-mono); font-size: var(--text-body-sm); }
+.demo-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-xl); }
+body[data-option="b"] .demo-card { border: 2px solid var(--color-heading); box-shadow: 4px 4px 0 var(--color-heading); }
+.demo-card h3 { margin: var(--space-sm) 0; font-size: var(--text-heading-md); }
+.demo-card p { color: var(--color-text-muted); margin-bottom: var(--space-lg); }
+
+.cmp-groups { display: grid; gap: var(--space-2xl); }
+.cmp-grouphead { font-family: var(--font-eyebrow); font-size: var(--text-eyebrow); letter-spacing: var(--eyebrow-track); text-transform: var(--eyebrow-case); color: var(--color-accent); margin-bottom: var(--space-base); }
+.cmp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-base); align-items: stretch; }
+.cmp-item { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-lg); min-width: 0; }
+body[data-option="b"] .cmp-item { border: 2px solid var(--color-heading); box-shadow: 3px 3px 0 var(--color-heading); }
+@media (min-width: 760px) { .cmp-item.span2 { grid-column: span 2; } }
+.cmp-name { display: block; color: var(--color-text-muted); font-size: var(--text-body-sm); margin-bottom: var(--space-base); }
+.cmp-name b { display: block; color: var(--color-heading); font-family: var(--font-display); font-size: var(--text-card); line-height: 1.1; margin-bottom: 2px; }
+.cmp-stage { display: flex; flex-wrap: wrap; gap: var(--space-sm); align-items: center; }
+.cmp-stage.col { display: grid; gap: var(--space-md); align-items: stretch; }
+.field { display: grid; gap: 5px; }
+.field label { font-family: var(--font-eyebrow); font-size: var(--text-eyebrow); letter-spacing: var(--eyebrow-track); text-transform: var(--eyebrow-case); color: var(--color-accent); }
+.control { width: 100%; border: 1px solid var(--color-border-strong); background: var(--color-bg); color: var(--color-text); border-radius: var(--radius-sm); padding: 0.65em 0.75em; font: inherit; }
+body[data-option="b"] .control { border: 1.5px solid var(--color-heading); border-radius: var(--radius-md); background: var(--color-surface); }
+.control:focus { outline: none; border-color: var(--color-accent); box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-accent) 20%, transparent); }
+body[data-option="b"] .control:focus { box-shadow: 3px 3px 0 var(--color-accent); }
+.control:disabled { color: var(--color-text-muted); opacity: 0.7; }
+.field.is-invalid .control { border-color: var(--color-accent); }
+.hint { color: var(--color-accent); font-size: var(--text-body-sm); }
+.btn.secondary { background: color-mix(in oklab, var(--color-accent) 12%, var(--color-surface)); color: var(--color-heading); }
+.btn.navy { background: var(--color-heading); color: var(--color-surface); border-color: var(--color-heading); }
+.btn.ghost { background: transparent; color: var(--color-text-muted); }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.btn.icon { width: 2.55rem; height: 2.55rem; display: inline-grid; place-items: center; padding: 0; }
+.btn.icon svg { width: 1rem; height: 1rem; }
+.badge { display: inline-flex; align-items: center; gap: 0.38em; border: 1px solid var(--color-border); border-radius: var(--radius-full); padding: 0.25em 0.7em; background: var(--color-surface); color: var(--color-text); font-size: var(--text-body-sm); }
+body[data-option="b"] .badge { border: 1.5px solid var(--color-heading); font-family: var(--font-mono); font-size: 0.78rem; }
+.badge::before { content: ""; width: 0.45em; height: 0.45em; border-radius: 50%; background: var(--color-accent); }
+.badge.ok::before { background: #5BA86B; }
+.badge.note::before { background: #F2C14E; }
+.badge.alert::before { background: #D9534F; }
+.cmp-card { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-lg); }
+body[data-option="b"] .cmp-card { border: 2px solid var(--color-heading); box-shadow: 3px 3px 0 var(--color-heading); }
+.cmp-card h4 { font-size: var(--text-heading-md); margin: var(--space-xs) 0 var(--space-sm); }
+.cmp-card p { color: var(--color-text-muted); font-size: var(--text-body-sm); }
+.cmp-card .foot { display: flex; justify-content: space-between; gap: var(--space-sm); align-items: center; margin-top: var(--space-base); flex-wrap: wrap; }
+.cmp-nav { display: flex; align-items: center; justify-content: space-between; gap: var(--space-base); flex-wrap: wrap; border: 1px solid var(--color-border); border-radius: var(--radius-full); background: var(--color-bg); padding: 0.55rem 0.7rem 0.55rem 1rem; }
+body[data-option="b"] .cmp-nav { border: 2px solid var(--color-heading); box-shadow: 3px 3px 0 var(--color-heading); }
+.cmp-nav .mk { font-family: var(--font-display); color: var(--color-heading); font-size: 1.08rem; }
+.cmp-nav .lnk { display: flex; flex-wrap: wrap; gap: var(--space-sm); }
+.cmp-nav a { color: var(--color-text-muted); text-decoration: none; font-size: var(--text-body-sm); }
+.cmp-nav a.on { color: var(--color-accent); }
+.cmp-tabs { display: inline-flex; border: 1px solid var(--color-border-strong); border-radius: var(--radius-full); overflow: hidden; background: var(--color-bg); max-width: 100%; flex-wrap: wrap; }
+body[data-option="b"] .cmp-tabs { border: 1.5px solid var(--color-heading); }
+.cmp-tab { border: 0; background: transparent; color: var(--color-text-muted); padding: 0.5em 0.8em; font-family: var(--font-body); cursor: pointer; }
+.cmp-tab.on { background: var(--color-heading); color: var(--color-surface); }
+.cmp-tablewrap { overflow-x: auto; }
+.cmp-table { width: 100%; border-collapse: collapse; font-size: var(--text-body-sm); min-width: 520px; }
+.cmp-table th, .cmp-table td { text-align: left; padding: 0.75em 0.8em; border-bottom: 1px solid var(--color-border); }
+.cmp-table th { font-family: var(--font-eyebrow); font-size: var(--text-eyebrow); letter-spacing: var(--eyebrow-track); text-transform: var(--eyebrow-case); color: var(--color-accent); }
+.cmp-table .nm { font-family: var(--font-display); color: var(--color-heading); }
+.cmp-callout { border: 1px solid var(--color-border); border-left: 4px solid var(--color-accent); border-radius: var(--radius-md); padding: var(--space-lg); background: var(--color-bg); }
+body[data-option="b"] .cmp-callout { border: 2px solid var(--color-heading); border-left-width: 8px; box-shadow: 3px 3px 0 var(--color-heading); }
+.cmp-callout .lbl { display: block; font-family: var(--font-eyebrow); font-size: var(--text-eyebrow); letter-spacing: var(--eyebrow-track); text-transform: var(--eyebrow-case); color: var(--color-accent); margin-bottom: var(--space-sm); }
+.cmp-callout p { color: var(--color-text-muted); font-size: var(--text-body-sm); }
+.footer { padding: var(--space-xl) 0; color: var(--color-text-muted); font-size: var(--text-body-sm); border-top: 1px solid var(--color-border); }
+body[data-option="b"] .footer { border-top: 2px solid var(--color-heading); }
+.lightbox { position: fixed; inset: 0; z-index: 200; display: none; align-items: center; justify-content: center; padding: clamp(1rem, 3vw, 2rem); background: rgba(13, 17, 23, 0.92); cursor: zoom-out; }
+.lightbox.open { display: flex; }
+.lightbox img { max-width: 96vw; max-height: 92vh; width: auto; height: auto; object-fit: contain; border-radius: var(--radius-md); background: #fff; box-shadow: 0 18px 60px rgba(0,0,0,0.45); }
+.lightbox .close { position: fixed; top: 16px; right: 16px; border: 1px solid rgba(255,255,255,0.4); border-radius: var(--radius-full); background: rgba(255,255,255,0.12); color: #fff; padding: 0.45em 0.8em; cursor: pointer; font-family: var(--font-body); }
+
+@media (max-width: 760px) {
+  .wrap { width: min(100% - 2rem, 1160px); }
+  .nav-shell { align-items: flex-start; }
+  .brand { width: 100%; }
+  .nav-links { justify-content: flex-start; }
+  .option-toggle { width: 100%; }
+  .option-toggle button { flex: 1; }
+  .spec-row, .graphics-grid, .scales, .inuse { grid-template-columns: 1fr; }
+  .role { grid-template-columns: 54px 1fr; }
+  .swatch { width: 44px; height: 58px; }
+}
+</style>
+</head>
+<body data-option="a">
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="nav-shell">
+      <div class="brand"><img id="brandMark" src="assets/20260619_cibc-a_mark-final.png" alt="CIBC Option A mark"><span>CIBC<span class="dot"> · </span><span id="brandOption">Option A</span></span></div>
+      <nav class="nav-links" aria-label="Page sections">
+        <a href="#color">color</a>
+        <a href="#type">type</a>
+        <a href="#graphics">graphics</a>
+        <a href="#spacing">spacing</a>
+        <a href="#in-use">in use</a>
+        <a href="#components">components</a>
+      </nav>
+      <div class="option-toggle" role="group" aria-label="Brand option">
+        <button type="button" class="on" data-option-button="a">A</button>
+        <button type="button" data-option-button="b">B</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="masthead wrap" id="top">
+    <span class="eyebrow">Citizen Infrastructure Builders Club</span>
+    <h1 id="heroTitle">Beauty should last.</h1>
+    <p class="lede" id="heroLede">An Art Nouveau and Bauhaus system for infrastructure that grows with community. Toggle to Option B without losing your place.</p>
+    <div class="meta-row">
+      <span class="meta-chip">Display <b id="metaDisplay">Gulax</b></span>
+      <span class="meta-chip">Body <b id="metaBody">Space Grotesk</b></span>
+      <span class="meta-chip">Eyebrow <b id="metaEyebrow">Aldrich</b></span>
+      <span class="meta-chip" id="metaDirection">Art Nouveau plus Bauhaus</span>
+    </div>
+  </section>
+
+  <section class="wrap" id="color">
+    <div class="section-head">
+      <span class="eyebrow">01 · Color</span>
+      <h2 id="colorTitle">The Natural Palette</h2>
+      <p id="colorLede">Semantic roles point at the named pigments below, so a single change ripples through every surface.</p>
+    </div>
+    <div class="hub-row" aria-label="Option B hub colors">
+      <div class="hub"><div class="hub-swatch" style="background:var(--palette-hub-green)"></div><div class="hub-meta">Green hub</div></div>
+      <div class="hub"><div class="hub-swatch" style="background:var(--palette-hub-teal)"></div><div class="hub-meta">Teal hub</div></div>
+      <div class="hub"><div class="hub-swatch" style="background:var(--palette-hub-purple)"></div><div class="hub-meta">Purple hub</div></div>
+      <div class="hub"><div class="hub-swatch" style="background:var(--palette-hub-yellow)"></div><div class="hub-meta">Yellow hub</div></div>
+      <div class="hub"><div class="hub-swatch" style="background:var(--palette-hub-red)"></div><div class="hub-meta">Red hub</div></div>
+    </div>
+    <div class="roles">
+      <article class="role"><span class="swatch" style="background:var(--color-bg)"></span><div><h3>Background</h3><p><span>--color-bg</span> · <span data-hex="--color-bg"></span></p></div></article>
+      <article class="role"><span class="swatch" style="background:var(--color-surface)"></span><div><h3>Surface</h3><p><span>--color-surface</span> · <span data-hex="--color-surface"></span></p></div></article>
+      <article class="role"><span class="swatch" style="background:var(--color-heading)"></span><div><h3>Heading</h3><p><span>--color-heading</span> · <span data-hex="--color-heading"></span></p></div></article>
+      <article class="role"><span class="swatch" style="background:var(--color-text)"></span><div><h3>Text</h3><p><span>--color-text</span> · <span data-hex="--color-text"></span></p></div></article>
+      <article class="role"><span class="swatch" style="background:var(--color-text-muted)"></span><div><h3>Muted</h3><p><span>--color-text-muted</span> · <span data-hex="--color-text-muted"></span></p></div></article>
+      <article class="role"><span class="swatch" style="background:var(--color-accent)"></span><div><h3>Accent</h3><p><span>--color-accent</span> · <span data-hex="--color-accent"></span></p></div></article>
+      <article class="role"><span class="swatch" style="background:var(--color-accent-2)"></span><div><h3>Accent 2</h3><p><span>--color-accent-2</span> · <span data-hex="--color-accent-2"></span></p></div></article>
+      <article class="role"><span class="swatch" style="background:var(--color-border)"></span><div><h3>Border</h3><p><span>--color-border</span> · <span data-hex="--color-border"></span></p></div></article>
+    </div>
+  </section>
+
+  <section class="wrap" id="type">
+    <div class="section-head">
+      <span class="eyebrow">02 · Type</span>
+      <h2>Live type system</h2>
+      <p>The selectors above update the whole frame. They stay available in both options so the frame remains a usable type lab.</p>
+    </div>
+    <div class="type-ramp">
+      <div class="spec-row"><span class="label">Display<b>--text-display</b></span><span class="sample-display" id="sampleDisplay">Rethink. Reuse.</span></div>
+      <div class="spec-row"><span class="label">Heading XL<b>--text-heading-xl</b></span><span class="sample-h1" id="sampleHeading">Technology in harmony with life</span></div>
+      <div class="spec-row"><span class="label">Card<b>--text-card</b></span><span class="sample-card" id="sampleCard">Found pieces, new purpose</span></div>
+      <div class="spec-row"><span class="label">Body<b>--text-body</b></span><span class="sample-body" id="sampleBody">Infrastructure that grows with community. The internet is the canvas; we shape it together through local tools, built to adapt and built to last.</span></div>
+    </div>
+  </section>
+
+  <section class="wrap" id="graphics">
+    <!-- visual-assets: reviewed · existing generated raster assets reused, source status illustrative_generated, crop cover in preview card, anchored under color and type styles, QA by path check and layout audit. -->
+    <div class="section-head">
+      <span class="eyebrow">03 · Graphics</span>
+      <h2>Connected Plane motif</h2>
+      <p id="graphicsLede">Graphics sit after text and color so the visual system is read as an application of the foundation, not a separate mood board.</p>
+    </div>
+    <div class="graphics-grid">
+      <figure class="graphic-card">
+        <button class="image-zoom" type="button" id="mainImageButton" aria-label="Open selected reference image">
+          <img id="motifImage" src="assets/20260619_cibc_motif-board.jpeg" alt="Option A motif board showing Art Nouveau city vignettes in a Bauhaus isometric grid">
+        </button>
+        <figcaption class="image-caption" id="imageCaption">Option A motif board. Click to zoom.</figcaption>
+      </figure>
+      <div class="graphic-notes">
+        <div class="reference-strip" id="referenceStrip" aria-label="Reference image thumbnails"></div>
+        <article class="asset-note">
+          <span class="asset-label">Core motif</span>
+          <h3>Square isometric plane</h3>
+          <p id="motifRule">The plane stays visible. Art Nouveau ornament frames the structure, while Bauhaus geometry carries the paths, city blocks, and civic infrastructure.</p>
+        </article>
+        <article class="asset-note">
+          <span class="asset-label">Asset families</span>
+          <ul>
+            <li>Hero scene with text-safe area.</li>
+            <li>Dynamic cityscape from supplied reference photos.</li>
+            <li>Member character or work scene from uploaded image.</li>
+            <li>Small icons, connector pattern, and scene props.</li>
+          </ul>
+        </article>
+        <article class="asset-note">
+          <span class="asset-label">Generation rule</span>
+          <p>Cutouts and icons are generated one at a time on chroma-key green <code>#00ff00</code>, then recovered as durable files before placement.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" id="spacing">
+    <div class="section-head">
+      <span class="eyebrow">04 · Spacing</span>
+      <h2>Space and radius</h2>
+      <p>Spacing stays consistent across both options. Radius changes by option so A feels flatter and crafted while B feels rounder and more playful.</p>
+    </div>
+    <div class="scales">
+      <div>
+        <div class="bar-row"><span>--space-xs · 4</span><span class="bar" style="width:4px"></span></div>
+        <div class="bar-row"><span>--space-sm · 8</span><span class="bar" style="width:8px"></span></div>
+        <div class="bar-row"><span>--space-md · 12</span><span class="bar" style="width:12px"></span></div>
+        <div class="bar-row"><span>--space-base · 16</span><span class="bar" style="width:16px"></span></div>
+        <div class="bar-row"><span>--space-lg · 24</span><span class="bar" style="width:24px"></span></div>
+        <div class="bar-row"><span>--space-xl · 32</span><span class="bar" style="width:32px"></span></div>
+        <div class="bar-row"><span>--space-2xl · 48</span><span class="bar" style="width:48px"></span></div>
+      </div>
+      <div class="radius-row">
+        <figure><div class="radius-box" style="border-radius:var(--radius-sm)"></div><figcaption>sm</figcaption></figure>
+        <figure><div class="radius-box" style="border-radius:var(--radius-md)"></div><figcaption>md</figcaption></figure>
+        <figure><div class="radius-box" style="border-radius:var(--radius-lg)"></div><figcaption>lg</figcaption></figure>
+        <figure><div class="radius-box" style="border-radius:var(--radius-xl)"></div><figcaption>xl</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" id="in-use">
+    <div class="section-head">
+      <span class="eyebrow">05 · In use</span>
+      <h2>The system applied</h2>
+      <p>These samples use the same variables as the rest of the page. Toggle A/B or change fonts and the examples move with the system.</p>
+    </div>
+    <div class="inuse">
+      <div>
+        <div class="button-row"><button class="btn primary">Join the club</button><button class="btn">Read the wiki</button></div>
+        <div class="tag-row" style="margin-top:var(--space-lg)"><span class="tag">repairable</span><span class="tag">upgradeable</span><span class="tag">sustainable</span></div>
+      </div>
+      <article class="demo-card">
+        <span class="eyebrow" id="demoEyebrow">The circular path</span>
+        <h3 id="demoTitle">Modular by design</h3>
+        <p id="demoCopy">Built to adapt. Built to last. Make, use, return, renew, regenerate.</p>
+        <button class="btn primary">See the method</button>
+      </article>
+    </div>
+  </section>
+
+  <section class="wrap" id="components">
+    <!-- visual-assets: reviewed · icon glyphs in this section are functional interface controls persisted in the source pages; select chevrons remain inline as native control affordances. -->
+    <div class="section-head">
+      <span class="eyebrow">06 · Components</span>
+      <h2>Parts built on the tokens</h2>
+      <p>Atoms and molecules are shown as working examples so the brand can be evaluated as an interface system, not just a palette.</p>
+    </div>
+    <div class="cmp-groups">
+      <div>
+        <div class="cmp-grouphead">Atoms</div>
+        <div class="cmp-grid">
+          <div class="cmp-item span2">
+            <span class="cmp-name"><b>Input field</b>label, field, helper, invalid state, and disabled state</span>
+            <div class="cmp-stage col">
+              <div class="field"><label for="cibc-name">Your name</label><input class="control" id="cibc-name" type="text" placeholder="Ada Lovelace"></div>
+              <div class="field is-invalid"><label for="cibc-email">Email</label><input class="control" id="cibc-email" type="email" value="ada@" aria-invalid="true"><span class="hint">Enter a complete email address.</span></div>
+              <div class="field"><label for="cibc-id">Membership ID</label><input class="control" id="cibc-id" type="text" value="assigned on join" disabled></div>
+            </div>
+          </div>
+
+          <div class="cmp-item">
+            <span class="cmp-name"><b>Select</b>same border, radius, and focus behavior as the field</span>
+            <div class="field"><label for="cibc-tier" id="componentSelectLabel">Your tier</label>
+              <select class="control" id="cibc-tier"><option>Aware</option><option>Interested</option><option selected>Member</option><option>Contributor</option></select>
+            </div>
+          </div>
+
+          <div class="cmp-item">
+            <span class="cmp-name"><b>Button</b>primary, secondary, ghost, icon, and disabled</span>
+            <div class="cmp-stage">
+              <button class="btn primary" id="componentPrimary">Join</button>
+              <button class="btn secondary" id="componentSecondary">Details</button>
+              <button class="btn ghost">Cancel</button>
+              <button class="btn icon navy" aria-label="Connect"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="2.4"/><circle cx="18" cy="6" r="2.4"/><circle cx="18" cy="18" r="2.4"/><path d="M8 11l8-4M8 13l8 4"/></svg></button>
+              <button class="btn primary" disabled>Sent</button>
+            </div>
+          </div>
+
+          <div class="cmp-item">
+            <span class="cmp-name"><b>Badge</b>status labels with state dots</span>
+            <div class="cmp-stage"><span class="badge ok">Active</span><span class="badge note">Pending</span><span class="badge alert">Needs review</span></div>
+          </div>
+
+          <div class="cmp-item">
+            <span class="cmp-name"><b>Label and kicker</b>section label, field label, and tag treatment</span>
+            <div class="cmp-stage col"><span class="eyebrow">Citizen Infrastructure Builders Club</span><span class="tag" id="componentTag">Details that matter</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="cmp-grouphead">Molecules</div>
+        <div class="cmp-grid">
+          <div class="cmp-item">
+            <span class="cmp-name"><b>Card</b>atoms composed into a reusable unit</span>
+            <div class="cmp-card">
+              <span class="eyebrow" id="componentCardEyebrow">The circular path</span>
+              <h4 id="componentCardTitle">Modular by design</h4>
+              <p id="componentCardCopy">Built to adapt. Built to last. Make, use, return, renew.</p>
+              <div class="foot"><span class="badge ok">Open</span><button class="btn primary" id="componentCardButton">See the method</button></div>
+            </div>
+          </div>
+
+          <div class="cmp-item span2">
+            <span class="cmp-name"><b>Navigation</b>brand, section links, and a primary action</span>
+            <div class="cmp-nav">
+              <span class="mk">CIBC</span>
+              <span class="lnk"><a class="on" href="#components">color</a><a href="#components">type</a><a href="#components">graphics</a><a href="#components">in use</a></span>
+              <button class="btn primary" id="componentNavButton">Join</button>
+            </div>
+          </div>
+
+          <div class="cmp-item">
+            <span class="cmp-name"><b>Tabs</b>segmented view switch</span>
+            <div data-tabs>
+              <div class="cmp-tabs" role="tablist">
+                <button class="cmp-tab on" role="tab" aria-selected="true" id="componentTabOne">Personas</button>
+                <button class="cmp-tab" role="tab" aria-selected="false" id="componentTabTwo">Access</button>
+                <button class="cmp-tab" role="tab" aria-selected="false" id="componentTabThree">Journeys</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cmp-item span2">
+            <span class="cmp-name"><b>Table</b>structured rows that can stack or scroll on small screens</span>
+            <div class="cmp-tablewrap">
+              <table class="cmp-table">
+                <thead><tr><th id="componentTableColOne">Tier</th><th id="componentTableColTwo">Channel</th><th id="componentTableColThree">Crossing</th><th>Status</th></tr></thead>
+                <tbody id="componentRows">
+                  <tr><td><span class="nm">Aware</span></td><td>Linktree</td><td>Curiosity</td><td><span class="badge ok">Open</span></td></tr>
+                  <tr><td><span class="nm">Interested</span></td><td>Broadcasting</td><td>Be known</td><td><span class="badge note">Membrane</span></td></tr>
+                  <tr><td><span class="nm">Member</span></td><td>Full Telegram</td><td>Introduction</td><td><span class="badge ok">Open</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="cmp-item span2">
+            <span class="cmp-name"><b>Callout</b>a labeled note panel for guidance or source status</span>
+            <div class="cmp-callout"><span class="lbl" id="componentCalloutLabel">Method note</span><p id="componentCalloutCopy">Proposed, not decided. The walls and gates are a working design. Confirm with the stewards before treating any of this as settled.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">Combined brand toggle frame. Option A and Option B keep live type selectors and swap in place without changing scroll position.</div>
+</footer>
+
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="close" type="button" id="lightboxClose">Close</button>
+  <img id="lightboxImage" alt="">
+</div>
+
+<script>
+const presets = {
+  a: {
+    label: "Option A",
+    mark: "assets/20260619_cibc-a_mark-final.png",
+    markAlt: "CIBC Option A mark",
+    display: '"Gulax", sans-serif',
+    body: '"Space Grotesk", system-ui, sans-serif',
+    eyebrow: '"Aldrich", system-ui, sans-serif',
+    displayLabel: "Gulax",
+    bodyLabel: "Space Grotesk",
+    eyebrowLabel: "Aldrich",
+    caseValue: "uppercase",
+    track: "0.28em",
+    heroTitle: "Beauty should last.",
+    heroLede: "An Art Nouveau and Bauhaus system for infrastructure that grows with community. Toggle to Option B without losing your place.",
+    direction: "Art Nouveau plus Bauhaus",
+    colorTitle: "The Natural Palette",
+    colorLede: "Semantic roles point at the named pigments below, so a single change ripples through every surface.",
+    sampleDisplay: "Rethink. Reuse.",
+    sampleHeading: "Technology in harmony with life",
+    sampleCard: "Found pieces, new purpose",
+    sampleBody: "Infrastructure that grows with community. The internet is the canvas; we shape it together through local tools, built to adapt and built to last.",
+    references: [
+      {
+        src: "assets/20260619_cibc_motif-board.jpeg",
+        alt: "Option A motif board showing Art Nouveau city vignettes in a Bauhaus isometric grid",
+        label: "Art Nouveau motif board"
+      }
+    ],
+    motifRule: "The plane stays visible. Art Nouveau ornament frames the structure, while Bauhaus geometry carries the paths, city blocks, and civic infrastructure.",
+    demoEyebrow: "The circular path",
+    demoTitle: "Modular by design",
+    demoCopy: "Built to adapt. Built to last. Make, use, return, renew, regenerate.",
+    componentSelectLabel: "Your tier",
+    componentPrimary: "Join",
+    componentSecondary: "Details",
+    componentTag: "Details that matter",
+    componentCardEyebrow: "The circular path",
+    componentCardTitle: "Modular by design",
+    componentCardCopy: "Built to adapt. Built to last. Make, use, return, renew.",
+    componentCardButton: "See the method",
+    componentNavButton: "Join",
+    componentTabs: ["Personas", "Access", "Journeys"],
+    componentTableHead: ["Tier", "Channel", "Crossing"],
+    componentRows: [
+      ["Aware", "Linktree", "Curiosity", "Open", "ok"],
+      ["Interested", "Broadcasting", "Be known", "Membrane", "note"],
+      ["Member", "Full Telegram", "Introduction", "Open", "ok"]
+    ],
+    componentCalloutLabel: "Method note",
+    componentCalloutCopy: "Proposed, not decided. The walls and gates are a working design. Confirm with the stewards before treating any of this as settled."
+  },
+  b: {
+    label: "Option B",
+    mark: "assets/20260619_cibc-b_mark-final.png",
+    markAlt: "CIBC Option B mark",
+    display: '"Outfit", system-ui, sans-serif',
+    body: '"DM Sans", system-ui, sans-serif',
+    eyebrow: '"Familjen Grotesk", system-ui, sans-serif',
+    displayLabel: "Outfit",
+    bodyLabel: "DM Sans",
+    eyebrowLabel: "Familjen Grotesk",
+    caseValue: "none",
+    track: "0.02em",
+    heroTitle: "Local hubs, <em>connected.</em>",
+    heroLede: "A warm, buildable system for local tools and real impact. Different places, shared connections. The internet is ours to shape.",
+    direction: "Playful Local Hubs",
+    colorTitle: "Five hubs, one network",
+    colorLede: "Each local hub gets its own accent. Navy holds the structure, orange does the pointing.",
+    sampleDisplay: "Build your space",
+    sampleHeading: "Different places, shared connections",
+    sampleCard: "Tools live locally",
+    sampleBody: "The internet is the canvas. We shape it together through local tools, relevant and familiar, made for the people who use them.",
+    references: [
+      {
+        src: "assets/20260621_cibc-b_reference-network-people-squares.jpg",
+        alt: "Reference illustration of people in blue square platforms connected by yellow routes",
+        label: "People and route network"
+      },
+      {
+        src: "assets/20260621_cibc-b_reference-my-silo-character.jpg",
+        alt: "Reference illustration of a person holding a box labeled My Silo while sitting in a blue square platform",
+        label: "My Silo character"
+      },
+      {
+        src: "assets/20260619_cibc_local-hubs-board.png",
+        alt: "Option B motif board showing playful isometric local hubs",
+        label: "Existing local hubs board"
+      }
+    ],
+    motifRule: "The plane becomes a friendly hub tile. Rounded routes, node dots, and color-coded hub accents make the network feel local and buildable.",
+    demoEyebrow: "Community node",
+    demoTitle: "Different places, shared connections",
+    demoCopy: "Each hub runs its own tools; the network keeps them linked.",
+    componentSelectLabel: "Your hub",
+    componentPrimary: "Start a hub",
+    componentSecondary: "Browse",
+    componentTag: "Community Kitchen · Zine Library",
+    componentCardEyebrow: "Maker Space",
+    componentCardTitle: "Add your tools",
+    componentCardCopy: "Choose what helps your community thrive. Make it yours.",
+    componentCardButton: "Connect",
+    componentNavButton: "Start a hub",
+    componentTabs: ["Hubs", "Tools", "People"],
+    componentTableHead: ["Hub", "Tool", "Maintainer"],
+    componentRows: [
+      ["Kitchen", "Shared pantry", "rotating", "Live", "ok"],
+      ["Zine Library", "Risograph", "volunteers", "Setup", "note"],
+      ["Maker Space", "Tool wall", "stewards", "Live", "ok"]
+    ],
+    componentCalloutLabel: "Note",
+    componentCalloutCopy: "Different places, shared connections. Each hub runs its own tools; the network keeps them linked."
+  }
+};
+
+const root = document.documentElement;
+const body = document.body;
+const referenceStrip = document.getElementById("referenceStrip");
+const motifImage = document.getElementById("motifImage");
+const imageCaption = document.getElementById("imageCaption");
+const mainImageButton = document.getElementById("mainImageButton");
+const lightbox = document.getElementById("lightbox");
+const lightboxImage = document.getElementById("lightboxImage");
+const lightboxClose = document.getElementById("lightboxClose");
+let currentReferences = [];
+let currentReferenceIndex = 0;
+
+function rgbToHex(rgb) {
+  const m = rgb.match(/[\d.]+/g);
+  if (!m) return "";
+  return "#" + m.slice(0, 3).map(x => Math.round(+x).toString(16).padStart(2, "0")).join("").toUpperCase();
+}
+
+function updateHexes() {
+  document.querySelectorAll("[data-hex]").forEach(el => {
+    const value = getComputedStyle(root).getPropertyValue(el.dataset.hex).trim();
+    const probe = document.createElement("span");
+    probe.style.color = value;
+    document.body.appendChild(probe);
+    el.textContent = rgbToHex(getComputedStyle(probe).color);
+    probe.remove();
+  });
+}
+
+function applyPresetFonts(preset) {
+  root.style.setProperty("--font-display", preset.display);
+  root.style.setProperty("--font-body", preset.body);
+  root.style.setProperty("--font-eyebrow", preset.eyebrow);
+  root.style.setProperty("--eyebrow-case", preset.caseValue);
+  root.style.setProperty("--eyebrow-track", preset.track);
+  document.getElementById("metaDisplay").textContent = preset.displayLabel;
+  document.getElementById("metaBody").textContent = preset.bodyLabel;
+  document.getElementById("metaEyebrow").textContent = preset.eyebrowLabel;
+}
+
+function showReference(index) {
+  if (!currentReferences.length) return;
+  currentReferenceIndex = Math.max(0, Math.min(index, currentReferences.length - 1));
+  const ref = currentReferences[currentReferenceIndex];
+  motifImage.src = ref.src;
+  motifImage.alt = ref.alt;
+  imageCaption.textContent = ref.label + ". Click to zoom.";
+  referenceStrip.querySelectorAll(".thumb-button").forEach((button, idx) => {
+    button.classList.toggle("active", idx === currentReferenceIndex);
+    button.setAttribute("aria-current", idx === currentReferenceIndex ? "true" : "false");
+  });
+}
+
+function renderReferences(references) {
+  currentReferences = references;
+  currentReferenceIndex = 0;
+  referenceStrip.innerHTML = "";
+  references.forEach((ref, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "thumb-button";
+    button.innerHTML = '<img alt=""><span></span>';
+    button.querySelector("img").src = ref.src;
+    button.querySelector("img").alt = ref.alt;
+    button.querySelector("span").textContent = ref.label;
+    button.addEventListener("click", () => showReference(index));
+    referenceStrip.appendChild(button);
+  });
+  showReference(0);
+}
+
+function openLightbox() {
+  if (!currentReferences.length) return;
+  const ref = currentReferences[currentReferenceIndex];
+  lightboxImage.src = ref.src;
+  lightboxImage.alt = ref.alt;
+  lightbox.classList.add("open");
+  lightbox.setAttribute("aria-hidden", "false");
+}
+
+function closeLightbox() {
+  lightbox.classList.remove("open");
+  lightbox.setAttribute("aria-hidden", "true");
+  lightboxImage.removeAttribute("src");
+  lightboxImage.alt = "";
+}
+
+function setOption(option) {
+  const currentY = window.scrollY;
+  const preset = presets[option];
+  body.dataset.option = option;
+  document.querySelectorAll("[data-option-button]").forEach(button => button.classList.toggle("on", button.dataset.optionButton === option));
+  document.getElementById("brandOption").textContent = preset.label;
+  const mark = document.getElementById("brandMark");
+  mark.src = preset.mark;
+  mark.alt = preset.markAlt;
+  applyPresetFonts(preset);
+  document.getElementById("heroTitle").innerHTML = preset.heroTitle;
+  document.getElementById("heroLede").textContent = preset.heroLede;
+  document.getElementById("metaDirection").textContent = preset.direction;
+  document.getElementById("colorTitle").textContent = preset.colorTitle;
+  document.getElementById("colorLede").textContent = preset.colorLede;
+  document.getElementById("sampleDisplay").textContent = preset.sampleDisplay;
+  document.getElementById("sampleHeading").textContent = preset.sampleHeading;
+  document.getElementById("sampleCard").textContent = preset.sampleCard;
+  document.getElementById("sampleBody").textContent = preset.sampleBody;
+  renderReferences(preset.references);
+  document.getElementById("motifRule").textContent = preset.motifRule;
+  document.getElementById("demoEyebrow").textContent = preset.demoEyebrow;
+  document.getElementById("demoTitle").textContent = preset.demoTitle;
+  document.getElementById("demoCopy").textContent = preset.demoCopy;
+  document.getElementById("componentSelectLabel").textContent = preset.componentSelectLabel;
+  document.getElementById("componentPrimary").textContent = preset.componentPrimary;
+  document.getElementById("componentSecondary").textContent = preset.componentSecondary;
+  document.getElementById("componentTag").textContent = preset.componentTag;
+  document.getElementById("componentCardEyebrow").textContent = preset.componentCardEyebrow;
+  document.getElementById("componentCardTitle").textContent = preset.componentCardTitle;
+  document.getElementById("componentCardCopy").textContent = preset.componentCardCopy;
+  document.getElementById("componentCardButton").textContent = preset.componentCardButton;
+  document.getElementById("componentNavButton").textContent = preset.componentNavButton;
+  ["componentTabOne", "componentTabTwo", "componentTabThree"].forEach((id, index) => {
+    document.getElementById(id).textContent = preset.componentTabs[index];
+  });
+  document.getElementById("componentTableColOne").textContent = preset.componentTableHead[0];
+  document.getElementById("componentTableColTwo").textContent = preset.componentTableHead[1];
+  document.getElementById("componentTableColThree").textContent = preset.componentTableHead[2];
+  document.getElementById("componentRows").innerHTML = preset.componentRows.map(row => {
+    return '<tr><td><span class="nm">' + row[0] + '</span></td><td>' + row[1] + '</td><td>' + row[2] + '</td><td><span class="badge ' + row[4] + '">' + row[3] + '</span></td></tr>';
+  }).join("");
+  document.getElementById("componentCalloutLabel").textContent = preset.componentCalloutLabel;
+  document.getElementById("componentCalloutCopy").textContent = preset.componentCalloutCopy;
+  requestAnimationFrame(() => {
+    updateHexes();
+    window.scrollTo({ top: currentY, left: 0, behavior: "instant" });
+  });
+}
+
+document.querySelectorAll("[data-option-button]").forEach(button => button.addEventListener("click", () => setOption(button.dataset.optionButton)));
+document.querySelectorAll(".cmp-tabs").forEach(group => {
+  group.addEventListener("click", event => {
+    const tab = event.target.closest(".cmp-tab");
+    if (!tab) return;
+    group.querySelectorAll(".cmp-tab").forEach(button => {
+      button.classList.remove("on");
+      button.setAttribute("aria-selected", "false");
+    });
+    tab.classList.add("on");
+    tab.setAttribute("aria-selected", "true");
+  });
+});
+mainImageButton.addEventListener("click", openLightbox);
+lightboxClose.addEventListener("click", closeLightbox);
+lightbox.addEventListener("click", event => {
+  if (event.target === lightbox) closeLightbox();
+});
+window.addEventListener("keydown", event => {
+  if (event.key === "Escape") closeLightbox();
+});
+setOption("a");
+window.addEventListener("load", updateHexes);
+</script>
+
+<!-- Cuts Layout Audit v1 · dev-only second look · self-suppresses off file://localhost · strip between markers to publish -->
+<script>
+// --- Cuts Layout Audit v1 ---
+(function () {
+  var IS_PROBE = location.hash.indexOf('__audit-probe') !== -1;
+  var ACTIVE = IS_PROBE
+    || location.protocol === 'file:'
+    || location.hostname === 'localhost'
+    || location.hostname === '127.0.0.1'
+    || /[?&]audit\b/.test(location.search);
+  if (!ACTIVE) return;
+
+  var TOL = 1;
+
+  function shortSelector(el) {
+    if (!el || el === document.body) return 'body';
+    if (el.id) return el.tagName.toLowerCase() + '#' + el.id;
+    var sel = el.tagName.toLowerCase();
+    if (el.classList && el.classList.length) sel += '.' + el.classList[0];
+    var p = el.parentElement;
+    if (p) {
+      var sib = Array.prototype.filter.call(p.children, function (c) { return c.tagName === el.tagName; });
+      if (sib.length > 1) sel += ':nth-of-type(' + (sib.indexOf(el) + 1) + ')';
+    }
+    return sel;
+  }
+
+  function audit(widthLabel) {
+    var findings = [];
+    var docEl = document.documentElement;
+    var vw = window.innerWidth;
+    if (docEl.scrollWidth > docEl.clientWidth + TOL) {
+      findings.push({ kind: 'page-overflow', severity: 'error', selector: 'html',
+        px: docEl.scrollWidth - docEl.clientWidth, note: 'Document is wider than the viewport.' });
+    }
+    var all = document.body ? document.body.querySelectorAll('*') : [];
+    for (var i = 0; i < all.length; i++) {
+      var el = all[i];
+      if (el.closest && el.closest('#cuts-layout-audit, #cuts-audit-probe, [data-audit-ignore]')) continue;
+      var cs = getComputedStyle(el);
+      if (cs.display === 'none' || cs.visibility === 'hidden') continue;
+      var r = el.getBoundingClientRect();
+      if (r.width === 0 && r.height === 0) continue;
+      if (r.right > vw + TOL && r.left < vw) {
+        var par = el.parentElement;
+        var parRight = par ? par.getBoundingClientRect().right : vw;
+        if (parRight <= vw + TOL) {
+          findings.push({ kind: 'element-overflow', severity: 'error', selector: shortSelector(el),
+            px: Math.round(r.right - vw), note: 'Extends ' + Math.round(r.right - vw) + 'px past the right edge.' });
+        }
+      }
+      var ox = cs.overflowX, oy = cs.overflowY;
+      var clipX = (ox === 'hidden' || ox === 'clip') && el.scrollWidth > el.clientWidth + TOL;
+      var clipY = (oy === 'hidden' || oy === 'clip') && el.scrollHeight > el.clientHeight + TOL;
+      if ((clipX || clipY) && el.textContent && el.textContent.trim().length > 1) {
+        var ellipsis = cs.textOverflow === 'ellipsis' && cs.whiteSpace === 'nowrap';
+        if (!ellipsis) {
+          findings.push({ kind: 'clipped-text', severity: 'warning', selector: shortSelector(el),
+            px: Math.round(Math.max(el.scrollWidth - el.clientWidth, el.scrollHeight - el.clientHeight)),
+            note: 'Text clipped by overflow:' + (clipX ? ox : oy) + '.' });
+        }
+      }
+    }
+    return { width: widthLabel || (vw + 'px'), findings: findings.slice(0, 40), total: findings.length };
+  }
+
+  if (IS_PROBE) {
+    var reportUp = function () { try { parent.postMessage({ __cutsAudit: true, result: audit('375px') }, '*'); } catch (e) {} };
+    if (document.readyState === 'complete') setTimeout(reportUp, 60);
+    else window.addEventListener('load', function () { setTimeout(reportUp, 60); });
+    return;
+  }
+
+  var results = { current: null, mobile: null };
+
+  function build() {
+    var css = '#cuts-layout-audit{position:fixed;left:12px;bottom:12px;z-index:2147483600;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;display:none}'
+      + '#cuts-layout-audit .la-pill{cursor:pointer;border:none;border-radius:999px;padding:7px 13px;font-size:12px;font-weight:700;color:#fff;box-shadow:0 3px 12px rgba(0,0,0,.28)}'
+      + '#cuts-layout-audit .la-pill.err{background:#9a1b1b}#cuts-layout-audit .la-pill.warn{background:#8a5a0a}'
+      + '#cuts-layout-audit .la-panel{display:none;margin-top:8px;max-width:min(92vw,440px);max-height:50vh;overflow:auto;background:#0d1117;color:#d8e0ea;border-radius:10px;padding:10px 12px;box-shadow:0 8px 28px rgba(0,0,0,.4);font-size:11.5px;line-height:1.5}'
+      + '#cuts-layout-audit.open .la-panel{display:block}'
+      + '#cuts-layout-audit .la-row{padding:7px 0;border-top:1px solid #222b36}#cuts-layout-audit .la-row:first-child{border-top:none}'
+      + '#cuts-layout-audit .la-kind{font-weight:700;color:#fff}#cuts-layout-audit .la-error .la-kind{color:#f08a8a}#cuts-layout-audit .la-warning .la-kind{color:#f0b46a}'
+      + '#cuts-layout-audit .la-w{margin-left:6px;color:#7e8a99}'
+      + '#cuts-layout-audit .la-sel{display:block;margin:2px 0;color:#cfe3ff;word-break:break-all}'
+      + '#cuts-layout-audit .la-note{color:#aab4c0}';
+    var style = document.createElement('style'); style.textContent = css; document.head.appendChild(style);
+    var wrap = document.createElement('div'); wrap.id = 'cuts-layout-audit';
+    wrap.innerHTML = '<button class="la-pill" type="button" aria-label="Layout issues"></button><div class="la-panel"><div class="la-list"></div></div>';
+    document.body.appendChild(wrap);
+    wrap.querySelector('.la-pill').addEventListener('click', function () { wrap.classList.toggle('open'); });
+    return wrap;
+  }
+
+  function render() {
+    var all = [];
+    if (results.current) results.current.findings.forEach(function (f) { f._w = results.current.width; all.push(f); });
+    if (results.mobile) results.mobile.findings.forEach(function (f) { f._w = '375px'; all.push(f); });
+    var errors = all.filter(function (f) { return f.severity === 'error'; });
+    var warns = all.filter(function (f) { return f.severity === 'warning'; });
+    var badge = document.getElementById('cuts-layout-audit');
+    if (!all.length) { if (badge) badge.style.display = 'none'; console.info('%cLayout audit: clean', 'color:#1f5028;font-weight:bold'); return; }
+    if (!badge) badge = build();
+    badge.style.display = 'block';
+    var pill = badge.querySelector('.la-pill');
+    pill.textContent = (errors.length ? '!' : '*') + ' ' + errors.length + ' error' + (errors.length === 1 ? '' : 's') + (warns.length ? ' · ' + warns.length + ' warn' : '');
+    pill.className = 'la-pill ' + (errors.length ? 'err' : 'warn');
+    var list = badge.querySelector('.la-list'); list.innerHTML = '';
+    all.forEach(function (f) {
+      var row = document.createElement('div'); row.className = 'la-row la-' + f.severity;
+      row.innerHTML = '<span class="la-kind"></span><span class="la-w"></span><code class="la-sel"></code><span class="la-note"></span>';
+      row.querySelector('.la-kind').textContent = f.kind;
+      row.querySelector('.la-w').textContent = '@' + f._w;
+      row.querySelector('.la-sel').textContent = f.selector;
+      row.querySelector('.la-note').textContent = (f.px ? f.px + 'px · ' : '') + f.note;
+      list.appendChild(row);
+    });
+    console.warn('Layout audit: ' + errors.length + ' error(s), ' + warns.length + ' warning(s)');
+    try { console.table(all.map(function (f) { return { kind: f.kind, severity: f.severity, width: f._w, px: f.px, selector: f.selector }; })); } catch (e) {}
+  }
+
+  function runMain() {
+    results.current = audit(window.innerWidth + 'px');
+    render();
+    if (window.innerWidth > 400 && !document.getElementById('cuts-audit-probe')) {
+      var f = document.createElement('iframe');
+      f.id = 'cuts-audit-probe'; f.setAttribute('aria-hidden', 'true');
+      f.style.cssText = 'position:absolute;left:-10000px;top:0;width:375px;height:900px;border:0;visibility:hidden';
+      f.src = location.href.split('#')[0] + '#__audit-probe';
+      document.body.appendChild(f);
+    }
+  }
+
+  window.addEventListener('message', function (e) {
+    if (e.data && e.data.__cutsAudit && e.data.result) { results.mobile = e.data.result; render(); }
+  });
+  var rt;
+  window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(function () { results.current = audit(window.innerWidth + 'px'); render(); }, 250); });
+  if (document.readyState === 'complete') setTimeout(runMain, 80);
+  else window.addEventListener('load', function () { setTimeout(runMain, 80); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { setTimeout(function () { results.current = audit(window.innerWidth + 'px'); render(); }, 50); });
+})();
+// --- end Cuts Layout Audit v1 ---
+</script>
+</body>
+</html>
+
