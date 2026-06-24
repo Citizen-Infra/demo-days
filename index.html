@@ -116,8 +116,9 @@
     font-variation-settings: "opsz" 24, "SOFT" 30;
   }
   .nav-cta {
-    background: var(--gradient-primary);
-    color: var(--bg-warm);
+    background: var(--accent);
+    color: var(--paper-white);
+    border: 1.5px solid var(--accent);
     padding: 11px 22px;
     border-radius: 100px;
     font-family: var(--mono);
@@ -126,9 +127,9 @@
     text-transform: uppercase;
     text-decoration: none;
     font-weight: 500;
-    transition: filter 150ms;
+    transition: background 150ms, border-color 150ms;
   }
-  .nav-cta:hover { filter: brightness(0.92); }
+  .nav-cta:hover { background: var(--accent-deep); border-color: var(--accent-deep); }
   .nav-links {
     display: flex;
     align-items: stretch;
@@ -309,10 +310,10 @@
     cursor: pointer;
     border: 1.5px solid var(--ink);
   }
-  .btn-primary { background: var(--gradient-primary); color: var(--paper-white); border-color: transparent; }
-  .btn-primary:hover { filter: brightness(0.92); }
-  .btn-ghost { background: transparent; color: var(--ink); }
-  .btn-ghost:hover { background: var(--ink); color: var(--bg-warm); }
+  .btn-primary { background: var(--accent); color: var(--paper-white); border-color: var(--accent); }
+  .btn-primary:hover { background: var(--accent-deep); border-color: var(--accent-deep); }
+  .btn-ghost { background: transparent; color: var(--ink); border-color: var(--ink); }
+  .btn-ghost:hover { background: var(--ink); color: var(--paper-white); border-color: var(--ink); }
   .btn .arrow { transition: transform 150ms; }
   .btn:hover .arrow { transform: translateX(3px); }
 
@@ -405,12 +406,12 @@
     transition: filter 150ms, background 150ms, border-color 150ms;
     cursor: pointer;
   }
-  .hero-btn-primary { background: var(--gradient-primary); color: #ffffff; }
-  .hero-btn-primary:hover { filter: brightness(1.06); }
+  .hero-btn-primary { background: var(--accent); color: var(--paper-white); border-color: var(--accent); }
+  .hero-btn-primary:hover { background: var(--accent-deep); border-color: var(--accent-deep); }
   .hero-btn-primary .hero-btn-arrow { transition: transform 150ms; }
   .hero-btn-primary:hover .hero-btn-arrow { transform: translateX(3px); }
   .hero-btn-ghost { background: transparent; color: var(--ink); border-color: var(--ink); }
-  .hero-btn-ghost:hover { background: rgba(42, 34, 24, 0.06); }
+  .hero-btn-ghost:hover { background: var(--ink); color: var(--paper-white); border-color: var(--ink); }
 
   /* Hero info card (cream main + slightly deeper side) */
   .hero-info-card {
@@ -682,10 +683,11 @@
     cursor: pointer;
   }
   .demos-btn-primary {
-    background: var(--gradient-primary);
-    color: #ffffff;
+    background: var(--accent);
+    color: var(--paper-white);
+    border-color: var(--accent);
   }
-  .demos-btn-primary:hover { filter: brightness(1.06); }
+  .demos-btn-primary:hover { background: var(--accent-deep); border-color: var(--accent-deep); }
   .demos-btn-primary .demos-btn-arrow { transition: transform 150ms; }
   .demos-btn-primary:hover .demos-btn-arrow { transform: translateX(3px); }
   .demos-btn-ghost {
@@ -906,7 +908,7 @@
   .presenter-linkedin svg { width: 100%; height: 100%; display: block; fill: currentColor; }
 
   .demo-action-zone {
-    background: var(--gradient-primary);
+    background: var(--accent);
     padding: 0;
     display: flex;
     align-items: stretch;

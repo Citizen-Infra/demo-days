@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Aldrich&family=JetBrains+Mono:wght@400;500;600&family=Caveat:wght@500;600;700&display=swap');
+
 /* ============================================================
    CIBC Demo Day · SINGLE SOURCE OF TRUTH FOR THE BRAND
    ------------------------------------------------------------
@@ -15,60 +17,102 @@
    2026-06-03: brand updated to the "barn / farmhouse" palette
    (barn-brick accent, bone paper, warm dark sections) with
    Crete Round + IBM Plex Sans/Mono type.
+
+   2026-06-24: brand updated to CIBC Brand Option A. Natural
+   Palette colors (paper / cream / clay / brass / sage / ink)
+   and Gulax (display) + Space Grotesk (body) + Aldrich (eyebrow)
+   + JetBrains Mono. Legacy var names retained as aliases so
+   every page inherits the new brand without per-page edits.
    ============================================================ */
+
+/* Gulax display face, self-hosted. Path is relative to this file
+   (repo root), so it resolves for every page that links theme.css. */
+@font-face {
+  font-family: "Gulax";
+  src: url("assets/fonts/gulax/gulax-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 
 :root {
   /* ---------- CANONICAL PRIMITIVES (edit these to rebrand) ---------- */
 
-  /* Paper + backgrounds */
-  --paper-white: #f9f5ea;   /* lightest paper, card-on-light */
-  --bg-warm: #e7ddc6;       /* page background (bone / putty) */
-  --bg-warm-2: #ddd1b6;     /* secondary warm panel */
-  --bg-card: #f3ecda;       /* card surfaces */
-  --bg-deep: #221b13;       /* dark sections (warm barn-wood near-black) */
-  --bg-deep-2: #2c2316;     /* dark section, one step lighter */
+  /* Paper + backgrounds (Option A Natural Palette) */
+  --paper-white: #FBF6EA;   /* cream, lightest surface, card-on-light */
+  --bg-warm: #F2E8D4;       /* paper, page background */
+  --bg-warm-2: #EADFC6;     /* secondary warm panel */
+  --bg-card: #FBF6EA;       /* card surfaces (cream) */
+  --bg-deep: #23291F;       /* dark sections (deep ink green-black) */
+  --bg-deep-2: #2E3528;     /* dark section, one step lighter */
 
   /* Ink / text */
-  --ink: #2a2117;
-  --ink-soft: #574a36;
-  --ink-faint: #8c7f63;
+  --ink: #23291F;
+  --ink-soft: #56503F;
+  --ink-faint: #7A7166;     /* stone */
 
   /* Hairline rules */
-  --rule: rgba(42,33,23,0.18);
-  --rule-soft: rgba(42,33,23,0.09);
+  --rule: rgba(35,41,31,0.18);
+  --rule-soft: rgba(35,41,31,0.09);
 
-  /* Primary accent (faded barn brick) */
-  --accent: #a86048;
-  --accent-deep: #8f4f3a;
-  --accent-soft: rgba(168,96,72,0.14);
+  /* Primary accent (clay) */
+  --accent: #C57B57;
+  --accent-deep: #A8623F;
+  --accent-soft: rgba(197,123,87,0.14);
 
   /* Secondary brand palette (categorical accents) */
-  --terra-soft: #b97058;    /* lighter brick */
-  --moss: #6e7150;          /* foliage olive */
-  --moss-soft: #889071;     /* lighter sage */
-  --gold: #c2913f;          /* ochre apron */
-  --indigo: #39434f;        /* denim */
-  --indigo-soft: rgba(57,67,79,0.16);
-  --plum: #6e3a4b;          /* shadow plum */
+  --terra-soft: #D08A66;    /* lighter clay */
+  --moss: #7E876F;          /* deeper sage */
+  --moss-soft: #A7B0A0;     /* sage */
+  --gold: #B08D4F;          /* brass */
+  --indigo: #45504A;        /* slate-sage */
+  --indigo-soft: rgba(69,80,74,0.16);
+  --plum: #7A4A55;          /* muted plum */
 
-  /* Brand gradients */
-  --gradient-primary: linear-gradient(90deg, #a86048 0%, #b97058 100%);
-  --gradient-light-text: linear-gradient(135deg, #c98a6e 0%, #cda07f 63%, #d6b89c 100%);
+  /* Option A is a FLAT brand: no gradients on components. These aliases are kept
+     so any existing var(--gradient-*) usage resolves to a solid fill instead. */
+  --gradient-primary: var(--ink);        /* primary action fill = solid ink */
+  --gradient-light-text: var(--accent);  /* emphasis text = solid clay */
 
-  /* Type */
-  --serif: 'Crete Round', 'Charter', Georgia, serif;
-  --body: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  --mono: 'IBM Plex Mono', 'SF Mono', Menlo, Consolas, monospace;
-  --pixel: 'Press Start 2P', 'IBM Plex Mono', monospace;
+  /* Option A scale tokens (from the Brand Option A spec) */
+  --font-eyebrow: 'Aldrich', system-ui, sans-serif;
+  --eyebrow-case: uppercase;
+  --eyebrow-track: 0.28em;
+  --text-display: clamp(2.8rem, 7vw, 5rem);
+  --text-heading-xl: clamp(2rem, 4.6vw, 3rem);
+  --text-heading-lg: clamp(1.55rem, 3vw, 2rem);
+  --text-heading-md: clamp(1.25rem, 2.4vw, 1.55rem);
+  --text-card: 1.3rem;
+  --text-body-lg: 1.22rem;
+  --text-body: 1.06rem;
+  --text-body-sm: 0.94rem;
+  --text-eyebrow: 0.78rem;
+  --tracking-display: 0;
+  --space-xs: 4px;  --space-sm: 8px;  --space-md: 12px; --space-base: 16px;
+  --space-lg: 24px; --space-xl: 32px; --space-2xl: 48px; --space-3xl: 64px;
+  --space-section: clamp(3.5rem, 8vw, 6rem);
+  --radius-sm: 4px; --radius-md: 8px; --radius-lg: 16px; --radius-xl: 28px; --radius-full: 999px;
+  --color-surface: var(--paper-white);
+  --color-border: var(--rule);
+  --color-border-strong: var(--moss-soft);
+  --color-heading: var(--ink);
+  --color-accent: var(--accent);
+  --color-text-muted: var(--ink-faint);
+
+  /* Type (Option A) */
+  --serif: 'Gulax', ui-sans-serif, system-ui, sans-serif;            /* display */
+  --body: 'Space Grotesk', ui-sans-serif, -apple-system, system-ui, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --pixel: 'Aldrich', ui-sans-serif, system-ui, sans-serif;          /* eyebrow / label */
   --script: 'Caveat', 'Bradley Hand', 'Marker Felt', cursive;
 
   /* Particle-field atmosphere (read by initFieldAtmosphere) */
-  --field-bg: #1b150e;      /* canvas background, warm dark */
-  --field-line: #a86048;    /* particle / line color, barn brick */
+  --field-bg: #23291F;      /* canvas background, deep ink */
+  --field-line: #C57B57;    /* particle / line color, clay */
 
   /* Misc */
-  --paper-shadow: rgba(42,33,23,0.10);
-  --char-eye: #1a1410;          /* network-map critter eyes */
+  --paper-shadow: rgba(35,41,31,0.10);
+  --char-eye: #23291F;          /* network-map critter eyes */
   --lens-color: var(--accent);  /* runtime-overridden per trainer */
 
   /* ---------- LEGACY ALIASES (follow the primitives above) ---------- */
